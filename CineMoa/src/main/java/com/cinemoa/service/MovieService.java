@@ -14,4 +14,7 @@ public interface MovieService {
     MovieDto saveMovie(MovieDto movieDto);
     MovieDto updateMovie(Long id, MovieDto movieDto);
     void deleteMovie(Long id);
+
+    // 검색 기능
+    List<MovieDto> searchMovies(String keyword);
 }

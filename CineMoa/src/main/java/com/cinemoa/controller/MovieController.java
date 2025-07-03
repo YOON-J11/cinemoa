@@ -120,7 +120,7 @@ public class MovieController {
         return "redirect:/movies";
     }
 
-    // 영화 수정 폼 보여주기
+    // 영화 수정 폼
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable Long id, Model model) {
         Optional<MovieDto> movieDto = movieService.getMovieById(id);
@@ -133,7 +133,7 @@ public class MovieController {
         }
     }
 
-    // 영화 수정 처리
+    // 영화 수정
     @PostMapping("/{id}/edit")
     public String updateMovie(@PathVariable Long id,
                               @ModelAttribute("movie") MovieDto movieDto,
@@ -149,6 +149,23 @@ public class MovieController {
         return "redirect:/movies/" + id;
     }
 
+    // 영화 삭제
+    @GetMapping("/delete/{id}")
+    public String deleteMovie(@PathVariable Long id) {
+        movieService.deleteMovie(id);
+        return "redirect:/movies";
+    }
+
+    // 영화 검색
+    @GetMapping("/search")
+    public String searchMovies(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            List<MovieDto> searchResults = movieService.searchMovies(keyword);
+            model.addAttribute("movies", searchResults);
+            model.addAttribute("keyword", keyword);
+        }
+        return "movies/search";
+    }
 
 
 }

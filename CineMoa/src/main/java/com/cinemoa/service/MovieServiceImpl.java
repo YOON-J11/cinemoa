@@ -77,6 +77,16 @@ public class MovieServiceImpl implements MovieService {
         movieRepository.deleteById(id);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<MovieDto> searchMovies(String keyword) {
+        // @Query 어노테이션을 사용한 메서드 호출
+        return movieRepository.searchByKeyword(keyword)
+                .stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
     // Entity -> DTO 변환
     private MovieDto convertToDto(Movie movie) {
         MovieDto movieDto = new MovieDto();
@@ -90,5 +100,6 @@ public class MovieServiceImpl implements MovieService {
         BeanUtils.copyProperties(movieDto, movie);
         return movie;
     }
+
 
 }
