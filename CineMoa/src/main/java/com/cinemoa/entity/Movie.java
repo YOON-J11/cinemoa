@@ -75,4 +75,26 @@ public class Movie {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    // 상영 상태를 위한 Enum 타입 필드 추가
+    @Enumerated(EnumType.STRING)
+    @Column(name = "screening_status")
+    private ScreeningStatus screeningStatus;
+
+    // 상영 상태를 위한 Enum 타입 정의
+    public enum ScreeningStatus {
+        NOW_SHOWING("개봉중"),
+        COMING_SOON("상영예정"),
+        NOT_SHOWING("상영안함");
+
+        private final String displayName;
+
+        ScreeningStatus(String displayName) {
+            this.displayName = displayName;
+        }
+
+        public String getDisplayName() {
+            return displayName;
+        }
+    }
 }

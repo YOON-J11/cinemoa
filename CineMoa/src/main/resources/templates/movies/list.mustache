@@ -1,6 +1,15 @@
 <div class="container mt-4">
     <h1>영화 목록</h1>
     <a href="/movies/new" class="btn btn-primary me-2">등록하기</a>
+
+    <!-- 상영 상태별 필터링 버튼 추가 -->
+    <div class="btn-group mb-3">
+        <a href="/movies" class="btn btn-outline-secondary">전체</a>
+        <a href="/movies?status=NOW_SHOWING" class="btn btn-outline-success">개봉중</a>
+        <a href="/movies?status=COMING_SOON" class="btn btn-outline-primary">상영예정</a>
+        <a href="/movies?status=NOT_SHOWING" class="btn btn-outline-secondary">상영안함</a>
+    </div>
+
     <div class="row">
         {{#movies.content}}
             <div class="col-md-4 mb-4">
@@ -13,16 +22,26 @@
                     {{/mainImageUrl}}
                     <div class="card-body">
                         <h5 class="card-title">{{title}}</h5>
+
+                        <!-- 상영 상태 배지 추가 -->
+                        {{#isNowShowing}}
+                            <span class="badge bg-success mb-2">개봉중</span>
+                        {{/isNowShowing}}
+                        {{#isComingSoon}}
+                            <span class="badge bg-primary mb-2">상영예정</span>
+                        {{/isComingSoon}}
+                        {{#isNotShowing}}
+                            <span class="badge bg-secondary mb-2">상영안함</span>
+                        {{/isNotShowing}}
+
                         <p class="card-text">
                             <small>
                                 <span class="badge bg-primary">{{genre}}</span>
-                                {{#releaseDate}} {{releaseDate}} 개봉 {{/releaseDate}}
+                                {{#releaseDate}}{{releaseDate}} 개봉{{/releaseDate}}
                             </small>
                         </p>
                         <p class="card-text">
-                            <span class="text-warning">★</span> {{rating}} |
-                            예매율: {{reservationRate}}% |
-                            관객수: {{audienceCount}}명
+                            <span class="text-warning">★</span> {{rating}} | 예매율: {{reservationRate}}% | 관객수: {{audienceCount}}명
                         </p>
                         <div class="d-flex justify-content-between">
                             <span><i class="bi bi-heart-fill text-danger"></i> {{likesCount}}</span>
@@ -43,13 +62,11 @@
                 <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-
             {{#pageNumbers}}
                 <li class="page-item {{#active}}active{{/active}}">
                     <a class="page-link" href="?page={{number}}">{{number}}</a>
                 </li>
             {{/pageNumbers}}
-
             <li class="page-item {{^hasNext}}disabled{{/hasNext}}">
                 <a class="page-link" href="?page={{nextPage}}" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>

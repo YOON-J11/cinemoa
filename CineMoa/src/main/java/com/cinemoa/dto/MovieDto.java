@@ -1,5 +1,6 @@
 package com.cinemoa.dto;
 
+import com.cinemoa.entity.Movie;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,6 +33,21 @@ public class MovieDto {
     private BigInteger audienceCount;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private Movie.ScreeningStatus screeningStatus; // 상영 상태 추가
+
+
+    public boolean isNowShowing() {
+        return this.screeningStatus != null && this.screeningStatus == Movie.ScreeningStatus.NOW_SHOWING;
+    }
+
+    public boolean isComingSoon() {
+        return this.screeningStatus != null && this.screeningStatus == Movie.ScreeningStatus.COMING_SOON;
+    }
+
+    public boolean isNotShowing() {
+        return this.screeningStatus != null && this.screeningStatus == Movie.ScreeningStatus.NOT_SHOWING;
+    }
+
 }
 
 // 목록 조회용 간소화된 DTO

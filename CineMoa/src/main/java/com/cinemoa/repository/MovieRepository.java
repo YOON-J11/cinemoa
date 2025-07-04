@@ -13,4 +13,8 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     // @Query 어노테이션을 사용하여 JPQL 쿼리 정의
     @Query("SELECT m FROM Movie m WHERE m.title LIKE %:keyword% OR m.director LIKE %:keyword% OR m.actors LIKE %:keyword% OR m.genre LIKE %:keyword%")
     List<Movie> searchByKeyword(@Param("keyword") String keyword);
+
+    // 상영 상태별 영화 조회
+    List<Movie> findByScreeningStatus(Movie.ScreeningStatus status);
+
 }

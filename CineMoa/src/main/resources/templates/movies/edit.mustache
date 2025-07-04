@@ -41,6 +41,16 @@
                 <input type="date" id="releaseDate" name="releaseDate" value="{{#releaseDate}}{{releaseDate}}{{/releaseDate}}">
             </div>
 
+            <!-- 상영 상태 필드 추가 -->
+            <div class="form-group">
+                <label for="screeningStatus">상영 상태</label>
+                <select id="screeningStatus" name="screeningStatus" class="form-control">
+                    <option value="NOW_SHOWING" {{#screeningStatus}}{{#isNowShowing}}selected{{/isNowShowing}}{{/screeningStatus}}>개봉중</option>
+                    <option value="COMING_SOON" {{#screeningStatus}}{{#isComingSoon}}selected{{/isComingSoon}}{{/screeningStatus}}>상영예정</option>
+                    <option value="NOT_SHOWING" {{#screeningStatus}}{{#isNotShowing}}selected{{/isNotShowing}}{{/screeningStatus}}>상영안함</option>
+                </select>
+            </div>
+
             <div class="form-group">
                 <label for="rating">평점</label>
                 <input type="number" id="rating" name="rating" step="0.1" min="0" max="10" value="{{#rating}}{{rating}}{{/rating}}">
