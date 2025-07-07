@@ -4,102 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8769ed0d-55db-4b1a-b05b-6b233e152dfb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+    <list default="true" id="ce82600d-b2d0-4913-9108-cfe4c2a48587" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_mysql_mysql_connector_j_9_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/CineMoa.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/CineMoa.main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/com.cinemoa.CineMoa.main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/.gradle/8.14.2/checksums/checksums.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/.gradle/8.14.2/executionHistory/executionHistory.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/.gradle/8.14.2/executionHistory/executionHistory.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/.gradle/8.14.2/fileChanges/last-build.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/.gradle/8.14.2/fileHashes/fileHashes.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/.gradle/8.14.2/fileHashes/fileHashes.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/.gradle/8.14.2/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/.gradle/file-system.probe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/.gradle/vcs-1/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/.idea/modules/CineMoa.main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/HELP.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/classes/java/main/com/cinemoa/CineMoaApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/classes/java/main/com/cinemoa/controller/MainController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/classes/java/test/com/cinemoa/CineMoaApplicationTests.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/reports/problems/problems-report.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/reports/tests/test/classes/com.cinemoa.CineMoaApplicationTests.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/reports/tests/test/css/base-style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/reports/tests/test/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/reports/tests/test/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/reports/tests/test/js/report.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/reports/tests/test/packages/com.cinemoa.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/resolvedMainTestClassName" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/resources/main/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/resources/main/static/css/common.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/resources/main/static/css/main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/resources/main/static/css/reset.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/resources/main/static/hello.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/resources/main/static/images/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/resources/main/static/js/common.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/resources/main/static/js/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/resources/main/templates/common/footer.mustache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/resources/main/templates/common/header.mustache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/resources/main/templates/main/main.mustache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/resources/main/templates/movies/edit.mustache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/resources/main/templates/movies/list.mustache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/resources/main/templates/movies/new.mustache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/resources/main/templates/movies/view.mustache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/test-results/test/TEST-com.cinemoa.CineMoaApplicationTests.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/test-results/test/binary/output.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/test-results/test/binary/output.bin.idx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/test-results/test/binary/results.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/java/com/cinemoa/CineMoaApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/java/com/cinemoa/api/MovieApiController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/java/com/cinemoa/controller/MainController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/java/com/cinemoa/controller/MovieController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/java/com/cinemoa/dto/MovieDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/java/com/cinemoa/entity/Movie.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/java/com/cinemoa/repository/MovieRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/java/com/cinemoa/service/MovieService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/java/com/cinemoa/service/MovieServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/resources/static/css/common.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/resources/static/css/main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/resources/static/css/reset.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/resources/static/hello.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/resources/static/images/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/resources/static/js/common.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/resources/static/js/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/resources/templates/common/footer.mustache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/resources/templates/common/header.mustache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/resources/templates/main/main.mustache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/resources/templates/movies/edit.mustache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/resources/templates/movies/list.mustache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/resources/templates/movies/new.mustache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/main/resources/templates/movies/view.mustache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CineMoa/src/test/java/com/cinemoa/CineMoaApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,31 +28,16 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
-    <projectState path="$PROJECT_DIR$/CineMoa">
-      <ProjectState />
-    </projectState>
-  </component>
-  <component name="ExternalProjectsManager">
-    <system id="GRADLE">
-      <state>
-        <projects_view>
-          <tree_state>
-            <expand />
-            <select />
-          </tree_state>
-        </projects_view>
-      </state>
-    </system>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;YOON-J11&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "YOON-J11"
   }
-}</component>
+}]]></component>
   <component name="GitToolBoxStore">
     <option name="recentBranches">
       <RecentBranches>
@@ -144,12 +47,12 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="layout" />
-                    <option name="lastUsedInstant" value="1751904205" />
+                    <option name="branchName" value="test" />
+                    <option name="lastUsedInstant" value="1751906823" />
                   </RecentBranch>
                   <RecentBranch>
-                    <option name="branchName" value="main" />
-                    <option name="lastUsedInstant" value="1751904204" />
+                    <option name="branchName" value="layout" />
+                    <option name="lastUsedInstant" value="1751906822" />
                   </RecentBranch>
                 </list>
               </option>
@@ -160,27 +63,27 @@
       </RecentBranches>
     </option>
   </component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/YOON-J11/cinemoa.git&quot;,
-    &quot;accountId&quot;: &quot;c727f623-82a7-4e36-846a-039dc355bb12&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/YOON-J11/cinemoa.git",
+    "accountId": "c727f623-82a7-4e36-846a-039dc355bb12"
   }
-}</component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 2
-}</component>
-  <component name="ProjectId" id="2zYNdbBcXnKnEGy2INhUkuDPtHJ" />
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2zYVcJGfc4l8LLlcpZcNUcMsMl3" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Gradle.cinemoa-layout [:com.cinemoa.CineMoaApplication.main()].executor": "Run",
+    "Gradle.cinemoa [:com.cinemoa.CineMoaApplication.main()].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "layout",
-    "ignore.virus.scanning.warn.message": "true",
+    "git-widget-placeholder": "test",
     "kotlin-language-version-configured": "true",
     "settings.editor.selected.configurable": "File.Encoding"
   }
@@ -219,12 +122,23 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="8769ed0d-55db-4b1a-b05b-6b233e152dfb" name="Changes" comment="" />
-      <created>1751904135002</created>
+      <changelist id="ce82600d-b2d0-4913-9108-cfe4c2a48587" name="Changes" comment="" />
+      <created>1751908072798</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1751904135002</updated>
+      <updated>1751908072798</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
