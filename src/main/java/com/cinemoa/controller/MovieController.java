@@ -7,15 +7,23 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
+import java.util.*;
 
 @Controller
 @RequestMapping("/movies")
@@ -29,9 +37,47 @@ public class MovieController {
     }
 
     @GetMapping("")
-    public String listMovies(Model model, @PageableDefault(size = 10) Pageable pageable) {
-        Page<MovieDto> movies = movieService.getMoviesPaginated(pageable);
+    public String listMovies(@RequestParam(required = false) String status,
+                             Model model,
+                             @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+
+        Page<MovieDto> movies;
+
+        // 상영 상태별 필터링
+        if (status != null && !status.isEmpty()) {
+            try {
+                // 문자열을 Enum으로 변환
+                com.cinemoa.entity.Movie.ScreeningStatus screeningStatus =
+                        com.cinemoa.entity.Movie.ScreeningStatus.valueOf(status);
+
+                // 상영 상태별 영화 조회 (페이징 처리 필요)
+                movies = movieService.getMoviesByScreeningStatus(screeningStatus, pageable);
+            } catch (IllegalArgumentException e) {
+                // 잘못된 상태 값이 전달된 경우 모든 영화 표시
+                movies = movieService.getMoviesPaginated(pageable);
+            }
+        } else {
+            // 상태 파라미터가 없으면 모든 영화 표시
+            movies = movieService.getMoviesPaginated(pageable);
+        }
+
+        // null 값 처리
+        for (MovieDto movie : movies.getContent()) {
+            if (movie.getRating() == null) {
+                movie.setRating(BigDecimal.ZERO);
+            }
+            if (movie.getReservationRate() == null) {
+                movie.setReservationRate(BigDecimal.ZERO);
+            }
+            if (movie.getAudienceCount() == null) {
+                movie.setAudienceCount(BigInteger.ZERO);
+            }
+        }
+
         model.addAttribute("movies", movies);
+        model.addAttribute("title", "영화 목록");
+        model.addAttribute("timestamp", System.currentTimeMillis());
+        model.addAttribute("currentStatus", status); // 현재 선택된 상태를 모델에 추가
 
         // 페이지네이션을 위한 값들 추가
         model.addAttribute("hasPrevious", movies.hasPrevious());
@@ -65,9 +111,12 @@ public class MovieController {
 
     // 영화 목록 페이지 (추가 매핑 - /list로 접근할 경우)
     @GetMapping("/list")
-    public String moviesList(Model model, @PageableDefault(size = 10) Pageable pageable) {
-        return listMovies(model, pageable);  // 위의 메서드 재사용
+    public String moviesList(@RequestParam(required = false) String status,
+                             Model model,
+                             @PageableDefault(size = 10) Pageable pageable) {
+        return listMovies(status, model, pageable);  // 파라미터 순서에 맞게 인자 전달
     }
+
 
     @GetMapping("/{id}")
     public String viewMovie(@PathVariable("id") Long id, Model model) {
@@ -75,6 +124,9 @@ public class MovieController {
 
         if (movieDtoOptional.isPresent()) {
             MovieDto movieDto = movieDtoOptional.get();
+
+            // null 값 처리를 함수로 호출
+            handleNullValues(movieDto);
 
             // videoUrl 처리
             if (movieDto.getVideoUrl() != null && !movieDto.getVideoUrl().isEmpty()) {
@@ -99,6 +151,18 @@ public class MovieController {
                 }
             }
 
+            // 상세 이미지 URL 처리 (콤마로 구분된 문자열을 리스트로 변환)
+            if (movieDto.getDetailImageUrls() != null && !movieDto.getDetailImageUrls().isEmpty()) {
+                List<String> detailImageUrlList = Arrays.asList(movieDto.getDetailImageUrls().split(","));
+                model.addAttribute("detailImageUrlList", detailImageUrlList);
+            }
+
+            // 서브 이미지 URL 처리 (콤마로 구분된 문자열을 리스트로 변환)
+            if (movieDto.getSubImageUrls() != null && !movieDto.getSubImageUrls().isEmpty()) {
+                List<String> subImageUrlList = Arrays.asList(movieDto.getSubImageUrls().split(","));
+                model.addAttribute("subImageUrlList", subImageUrlList);
+            }
+
             model.addAttribute("movie", movieDto);
             return "movies/view";
         } else {
@@ -112,21 +176,75 @@ public class MovieController {
         return "movies/new";
     }
 
+
     @PostMapping("/new")
     public String saveNewMovie(@ModelAttribute("movie") MovieDto movieDto,
+                               @RequestParam(value = "mainImageFile", required = false) MultipartFile mainImageFile,
+                               @RequestParam(value = "subImageFile", required = false) MultipartFile subImageFile,
+                               @RequestParam(value = "detailImageFiles", required = false) MultipartFile[] detailImageFiles,
                                RedirectAttributes redirectAttributes) {
+
+        // 1. 메인 이미지 처리
+        if (mainImageFile != null && !mainImageFile.isEmpty()) {
+            String savedFileName = saveFile(mainImageFile);
+            movieDto.setMainImageUrl(savedFileName);
+        } else {
+            movieDto.setMainImageUrl(null); // 파일이 없으면 null
+        }
+
+        // 2. 서브 이미지 처리 (단일 파일로 변경)
+        if (subImageFile != null && !subImageFile.isEmpty()) {
+            String savedFileName = saveFile(subImageFile);
+            movieDto.setSubImageUrls(savedFileName); // 단일 파일명 저장
+        } else {
+            movieDto.setSubImageUrls(null); // 파일이 없으면 null
+        }
+
+        // 3. 상세 이미지 처리
+        if (detailImageFiles != null && detailImageFiles.length > 0) {
+            List<String> savedDetailImagePaths = new ArrayList<>();
+            for (MultipartFile file : detailImageFiles) {
+                if (!file.isEmpty()) {
+                    savedDetailImagePaths.add(saveFile(file));
+                }
+            }
+            movieDto.setDetailImageUrls(String.join(",", savedDetailImagePaths));
+        } else {
+            movieDto.setDetailImageUrls(null); // 파일이 없으면 null
+        }
+
+        // null 값 처리 (반복되는 코드는 handleNullValues 메서드로 분리)
+        handleNullValues(movieDto);
+
         MovieDto savedMovie = movieService.saveMovie(movieDto);
         redirectAttributes.addFlashAttribute("message", "영화가 성공적으로 등록되었습니다.");
-        return "redirect:/movies";
+
+        // 등록 완료 후 상세 화면으로 이동
+        return "redirect:/movies/" + savedMovie.getMovieId();
     }
 
-    // 영화 수정 폼 보여주기
+    // 영화 수정 폼
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable Long id, Model model) {
-        Optional<MovieDto> movieDto = movieService.getMovieById(id);
+        Optional<MovieDto> movieDtoOptional = movieService.getMovieById(id);
 
-        if (movieDto.isPresent()) {
-            model.addAttribute("movie", movieDto.get());
+        if (movieDtoOptional.isPresent()) {
+            MovieDto movieDto = movieDtoOptional.get();
+
+            // null 값 처리 (뷰에서 오류 나지 않도록)
+            handleNullValues(movieDto);
+
+            // 상세 이미지 URL을 리스트로 변환하여 뷰에 전달
+            if (movieDto.getDetailImageUrls() != null && !movieDto.getDetailImageUrls().isEmpty()) {
+                String[] detailImageUrlArray = movieDto.getDetailImageUrls().split(",");
+                List<String> detailImageUrlList = Arrays.asList(detailImageUrlArray);
+                model.addAttribute("detailImageUrlList", detailImageUrlList);
+
+                // 디버깅용 로그
+                System.out.println("상세 이미지 목록: " + detailImageUrlList);
+            }
+
+            model.addAttribute("movie", movieDto);
             return "movies/edit";
         } else {
             return "redirect:/movies";
@@ -136,8 +254,59 @@ public class MovieController {
     // 영화 수정 처리
     @PostMapping("/{id}/edit")
     public String updateMovie(@PathVariable Long id,
-                              @ModelAttribute("movie") MovieDto movieDto,
+                              @ModelAttribute("movie") MovieDto movieDto, // movieDto에는 hidden 필드의 기존 값들이 포함됨
+                              @RequestParam(value = "mainImageFile", required = false) MultipartFile mainImageFile,
+                              @RequestParam(value = "subImageFile", required = false) MultipartFile subImageFile,
+                              @RequestParam(value = "detailImageFiles", required = false) MultipartFile[] detailImageFiles,
                               RedirectAttributes redirectAttributes) {
+
+        // 현재 DTO에 있는 이미지 URL 값 (hidden 필드에서 넘어온 값)을 임시 저장
+        String currentMainImageUrl = movieDto.getMainImageUrl();
+        String currentSubImageUrls = movieDto.getSubImageUrls();
+        String currentDetailImageUrls = movieDto.getDetailImageUrls();
+
+        // 1. 메인 이미지 처리
+        if (mainImageFile != null && !mainImageFile.isEmpty()) {
+            // 새 파일이 업로드되면 기존 파일 교체
+            movieDto.setMainImageUrl(saveFile(mainImageFile));
+        } else if (currentMainImageUrl == null || currentMainImageUrl.isEmpty()) {
+            // 새 파일 없고, hidden 필드 값이 비어있으면 (JS로 삭제된 경우) null로 설정
+            movieDto.setMainImageUrl(null);
+        }
+        // else: 새 파일 없고, hidden 필드에 값이 있으면 (유지) movieDto.mainImageUrl은 그대로 유지됨
+
+        // 2. 서브 이미지 처리
+        if (subImageFile != null && !subImageFile.isEmpty()) {
+            // 새 파일이 업로드되면 기존 파일 교체
+            movieDto.setSubImageUrls(saveFile(subImageFile));
+        } else if (currentSubImageUrls == null || currentSubImageUrls.isEmpty()) {
+            // 새 파일 없고, hidden 필드 값이 비어있으면 (JS로 삭제된 경우) null로 설정
+            movieDto.setSubImageUrls(null);
+        }
+        // else: 새 파일 없고, hidden 필드에 값이 있으면 (유지) movieDto.subImageUrls는 그대로 유지됨
+
+        // 3. 상세 이미지 처리
+        List<String> finalDetailImageUrls = new ArrayList<>();
+
+        // 폼에서 넘어온 기존 상세 이미지 URL들 (JS에서 삭제된 것은 이미 제거되었어야 함)
+        if (currentDetailImageUrls != null && !currentDetailImageUrls.isEmpty()) {
+            finalDetailImageUrls.addAll(Arrays.asList(currentDetailImageUrls.split(",")));
+        }
+
+        // 새로 업로드된 상세 이미지들 추가
+        if (detailImageFiles != null && detailImageFiles.length > 0) {
+            for (MultipartFile file : detailImageFiles) {
+                if (!file.isEmpty()) {
+                    finalDetailImageUrls.add(saveFile(file));
+                }
+            }
+        }
+        // 최종 상세 이미지 URL 문자열 설정
+        movieDto.setDetailImageUrls(finalDetailImageUrls.isEmpty() ? null : String.join(",", finalDetailImageUrls));
+
+        // null 값 처리 (다른 숫자 필드 등)
+        handleNullValues(movieDto);
+
         MovieDto updatedMovie = movieService.updateMovie(id, movieDto);
 
         if (updatedMovie != null) {
@@ -149,6 +318,94 @@ public class MovieController {
         return "redirect:/movies/" + id;
     }
 
+    // 영화 삭제
+    @GetMapping("/delete/{id}")
+    public String deleteMovie(@PathVariable Long id) {
+        movieService.deleteMovie(id);
+        return "redirect:/movies";
+    }
+
+    // 영화 검색
+    @GetMapping("/search")
+    public String searchMovies(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            List<MovieDto> searchResults = movieService.searchMovies(keyword);
+            model.addAttribute("movies", searchResults);
+            model.addAttribute("keyword", keyword);
+        }
+        return "movies/search";
+    }
+
+    private void handleNullValues(MovieDto movieDto) {
+        if (movieDto.getRating() == null) {
+            movieDto.setRating(BigDecimal.ZERO);
+        }
+        if (movieDto.getReservationRate() == null) {
+            movieDto.setReservationRate(BigDecimal.ZERO);
+        }
+        if (movieDto.getAudienceCount() == null) {
+            movieDto.setAudienceCount(BigInteger.ZERO);
+        }
+        if (movieDto.getLikesCount() == null) {
+            movieDto.setLikesCount(0);
+        }
+        if (movieDto.getReviewCount() == null) {
+            movieDto.setReviewCount(0);
+        }
+        if (movieDto.getReleaseDate() == null) {
+            movieDto.setReleaseDate(LocalDate.now());
+        }
+        // 관람등급과 러닝타임 null 처리 추가
+        if (movieDto.getAgeRating() == null) {
+            movieDto.setAgeRating(""); // 공백으로 설정
+        }
+        if (movieDto.getRunningTime() == null) {
+            movieDto.setRunningTime(0); // 0으로 설정 (또는 필요에 따라 null 유지)
+        }
+    }
+
+    // 파일 저장 로직 (컨트롤러 내부에 private)
+    private String saveFile(MultipartFile file) {
+        // 허용할 이미지 MIME 타입 목록 (선택 사항: 유효성 검사 추가)
+        List<String> allowedImageTypes = List.of(
+                "image/jpeg", "image/png", "image/gif", "image/bmp", "image/webp"
+        );
+
+        if (file.isEmpty()) {
+            throw new RuntimeException("업로드할 파일이 비어있습니다.");
+        }
+
+        String contentType = file.getContentType();
+        if (contentType == null || !allowedImageTypes.contains(contentType.toLowerCase())) {
+            throw new RuntimeException("이미지 파일만 업로드할 수 있습니다. (허용되지 않는 파일 형식: " + contentType + ")");
+        }
+
+        try {
+            String originalFilename = file.getOriginalFilename();
+            String extension = "";
+            if (originalFilename != null && originalFilename.contains(".")) {
+                extension = originalFilename.substring(originalFilename.lastIndexOf(".")).toLowerCase();
+            }
+
+            String savedFileName = UUID.randomUUID().toString() + extension;
+
+            // 실제 운영 환경에서는 외부 경로를 사용하거나 S3와 같은 클라우드 스토리지를 권장합니다.
+            // 현재는 프로젝트 리소스 폴더에 저장합니다.
+            String uploadDir = "src/main/resources/static/images/movie/";
+            Path uploadPath = Paths.get(uploadDir);
+
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
+
+            Path filePath = uploadPath.resolve(savedFileName);
+            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+            return savedFileName;
+        } catch (IOException e) {
+            throw new RuntimeException("파일 저장 중 오류가 발생했습니다: " + e.getMessage(), e);
+        }
+    }
 
 
 }

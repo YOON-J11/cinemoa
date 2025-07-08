@@ -1,4 +1,5 @@
-<div class="container mt-4">
+<link rel="stylesheet" href="/css/movie.css"/>
+<div class="container movie">
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <div class="card mb-4">
@@ -9,27 +10,27 @@
                     <div class="card-body">
                         <div class="text-center mb-4">
                             {{#mainImageUrl}}
-                                <img src="/images/{{mainImageUrl}}" class="img-fluid rounded" alt="{{title}}" style="max-height: 400px; object-fit: cover;">
+                                <img src="/images/movie/{{mainImageUrl}}" class="img-fluid rounded" alt="{{title}}"
+                                     style="max-height:400px;object-fit:cover;">
                             {{/mainImageUrl}}
                             {{^mainImageUrl}}
-                                <div class="bg-light text-center py-5 rounded" style="min-height: 200px;">이미지 없음</div>
+                                <div class="bg-light text-center py-5 rounded" style="min-height:200px;">이미지 없음</div>
                             {{/mainImageUrl}}
                         </div>
-
                         <p class="card-text">
-                            <strong>감독:</strong> {{director}} <br>
-                            <strong>배우:</strong> {{actors}} <br>
-                            <strong>장르:</strong> <span class="badge bg-secondary">{{genre}}</span> <br>
-                            <strong>개봉일:</strong> {{releaseDate}}
+                            <strong>감독:</strong> {{director}}<br>
+                            <strong>배우:</strong> {{actors}}<br>
+                            <strong>장르:</strong> <span class="badge bg-secondary">{{genre}}</span><br>
+                            <strong>개봉일:</strong> {{#releaseDate}}{{releaseDate}}{{/releaseDate}}{{^releaseDate}}
+                            미정{{/releaseDate}}
+                            <!-- 관람등급과 러닝타임 추가 -->
+                            <strong>관람등급:</strong> {{ageRating}}<br>
+                            <strong>러닝타임:</strong> {{runningTime}}분
                         </p>
-
                         <hr>
-
                         <h4>줄거리</h4>
                         <p class="card-text">{{content}}</p>
-
                         <hr>
-
                         <div class="row text-center">
                             <div class="col-md-4">
                                 <h5><span class="text-warning">★</span> 평점</h5>
@@ -40,13 +41,11 @@
                                 <p class="h4">{{reservationRate}}%</p>
                             </div>
                             <div class="col-md-4">
-                                <h5>관객 수</h5>
+                                <h5>관객수</h5>
                                 <p class="h4">{{audienceCount}}명</p>
                             </div>
                         </div>
-
                         <hr>
-
                         <div class="row text-center">
                             <div class="col-6">
                                 <h5><i class="bi bi-heart-fill text-danger"></i> 좋아요</h5>
@@ -58,34 +57,44 @@
                             </div>
                         </div>
 
-                        {{#movie}}
-                            {{#videoUrl}}
-                                <hr>
-                                <h4>예고편</h4>
-                                <div class="embed-responsive embed-responsive-16by9 mb-3">
-                                    <iframe class="embed-responsive-item" src="{{videoUrl}}" allowfullscreen></iframe>
+                        {{#videoUrl}}
+                            <hr>
+                            <h4>예고편</h4>
+                            <div class="embed-responsive embed-responsive-16by9 mb-3">
+                                <iframe class="embed-responsive-item" src="{{videoUrl}}" allowfullscreen
+                                        style="width:100%; height:400px;"></iframe>
+                            </div>
+                        {{/videoUrl}}
+
+                        {{#subImageUrls}}
+                            <hr>
+                            <h4>서브 이미지</h4>
+                            <div class="detail-images-gallery">
+                                <div class="detail-image-item mb-3">
+                                    <img src="/images/movie/{{subImageUrls}}" class="img-fluid rounded" alt="서브 이미지">
                                 </div>
-                            {{/videoUrl}}
-                        {{/movie}}
+                            </div>
+                        {{/subImageUrls}}
 
                         {{#detailImageUrls}}
                             <hr>
                             <h4>상세 이미지</h4>
-                            <div class="row">
-                                <div class="col-12">
-                                    <p>{{detailImageUrls}}</p>
-                                </div>
+                            <div class="detail-images-gallery">
+                                {{#detailImageUrlList}}
+                                    <div class="detail-image-item mb-3">
+                                        <img src="/images/movie/{{.}}" class="img-fluid rounded" alt="상세 이미지">
+                                    </div>
+                                {{/detailImageUrlList}}
                             </div>
                         {{/detailImageUrls}}
 
                         <hr>
-                        <p class="text-muted text-end">
-                            등록일: {{createdAt}}<br>
-                            수정일: {{updatedAt}}
-                        </p>
+                        <p class="text-muted text-end">등록일: {{createdAt}}<br>수정일: {{updatedAt}}</p>
                     </div>
                     <div class="card-footer text-center">
                         <a href="/movies/{{movieId}}/edit" class="btn btn-primary me-2">수정하기</a>
+                        <button type="button" class="btn btn-danger me-2" onclick="deleteMovie({{movieId}})">삭제하기
+                        </button>
                         <a href="/movies" class="btn btn-secondary">목록으로 돌아가기</a>
                     </div>
                 {{/movie}}
@@ -93,3 +102,66 @@
         </div>
     </div>
 </div>
+
+<script>
+    function deleteMovie(movieId) {
+        // 사용자에게 삭제 여부 확인
+        if (confirm('정말로 이 영화를 삭제하시겠습니까?')) {
+            // fetch API를 사용하여 DELETE 요청 전송
+            fetch(`/api/movies/${movieId}`, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (response.ok) { // HTTP 상태 코드가 200-299 범위인 경우 (성공)
+                    alert('영화를 성공적으로 삭제했습니다.');
+                    window.location.href = '/movies'; // 영화 목록 페이지로 리다이렉트
+                } else {
+                    // 오류 응답 처리
+                    alert('영화 삭제에 실패했습니다. 다시 시도해주세요.');
+                    console.error('삭제 실패:', response.status, response.statusText);
+                }
+            })
+            .catch(error => {
+                // 네트워크 오류 등 예외 처리
+                alert('영화 삭제 중 오류가 발생했습니다.');
+                console.error('삭제 중 오류 발생:', error);
+            });
+        }
+    }
+</script>
+
+<style>
+    .detail-images-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .detail-image-item {
+        flex: 0 0 calc(33.333% - 15px);
+        max-width: calc(33.333% - 15px);
+        margin-bottom: 15px;
+    }
+
+    .detail-image-item img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    /* 반응형 디자인 */
+    @media (max-width: 768px) {
+        .detail-image-item {
+            flex: 0 0 calc(50% - 15px);
+            max-width: calc(50% - 15px);
+        }
+    }
+    @media (max-width: 576px) {
+        .detail-image-item {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+    }
+</style>

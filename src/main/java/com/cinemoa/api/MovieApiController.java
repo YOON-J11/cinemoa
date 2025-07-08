@@ -57,9 +57,14 @@ public class MovieApiController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMovie(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteMovie(@PathVariable Long id) {
         movieService.deleteMovie(id);
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<MovieDto>> searchMovies(@RequestParam("keyword") String keyword) {
+        List<MovieDto> searchResults = movieService.searchMovies(keyword);
+        return ResponseEntity.ok(searchResults);
+    }
 }
