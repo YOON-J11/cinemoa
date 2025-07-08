@@ -21,6 +21,14 @@ public class MemberController {
 
     private final MemberService memberService;
 
+    // STEP1: 이메일 인증 페이지 (GET)
+    @GetMapping("/join/step1")
+    public String showJoinStep1(Model model) {
+        model.addAttribute("timestamp", System.currentTimeMillis());
+        return "member/joinStep1";
+    }
+
+
     //회원가입 페이지 (GET)
     @GetMapping("/join")
     public String showJoinForm(Model model){

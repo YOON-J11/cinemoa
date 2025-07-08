@@ -1,0 +1,76 @@
+body{
+    background-color: #f4f4f4;
+}
+.container {
+    max-width: 500px;
+    margin: 60px auto;
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.logo-area{
+    text-align: center;
+}
+
+.logo svg {
+  height: 50px;
+  color: #006f7c;
+  margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #333;
+}
+
+input[type="email"],
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #006f7c;/* 메인 컬러 */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #004f59;/* 더 진한 청록 */
+}
+
+.step-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding-left: 0;
+    list-style: none;
+}
+
+.step-indicator li {
+    flex: 1;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 3px solid #ddd;
+    color: #888; /* 서브 텍스트 */
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.step-indicator li.current {
+    border-bottom: 3px solid #006f7c;/* 메인 강조색 */
+    color: #006f7c;
+    font-weight: 700;
+}
