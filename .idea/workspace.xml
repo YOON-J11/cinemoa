@@ -4,28 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3417d97b-d6fd-4d2f-af62-c8f09db8a780" name="Changes" comment="main과 맞춤">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/member/join.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/member/joinStep1.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+    <list default="true" id="3417d97b-d6fd-4d2f-af62-c8f09db8a780" name="Changes" comment="join-step1(메일인증)진행중">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/static/css/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/css/common.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/static/css/reset.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/css/reset.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/static/images/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/common/header.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/common/header.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/common.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/reset.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/reset.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/icons/logo.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/common/header.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/common/header.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/member/join.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/member/join.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,12 +155,21 @@
       <option name="project" value="LOCAL" />
       <updated>1751957955103</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="join-step1(메일인증)진행중">
+      <option name="closed" value="true" />
+      <created>1751965842545</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1751965842545</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="오류 수정" />
     <MESSAGE value="main과 맞춤" />
-    <option name="LAST_COMMIT_MESSAGE" value="main과 맞춤" />
+    <MESSAGE value="join-step1(메일인증)진행중" />
+    <option name="LAST_COMMIT_MESSAGE" value="join-step1(메일인증)진행중" />
   </component>
 </project>
