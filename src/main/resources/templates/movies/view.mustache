@@ -160,11 +160,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="reviewModalLabel">리뷰 작성</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
             </div>
             <div class="modal-body" id="reviewFormContainer">
                 <!-- 리뷰 폼 내용이 여기에 로드됩니다 -->
-                로딩 중...
+                리뷰 폼 여기 나옴
             </div>
         </div>
     </div>
@@ -192,6 +192,11 @@
                     console.error('리뷰 폼을 불러오는데 실패했습니다:', error);
                     reviewFormContainer.innerHTML = '<p class="text-danger">리뷰 폼을 불러오는데 실패했습니다.</p>';
                 });
+        });
+
+        // 모달이 닫힐 때 내용 초기화 (선택 사항)
+        reviewModal.addEventListener('hidden.bs.modal', function () {
+            document.getElementById('reviewFormContainer').innerHTML = '로딩 중...';
         });
     });
 </script>

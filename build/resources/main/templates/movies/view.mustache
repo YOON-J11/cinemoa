@@ -115,7 +115,7 @@
             <p class="mt-2">{{positivePercentage}}%의 관람객이 이 영화를 좋아했습니다.</p>
         </div>
         <div class="col-md-6">
-            <!-- 리뷰 작성 버튼 수정: 모달 트리거로 변경 -->
+            <!-- 리뷰 작성 버튼 모달 트리거로 변경 -->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal" data-movie-id="{{movieId}}">
                 리뷰 작성하기
             </button>
@@ -160,11 +160,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="reviewModalLabel">리뷰 작성</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
             </div>
             <div class="modal-body" id="reviewFormContainer">
                 <!-- 리뷰 폼 내용이 여기에 로드됩니다 -->
-                로딩 중...
+                리뷰 폼 여기 나옴
             </div>
         </div>
     </div>
@@ -192,11 +192,6 @@
                     console.error('리뷰 폼을 불러오는데 실패했습니다:', error);
                     reviewFormContainer.innerHTML = '<p class="text-danger">리뷰 폼을 불러오는데 실패했습니다.</p>';
                 });
-        });
-
-        // 모달이 닫힐 때 내용 초기화 (선택 사항)
-        reviewModal.addEventListener('hidden.bs.modal', function () {
-            document.getElementById('reviewFormContainer').innerHTML = '로딩 중...';
         });
     });
 </script>
