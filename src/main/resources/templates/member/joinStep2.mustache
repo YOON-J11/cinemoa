@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>cinemoa</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@latest/dist/web/static/pretendard.css"/>
+    <link rel="stylesheet" href="/css/reset.css"/>
+    <link rel="stylesheet" href="/css/member/join.css"/>
+</head>
+<body>
+<div class="container">
+    <!-- 로고 -->
+    <div class="logo-area">
+        <a href="/" class="logo">
+            <!-- 로고 SVG 그대로 복붙 -->
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 1831 512">
+                <path fill="currentColor" d="M62 64.7c-8.5..."/> <!-- 생략 -->
+            </svg>
+        </a>
+    </div>
+
+    <!-- 진행 단계 표시 -->
+    <ul class="step-indicator">
+        <li>STEP1. 메일인증</li>
+        <li class="current">STEP2. 약관동의</li>
+        <li>STEP3. 정보입력</li>
+        <li>STEP4. 가입완료</li>
+    </ul>
+
+    <!-- 약관동의 -->
+    <form method="post" action="/member/join/step2/process">
+        <div class="input-group">
+            <label><input type="checkbox" id="termsChk" name="terms" required> [필수] 서비스 이용약관 동의</label>
+            <div class="terms-box">
+                제1조 (목적)<br>
+                본 약관은 cinemoa(이하 ‘회사’)가 제공하는 온라인 영화 예매 및 관련 서비스(이하 ‘서비스’)의 이용 조건 및 절차에 관한 사항을 규정함을 목적으로 합니다.<br><br>
+
+                제2조 (회원가입)<br>
+                회원은 본인의 이메일 또는 SNS 계정을 통해 가입할 수 있으며, 필수정보를 정확하게 입력해야 합니다.<br><br>
+
+                제3조 (서비스 이용)<br>
+                회원은 영화 예매, 리뷰 작성, 개인화 추천 등 서비스를 이용할 수 있으며, 타인의 권리를 침해하거나 부정 이용행위를 해서는 안 됩니다.<br><br>
+
+                제4조 (회원탈퇴 및 이용제한)<br>
+                회원은 언제든지 탈퇴할 수 있으며, 회사는 이용자가 약관을 위반할 경우 서비스 이용을 제한할 수 있습니다.<br><br>
+
+                제5조 (면책)<br>
+                회사는 시스템 장애나 제휴사 사정 등으로 인해 발생한 예매 오류에 대해 책임을 지지 않습니다. 단, 회사의 고의 또는 중대한 과실은 예외로 합니다.
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label><input type="checkbox" id="privacyChk"  name="privacy" required> [필수] 개인정보 수집 및 이용 동의</label>
+            <div class="terms-box">
+                1. 수집 항목<br>
+                - 필수항목: 아이디, 비밀번호, 이름, 닉네임<br>
+                - 선택항목: 생년월일, 휴대전화, 이메일, 주소, 선호 영화 장르, 선호 영화관, 프로필 이미지<br><br>
+
+                2. 수집 목적<br>
+                - 회원 식별 및 관리, 서비스 제공, 맞춤형 추천, 예매 처리, 고객 응대 등<br><br>
+
+                3. 보유 및 이용 기간<br>
+                - 회원 탈퇴 시까지 또는 관련 법령에 따른 보존기간까지<br><br>
+
+                ※ 이용자는 개인정보 수집 및 이용에 대한 동의를 거부할 권리가 있으나, 필수 항목에 대한 동의 거부 시 회원가입이 제한될 수 있습니다.
+            </div>
+        </div>
+
+        <button type="submit" id="nextBtn" disabled>다음 단계로</button>
+    </form>
+</div>
+<script>
+    const termsChk = document.getElementById('termsChk');
+    const privacyChk = document.getElementById('privacyChk');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function updateButtonState() {
+      if (termsChk.checked && privacyChk.checked) {
+        nextBtn.disabled = false;
+      } else {
+        nextBtn.disabled = true;
+      }
+    }
+
+    // 이벤트 연결
+    termsChk.addEventListener('change', updateButtonState);
+    privacyChk.addEventListener('change', updateButtonState);
+
+    // 초기 상태 적용
+    updateButtonState();
+</script>
+</body>
+</html>

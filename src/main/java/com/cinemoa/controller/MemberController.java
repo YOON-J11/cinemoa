@@ -27,7 +27,22 @@ public class MemberController {
         model.addAttribute("timestamp", System.currentTimeMillis());
         return "member/joinStep1";
     }
-
+    // STEP2: 약관 동의 페이지 (GET)
+    @GetMapping("/join/step2")
+    public String showStep2Page() {
+        return "member/joinStep2";
+    }
+    @PostMapping("/join/step2/process")
+    public String processStep2(@RequestParam(value = "terms", required = false) String terms,
+                               @RequestParam(value = "privacy", required = false) String privacy) {
+        // 약관 동의 확인
+        if (terms == null || privacy == null) {
+            // 하나라도 동의 안했으면 다시 step2로
+            return "redirect:/member/join/step2?error=agree";
+        }
+        // 둘 다 동의했으면 step3으로 이동
+        return "redirect:/member/join/step3";
+    }
 
     //회원가입 페이지 (GET)
     @GetMapping("/join")
