@@ -78,6 +78,7 @@ input:-webkit-autofill {
   color: #333;
   margin-bottom: 20px;
   line-height: 1.5;
+  padding: 20px 0;
 }
 
 /* ===== [ 입력 필드 ] ===== */
@@ -94,7 +95,8 @@ label {
 }
 
 input[type="email"],
-input[type="text"] {
+input[type="text"],
+input[type="password"]{
   width: 100%;
   padding: 11px 12px;
   border: 1px solid #ccc;
@@ -179,4 +181,31 @@ button:disabled {
   font-size: 14px;
   line-height: 1.6;
   margin-top: 6px;
+}
+
+/* ====== [  step4 하단 버튼 설정  ] ==== */
+.step4-bottom-box {
+  display: flex;
+  gap: 15px;
+
+}
+
+.step4-bottom-box a{
+  border: 1px solid #006f7c;
+  border-radius: 10px;
+  width: 50%;
+  padding: 20px;
+  color: #006f7c;
+}
+.step4-bottom-box a:hover{
+  background-color: #f5feff;
+}
+
+.step4-bottom-box a img{
+  width: 35px;
+  height: auto;
+  filter: invert(21%) sepia(92%) saturate(2190%) hue-rotate(168deg) brightness(93%) contrast(102%);
+}
+.step4-bottom-box a p {
+  margin-top: 15px;
 }

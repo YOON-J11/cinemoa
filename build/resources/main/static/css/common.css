@@ -1,4 +1,4 @@
-/* 헤더 스타일 */
+/* 헤더 */
 header {
   width: 100%;
   border-bottom: 3px solid transparent;
@@ -6,7 +6,7 @@ header {
   background: #fff;
 }
 
-/* 로고 및 상단 메뉴 */
+/* 상단 로고/메뉴 */
 .header-top {
   max-width: 1200px;
   margin: 0 auto;
@@ -16,15 +16,16 @@ header {
   align-items: center;
 }
 
-.logo svg {
-  height: 50px;
-  color: #4320ab;
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #222;
+  text-decoration: none;
 }
 
-/* 로그인, 마이페이지 등 */
 .member-info-wrap ul {
   display: flex;
-  gap: 5px;
+  gap: 10px;
 }
 
 .member-info-wrap li a {
@@ -35,95 +36,101 @@ header {
 
 /* 메인 내비게이션 */
 .main-nav {
-  background-color: #fff;
+  background: #fff;
   border-top: 1px solid #eee;
 }
 
-.main-nav > ul {
+.main-menu {
   display: flex;
   justify-content: center;
-  gap: 40px;
-  padding: 0;
   max-width: 1200px;
   margin: 0 auto;
+  gap: 40px;
+  padding: 0;
+  list-style: none;
 }
 
-.main-nav > ul > li {
+.main-menu > li {
   position: relative;
 }
 
-.main-nav > ul > li > a {
+.main-menu > li > a {
   display: block;
   padding: 20px 0;
   font-weight: bold;
   color: #222;
   font-size: 16px;
+  text-decoration: none;
   transition: color 0.2s;
 }
 
-.main-nav > ul > li > a:hover {
+.main-menu > li > a:hover {
   color: #4320ab;
 }
 
-/* 서브메뉴 */
-.submenu {
-  display: none;
+/* === 메가 서브메뉴 === */
+.mega-submenu {
   position: absolute;
   top: 100%;
   left: 0;
   width: 100vw;
-  /* 화면 전체 너비 */
   background: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  padding: 20px 0;
-  z-index: 999;
-  overflow-x: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-10px);
+  overflow: hidden;
+  pointer-events: none;
+  transition: all 0.3s ease;
   border-top: 3px solid transparent;
-  border-image: linear-gradient(to right, #4320ab, #7571d9) 1;
+  border-image: linear-gradient(to right, #006f7c, #7ea9ae) 1;
+  z-index: 999;
 }
 
+/* 내부 컨텐츠 가로정렬 */
 .submenu-inner {
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  gap: 30px;
+  padding: 20px 120px;
 }
 
-.submenu li {
-  list-style: none;
-}
-
-.submenu li a {
-  padding: 10px 15px;
+/* 항목 스타일 */
+.submenu-inner a {
   font-size: 14px;
   color: #333;
+  padding: 10px 15px;
+  text-decoration: none;
   white-space: nowrap;
 }
 
-.submenu-inner li a:hover {
+.submenu-inner a:hover {
   color: #4320ab;
 }
 
-/* 메뉴에 마우스 올릴 때 서브메뉴 표시 */
-.main-nav > ul > li:hover .submenu {
-  display: block;
+/* 호버 시 활성화 */
+.has-submenu:hover .mega-submenu {
+  max-height: 200px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
-/*상단고정*/
+/* 상단 고정 시 스타일 */
 #main-nav.fixed {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   background: linear-gradient(to right, #4320ab, #7571d9);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-#main-nav.fixed > ul > li > a {
+#main-nav.fixed .main-menu > li > a {
   color: #fff;
 }
-#main-nav.fixed > ul > li > a:hover {
+#main-nav.fixed .main-menu > li > a:hover {
   color: #ffb428;
 }
-#main-nav.fixed .submenu {
+#main-nav.fixed .mega-submenu {
   border-top: none;
 }
