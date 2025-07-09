@@ -24,12 +24,18 @@ public class MemberController {
     // STEP1: 이메일 인증 페이지 (GET)
     @GetMapping("/join/step1")
     public String showJoinStep1(Model model) {
-        model.addAttribute("timestamp", System.currentTimeMillis());
         return "member/joinStep1";
     }
     // STEP2: 약관 동의 페이지 (GET)
     @GetMapping("/join/step2")
-    public String showStep2Page() {
+    public String showStep2Page(HttpSession session) {
+        //접근 제한 (STEP1을 거치지 않으면 접근불가)
+//        Boolean verified = (Boolean) session.getAttribute("emailVerified");
+//
+//        if (verified == null || !verified) {
+//            return "redirect:/member/join/step1?error=unauthorized";
+//        }
+
         return "member/joinStep2";
     }
     @PostMapping("/join/step2/process")
@@ -42,6 +48,18 @@ public class MemberController {
         }
         // 둘 다 동의했으면 step3으로 이동
         return "redirect:/member/join/step3";
+    }
+
+    // STEP3: 회원정보 입력 페이지 (GET)
+    @GetMapping("/join/step3")
+    public String showJoinStep3(Model model) {
+        return "member/joinStep3";
+    }
+
+    // STEP4: 가입완료 페이지 (GET)
+    @GetMapping("/join/step4")
+    public String showJoinStep4(Model model) {
+        return "member/joinStep4";
     }
 
     //회원가입 페이지 (GET)
