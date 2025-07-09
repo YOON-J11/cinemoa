@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="/css/member/login.css?v={{ timestamp }}" />
+{{> common/header }}
+
+<main class="container login-page">
+    <h2 class="page-title">로그인</h2>
+
+    {{#error}}
+        <div class="error-msg">{{error}}</div>
+    {{/error}}
+
+    <form method="post" action="/member/login" class="login-form">
+        <div class="form-group">
+            <label for="memberId">아이디</label>
+            <input type="text" id="memberId" name="memberId" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">로그인</button>
+    </form>
+
+    <div class="login-links">
+        <a href="/member/join/step1">회원가입</a> |
+        <a href="#">아이디/비밀번호 찾기</a> <!-- 이건 추후 구현 -->
+    </div>
+</main>
+
+{{> common/footer }}

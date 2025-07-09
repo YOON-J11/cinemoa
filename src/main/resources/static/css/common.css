@@ -1,11 +1,10 @@
-/* 헤더 스타일 */
+/* ==== header ==== */
 header {
   width: 100%;
   border-bottom: 3px solid transparent;
   border-image: linear-gradient(to right, #006f7c, #95c0c3) 1;
   background: #fff;
 }
-
 /* 로고 및 상단 메뉴 */
 .header-top {
   max-width: 1200px;
@@ -20,7 +19,6 @@ header {
   height: 50px;
   color: #006f7c;
 }
-
 /* 로그인, 마이페이지 등 */
 .member-info-wrap ul {
   display: flex;
@@ -32,7 +30,6 @@ header {
   color: #666;
   padding: 5px 10px;
 }
-
 /* 메인 내비게이션 */
 .main-nav {
   background-color: #fff;
@@ -64,7 +61,6 @@ header {
 .main-nav > ul > li > a:hover {
   color: #006f7c;
 }
-
 /* 서브메뉴 */
 .submenu {
   display: none;
@@ -103,7 +99,6 @@ header {
   color: #006f7c;
 }
 
-/* 메뉴에 마우스 올릴 때 서브메뉴 표시 */
 .main-nav > ul > li:hover .submenu {
   display: block;
 }
@@ -126,4 +121,12 @@ header {
 }
 #main-nav.fixed .submenu {
   border-top: none;
+}
+
+
+/* ====  [container]  ==== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }

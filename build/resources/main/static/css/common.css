@@ -1,12 +1,11 @@
-/* 헤더 */
+/* ==== header ==== */
 header {
   width: 100%;
   border-bottom: 3px solid transparent;
-  border-image: linear-gradient(to right, #4320ab, #7571d9) 1;
+  border-image: linear-gradient(to right, #006f7c, #95c0c3) 1;
   background: #fff;
 }
-
-/* 상단 로고/메뉴 */
+/* 로고 및 상단 메뉴 */
 .header-top {
   max-width: 1200px;
   margin: 0 auto;
@@ -16,16 +15,14 @@ header {
   align-items: center;
 }
 
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #222;
-  text-decoration: none;
+.logo svg {
+  height: 50px;
+  color: #006f7c;
 }
-
+/* 로그인, 마이페이지 등 */
 .member-info-wrap ul {
   display: flex;
-  gap: 10px;
+  gap: 5px;
 }
 
 .member-info-wrap li a {
@@ -33,104 +30,103 @@ header {
   color: #666;
   padding: 5px 10px;
 }
-
 /* 메인 내비게이션 */
 .main-nav {
-  background: #fff;
+  background-color: #fff;
   border-top: 1px solid #eee;
 }
 
-.main-menu {
+.main-nav > ul {
   display: flex;
   justify-content: center;
-  max-width: 1200px;
-  margin: 0 auto;
   gap: 40px;
   padding: 0;
-  list-style: none;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.main-menu > li {
+.main-nav > ul > li {
   position: relative;
 }
 
-.main-menu > li > a {
+.main-nav > ul > li > a {
   display: block;
   padding: 20px 0;
   font-weight: bold;
   color: #222;
   font-size: 16px;
-  text-decoration: none;
   transition: color 0.2s;
 }
 
-.main-menu > li > a:hover {
-  color: #4320ab;
+.main-nav > ul > li > a:hover {
+  color: #006f7c;
 }
-
-/* === 메가 서브메뉴 === */
-.mega-submenu {
+/* 서브메뉴 */
+.submenu {
+  display: none;
   position: absolute;
   top: 100%;
   left: 0;
   width: 100vw;
+  /* 화면 전체 너비 */
   background: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  max-height: 0;
-  opacity: 0;
-  transform: translateY(-10px);
-  overflow: hidden;
-  pointer-events: none;
-  transition: all 0.3s ease;
-  border-top: 3px solid transparent;
-  border-image: linear-gradient(to right, #006f7c, #7ea9ae) 1;
+  padding: 20px 0;
   z-index: 999;
+  overflow-x: hidden;
+  border-top: 3px solid transparent;
+  border-image: linear-gradient(to right, #006f7c, #95c0c3) 1;
 }
 
-/* 내부 컨텐츠 가로정렬 */
 .submenu-inner {
   display: flex;
-  gap: 30px;
-  padding: 20px 120px;
+  justify-content: center;
+  gap: 20px;
 }
 
-/* 항목 스타일 */
-.submenu-inner a {
+.submenu li {
+  list-style: none;
+}
+
+.submenu li a {
+  padding: 10px 15px;
   font-size: 14px;
   color: #333;
-  padding: 10px 15px;
-  text-decoration: none;
   white-space: nowrap;
 }
 
-.submenu-inner a:hover {
-  color: #4320ab;
+.submenu-inner li a:hover {
+  color: #006f7c;
 }
 
-/* 호버 시 활성화 */
-.has-submenu:hover .mega-submenu {
-  max-height: 200px;
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+.main-nav > ul > li:hover .submenu {
+  display: block;
 }
 
-/* 상단 고정 시 스타일 */
+/*상단고정*/
 #main-nav.fixed {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(to right, #4320ab, #7571d9);
-  z-index: 1000;
+  background: linear-gradient(to right, #006f7c, #95c0c3);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 }
-#main-nav.fixed .main-menu > li > a {
+#main-nav.fixed > ul > li > a {
   color: #fff;
 }
-#main-nav.fixed .main-menu > li > a:hover {
+#main-nav.fixed > ul > li > a:hover {
   color: #ffb428;
 }
-#main-nav.fixed .mega-submenu {
+#main-nav.fixed .submenu {
   border-top: none;
+}
+
+
+/* ====  [container]  ==== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }

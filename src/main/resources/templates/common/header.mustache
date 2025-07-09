@@ -25,12 +25,19 @@
           </svg>
         </a>
         <nav class="member-info-wrap">
-          <ul>
-            <li><a href="/login">로그인</a></li>
-            <li><a href="/member/join/step1">회원가입</a></li>
-            <li><a href="/mypage">마이페이지</a></li>
-            <li><a href="/help">고객센터</a></li>
-          </ul>
+            <ul>
+                {{#loginMember}}
+                    <li><a href="/member/logout">로그아웃</a></li>
+                    <li><a href="/mypage">마이페이지</a></li>
+                {{/loginMember}}
+
+                {{^loginMember}}
+                    <li><a href="/member/login">로그인</a></li>
+                    <li><a href="/member/join/step1">회원가입</a></li>
+                {{/loginMember}}
+
+                <li><a href="/help">고객센터</a></li>
+            </ul>
         </nav>
       </div>
 

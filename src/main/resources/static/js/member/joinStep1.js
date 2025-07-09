@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
+    //잘못된 접근 차단
+    const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('error') === 'unauthorized') {
+            alert('잘못된 접근입니다. 메일 인증부터 진행해주세요.');
+        }
     // === STEP0: 요소 참조 ===
     const startBtn = document.getElementById('startEmailBtn');
     const emailForm = document.getElementById('emailForm');

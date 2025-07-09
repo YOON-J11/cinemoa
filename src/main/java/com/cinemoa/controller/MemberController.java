@@ -29,15 +29,13 @@ public class MemberController {
     // STEP2: 약관 동의 페이지 (GET)
     @GetMapping("/join/step2")
     public String showStep2Page(HttpSession session) {
-        //접근 제한 (STEP1을 거치지 않으면 접근불가)
-//        Boolean verified = (Boolean) session.getAttribute("emailVerified");
-//
-//        if (verified == null || !verified) {
-//            return "redirect:/member/join/step1?error=unauthorized";
-//        }
-
+        Boolean verified = (Boolean) session.getAttribute("emailVerified");
+        if (verified == null || !verified) {
+            return "redirect:/member/join/step1?error=unauthorized";
+        }
         return "member/joinStep2";
     }
+
     @PostMapping("/join/step2/process")
     public String processStep2(@RequestParam(value = "terms", required = false) String terms,
                                @RequestParam(value = "privacy", required = false) String privacy) {
@@ -52,52 +50,55 @@ public class MemberController {
 
     // STEP3: 회원정보 입력 페이지 (GET)
     @GetMapping("/join/step3")
-    public String showJoinStep3(Model model) {
+    public String showJoinStep3(HttpSession session) {
+        Boolean verified = (Boolean) session.getAttribute("emailVerified");
+        if (verified == null || !verified) {
+            return "redirect:/member/join/step1?error=unauthorized";
+        }
         return "member/joinStep3";
+    }
+    @PostMapping("/join/step3/process")
+    public String processStep3(@ModelAttribute MemberDto dto, HttpSession session, Model model) {
+        // 이메일은 세션에서 가져오기 (step1에서 저장된 verifiedEmail)
+        String verifiedEmail = (String) session.getAttribute("verifiedEmail");
+        if (verifiedEmail == null) {
+            return "redirect:/member/join/step1?error=auth";
+        }
+        dto.setEmail(verifiedEmail);
+
+        // 아이디, 닉네임 중복 체크
+        if (memberService.isDuplicateId(dto.getMemberId())) {
+            model.addAttribute("error", "이미 사용 중인 아이디입니다.");
+            return "member/joinStep3";
+        }
+        if (memberService.isDuplicateNickname(dto.getNickname())) {
+            model.addAttribute("error", "이미 사용 중인 닉네임입니다.");
+            return "member/joinStep3";
+        }
+
+        // 회원 가입 처리
+        memberService.join(dto);
+
+        // 세션 정리 (선택사항)
+        session.removeAttribute("verifiedEmail");
+        session.removeAttribute("emailVerified");
+        session.removeAttribute("authCode");
+        session.removeAttribute("authEmail");
+
+        // 가입 완료 페이지로 이동
+        return "redirect:/member/join/step4";
     }
 
     // STEP4: 가입완료 페이지 (GET)
     @GetMapping("/join/step4")
-    public String showJoinStep4(Model model) {
+    public String showJoinStep4(HttpSession session) {
+        Boolean verified = (Boolean) session.getAttribute("emailVerified");
+        if (verified == null || !verified) {
+            return "redirect:/member/join/step1?error=unauthorized";
+        }
         return "member/joinStep4";
     }
 
-    //회원가입 페이지 (GET)
-    @GetMapping("/join")
-    public String showJoinForm(Model model){
-        model.addAttribute("timestamp", System.currentTimeMillis());
-        return "member/join";
-    }
-
-    //회원가입 처리 (POST)
-    @PostMapping("/join")
-    public String processJoin(@ModelAttribute MemberDto dto, Model model) {
-        if (memberService.isDuplicateId(dto.getMemberId())) {
-            model.addAttribute("error", "이미 사용 중인 아이디입니다.");
-            return "member/join";
-        }
-        if (memberService.isDuplicateNickname(dto.getNickname())) {
-            model.addAttribute("error", "이미 사용 중인 닉네임입니다.");
-            return "member/join";
-        }
-
-        MultipartFile file = dto.getProfileImgFile();
-        if (file != null && !file.isEmpty()) {
-            String uploadDir = "C:/cinemoa/upload/profile/";
-            new File(uploadDir).mkdirs();
-            String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
-            try {
-                file.transferTo(new File(uploadDir, fileName));
-                dto.setProfileImg(fileName);
-            } catch (IOException e) {
-                model.addAttribute("error", "이미지 업로드 실패");
-                return "member/join";
-            }
-        }
-
-        memberService.join(dto);
-        return "redirect:/member/login";
-    }
 
 
     //로그인 페이지 (GET)
@@ -119,6 +120,13 @@ public class MemberController {
         session.setAttribute("loginMember", member);
 
         return "redirect:/"; //로그인 성공 후 메인페이지로 이동
+    }
+
+    //로그아웃
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // 세션 초기화
+        return "redirect:/"; // 홈으로 이동
     }
 
 }
