@@ -1,7 +1,9 @@
 package com.cinemoa.controller;
 
 import com.cinemoa.dto.MovieDto;
+import com.cinemoa.dto.ReviewDto;
 import com.cinemoa.service.MovieService;
+import com.cinemoa.service.ReviewService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Controller
@@ -30,11 +33,14 @@ import java.util.*;
 public class MovieController {
 
     private final MovieService movieService;
+    private final ReviewService reviewService;
 
     @Autowired
-    public MovieController(MovieService movieService) {
+    public MovieController(MovieService movieService, ReviewService reviewService) {
         this.movieService = movieService;
+        this.reviewService = reviewService;
     }
+
 
     @GetMapping("")
     public String listMovies(@RequestParam(required = false) String status,
@@ -163,6 +169,17 @@ public class MovieController {
                 model.addAttribute("subImageUrlList", subImageUrlList);
             }
 
+            // 리뷰 목록 조회
+            List<ReviewDto> reviews = reviewService.getReviewsByMovieId(id);
+            model.addAttribute("reviews", reviews);
+
+            // 긍정 평가 비율 계산
+            int positivePercentage = reviewService.getPositivePercentage(id);
+            model.addAttribute("positivePercentage", positivePercentage);
+
+            // movieId 값을 모델에 추가
+            model.addAttribute("movieId", id);
+
             model.addAttribute("movie", movieDto);
             return "movies/view";
         } else {
@@ -172,10 +189,13 @@ public class MovieController {
 
     @GetMapping("/new")
     public String showNewMovieForm(Model model) {
-        model.addAttribute("movie", new MovieDto());
+        MovieDto movieDto = new MovieDto();
+        movieDto.setContent(""); // content 필드 초기화
+
+        // 다른 필드들도 필요하다면 초기화
+        model.addAttribute("movie", movieDto);
         return "movies/new";
     }
-
 
     @PostMapping("/new")
     public String saveNewMovie(@ModelAttribute("movie") MovieDto movieDto,
@@ -183,6 +203,17 @@ public class MovieController {
                                @RequestParam(value = "subImageFile", required = false) MultipartFile subImageFile,
                                @RequestParam(value = "detailImageFiles", required = false) MultipartFile[] detailImageFiles,
                                RedirectAttributes redirectAttributes) {
+
+        // content 필드 디버깅
+        System.out.println("Content 필드 값: " + movieDto.getContent());
+
+        // 빈 문자열이나 HTML 공백 태그만 있는 경우 null로 설정
+        if (movieDto.getContent() != null &&
+                (movieDto.getContent().isEmpty() ||
+                        movieDto.getContent().equals("<p>&nbsp;</p>") ||
+                        movieDto.getContent().equals("<p><br></p>"))) {
+            movieDto.setContent(null);
+        }
 
         // 1. 메인 이미지 처리
         if (mainImageFile != null && !mainImageFile.isEmpty()) {
@@ -337,6 +368,7 @@ public class MovieController {
     }
 
     private void handleNullValues(MovieDto movieDto) {
+        // 숫자형 필드 null 처리
         if (movieDto.getRating() == null) {
             movieDto.setRating(BigDecimal.ZERO);
         }
@@ -352,15 +384,51 @@ public class MovieController {
         if (movieDto.getReviewCount() == null) {
             movieDto.setReviewCount(0);
         }
+        if (movieDto.getRunningTime() == null) {
+            movieDto.setRunningTime(0);
+        }
+
+        // 문자열 필드 null 처리
+        if (movieDto.getTitle() == null) {
+            movieDto.setTitle("");
+        }
+        if (movieDto.getContent() == null) {
+            movieDto.setContent("");
+        }
+        if (movieDto.getDirector() == null) {
+            movieDto.setDirector("");
+        }
+        if (movieDto.getActors() == null) {
+            movieDto.setActors("");
+        }
+        if (movieDto.getGenre() == null) {
+            movieDto.setGenre("");
+        }
+        if (movieDto.getAgeRating() == null) {
+            movieDto.setAgeRating("");
+        }
+        if (movieDto.getMainImageUrl() == null) {
+            movieDto.setMainImageUrl("");
+        }
+        if (movieDto.getSubImageUrls() == null) {
+            movieDto.setSubImageUrls("");
+        }
+        if (movieDto.getDetailImageUrls() == null) {
+            movieDto.setDetailImageUrls("");
+        }
+        if (movieDto.getVideoUrl() == null) {
+            movieDto.setVideoUrl("");
+        }
+
+        // 날짜 필드 null 처리
         if (movieDto.getReleaseDate() == null) {
             movieDto.setReleaseDate(LocalDate.now());
         }
-        // 관람등급과 러닝타임 null 처리 추가
-        if (movieDto.getAgeRating() == null) {
-            movieDto.setAgeRating(""); // 공백으로 설정
+        if (movieDto.getCreatedAt() == null) {
+            movieDto.setCreatedAt(LocalDateTime.now());
         }
-        if (movieDto.getRunningTime() == null) {
-            movieDto.setRunningTime(0); // 0으로 설정 (또는 필요에 따라 null 유지)
+        if (movieDto.getUpdatedAt() == null) {
+            movieDto.setUpdatedAt(LocalDateTime.now());
         }
     }
 
@@ -406,6 +474,4 @@ public class MovieController {
             throw new RuntimeException("파일 저장 중 오류가 발생했습니다: " + e.getMessage(), e);
         }
     }
-
-
 }
