@@ -115,7 +115,10 @@
             <p class="mt-2">{{positivePercentage}}%의 관람객이 이 영화를 좋아했습니다.</p>
         </div>
         <div class="col-md-6">
-            <a href="/reviews/new?movieId={{movieId}}" class="btn btn-primary">리뷰 작성하기</a>
+            <!-- 리뷰 작성 버튼 모달 트리거로 변경 -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal" data-movie-id="{{movieId}}">
+                리뷰 작성하기
+            </button>
         </div>
     </div>
 
@@ -150,6 +153,48 @@
         </div>
     {{/reviews}}
 </div>
+
+<!-- 리뷰 작성 모달 -->
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reviewModalLabel">리뷰 작성</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="reviewFormContainer">
+                <!-- 리뷰 폼 내용이 여기에 로드됩니다 -->
+                로딩 중...
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS 및 모달 로딩 스크립트 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var reviewModal = document.getElementById('reviewModal');
+        reviewModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget; // 모달을 트리거한 버튼
+            var movieId = button.getAttribute('data-movie-id'); // data-movie-id 속성에서 영화 ID 추출
+            var reviewFormContainer = document.getElementById('reviewFormContainer');
+
+            // AJAX 요청으로 폼 내용 불러오기
+            fetch(`/reviews/new-fragment?movieId=${movieId}`) // 새로운 엔드포인트 호출
+                .then(response => response.text())
+                .then(html => {
+                    reviewFormContainer.innerHTML = html;
+                    // 만약 리뷰 폼에 스마트 에디터가 적용되어 있다면, 여기서 에디터를 다시 초기화하는 코드가 필요합니다.
+                    // 예: if (typeof nhn !== 'undefined') { nhn.husky.EZCreator.createInIFrame(...) }
+                })
+                .catch(error => {
+                    console.error('리뷰 폼을 불러오는데 실패했습니다:', error);
+                    reviewFormContainer.innerHTML = '<p class="text-danger">리뷰 폼을 불러오는데 실패했습니다.</p>';
+                });
+        });
+    });
+</script>
 
 
 <script>
