@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="ko">
 <head>
+    <link rel="icon" href="/images/icons/favicon.png" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cinemoa - 회원가입</title>
@@ -32,6 +33,7 @@
         <div class="input-group">
             <label for="member_id">아이디 (로그인 ID)</label>
             <input type="text" id="memberId" name="memberId" required placeholder="아이디 입력">
+            <div id="idMessage" class="input-msg"></div>
         </div>
 
         <div class="input-group">
@@ -47,10 +49,65 @@
         <div class="input-group">
             <label for="nickname">닉네임</label>
             <input type="text" id="nickname" name="nickname" required placeholder="닉네임 입력">
+            <div id="nicknameMessage" class="input-msg"></div>
         </div>
 
         <button type="submit">가입 완료</button>
     </form>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const idInput = document.getElementById('memberId');
+        const idMessage = document.getElementById('idMessage');
+        const nicknameInput = document.getElementById('nickname');
+        const nicknameMessage = document.getElementById('nicknameMessage');
+
+        idInput.addEventListener('input', async () => {
+            const id = idInput.value.trim();
+            if (!id) {
+                idMessage.textContent = '';
+                return;
+            }
+
+            const res = await fetch('/api/member/check-id', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ memberId: id })
+            });
+
+            const isAvailable = await res.json();
+            if (isAvailable) {
+                idMessage.textContent = '✅ 사용 가능한 아이디입니다.';
+                idMessage.style.color = 'green';
+            } else {
+                idMessage.textContent = '❌ 이미 사용 중인 아이디입니다.';
+                idMessage.style.color = 'red';
+            }
+        });
+
+        nicknameInput.addEventListener('input', async () => {
+            const nickname = nicknameInput.value.trim();
+            if (!nickname) {
+                nicknameMessage.textContent = '';
+                return;
+            }
+
+            const res = await fetch('/api/member/check-nickname', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ nickname })
+            });
+
+            const isAvailable = await res.json();
+            if (isAvailable) {
+                nicknameMessage.textContent = '✅ 사용 가능한 닉네임입니다.';
+                nicknameMessage.style.color = 'green';
+            } else {
+                nicknameMessage.textContent = '❌ 이미 사용 중인 닉네임입니다.';
+                nicknameMessage.style.color = 'red';
+            }
+        });
+    });
+</script>
 </body>
 </html>

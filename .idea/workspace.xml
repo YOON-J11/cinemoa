@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3417d97b-d6fd-4d2f-af62-c8f09db8a780" name="Changes" comment="join-step2(약관동의)완료">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/config/GlobalModelAttributeAdvice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/member/login.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/member/login.mustache" afterDir="false" />
+    <list default="true" id="3417d97b-d6fd-4d2f-af62-c8f09db8a780" name="Changes" comment="join 완료, 로그인 로그아웃 완료">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/api/MemberApiController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" afterDir="false" />
@@ -16,17 +14,20 @@
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/controller/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/controller/MainController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/static/css/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/css/common.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/common/header.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/common/header.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/common/footer.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/common/footer.mustache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/common.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/MemberRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/MemberRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/MemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/member/join.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/member/join.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/member/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/member/login.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/member/joinStep1.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/member/joinStep1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/common/header.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/common/header.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/common/footer.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/common/footer.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/member/joinStep1.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/member/joinStep1.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/member/joinStep2.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/member/joinStep2.mustache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/member/joinStep3.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/member/joinStep3.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/member/joinStep4.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/member/joinStep4.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/member/login.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/member/login.mustache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -259,7 +260,15 @@
       <option name="project" value="LOCAL" />
       <updated>1752066231319</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="join 완료, 로그인 로그아웃 완료">
+      <option name="closed" value="true" />
+      <created>1752071330181</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1752071330181</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -267,6 +276,7 @@
     <MESSAGE value="main과 맞춤" />
     <MESSAGE value="join-step1(메일인증)진행중" />
     <MESSAGE value="join-step2(약관동의)완료" />
-    <option name="LAST_COMMIT_MESSAGE" value="join-step2(약관동의)완료" />
+    <MESSAGE value="join 완료, 로그인 로그아웃 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="join 완료, 로그인 로그아웃 완료" />
   </component>
 </project>

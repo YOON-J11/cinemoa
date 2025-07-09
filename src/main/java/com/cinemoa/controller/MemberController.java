@@ -5,6 +5,7 @@ import com.cinemoa.entity.Member;
 import com.cinemoa.service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,13 @@ public class MemberController {
     public String showJoinStep1(Model model) {
         return "member/joinStep1";
     }
+    // 이메일 중복 확인
+    @PostMapping("/check-email")
+    public ResponseEntity<Boolean> checkEmail(@RequestParam String email) {
+        boolean duplicated = memberService.isEmailDuplicated(email);
+        return ResponseEntity.ok(!duplicated); // 중복이면 false 반환
+    }
+
     // STEP2: 약관 동의 페이지 (GET)
     @GetMapping("/join/step2")
     public String showStep2Page(HttpSession session) {
@@ -92,13 +100,15 @@ public class MemberController {
     // STEP4: 가입완료 페이지 (GET)
     @GetMapping("/join/step4")
     public String showJoinStep4(HttpSession session) {
-        Boolean verified = (Boolean) session.getAttribute("emailVerified");
-        if (verified == null || !verified) {
-            return "redirect:/member/join/step1?error=unauthorized";
-        }
+
+        // 회원가입 과정에서 사용된 임시 세션 정보 제거
+        session.removeAttribute("verifiedEmail");
+        session.removeAttribute("emailVerified");
+        session.removeAttribute("authCode");
+        session.removeAttribute("authEmail");
+
         return "member/joinStep4";
     }
-
 
 
     //로그인 페이지 (GET)

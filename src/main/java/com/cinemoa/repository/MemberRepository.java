@@ -13,4 +13,7 @@ public interface MemberRepository extends JpaRepository<Member, String> {
 
     // 로그인 메서드 (아이디+비밀번호로 조회)
     Member findByMemberIdAndPassword(String memberId, String password);
+
+    // 이메일이 이미 존재하는지 여부
+    boolean existsByEmail(String email);
 }

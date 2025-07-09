@@ -1,6 +1,5 @@
 /* 기본 배경색 */
 body {
-  background-color: #f4f4f4;
 }
 
 /* 요소 숨김 */
@@ -21,8 +20,6 @@ input:-webkit-autofill {
   margin: 60px auto;
   background: #fff;
   padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .logo-area {
@@ -181,6 +178,10 @@ button:disabled {
   font-size: 14px;
   line-height: 1.6;
   margin-top: 6px;
+}
+
+.input-msg{
+    margin-top: 10px;
 }
 
 /* ====== [  step4 하단 버튼 설정  ] ==== */

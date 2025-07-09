@@ -90,7 +90,30 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // === STEP5: 버튼 이벤트 연결 ===
-    sendCodeBtn.addEventListener('click', () => sendAuthCodeRequest(sendCodeBtn));
+    sendCodeBtn.addEventListener('click', async () => {
+        const email = emailInput.value.trim();
+
+        // 이메일 중복 체크 먼저 실행
+        const res = await fetch("/member/check-email", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: "email=" + encodeURIComponent(email)
+        });
+
+        const isAvailable = await res.json();
+
+        if (!isAvailable) {
+            emailError.textContent = "이미 가입된 이메일입니다.";
+            emailError.style.display = "block";
+            return;
+        }
+
+        emailError.style.display = "none";
+
+        // 중복이 아니면 인증 요청 진행
+        sendAuthCodeRequest(sendCodeBtn);
+    });
+
     resendBtn.addEventListener('click', () => sendAuthCodeRequest(resendBtn));
 
     // === STEP6: 인증번호 확인 후 결과 메시지 출력 ===

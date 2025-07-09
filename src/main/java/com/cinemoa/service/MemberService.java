@@ -47,5 +47,10 @@ public class MemberService {
         return memberRepository.findByMemberIdAndPassword(id, password);
     }
 
+    //이메일 중복 확인 메서드
+    public boolean isEmailDuplicated(String email) {
+        return memberRepository.existsByEmail(email);
+    }
+
 
 }
