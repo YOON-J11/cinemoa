@@ -1,0 +1,37 @@
+{{> common/header }}
+<link rel="stylesheet" href="/css/member/mypage.css?v={{ timestamp }}" />
+<div class="container mypage-container">
+    <div class="page-util">
+        {{ pagePath }}
+    </div>
+    <div class="inner-wrap">
+        <div class="mypage-menu">
+            <h3><a href="/mypage">마이페이지</a></h3>
+            <nav>
+                <ul>
+                    <li><a href="/mypage/bookinglist">예매/구매내역</a></li>
+                    <li><a href="/mypage/mymovie">내가 본 영화</a></a></li>
+                    <li>
+                        <a href="/mypage/information/myinfo">회원정보</a>
+                        <ul>
+                            <li><a href="/mypage/information/myinfo">개인정보 설정</a></li>
+                            <li><a href="/mypage/information/pref">선호관람정보 설정</a></li>
+                            <li><a href="/mypage/information/withdrawal">회원 탈퇴</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/mypage/myinquiry">나의 문의내역</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="mypage-contents">
+            {{#mypageHome}}
+                {{> mypage/mypageHome }}
+            {{/mypageHome}}
+            {{#bookinglist}}
+                {{> mypage/bookinglist }}
+            {{/bookinglist}}
+        </div>
+    </div>
+</div>
+
+{{> common/footer }}

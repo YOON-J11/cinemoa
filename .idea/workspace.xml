@@ -5,29 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3417d97b-d6fd-4d2f-af62-c8f09db8a780" name="Changes" comment="join 완료, 로그인 로그아웃 완료">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/api/MemberApiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MypageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/bookinglist.mustache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/myinfo.mustache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/myinquiry.mustache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/mymovie.mustache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/pref.mustache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/withdrawal.mustache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/cinemoa.main.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/common/footer.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/common/footer.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/MemberRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/MemberRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/MemberService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/member/join.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/member/join.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/member/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/member/login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/member/joinStep1.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/member/joinStep1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/common/footer.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/common/footer.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/member/joinStep1.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/member/joinStep1.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/member/joinStep2.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/member/joinStep2.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/member/joinStep3.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/member/joinStep3.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/member/joinStep4.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/member/joinStep4.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/member/login.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/member/login.mustache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,17 +136,18 @@
     "git-widget-placeholder": "member",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/cinemoa/src/main/resources/static/images/icons",
+    "last_opened_file_path": "C:/cinemoa/src/main/resources/templates/member",
     "settings.editor.selected.configurable": "File.Encoding"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\cinemoa\src\main\resources\static\images\icons" />
       <recent name="C:\cinemoa\src\main\resources\templates\member" />
+      <recent name="C:\cinemoa\src\main\resources\static\images\icons" />
       <recent name="C:\cinemoa\src\main\java\com\cinemoa\controller" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\cinemoa\src\main\resources\templates\mypage\partials" />
       <recent name="C:\cinemoa\src\main\resources\static\images\icons" />
     </key>
   </component>
