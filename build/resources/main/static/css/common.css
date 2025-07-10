@@ -130,3 +130,49 @@ header {
     margin: 0 auto;
     padding: 20px;
 }
+
+/* ====  [ 하단 고정 버튼 ]  ==== */
+.fixed-btn {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+.btn-ticketing a {
+    display: inline-block;
+    background-color: #006f7c;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+.btn-ticketing a:hover {
+    background-color: #00525b;
+}
+
+.btn_goto-top {
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
+    color: #333;
+    font-size: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn_goto-top:hover {
+    background-color: #999;
+}

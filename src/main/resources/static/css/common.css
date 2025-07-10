@@ -130,3 +130,50 @@ header {
     margin: 0 auto;
     padding: 20px;
 }
+
+/* ====  [ 하단 고정 버튼 ]  ==== */
+.fixed-btn-wrapper {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.fixed-btn {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn-ticketing a {
+    display: inline-block;
+    background: linear-gradient(to right, #006f7c, #95c0c3);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    color: white;
+    padding: 20px 40px;
+    border-radius: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+.btn_goto-top {
+    width: 60px;
+    height: 60px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-size: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}

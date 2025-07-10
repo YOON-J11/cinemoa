@@ -1,19 +1,19 @@
 {{> common/header }}
-<link rel="stylesheet" href="/css/member/mypage.css?v={{ timestamp }}" />
+<link rel="stylesheet" href="/css/mypage/mypage.css?v={{ timestamp }}" />
 <div class="container mypage-container">
     <div class="page-util">
         {{ pagePath }}
     </div>
     <div class="inner-wrap">
         <div class="mypage-menu">
-            <h3><a href="/mypage">마이페이지</a></h3>
+            <a href="/mypage"><h3>마이페이지</h3></a>
             <nav>
-                <ul>
+                <ul class="mypage-menu-ul">
                     <li><a href="/mypage/bookinglist">예매/구매내역</a></li>
-                    <li><a href="/mypage/mymovie">내가 본 영화</a></a></li>
+                    <li><a href="/mypage/mymovie">내가 본 영화</a></li>
                     <li>
                         <a href="/mypage/information/myinfo">회원정보</a>
-                        <ul>
+                        <ul class="mypage-menu-ul-sub">
                             <li><a href="/mypage/information/myinfo">개인정보 설정</a></li>
                             <li><a href="/mypage/information/pref">선호관람정보 설정</a></li>
                             <li><a href="/mypage/information/withdrawal">회원 탈퇴</a></li>
