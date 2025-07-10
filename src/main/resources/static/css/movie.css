@@ -1,0 +1,13 @@
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.movie-list .item {
+    padding: 1rem;
+}
+nav ul {
+    display: flex;
+    gap: 1rem;
+}
