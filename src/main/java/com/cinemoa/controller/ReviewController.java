@@ -17,7 +17,7 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final MovieService movieService; // MovieService도 필요하다면 final로 선언하여 주입받습니다.
 
-    // 기존: 리뷰 작성 폼 표시 (풀 페이지 반환)
+    // 리뷰 작성 폼 표시 (풀 페이지 반환)
     // @GetMapping("/new")
     // public String showNewReviewForm(@RequestParam("movieId") Long movieId, Model model) {
     //     model.addAttribute("movieId", movieId);
@@ -25,13 +25,12 @@ public class ReviewController {
     //     return "reviews/new"; // 풀 페이지 템플릿 반환
     // }
 
-    // 새롭게 추가: 리뷰 작성 폼 Fragment 반환 (AJAX 모달용)
+    //리뷰 작성 폼 Fragment 반환 (AJAX 모달용)
     @GetMapping("/new-fragment")
     public String showNewReviewFormFragment(@RequestParam("movieId") Long movieId, Model model) {
         model.addAttribute("movieId", movieId);
         model.addAttribute("review", new ReviewDto());
-        // "reviews/new" 템플릿의 내용 중 폼 부분만 반환하도록 가정합니다.
-        // reviews/new.mustache 파일이 <html>, <head>, <body> 태그 없이 폼 내용만 포함해야 합니다.
+        // "reviews/new" 템플릿의 내용 중 폼 부분만 반환
         return "reviews/new";
     }
 

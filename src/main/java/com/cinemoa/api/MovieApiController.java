@@ -1,13 +1,17 @@
 package com.cinemoa.api;
 
 import com.cinemoa.dto.MovieDto;
+import com.cinemoa.entity.Movie;
 import com.cinemoa.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -62,9 +66,4 @@ public class MovieApiController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<MovieDto>> searchMovies(@RequestParam("keyword") String keyword) {
-        List<MovieDto> searchResults = movieService.searchMovies(keyword);
-        return ResponseEntity.ok(searchResults);
-    }
 }

@@ -12,9 +12,6 @@ import java.util.List;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
-    // @Query 어노테이션을 사용하여 JPQL 쿼리 정의
-    @Query("SELECT m FROM Movie m WHERE m.title LIKE %:keyword% OR m.director LIKE %:keyword% OR m.actors LIKE %:keyword% OR m.genre LIKE %:keyword%")
-    List<Movie> searchByKeyword(@Param("keyword") String keyword);
 
     // 상영 상태별 영화 조회
     List<Movie> findByScreeningStatus(Movie.ScreeningStatus status);
@@ -22,5 +19,15 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     // 페이징을 지원하는 메서드 추가
     Page<Movie> findByScreeningStatus(Movie.ScreeningStatus status, Pageable pageable);
 
+    // 키워드로 영화 검색 (제목, 감독, 배우 중 하나라도 포함)
+    Page<Movie> findByTitleContainingOrDirectorContainingOrActorsContaining(
+            String titleKeyword, String directorKeyword, String actorsKeyword, Pageable pageable);
+
+    // 키워드와 상영 상태로 영화 검색 (제목, 감독, 배우 중 하나라도 포함하고, 특정 상영 상태인 경우)
+    Page<Movie> findByTitleContainingAndScreeningStatusOrDirectorContainingAndScreeningStatusOrActorsContainingAndScreeningStatus(
+            String titleKeyword, Movie.ScreeningStatus titleStatus,
+            String directorKeyword, Movie.ScreeningStatus directorStatus,
+            String actorsKeyword, Movie.ScreeningStatus actorsStatus,
+            Pageable pageable);
 
 }

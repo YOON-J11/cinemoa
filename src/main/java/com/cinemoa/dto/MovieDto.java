@@ -57,15 +57,19 @@ public class MovieDto {
         return "ALL".equalsIgnoreCase(this.ageRating);
     }
 
-    public boolean is12Rating() {
+    public boolean isAll() {
+        return "ALL".equals(this.ageRating);
+    }
+
+    public boolean is12() {
         return "12".equals(this.ageRating);
     }
 
-    public boolean is15Rating() {
+    public boolean is15() {
         return "15".equals(this.ageRating);
     }
 
-    public boolean is19Rating() {
+    public boolean is19() {
         return "19".equals(this.ageRating);
     }
 
@@ -91,4 +95,3 @@ class MovieListDto {
     private String ageRating;  // 관람등급 추가
     private Integer runningTime;  // 러닝타임 추가
 }
-

@@ -2,6 +2,7 @@ package com.cinemoa.controller;
 
 import com.cinemoa.dto.MovieDto;
 import com.cinemoa.dto.ReviewDto;
+import com.cinemoa.entity.Movie;
 import com.cinemoa.service.MovieService;
 import com.cinemoa.service.ReviewService;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Controller
@@ -67,17 +69,14 @@ public class MovieController {
             movies = movieService.getMoviesPaginated(pageable);
         }
 
-        // null 값 처리
-        for (MovieDto movie : movies.getContent()) {
-            if (movie.getRating() == null) {
-                movie.setRating(BigDecimal.ZERO);
-            }
-            if (movie.getReservationRate() == null) {
-                movie.setReservationRate(BigDecimal.ZERO);
-            }
-            if (movie.getAudienceCount() == null) {
-                movie.setAudienceCount(BigInteger.ZERO);
-            }
+        // 다음 페이지 번호 계산 (movies.number는 현재 페이지 번호, 0부터 시작)
+        int nextPageNumber = movies.getNumber() + 1;
+        model.addAttribute("nextPageNumber", nextPageNumber);
+
+
+        for (MovieDto movieDto : movies.getContent()) {
+            // null 값 처리
+            handleNullValues(movieDto);
         }
 
         model.addAttribute("movies", movies);
@@ -358,13 +357,81 @@ public class MovieController {
 
     // 영화 검색
     @GetMapping("/search")
-    public String searchMovies(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
+    public String searchMovies(@RequestParam(value = "keyword", required = false) String keyword,
+                               @RequestParam(required = false) String status,
+                               Model model,
+                               @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+
+        Page<MovieDto> movies;
+
+        // 키워드가 있는 경우 검색 수행
         if (keyword != null && !keyword.trim().isEmpty()) {
-            List<MovieDto> searchResults = movieService.searchMovies(keyword);
-            model.addAttribute("movies", searchResults);
-            model.addAttribute("keyword", keyword);
+            // 키워드와 상영 상태를 함께 고려하여 검색
+            if (status != null && !status.isEmpty()) {
+                try {
+                    Movie.ScreeningStatus screeningStatus = Movie.ScreeningStatus.valueOf(status);
+                    movies = movieService.searchMoviesByKeywordAndStatus(keyword, screeningStatus, pageable);
+                } catch (IllegalArgumentException e) {
+                    movies = movieService.searchMoviesByKeyword(keyword, pageable);
+                }
+            } else {
+                movies = movieService.searchMoviesByKeyword(keyword, pageable);
+            }
+        } else {
+            // 키워드가 없는 경우 상영 상태별 필터링만 수행
+            if (status != null && !status.isEmpty()) {
+                try {
+                    Movie.ScreeningStatus screeningStatus = Movie.ScreeningStatus.valueOf(status);
+                    movies = movieService.getMoviesByScreeningStatus(screeningStatus, pageable);
+                } catch (IllegalArgumentException e) {
+                    movies = movieService.getMoviesPaginated(pageable);
+                }
+            } else {
+                movies = movieService.getMoviesPaginated(pageable);
+            }
         }
-        return "movies/search";
+
+        // 다음 페이지 번호 계산
+        int nextPageNumber = movies.getNumber() + 1;
+        model.addAttribute("nextPageNumber", nextPageNumber);
+
+        // 영화 목록의 각 영화에 대해 null 값 처리
+        for (MovieDto movieDto : movies.getContent()) {
+            handleNullValues(movieDto);
+        }
+
+        model.addAttribute("movies", movies);
+
+        // 검색 키워드가 있는 경우에만 관련 정보 추가
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            model.addAttribute("keyword", keyword);
+            model.addAttribute("title", "'" + keyword + "' 검색 결과");
+        } else {
+            model.addAttribute("title", "영화 목록");
+        }
+
+        model.addAttribute("timestamp", System.currentTimeMillis());
+        model.addAttribute("currentStatus", status);
+
+        // 페이지네이션을 위한 값들 추가
+        model.addAttribute("hasPrevious", movies.hasPrevious());
+        model.addAttribute("hasNext", movies.hasNext());
+        model.addAttribute("prevPage", Math.max(0, movies.getNumber() - 1));
+        model.addAttribute("nextPage", Math.min(movies.getTotalPages() - 1, movies.getNumber() + 1));
+
+        // 페이지 번호 목록 생성
+        int totalPages = movies.getTotalPages();
+        if (totalPages > 0) {
+            List<PageItem> pageNumbers = new ArrayList<>();
+            int start = Math.max(0, movies.getNumber() - 2);
+            int end = Math.min(totalPages - 1, movies.getNumber() + 2);
+            for (int i = start; i <= end; i++) {
+                pageNumbers.add(new PageItem(i, movies.getNumber() == i));
+            }
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
+        return "movies/list"; // 검색 결과도 동일한 목록 템플릿 사용
     }
 
     private void handleNullValues(MovieDto movieDto) {

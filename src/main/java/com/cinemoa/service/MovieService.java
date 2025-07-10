@@ -16,10 +16,14 @@ public interface MovieService {
     MovieDto updateMovie(Long id, MovieDto movieDto);
     void deleteMovie(Long id);
 
-    // 검색 기능
-    List<MovieDto> searchMovies(String keyword);
 
     // 상영 상태별 필터링
     Page<MovieDto> getMoviesByScreeningStatus(Movie.ScreeningStatus status, Pageable pageable);
+
+    // 키워드로 영화 검색
+    Page<MovieDto> searchMoviesByKeyword(String keyword, Pageable pageable);
+
+    // 키워드와 상영 상태로 영화 검색
+    Page<MovieDto> searchMoviesByKeywordAndStatus(String keyword, Movie.ScreeningStatus status, Pageable pageable);
 
 }

@@ -79,19 +79,25 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<MovieDto> searchMovies(String keyword) {
-        // @Query 어노테이션을 사용한 메서드 호출
-        return movieRepository.searchByKeyword(keyword)
-                .stream()
-                .map(this::convertToDto)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    @Transactional(readOnly = true)
     public Page<MovieDto> getMoviesByScreeningStatus(Movie.ScreeningStatus status, Pageable pageable) {
         // 리포지토리에 이미 findByScreeningStatus 메서드가 있다면 페이징 처리를 위해 수정 필요
         Page<Movie> moviePage = movieRepository.findByScreeningStatus(status, pageable);
+        return moviePage.map(this::convertToDto);
+    }
+
+    @Override
+    public Page<MovieDto> searchMoviesByKeyword(String keyword, Pageable pageable) {
+        // 제목, 감독, 배우만으로 키워드 검색
+        Page<Movie> moviePage = movieRepository.findByTitleContainingOrDirectorContainingOrActorsContaining(
+                keyword, keyword, keyword, pageable);
+        return moviePage.map(this::convertToDto);
+    }
+
+    @Override
+    public Page<MovieDto> searchMoviesByKeywordAndStatus(String keyword, Movie.ScreeningStatus status, Pageable pageable) {
+        // 키워드와 상영 상태로 검색
+        Page<Movie> moviePage = movieRepository.findByTitleContainingAndScreeningStatusOrDirectorContainingAndScreeningStatusOrActorsContainingAndScreeningStatus(
+                keyword, status, keyword, status, keyword, status, pageable);
         return moviePage.map(this::convertToDto);
     }
 
