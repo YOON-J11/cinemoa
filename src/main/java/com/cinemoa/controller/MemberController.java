@@ -139,4 +139,10 @@ public class MemberController {
         return "redirect:/"; // 홈으로 이동
     }
 
+    // 아이디, 비밀번호 찾기 페이지
+    @GetMapping("/find")
+    public String showFindForm(Model model) {
+        return "member/find";
+    }
+
 }

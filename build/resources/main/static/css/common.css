@@ -180,7 +180,22 @@ header {
 
 /* ====  [ footer ]  ==== */
 footer{
-
+  background-color: #f4f4f4;
 }
 .footer-inner{
+  max-width: 1200px;
+  width: 100%;
+  padding: 50px 20px;
+  margin: 0 auto;
+}
+.footer-inner ul {
+  display: flex;
+  gap : 10px;
+  font-size: 14px;
+}
+.footer-inner p {
+  font-size: 13px;
+  color: #666;
+  margin-top: 20px;
+  line-height: 16px;
 }
