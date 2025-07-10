@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3417d97b-d6fd-4d2f-af62-c8f09db8a780" name="Changes" comment="footer 스타일 수정">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/member/find.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/member/find.mustache" afterDir="false" />
+    <list default="true" id="db7c2c1c-194a-4b3c-ba65-82e17eafdc6c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/icons/headset-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/icons/login-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/member/find.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" afterDir="false" />
@@ -14,14 +15,26 @@
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/static/css/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/css/common.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/static/css/reset.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/css/reset.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/common/footer.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/common/footer.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/api/MemberApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/api/MemberApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/EmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/EmailController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/dto/MemberDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/dto/MemberDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/MemberRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/MemberRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/EmailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/MemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/common.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/member/find.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/member/find.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/member/join.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/member/join.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/reset.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/reset.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/icons/logout-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/icons/logout-icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/common/header.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/common/header.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/member/find.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/member/find.mustache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/member/login.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/member/login.mustache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,13 +78,6 @@
       </state>
     </system>
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -81,31 +87,6 @@
     &quot;assignee&quot;: &quot;YOON-J11&quot;
   }
 }</component>
-  <component name="GitToolBoxStore">
-    <option name="recentBranches">
-      <RecentBranches>
-        <option name="branchesForRepo">
-          <list>
-            <RecentBranchesForRepo>
-              <option name="branches">
-                <list>
-                  <RecentBranch>
-                    <option name="branchName" value="member" />
-                    <option name="lastUsedInstant" value="1751989268" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="main" />
-                    <option name="lastUsedInstant" value="1751989267" />
-                  </RecentBranch>
-                </list>
-              </option>
-              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
-            </RecentBranchesForRepo>
-          </list>
-        </option>
-      </RecentBranches>
-    </option>
-  </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/YOON-J11/cinemoa.git&quot;,
@@ -116,49 +97,28 @@
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 5
 }</component>
-  <component name="ProjectId" id="2za7bah8U2J9duscBnDooXmez9R" />
+  <component name="ProjectId" id="2zggVyxd5lrWtu1opfB5HNLI8jg" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Gradle.cinemoa [:com.cinemoa.CineMoaApplication.main()].executor": "Run",
     "Gradle.cinemoa [bootRun].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "member",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/cinemoa/src/main/resources/templates/member",
-    "settings.editor.selected.configurable": "File.Encoding"
+    "last_opened_file_path": "C:/cinemoa/src/main/resources/static/images/icons"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\cinemoa\src\main\resources\templates\member" />
-      <recent name="C:\cinemoa\src\main\resources\static\images\icons" />
-      <recent name="C:\cinemoa\src\main\java\com\cinemoa\controller" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\cinemoa\src\main\resources\templates\mypage\partials" />
       <recent name="C:\cinemoa\src\main\resources\static\images\icons" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.cinemoa [bootRun]">
-    <configuration name="CineMoaApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.cinemoa.CineMoaApplication" />
-      <module name="cinemoa.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.cinemoa.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager">
     <configuration name="cinemoa [bootRun]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -181,133 +141,30 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.cinemoa [bootRun]" />
-        <item itemvalue="Application.CineMoaApplication" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
-  <component name="StructureViewState">
-    <option name="selectedTab" value="Handlebars" />
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="3417d97b-d6fd-4d2f-af62-c8f09db8a780" name="Changes" comment="" />
-      <created>1751957403704</created>
+      <changelist id="db7c2c1c-194a-4b3c-ba65-82e17eafdc6c" name="Changes" comment="" />
+      <created>1752158158509</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1751957403704</updated>
+      <updated>1752158158509</updated>
     </task>
-    <task id="LOCAL-00001" summary="main과 맞춤">
-      <option name="closed" value="true" />
-      <created>1751957955103</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1751957955103</updated>
-    </task>
-    <task id="LOCAL-00002" summary="join-step1(메일인증)진행중">
-      <option name="closed" value="true" />
-      <created>1751965842545</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1751965842545</updated>
-    </task>
-    <task id="LOCAL-00003" summary="join-step1(메일인증)진행중">
-      <option name="closed" value="true" />
-      <created>1751998892024</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1751998892024</updated>
-    </task>
-    <task id="LOCAL-00004" summary="join-step1(메일인증)진행중">
-      <option name="closed" value="true" />
-      <created>1751999402248</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1751999402248</updated>
-    </task>
-    <task id="LOCAL-00005" summary="join-step1(메일인증)진행중">
-      <option name="closed" value="true" />
-      <created>1752030616127</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1752030616127</updated>
-    </task>
-    <task id="LOCAL-00006" summary="join-step2(약관동의)완료">
-      <option name="closed" value="true" />
-      <created>1752031845355</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1752031845355</updated>
-    </task>
-    <task id="LOCAL-00007" summary="join-step2(약관동의)완료">
-      <option name="closed" value="true" />
-      <created>1752066231319</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1752066231319</updated>
-    </task>
-    <task id="LOCAL-00008" summary="join 완료, 로그인 로그아웃 완료">
-      <option name="closed" value="true" />
-      <created>1752071330181</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1752071330181</updated>
-    </task>
-    <task id="LOCAL-00009" summary="mypage 기본틀 완성">
-      <option name="closed" value="true" />
-      <created>1752130299412</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1752130299412</updated>
-    </task>
-    <task id="LOCAL-00010" summary="mypage 기본틀 완성">
-      <option name="closed" value="true" />
-      <created>1752131070320</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1752131070320</updated>
-    </task>
-    <task id="LOCAL-00011" summary="하단 고정 버튼 추가함">
-      <option name="closed" value="true" />
-      <created>1752135342534</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1752135342534</updated>
-    </task>
-    <task id="LOCAL-00012" summary="footer 스타일 수정">
-      <option name="closed" value="true" />
-      <created>1752136901121</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1752136901121</updated>
-    </task>
-    <option name="localTasksCounter" value="13" />
     <servers />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="오류 수정" />
-    <MESSAGE value="main과 맞춤" />
-    <MESSAGE value="join-step1(메일인증)진행중" />
-    <MESSAGE value="join-step2(약관동의)완료" />
-    <MESSAGE value="join 완료, 로그인 로그아웃 완료" />
-    <MESSAGE value="mypage 기본틀 완성" />
-    <MESSAGE value="하단 고정 버튼 추가함" />
-    <MESSAGE value="footer 스타일 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="footer 스타일 수정" />
   </component>
 </project>

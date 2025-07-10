@@ -1,5 +1,7 @@
 package com.cinemoa.service;
 
+import com.cinemoa.entity.Member;
+import com.cinemoa.repository.MemberRepository;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
@@ -7,12 +9,14 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
 public class EmailService {
     private final JavaMailSender mailSender;
+    private final MemberRepository memberRepository;
 
     // 인증코드 생성 (숫자 6자리)
     public String createAuthCode() {
@@ -54,4 +58,23 @@ public class EmailService {
             throw new RuntimeException("이메일 전송에 실패했습니다", e);
         }
     }
+
+    //입력한 정보가 DB에 실제 존재하는지 검사하는 메서드
+    public boolean validateMemberInfo(String memberId, String name, String email) {
+        if (memberId == null || name == null || email == null) return false;
+
+        // 입력값 정리
+        String trimmedId = memberId.trim();
+        String trimmedName = name.trim();
+        String trimmedEmail = email.trim().toLowerCase();
+
+        System.out.println("[입력 검증] memberId: " + trimmedId + ", name: " + trimmedName + ", email: " + trimmedEmail);
+
+        System.out.println("▶ DB 조회 결과: " +
+                memberRepository.findByMemberIdAndNameAndEmail(trimmedId, trimmedName, trimmedEmail)
+        );
+
+        return memberRepository.findByMemberIdAndNameAndEmail(trimmedId, trimmedName, trimmedEmail).isPresent();
+    }
+
 }

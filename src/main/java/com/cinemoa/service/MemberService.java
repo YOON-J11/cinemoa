@@ -6,6 +6,8 @@ import com.cinemoa.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor // final 필드 생성자 자동 생성
 public class MemberService {
@@ -50,6 +52,34 @@ public class MemberService {
     //이메일 중복 확인 메서드
     public boolean isEmailDuplicated(String email) {
         return memberRepository.existsByEmail(email);
+    }
+
+    // 이름과 이메일로 회원 정보 조회 → 아이디/가입일 반환용
+    public MemberDto findMemberId(String name, String email) {
+        Member member = memberRepository.findByNameAndEmail(name, email).orElse(null);
+        if (member != null) {
+            // 필요한 정보만 담은 DTO 반환
+            return MemberDto.builder()
+                    .memberId(member.getMemberId())
+                    .regDate(member.getRegDate().toLocalDate())
+                    .build();
+        }
+        return null;
+    }
+    // 입력한 정보가 DB에 실제 존재하는지 검사하는 메서드
+    public boolean validateMemberInfo(String memberId, String name, String email) {
+        return memberRepository.findByMemberIdAndNameAndEmail(memberId, name, email).isPresent();
+    }
+    // 비밀번호 재설정 메서드
+    public boolean updatePassword(String memberId, String newPassword) {
+        Optional<Member> optionalMember = memberRepository.findByMemberId(memberId);
+        if (optionalMember.isPresent()) {
+            Member member = optionalMember.get();
+            member.setPassword(newPassword); // 필요시 암호화
+            memberRepository.save(member);
+            return true;
+        }
+        return false;
     }
 
 

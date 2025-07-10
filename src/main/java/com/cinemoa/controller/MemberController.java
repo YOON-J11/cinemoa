@@ -145,4 +145,18 @@ public class MemberController {
         return "member/find";
     }
 
+
+    // 아이디 찾기
+    @PostMapping("/find-id")
+    @ResponseBody
+    public ResponseEntity<MemberDto> findId(@RequestParam String name, @RequestParam String email) {
+        MemberDto result = memberService.findMemberId(name, email);
+        if (result != null) {
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 }

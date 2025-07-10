@@ -1,6 +1,7 @@
 package com.cinemoa.controller;
 
 import com.cinemoa.service.EmailService;
+import com.cinemoa.service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import java.util.Map;
 @RequestMapping("/member")
 public class EmailController {
     private final EmailService emailService;
+    private final MemberService memberService;
 
     // 사용자가 입력한 이메일로 인증번호를 생성하고 전송
     // 생성된 인증번호와 이메일은 세션에 저장, 유효시간은 5분
@@ -66,5 +68,46 @@ public class EmailController {
             return "redirect:/member/join?error=auth";
         }
     }
+
+    @PostMapping("/email/send-password-auth-code")
+    @ResponseBody
+    public String sendPasswordAuthCode(@RequestBody Map<String, String> payload, HttpSession session) {
+        String memberId = payload.get("memberId");
+        String name = payload.get("name");
+        String email = payload.get("email");
+
+        if (!memberService.validateMemberInfo(memberId, name, email)) {
+            return "fail";  // 정보가 일치하지 않음
+        }
+
+        String authCode = emailService.createAuthCode();
+        emailService.sendAuthCode(email, authCode);
+
+        session.setAttribute("authCode", authCode);
+        session.setAttribute("authEmail", email);
+        session.setMaxInactiveInterval(300); // 5분
+
+        return "success";
+    }
+
+    @PostMapping("/email/verify-auth-code")
+    @ResponseBody
+    public String verifyPasswordAuthCode(@RequestBody Map<String, String> payload, HttpSession session) {
+        String email = payload.get("email");
+        String inputCode = payload.get("authCode");
+
+        String savedCode = (String) session.getAttribute("authCode");
+        String savedEmail = (String) session.getAttribute("authEmail");
+
+        if (savedCode != null && savedCode.equals(inputCode) && savedEmail.equals(email)) {
+            session.setAttribute("emailVerified", true);
+            session.setAttribute("verifiedEmail", email);
+            return "success";
+        }
+
+        return "fail";
+    }
+
+
 
 }
