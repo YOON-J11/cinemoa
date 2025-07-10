@@ -5,14 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce82600d-b2d0-4913-9108-cfe4c2a48587" name="Changes" comment="250709 리뷰 작성 모달로 변경">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/CineMoa.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/CineMoa.test.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/controller/ReviewApiController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/images/movie/bc896f09-fa17-424f-9381-b7087a74ea11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/images/movie/c102d15d-41ef-4215-b4b8-bf3bf8c224d1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/images/movie/c6295fa0-eb29-4877-901e-b2ebfdbf7751.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/images/movie/c7132812-f345-42a9-a109-b0718ac53962.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/images/movie/d40ee421-f66c-4183-aeb1-e531e26bfd31.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/images/movie/df468407-f786-4d21-bf5a-48753c3259be.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/images/movie/e417cc80-62a8-428e-ad48-8927561a5696.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/static/images/movie/f3db0697-fd4f-493e-9833-b2b6d0d9a5f9.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/templates/movies/view.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/movies/view.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/movies/view.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/movies/view.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ReviewController.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,12 +104,12 @@
       </RecentBranches>
     </option>
   </component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/YOON-J11/cinemoa.git&quot;,
-    &quot;accountId&quot;: &quot;c727f623-82a7-4e36-846a-039dc355bb12&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/YOON-J11/cinemoa.git",
+    "accountId": "3e202a84-8bba-4e02-9dd9-ce2efead2401"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 5
@@ -103,17 +119,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.cinemoa [:com.cinemoa.CineMoaApplication.main()].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "board",
-    "kotlin-language-version-configured": "true",
-    "settings.editor.selected.configurable": "File.Encoding"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.cinemoa [:com.cinemoa.CineMoaApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;board&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\test\cinemoa\src\main\resources\static\se2" />
@@ -187,7 +203,23 @@
       <option name="project" value="LOCAL" />
       <updated>1752052632023</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="250709 리뷰 작성 모달로 변경">
+      <option name="closed" value="true" />
+      <created>1752052799443</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1752052799443</updated>
+    </task>
+    <task id="LOCAL-00005" summary="250709 리뷰 작성 모달로 변경">
+      <option name="closed" value="true" />
+      <created>1752108004902</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1752108004902</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

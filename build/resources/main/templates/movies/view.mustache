@@ -193,6 +193,11 @@
                     reviewFormContainer.innerHTML = '<p class="text-danger">리뷰 폼을 불러오는데 실패했습니다.</p>';
                 });
         });
+
+        // 모달이 닫힐 때 내용 초기화 (선택 사항)
+        reviewModal.addEventListener('hidden.bs.modal', function () {
+            document.getElementById('reviewFormContainer').innerHTML = '로딩 중...';
+        });
     });
 </script>
 
