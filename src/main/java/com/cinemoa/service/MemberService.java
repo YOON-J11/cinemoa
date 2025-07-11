@@ -1,11 +1,14 @@
 package com.cinemoa.service;
 
+import com.cinemoa.dto.InquiryDto;
 import com.cinemoa.dto.MemberDto;
+import com.cinemoa.dto.ReservationDto;
 import com.cinemoa.entity.Member;
 import com.cinemoa.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -82,5 +85,24 @@ public class MemberService {
         return false;
     }
 
+    // 내가 본 영화 수
+    public int countWatchedMovies(String memberId) {
+        return memberRepository.countWatchedMovies(memberId);
+    }
+
+    // 내가 쓴 관람평 수
+    public int countWrittenReviews(String memberId) {
+        return memberRepository.countWrittenReviews(memberId);
+    }
+
+    // 최근 예매 내역 (5건)
+    public List<ReservationDto> getRecentReservations(String memberId) {
+        return memberRepository.getRecentReservations(memberId);
+    }
+
+    // 최근 문의 내역 (5건)
+    public List<InquiryDto> getRecentInquiries(String memberId) {
+        return memberRepository.getRecentInquiries(memberId);
+    }
 
 }

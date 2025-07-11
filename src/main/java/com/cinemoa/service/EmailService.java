@@ -43,7 +43,7 @@ public class EmailService {
                             + "  </div>"
                             + "  <div style='padding: 30px; color: #333;'>"
                             + "    <h2 style='color: #006f7c;'>이메일 인증번호</h2>"
-                            + "    <p>안녕하세요. CINEMOA 가입을 위한 이메일 인증번호입니다.</p>"
+                            + "    <p>안녕하세요. CINEMOA 이메일 인증번호입니다.</p>"
                             + "    <p>아래 인증번호를 입력하여 인증을 완료해 주세요.</p>"
                             + "    <div style='text-align: center; margin: 30px 0;'>"
                             + "      <span style='font-size: 32px; font-weight: bold; color: #006f7c;'>" + authCode + "</span>"

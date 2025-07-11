@@ -22,13 +22,22 @@ header {
 /* 로그인, 마이페이지 등 */
 .member-info-wrap ul {
   display: flex;
-  gap: 5px;
+  gap: 10px;
 }
 
 .member-info-wrap li a {
-  font-size: 14px;
-  color: #666;
   padding: 5px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;  
+}
+.member-info-wrap li a img {
+  width: 25px;
+}
+.member-info-wrap li a p {
+  font-size: 14px;
 }
 /* 메인 내비게이션 */
 .main-nav {

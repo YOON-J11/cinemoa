@@ -87,6 +87,11 @@ public class MemberController {
         // 회원 가입 처리
         memberService.join(dto);
 
+        // 로그인 세션 생성 (회원 가입 완료시 자동로그인)
+        Member member = memberService.join(dto);
+        session.setAttribute("loginMember", member); // 로그인 세션
+
+
         // 세션 정리 (선택사항)
         session.removeAttribute("verifiedEmail");
         session.removeAttribute("emailVerified");
