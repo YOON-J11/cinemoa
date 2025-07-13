@@ -179,6 +179,9 @@ public class MovieController {
             // movieId 값을 모델에 추가
             model.addAttribute("movieId", id);
 
+            model.addAttribute("title", id);
+            model.addAttribute("timestamp", System.currentTimeMillis());
+
             model.addAttribute("movie", movieDto);
             return "movies/view";
         } else {

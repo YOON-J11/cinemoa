@@ -21,11 +21,10 @@
                 <p class="toggle-text">개봉작만</p>
             </div>
             <div class="input-wrap movie-search">
-                <input type="text" id="searchKeyword" title="영화명을 입력하세요" placeholder="영화명 검색">
+                <input type="text" id="searchKeyword" title="영화 검색" placeholder="영화명, 감독명, 배우명 검색">
                 <button type="button" class="btn-search-input" id="btnSearch"><img width="20" height="20" src="https://img.icons8.com/ios-glyphs/20/search--v1.png" alt="search--v1"/></button>
             </div>
         </div>
-
 
         <div class="movie-list">
             {{#movies.content}}
@@ -58,7 +57,7 @@
                             <h5>{{title}}</h5>
                         </div>
                         <div class="item-info">
-                            <span class="rate"> 예매율: {{reservationRate}}% </span>
+                            <span class="rate">예매율 <span class="rating">{{reservationRate}}</span>%</span>
                             <span class="date">
                                 {{#releaseDate}}
                                     개봉일 <span class="format-date">{{releaseDate}}</span>
@@ -66,9 +65,16 @@
                                 {{^releaseDate}}개봉일 미정{{/releaseDate}}
                             </span>
                         </div>
-                        <div>
-                            <span>좋아요{{likesCount}}</span>
-                            <button>예매하기</button>
+                        <div class="item-btn">
+                            <div class="like-btn">
+                                <button class="heart-button">
+                                <svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" id="heart" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13.91,6.75c-1.17,2.25-4.3,5.31-6.07,6.94c-0.1903,0.1718-0.4797,0.1718-0.67,0C5.39,12.06,2.26,9,1.09,6.75&#xA;&#x9;C-1.48,1.8,5-1.5,7.5,3.45C10-1.5,16.48,1.8,13.91,6.75z" stroke="black"/>
+                                </svg>
+                                </button>
+                                <span class="likesCount">{{likesCount}}</span>
+                            </div>
+                            <button class="reservation-btn">예매하기</button>
                         </div>
                         <a href="/movies/{{movieId}}">상세보기</a>
                     </div>
@@ -252,8 +258,65 @@
                 }
             }
         }
-
     });
+
+    // 'rating' 클래스를 가진 모든 요소를 찾아서 소수점 첫째 자리까지만 표시
+    const ratingElements = document.querySelectorAll('.rating');
+
+    ratingElements.forEach(function(element) {
+        const text = element.textContent;
+        const value = parseFloat(text);
+
+        if (!isNaN(value)) {
+          // 소수점 첫째 자리까지만 표시 (둘째 자리에서 버림)
+          const truncatedValue = Math.floor(value * 10) / 10;
+
+          // % 기호가 있는지 확인하여 유지
+          if (text.includes('%')) {
+            element.textContent = truncatedValue + '%';
+          } else {
+            element.textContent = truncatedValue;
+          }
+        }
+    });
+
+    let heartButtons = document.querySelectorAll(".heart-button");
+    heartButtons.forEach((button) => {
+        button.addEventListener("click", (event) => {
+            button.classList.toggle("active");
+        });
+    });
+
+  // 좋아요 개수를 표시하는 모든 span 요소
+  const likeCountElements = document.querySelectorAll('.likesCount');
+
+  likeCountElements.forEach(function(element) {
+    const count = parseInt(element.textContent);
+
+    if (!isNaN(count)) {
+      // 숫자 형식 변환 함수 호출
+      element.textContent = formatNumber(count);
+    }
+  });
+
+  // 숫자를 K, M, G, T 형식으로 변환하는 함수
+  function formatNumber(num) {
+    if (num < 1000) {
+      return num; // 1000 미만은 그대로 표시
+    } else if (num < 1000000) {
+      // 1K ~ 999K (천 단위)
+      return (Math.floor(num / 100) / 10) + 'K';
+    } else if (num < 1000000000) {
+      // 1M ~ 999M (백만 단위)
+      return (Math.floor(num / 100000) / 10) + 'M';
+    } else if (num < 1000000000000) {
+      // 1G ~ 999G (십억 단위)
+      return (Math.floor(num / 100000000) / 10) + 'G';
+    } else {
+      // 1T 이상 (조 단위)
+      return (Math.floor(num / 100000000000) / 10) + 'T';
+    }
+  }
 </script>
 
 {{> common/footer }}
