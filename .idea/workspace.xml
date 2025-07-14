@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db7c2c1c-194a-4b3c-ba65-82e17eafdc6c" name="Changes" comment="아이디/비밀번호찾기 진행중">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/config/WebConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/dto/InquiryDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/dto/ReservationDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/entity/Cinemas.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/entity/Reservation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/interceptor/LoginCheckInterceptor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/icons/default-profile.png" afterDir="false" />
+    <list default="true" id="db7c2c1c-194a-4b3c-ba65-82e17eafdc6c" name="Changes" comment="mypage진행중">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/SeatsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/seats/seatReservation.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/seats/seatReservation.mustache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" afterDir="false" />
@@ -22,18 +19,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/static/css/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/css/common.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/common/header.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/common/header.mustache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MypageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MypageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/dto/MemberDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/dto/MemberDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/MemberRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/MemberRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/EmailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/MemberService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/mypage/mypage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/mypage/mypage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/member/find.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/member/find.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/mypage/mypageHome.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/mypageHome.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/entity/Cinemas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/entity/Cinemas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/mypage/mypageLayout.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/mypageLayout.mustache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,12 +80,12 @@
     &quot;assignee&quot;: &quot;YOON-J11&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/YOON-J11/cinemoa.git",
-    "accountId": "924e52b0-aa04-4ac1-afa4-5b847d085450"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/YOON-J11/cinemoa.git&quot;,
+    &quot;accountId&quot;: &quot;924e52b0-aa04-4ac1-afa4-5b847d085450&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 5
@@ -113,10 +101,12 @@
     "Gradle.cinemoa [bootRun].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "member",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/cinemoa/src/main/resources/static/images/icons"
+    "last_opened_file_path": "C:/cinemoa/src/main/resources/static/images/icons",
+    "settings.editor.selected.configurable": "File.Encoding"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -125,6 +115,9 @@
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\cinemoa\src\main\resources\static\images\icons" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.cinemoa.controller" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.cinemoa [bootRun]">
@@ -188,10 +181,20 @@
       <option name="presentableId" value="Default" />
       <updated>1752158158509</updated>
     </task>
+    <task id="LOCAL-00001" summary="mypage진행중">
+      <option name="closed" value="true" />
+      <created>1752225638085</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1752225638085</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="아이디/비밀번호찾기 진행중" />
-    <option name="LAST_COMMIT_MESSAGE" value="아이디/비밀번호찾기 진행중" />
+    <MESSAGE value="mypage진행중" />
+    <option name="LAST_COMMIT_MESSAGE" value="mypage진행중" />
   </component>
 </project>

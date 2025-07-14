@@ -16,7 +16,7 @@ public class Cinemas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cinema_id")
-    private Integer cinemaId;  // 영화관 ID
+    private Long cinemaId;  // 영화관 ID
 
     @Column(name = "name", nullable = false)
     private String name;       // 영화관 이름
