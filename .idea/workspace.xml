@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db7c2c1c-194a-4b3c-ba65-82e17eafdc6c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/icons/reset-icon.png" afterDir="false" />
+    <list default="true" id="824ad3fb-b2ee-4c6f-9c4a-35d6af18c491" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/cinemoa.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/seats/seatReservation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" afterDir="false" />
@@ -13,11 +15,16 @@
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/seats/seatReservation.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/seats/seatReservation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/mypage/mypageHome.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/mypageHome.mustache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/seats/seatReservation.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/seats/seatReservation.mustache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,40 +68,32 @@
       </state>
     </system>
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;YOON-J11&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "YOON-J11"
   }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/YOON-J11/cinemoa.git&quot;,
-    &quot;accountId&quot;: &quot;924e52b0-aa04-4ac1-afa4-5b847d085450&quot;
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/YOON-J11/cinemoa.git",
+    "accountId": "924e52b0-aa04-4ac1-afa4-5b847d085450"
   }
-}</component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 5
-}</component>
-  <component name="ProjectId" id="2zggVyxd5lrWtu1opfB5HNLI8jg" />
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2ztAXQ8J0nYaXPn5wO6M0cEsO93" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Gradle.cinemoa [:com.cinemoa.CineMoaApplication.main()].executor": "Run",
     "Gradle.cinemoa [bootRun].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -102,35 +101,10 @@
     "git-widget-placeholder": "reservation__seats",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/cinemoa/src/main/resources/static/images/icons",
     "settings.editor.selected.configurable": "File.Encoding"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\cinemoa\src\main\resources\static\images\icons" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\cinemoa\src\main\resources\static\images\icons" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.cinemoa.controller" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Gradle.cinemoa [bootRun]">
-    <configuration name="CineMoaApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.cinemoa.CineMoaApplication" />
-      <module name="cinemoa.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.cinemoa.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager">
     <configuration name="cinemoa [bootRun]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -154,44 +128,31 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="JetRunConfigurationType">
+      <module name="cinemoa" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="cinemoa" />
       <option name="filePath" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.cinemoa [bootRun]" />
-        <item itemvalue="Application.CineMoaApplication" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="db7c2c1c-194a-4b3c-ba65-82e17eafdc6c" name="Changes" comment="" />
-      <created>1752158158509</created>
+      <changelist id="824ad3fb-b2ee-4c6f-9c4a-35d6af18c491" name="Changes" comment="" />
+      <created>1752540035655</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1752158158509</updated>
+      <updated>1752540035655</updated>
     </task>
-    <task id="LOCAL-00001" summary="mypage진행중">
-      <option name="closed" value="true" />
-      <created>1752225638085</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1752225638085</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="아이디/비밀번호찾기 진행중" />
-    <MESSAGE value="mypage진행중" />
-    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
 </project>

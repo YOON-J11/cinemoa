@@ -1,6 +1,11 @@
 <div class="mypage-home-card">
     <div class="card-top">
-        <img src="{{profileImg}}" onerror="this.src='/images/icons/default-profile.png'" alt="프로필 이미지">
+        {{#profileImg}}
+            <img src="/upload/profile/{{profileImg}}" alt="프로필 이미지">
+        {{/profileImg}}
+        {{^profileImg}}
+            <img src="/images/icons/default-profile.png" alt="기본 이미지">
+        {{/profileImg}}
         <div class="profile-info">
             <h1>안녕하세요! <span>{{name}}</span>님!</h1>
             <P>아이디 : <span>{{memberId}}</span></P>
