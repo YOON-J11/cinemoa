@@ -18,8 +18,8 @@
             <div class="genre-checkboxes">
                 {{#genres}}
                     <label class="genre-item">
-                        <input type="checkbox" name="preferredGenres" value="{{name}}" {{#checked}}checked{{/checked}}>
-                        {{name}}
+                        <input type="checkbox" name="preferredGenres[]" value="{{name}}" {{#checked}}checked{{/checked}}>
+                        <span>{{name}}</span>
                     </label>
                 {{/genres}}
             </div>

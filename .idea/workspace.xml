@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db7c2c1c-194a-4b3c-ba65-82e17eafdc6c" name="Changes" comment="mypage - 프로필이미지 변경">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/CinemasRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/CinemaService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/mypage/mypageHome.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/mypage/pref.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/mypage/pref.js" afterDir="false" />
+    <list default="true" id="db7c2c1c-194a-4b3c-ba65-82e17eafdc6c" name="Changes" comment="mypage - 선호 페이지 작성중">
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" afterDir="false" />
@@ -18,12 +13,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/static/css/reset.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/static/css/reset.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MypageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MypageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/mypage/mypage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/mypage/mypage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/reset.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/reset.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/mypage/mypageHome.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/mypageHome.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/mypage/pref.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/mypage/pref.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/mypage/pref.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/pref.mustache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -201,7 +192,15 @@
       <option name="project" value="LOCAL" />
       <updated>1752542803590</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="mypage - 선호 페이지 작성중">
+      <option name="closed" value="true" />
+      <created>1752553189722</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1752553189722</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -209,6 +208,7 @@
     <MESSAGE value="mypage진행중" />
     <MESSAGE value="seats 선택 로직 (js) 완료" />
     <MESSAGE value="mypage - 프로필이미지 변경" />
-    <option name="LAST_COMMIT_MESSAGE" value="mypage - 프로필이미지 변경" />
+    <MESSAGE value="mypage - 선호 페이지 작성중" />
+    <option name="LAST_COMMIT_MESSAGE" value="mypage - 선호 페이지 작성중" />
   </component>
 </project>

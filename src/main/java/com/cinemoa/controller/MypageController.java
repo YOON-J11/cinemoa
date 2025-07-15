@@ -90,7 +90,7 @@ public class MypageController {
         model.addAttribute("myinfo", true);
         return "mypage/mypageLayout";
     }
-    //회원정보 > 선호관람정보설정
+
     // 회원정보 > 선호관람정보설정
     @GetMapping("/information/pref")
     public String preference(HttpSession session, Model model) {
