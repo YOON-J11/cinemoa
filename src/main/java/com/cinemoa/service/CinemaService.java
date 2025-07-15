@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface CinemaService {
     List<Cinema> getAllCinemas();
+    List<Cinema> getCinemasByRegion(String region);
 }

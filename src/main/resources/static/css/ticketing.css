@@ -1,2 +1,8 @@
 *{outline:none; border: none;}
 *, :after, :before {box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;}
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #222;
+}

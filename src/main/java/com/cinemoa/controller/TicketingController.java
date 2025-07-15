@@ -45,11 +45,10 @@ public class TicketingController {
         this.showtimeService = showtimeService;
     }
 
-    // 영화 ID로 예매 페이지 진입 (영화 선택, 영화관, 날짜, 시간 선택 단계)
-    @GetMapping("/{movieId}")
+   // 영화 ID로 예매 페이지 진입 (영화 선택, 영화관, 날짜, 시간 선택 단계)
+   @GetMapping("/{movieId}")
     public String ticketingByMovie(@PathVariable("movieId") Long movieId, Model model) {
         // 상영 중인 모든 영화 목록 가져오기 (페이징 없이 모든 데이터)
-        // 실제 운영에서는 페이징 처리나 검색 기능을 추가하는 것이 좋습니다.
         Pageable pageable = PageRequest.of(0, Integer.MAX_VALUE, Sort.by("title").ascending()); // 모든 영화 가져오기
         List<MovieDto> nowShowingMovies = movieService.getMoviesByScreeningStatus(
                         Movie.ScreeningStatus.NOW_SHOWING, pageable)
@@ -61,6 +60,14 @@ public class TicketingController {
         // 모든 영화관 정보 가져오기
         List<Cinema> cinemas = cinemaService.getAllCinemas();
         model.addAttribute("cinemas", cinemas);
+
+        // 지역별 영화관 목록 가져오기
+        List<String> regions = cinemas.stream()
+                .map(Cinema::getRegion)
+                .distinct()
+                .sorted()
+                .toList();
+        model.addAttribute("regions", regions);
 
         model.addAttribute("title", "영화 예매");
         model.addAttribute("timestamp", System.currentTimeMillis());
@@ -74,7 +81,6 @@ public class TicketingController {
     public List<String> getAvailableDates(
             @RequestParam Long movieId,
             @RequestParam Long cinemaId) {
-
         return showtimeService.getAvailableDatesByMovieAndCinema(movieId, cinemaId);
     }
 
@@ -98,6 +104,13 @@ public class TicketingController {
             showtimeMap.put("screenName", showtime.getScreen().getScreenName()); // 상영관 이름
             return showtimeMap;
         }).collect(Collectors.toList());
+    }
+
+    // 지역별 영화관 목록 조회
+    @GetMapping("/api/cinemas")
+    @ResponseBody
+    public List<Cinema> getCinemasByRegion(@RequestParam String region) {
+        return cinemaService.getCinemasByRegion(region);
     }
 
     // 좌석 선택 페이지로 이동하는 엔드포인트

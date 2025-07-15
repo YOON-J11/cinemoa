@@ -22,4 +22,9 @@ public class CinemaServiceImpl implements CinemaService {
     public List<Cinema> getAllCinemas() {
         return cinemaRepository.findAll();
     }
+
+    @Override
+    public List<Cinema> getCinemasByRegion(String region) {
+        return cinemaRepository.findByRegion(region);
+    }
 }
