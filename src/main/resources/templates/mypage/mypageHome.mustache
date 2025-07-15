@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/css/mypage/mypageHome.css?v={{ timestamp }}" />
 <div class="mypage-home-card">
     <div class="card-top">
         {{#profileImg}}
@@ -13,29 +14,29 @@
             <button onclick="openProfileEditModal()">프로필 수정</button><!--클릭시 프로필 수정 페이지가 팝업으로 나타남-->
         </div>
     </div>
-    <div class="card-bottom">추후 멤버십등급, 포인트 등..이곳에 나타낼 예정</div>
+    <!--<div class="card-bottom">추후 멤버십등급, 포인트 등..이곳에 나타낼 예정</div>-->
 </div>
-<div class="mypage-home-col">
+<div class="mypage-home-col mymovie">
     <div class="col-left">
         <div class="col-title"><h2>나의 무비</h2></div>
         <div class="movie-items">
             <a href="/mypage/mymovie"><!--클릭시 해당 리스트 페이지로-->
-                <img src="/images/icons/videocamera-icon.png">
                 <p>내가 본 영화</p>
-                <p>총 {{movieCount}}건</p>
+                <img src="/images/icons/videocamera-icon.png">
+                <p>총 <strong>{{movieCount}}</strong>건</p>
             </a>
             <a href="/mypage/myreview"><!--클릭시 해당 리스트 페이지로-->
-                <img src="/images/icons/review-icon.png">
                 <p>내가 쓴 관람평</p>
-                <p>총 {{reviewCount}}건</p>
+                <img src="/images/icons/review-icon.png">
+                <p>총 <strong>{{reviewCount}}</strong>건</p>
             </a>
         </div>
     </div>
     <div class="col-right">
         <div class="col-title"><h2>선호관람정보</h2><a href="/mypage/information/pref" class="btn-pref-setting">설정</a></div><!--설정클릭시 선호관람정보 설정 페이지로 or 선호관람정보 수정 모달창 나타남-->
         <div class="col-contents">
-            <p>선호 극장 : {{#preferredCinema}}{{preferredCinema}}{{/preferredCinema}}{{^preferredCinema}}- 설정안됨{{/preferredCinema}}</p>
-            <p>선호 장르 : {{#preferredGenres}}{{preferredGenres}}{{/preferredGenres}}{{^preferredGenres}}- 설정안됨{{/preferredGenres}}</p>
+            <p>선호 극장 : {{#preferredCinema}}{{preferredCinema}}{{/preferredCinema}}{{^preferredCinema}} 설정안됨{{/preferredCinema}}</p>
+            <p>선호 장르 : {{#preferredGenres}}{{preferredGenres}}{{/preferredGenres}}{{^preferredGenres}} 설정안됨{{/preferredGenres}}</p>
         </div>
     </div>
 </div>

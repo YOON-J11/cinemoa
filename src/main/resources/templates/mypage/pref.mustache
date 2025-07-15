@@ -1,1 +1,34 @@
-<h1 style="color:red;">성호관람정보 페이지</h1>
+<link rel="stylesheet" href="/css/mypage/pref.css?v={{ timestamp }}" />
+<div class="pref-container">
+    <form method="post" action="/member/information/pref/update">
+        <!-- 선호 극장 선택 -->
+        <div class="form-group">
+            <label for="preferredCinema">선호 영화관</label>
+            <select name="preferredCinema" id="preferredCinema" required>
+                <option disabled selected hidden>영화관을 선택해주세요</option>
+                {{#cinemas}}
+                    <option value="{{cinemaId}}" {{#selected}}selected{{/selected}}>{{name}}</option>
+                {{/cinemas}}
+            </select>
+        </div>
+
+        <!-- 선호 장르 선택 -->
+        <div class="form-group">
+            <label>선호 장르 <span style="font-size: 0.85em;">(최대 3개)</span></label>
+            <div class="genre-checkboxes">
+                {{#genres}}
+                    <label class="genre-item">
+                        <input type="checkbox" name="preferredGenres" value="{{name}}" {{#checked}}checked{{/checked}}>
+                        {{name}}
+                    </label>
+                {{/genres}}
+            </div>
+        </div>
+
+        <!-- 저장 버튼 -->
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">저장</button>
+        </div>
+    </form>
+</div>
+<script src="/js/mypage/pref.js"></script>

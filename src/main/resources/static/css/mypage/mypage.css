@@ -8,14 +8,13 @@
 }
 /* ==== [경로영역] ==== */
 .page-util{
-    background-color: beige;
     padding: 10px 20px;
 }
 .inner-wrap{
     display: flex;
     gap: 20px;
-    background-color: blanchedalmond;
     align-items: flex-start;
+    padding: 0 20px;
 }
 /* ==== [ 메뉴영역 ] ==== */
 .mypage-menu{
@@ -25,6 +24,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
 }
 .mypage-menu li a:hover{
     color: #006f7c;
@@ -63,4 +63,7 @@
 }
 .mypage-menu-ul-sub a{
     padding: 10px !important;
+}
+.mypage-contents{
+    flex: 1;
 }
