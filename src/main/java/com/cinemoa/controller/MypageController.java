@@ -2,7 +2,7 @@ package com.cinemoa.controller;
 
 import com.cinemoa.dto.InquiryDto;
 import com.cinemoa.dto.ReservationDto;
-import com.cinemoa.entity.Cinemas;
+import com.cinemoa.entity.Cinema;
 import com.cinemoa.entity.Member;
 import com.cinemoa.service.CinemaService;
 import com.cinemoa.service.MemberService;
@@ -140,11 +140,11 @@ public class MypageController {
         model.addAttribute("selectedCinemaId", preferredCinemaId);
 
         // 전체 극장 목록 (cinemaService는 이미 서비스로 구현되어 있어야 함)
-        List<Cinemas> cinemas = cinemaService.getAllCinemas();
+        List<Cinema> cinemaList = cinemaService.getAllCinemas();
 
         // 지역 목록 중복 제거 및 정렬
-        Set<String> uniqueRegions = cinemas.stream()
-                .map(Cinemas::getRegion)
+        Set<String> uniqueRegions = cinemaList.stream()
+                .map(Cinema::getRegion)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toCollection(TreeSet::new)); // TreeSet으로 정렬 포함
 
@@ -158,7 +158,7 @@ public class MypageController {
         model.addAttribute("regions", regionData);
 
         // 전체 영화관 목록 (id, 이름, 지역 포함)
-        List<Map<String, Object>> cinemaData = cinemas.stream()
+        List<Map<String, Object>> cinemaData = cinemaList.stream()
                 .map(cinema -> {
                     Map<String, Object> map = new HashMap<>();
                     map.put("cinemaId", cinema.getCinemaId());

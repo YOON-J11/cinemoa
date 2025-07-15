@@ -1,28 +1,29 @@
 package com.cinemoa.service;
 
-import com.cinemoa.entity.Cinemas;
-import com.cinemoa.repository.CinemasRepository;
+import com.cinemoa.entity.Cinema;
+import com.cinemoa.repository.CinemaRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class CinemaService {
-    private final CinemasRepository cinemasRepository;
 
-    List<Cinema> getAllCinemas();
-    List<Cinema> getCinemasByRegion(String region);
+    private final CinemaRepository cinemaRepository;
 
-    public List<Cinemas> getAllCinemas() {
-        return cinemasRepository.findAll();
+    public List<Cinema> getAllCinemas() {
+        return cinemaRepository.findAll();
+    }
+
+    public List<Cinema> getCinemasByRegion(String region) {
+        return cinemaRepository.findByRegion(region);
     }
 
     public String getCinemaNameById(Long cinemaId) {
-        return cinemasRepository.findByCinemaId(cinemaId)
-                .map(Cinemas::getName)
+        return cinemaRepository.findById(cinemaId)
+                .map(Cinema::getName)
                 .orElse("알 수 없음");
     }
+}

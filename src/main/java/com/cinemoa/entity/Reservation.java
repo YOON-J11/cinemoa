@@ -27,7 +27,7 @@ public class Reservation {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cinema_id")
-    private Cinemas cinemas; // 영화관
+    private Cinema cinema; // 영화관
 
     private Integer screenId; // 상영관 ID
 
