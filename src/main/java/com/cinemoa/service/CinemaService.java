@@ -14,6 +14,9 @@ import java.util.Optional;
 public class CinemaService {
     private final CinemasRepository cinemasRepository;
 
+    List<Cinema> getAllCinemas();
+    List<Cinema> getCinemasByRegion(String region);
+
     public List<Cinemas> getAllCinemas() {
         return cinemasRepository.findAll();
     }
@@ -23,5 +26,3 @@ public class CinemaService {
                 .map(Cinemas::getName)
                 .orElse("알 수 없음");
     }
-
-}
