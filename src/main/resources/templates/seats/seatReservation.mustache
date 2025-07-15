@@ -1,0 +1,87 @@
+<link rel="stylesheet" href="/css/seats/seatReservation.css?v={{ timestamp }}" />
+{{> common/header }}
+<div class="container reservation-wrapper">
+    <!-- 왼쪽: 좌석 선택 영역 -->
+    <div class="seat-selection">
+        <h2>빠른예매</h2>
+        <!-- 관람 인원 선택 -->
+        <div class="person-selection">
+            <span>성인</span>
+            <button>-</button><input type="text" value="0" readonly><button>+</button>
+            <span>청소년</span>
+            <button>-</button><input type="text" value="0" readonly><button>+</button>
+            <span>우대</span>
+            <button>-</button><input type="text" value="0" readonly><button>+</button>
+
+            <button class="reset-btn">초기화</button>
+        </div>
+
+        <!-- 좌석 배치도 -->
+        <div class="seat-map">
+            <div class="screen-label">SCREEN</div>
+
+            <div class="seat-rows">
+                <!-- 좌석 행들 -->
+                <div class="row" data-row="A">
+                    <span class="row-label">A</span>
+                    <!-- 좌석들 -->
+                    <span class="seat">1</span>
+                    <span class="seat">2</span>
+                    <span class="seat">3</span>
+                </div>
+
+                <!-- 추가 행 계속 -->
+                <div class="row" data-row="A">
+                    <span class="row-label">A</span>
+                    <!-- 좌석들 -->
+                    <span class="seat">1</span>
+                    <span class="seat">2</span>
+                    <span class="seat">3</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 오른쪽: 예매 정보 영역 -->
+    <div class="reservation-summary">
+        <div class="movie-info">
+            <h3>F1 더 무비</h3>
+            <p>2D(자막)</p>
+            <p>서면대한<br>리클라이너 3관</p>
+            <p>2025.07.14(월)</p>
+            <p>20:35 ~ 23:20</p>
+            <img src="/images/movie.jpg" alt="포스터" class="poster">
+        </div>
+
+        <div class="legend">
+            <ul>
+                <li><span class="box selected"></span>선택</li>
+                <li><span class="box reserved"></span>예매완료</li>
+                <li><span class="box disabled"></span>선택불가</li>
+                <li><span class="box normal"></span>일반</li>
+                <li><span class="box vip"></span>장애인석</li>
+            </ul>
+        </div>
+
+        <div class="selected-seats">
+            <h4>선택좌석</h4>
+            <ul>
+                <li>A5</li>
+                <li>B6</li>
+            </ul>
+        </div>
+
+        <div class="price-info">
+            <strong>최종결제금액</strong>
+            <p>0 원</p>
+        </div>
+
+        <div class="navigation">
+            <button class="prev">이전</button>
+            <button class="next">다음</button>
+        </div>
+    </div>
+</div>
+
+{{> common/fixedBtn }}
+{{> common/footer }}
