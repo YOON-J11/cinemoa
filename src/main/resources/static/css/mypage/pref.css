@@ -26,26 +26,61 @@ form{
 }
 
 /* 셀렉트 박스 */
-#preferredCinema {
-  width: 100%;
+.custom-select-wrapper {
+  position: relative;
   max-width: 350px;
-  padding: 10px 12px;
+  width: 100%;
   font-size: 14px;
+}
+
+.custom-select {
   border: 1px solid #ccc;
   border-radius: 6px;
+  padding: 10px 12px;
   background-color: #fff;
-  -moz-appearance: none; /* 기본 화살표 제거 */
-  -webkit-appearance: none; /* 기본 화살표 제거 */
-  appearance: none; /* 기본 화살표 제거 */
-  background-image: url('/images/icons/arrow-down.svg'); /* 변경 원하는 화살표 아이콘 */
+  cursor: pointer;
+  position: relative;
+}
+
+.custom-select::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background-image: url('/images/icons/arrow-down.svg');
   background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 16px 16px;
+  background-size: contain;
+}
+
+.options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  z-index: 999;
+  max-height: 180px;
+  overflow-y: auto;
+  margin-top: 5px;
+}
+
+.option {
+  padding: 10px;
   cursor: pointer;
 }
-#preferredCinema:focus{
-  outline: none;
-  border: 1px solid #006f7c;
+
+.option:hover {
+  background-color: #f2f2f2;
+}
+
+.custom-select-wrapper.open .options {
+  display: block;
 }
 
 

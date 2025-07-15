@@ -133,6 +133,7 @@ public class MypageController {
         // 기존 선호 극장 선택 여부
         boolean hasSelection = preferredCinema != null && !preferredCinema.isBlank();
         model.addAttribute("hasSelection", hasSelection);
+        model.addAttribute("selectedCinemaId", preferredCinemaId);
 
         // 전체 극장 목록 (cinemaService는 이미 서비스로 구현되어 있어야 함)
         List<Cinemas> cinemas = cinemaService.getAllCinemas();

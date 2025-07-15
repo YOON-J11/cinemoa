@@ -5,12 +5,15 @@
         <!-- 선호 극장 선택 -->
         <div class="form-group">
             <label for="preferredCinema">선호 영화관</label>
-            <select name="preferredCinema" id="preferredCinema">
-                <option value="" disabled {{^hasSelection}}selected{{/hasSelection}} hidden>영화관을 선택해주세요</option>
-                {{#cinemas}}
-                <option value="{{cinemaId}}" {{#selected}}selected{{/selected}}>{{name}}</option>
-                {{/cinemas}}
-            </select>
+            <div class="custom-select-wrapper">
+                <div class="custom-select" id="cinemaSelect">영화관을 선택해주세요</div>
+                <div class="options" id="cinemaOptions">
+                    {{#cinemas}}
+                    <div class="option" data-id="{{cinemaId}}">{{name}}</div>
+                    {{/cinemas}}
+                </div>
+            </div>
+<input type="hidden" name="preferredCinema" id="preferredCinema" value="{{selectedCinemaId}}">
         </div>
 
         <!-- 선호 장르 선택 -->
