@@ -105,4 +105,9 @@ public class MemberService {
         return memberRepository.getRecentInquiries(memberId);
     }
 
+    // 선호 영화관/장르 업데이트
+    public void updatePreference(Member member) {
+        memberRepository.save(member);
+    }
+
 }

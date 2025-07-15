@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -161,6 +162,29 @@ public class MemberController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    //선호관람정보 설정 메소드
+    @PostMapping("/information/pref/update")
+    public String updatePreference(
+            @RequestParam("preferredCinema") String preferredCinema,
+            @RequestParam("preferredGenres[]") List<String> preferredGenres,
+            HttpSession session) {
+
+        Member loginMember = (Member) session.getAttribute("loginMember");
+
+        // DB 저장용: preferredGenres는 "코미디,로맨스" 식의 문자열로 변환
+        String genresAsString = String.join(",", preferredGenres);
+
+        loginMember.setPreferredCinema(preferredCinema);
+        loginMember.setPreferredGenres(genresAsString);
+
+        // DB 저장
+        memberService.updatePreference(loginMember);
+
+        // 리다이렉트
+        return "redirect:/mypage/information/pref";
+
     }
 
 

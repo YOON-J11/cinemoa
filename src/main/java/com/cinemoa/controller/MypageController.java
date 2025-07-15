@@ -42,8 +42,13 @@ public class MypageController {
         model.addAttribute("profileImg", loginMember.getProfileImg());
 
         // 2. 선호관람정보
-        model.addAttribute("preferredCinema", loginMember.getPreferredCinema());
+        String preferredCinemaId = loginMember.getPreferredCinema();
+        Long cinemaId = Long.parseLong(loginMember.getPreferredCinema());
+        String preferredCinemaName = cinemaService.getCinemaNameById(cinemaId);
+        model.addAttribute("preferredCinema", preferredCinemaId);
         model.addAttribute("preferredGenres", loginMember.getPreferredGenres());
+        model.addAttribute("preferredCinemaName", preferredCinemaName);
+
 
         // 3. 내가 본 영화 수
         int movieCount = memberService.countWatchedMovies(memberId);
@@ -63,6 +68,7 @@ public class MypageController {
         model.addAttribute("recentInquiries", recentInquiries);
         model.addAttribute("totalInquiries", recentInquiries.size());
 
+        model.addAttribute("preferredCinemaName", preferredCinemaName);
 
         return "mypage/mypageLayout";
     }
@@ -103,20 +109,33 @@ public class MypageController {
 
         // 기존 선호 정보
         String preferredCinema = loginMember.getPreferredCinema(); // 선호 극장 ID
+        Long preferredCinemaId = null;
+        if (preferredCinema != null && !preferredCinema.isBlank()) {
+            try {
+                preferredCinemaId = Long.parseLong(preferredCinema);
+            } catch (NumberFormatException e) {
+                // 변환 실패 시 무시
+            }
+        }
         String preferredGenresRaw = loginMember.getPreferredGenres(); // 쉼표로 연결된 선호 장르들 (예: "드라마,액션")
         model.addAttribute("preferredCinema", preferredCinema);
         model.addAttribute("preferredGenres", preferredGenresRaw);
+        
+        // 기존 선호 극장 선택 여부
+        boolean hasSelection = preferredCinema != null && !preferredCinema.isBlank();
+        model.addAttribute("hasSelection", hasSelection);
 
         // 전체 극장 목록 (cinemaService는 이미 서비스로 구현되어 있어야 함)
         List<Cinemas> cinemas = cinemaService.getAllCinemas();
 
+        final Long finalPreferredCinemaId = preferredCinemaId;
         // 각 극장에 대해 'selected' 여부를 추가한 리스트 구성
         List<Map<String, Object>> cinemaData = cinemas.stream()
                 .map(cinema -> {
                     Map<String, Object> map = new HashMap<>();
                     map.put("cinemaId", cinema.getCinemaId());
                     map.put("name", cinema.getName());
-                    map.put("selected", cinema.getCinemaId().equals(preferredCinema));
+                    map.put("selected", cinema.getCinemaId().equals(finalPreferredCinemaId));
                     return map;
                 }).toList();
         model.addAttribute("cinemas", cinemaData);

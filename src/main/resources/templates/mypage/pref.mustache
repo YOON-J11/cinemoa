@@ -5,7 +5,7 @@
         <div class="form-group">
             <label for="preferredCinema">선호 영화관</label>
             <select name="preferredCinema" id="preferredCinema" required>
-                <option disabled selected hidden>영화관을 선택해주세요</option>
+                <option disabled {{^hasSelection}}selected{{/hasSelection}} hidden>영화관을 선택해주세요</option>
                 {{#cinemas}}
                     <option value="{{cinemaId}}" {{#selected}}selected{{/selected}}>{{name}}</option>
                 {{/cinemas}}
