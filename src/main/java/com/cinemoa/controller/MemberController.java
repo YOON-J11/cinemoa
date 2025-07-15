@@ -167,14 +167,21 @@ public class MemberController {
     //선호관람정보 설정 메소드
     @PostMapping("/information/pref/update")
     public String updatePreference(
-            @RequestParam("preferredCinema") String preferredCinema,
-            @RequestParam("preferredGenres[]") List<String> preferredGenres,
+            @RequestParam(value = "preferredCinema", required = false) String preferredCinema,
+            @RequestParam(value = "preferredGenres[]", required = false) List<String> preferredGenres,
             HttpSession session) {
 
         Member loginMember = (Member) session.getAttribute("loginMember");
 
-        // DB 저장용: preferredGenres는 "코미디,로맨스" 식의 문자열로 변환
-        String genresAsString = String.join(",", preferredGenres);
+        // 빈 문자열로 들어오면 null로 변환
+        if (preferredCinema != null && preferredCinema.isBlank()) {
+            preferredCinema = null;
+        }
+
+        // 장르 리스트 → 쉼표로 연결된 문자열 (null일 경우 빈 문자열 저장 또는 null 처리)
+        String genresAsString = (preferredGenres != null && !preferredGenres.isEmpty())
+                ? String.join(",", preferredGenres)
+                : null;
 
         loginMember.setPreferredCinema(preferredCinema);
         loginMember.setPreferredGenres(genresAsString);
@@ -182,10 +189,13 @@ public class MemberController {
         // DB 저장
         memberService.updatePreference(loginMember);
 
+        // 세션 갱신
+        session.setAttribute("loginMember", loginMember);
+
         // 리다이렉트
         return "redirect:/mypage/information/pref";
-
     }
+
 
 
 }

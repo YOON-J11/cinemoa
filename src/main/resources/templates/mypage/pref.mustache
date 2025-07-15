@@ -1,13 +1,14 @@
 <link rel="stylesheet" href="/css/mypage/pref.css?v={{ timestamp }}" />
 <div class="pref-container">
+    <h2 class="container-title">선호관람정보 설정</h2>
     <form method="post" action="/member/information/pref/update">
         <!-- 선호 극장 선택 -->
         <div class="form-group">
             <label for="preferredCinema">선호 영화관</label>
-            <select name="preferredCinema" id="preferredCinema" required>
-                <option disabled {{^hasSelection}}selected{{/hasSelection}} hidden>영화관을 선택해주세요</option>
+            <select name="preferredCinema" id="preferredCinema">
+                <option value="" disabled {{^hasSelection}}selected{{/hasSelection}} hidden>영화관을 선택해주세요</option>
                 {{#cinemas}}
-                    <option value="{{cinemaId}}" {{#selected}}selected{{/selected}}>{{name}}</option>
+                <option value="{{cinemaId}}" {{#selected}}selected{{/selected}}>{{name}}</option>
                 {{/cinemas}}
             </select>
         </div>
@@ -17,18 +18,21 @@
             <label>선호 장르 <span style="font-size: 0.85em;">(최대 3개)</span></label>
             <div class="genre-checkboxes">
                 {{#genres}}
-                    <label class="genre-item">
-                        <input type="checkbox" name="preferredGenres[]" value="{{name}}" {{#checked}}checked{{/checked}}>
-                        <span>{{name}}</span>
-                    </label>
+                <label class="genre-item">
+                    <input type="checkbox" name="preferredGenres[]" value="{{name}}" {{#checked}}checked{{/checked}}>
+                    <span>{{name}}</span>
+                </label>
                 {{/genres}}
             </div>
         </div>
 
-        <!-- 저장 버튼 -->
-        <div class="form-group">
+        <!-- 저장 & 초기화 버튼 -->
+        <div class="form-group btn-group">
             <button type="submit" class="btn btn-primary">저장</button>
+            <button type="button" id="resetBtn" class="btn btn-secondary"><img
+                    src="/images/icons/reset-icon.png">초기화</button>
         </div>
+
     </form>
 </div>
 <script src="/js/mypage/pref.js"></script>

@@ -43,8 +43,17 @@ public class MypageController {
 
         // 2. 선호관람정보
         String preferredCinemaId = loginMember.getPreferredCinema();
-        Long cinemaId = Long.parseLong(loginMember.getPreferredCinema());
-        String preferredCinemaName = cinemaService.getCinemaNameById(cinemaId);
+        Long cinemaId = null;
+        String preferredCinemaName = null;
+
+        if (preferredCinemaId != null && !preferredCinemaId.isBlank()) {
+            try {
+                cinemaId = Long.parseLong(preferredCinemaId);
+                preferredCinemaName = cinemaService.getCinemaNameById(cinemaId);
+            } catch (NumberFormatException e) {
+                // 빈값이거나 숫자 형식이 아닐 경우 무시
+            }
+        }
         model.addAttribute("preferredCinema", preferredCinemaId);
         model.addAttribute("preferredGenres", loginMember.getPreferredGenres());
         model.addAttribute("preferredCinemaName", preferredCinemaName);
