@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor //생성자 자동 생성
@@ -81,6 +82,7 @@ public class MypageController {
 
         return "mypage/mypageLayout";
     }
+
     //예매내역
     @GetMapping("/bookinglist")
     public String bookingList(Model model) {
@@ -89,6 +91,7 @@ public class MypageController {
         model.addAttribute("bookinglist", true);
         return "mypage/mypageLayout";
     }
+
     //내가본영화
     @GetMapping("/mymovie")
     public String myMovie(Model model) {
@@ -97,6 +100,7 @@ public class MypageController {
         model.addAttribute("mymovie", true);
         return "mypage/mypageLayout";
     }
+
     //회원정보 > 개인정보설정
     @GetMapping("/information/myinfo")
     public String personalInfo(Model model) {
@@ -129,7 +133,7 @@ public class MypageController {
         String preferredGenresRaw = loginMember.getPreferredGenres(); // 쉼표로 연결된 선호 장르들 (예: "드라마,액션")
         model.addAttribute("preferredCinema", preferredCinema);
         model.addAttribute("preferredGenres", preferredGenresRaw);
-        
+
         // 기존 선호 극장 선택 여부
         boolean hasSelection = preferredCinema != null && !preferredCinema.isBlank();
         model.addAttribute("hasSelection", hasSelection);
@@ -138,39 +142,53 @@ public class MypageController {
         // 전체 극장 목록 (cinemaService는 이미 서비스로 구현되어 있어야 함)
         List<Cinemas> cinemas = cinemaService.getAllCinemas();
 
-        final Long finalPreferredCinemaId = preferredCinemaId;
-        // 각 극장에 대해 'selected' 여부를 추가한 리스트 구성
+        // 지역 목록 중복 제거 및 정렬
+        Set<String> uniqueRegions = cinemas.stream()
+                .map(Cinemas::getRegion)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toCollection(TreeSet::new)); // TreeSet으로 정렬 포함
+
+        // 지역 리스트 (단순 지역명만 전달, selected 없음)
+        List<Map<String, Object>> regionData = uniqueRegions.stream()
+                .map(region -> {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("region", region);
+                    return map;
+                }).collect(Collectors.toList());
+        model.addAttribute("regions", regionData);
+
+        // 전체 영화관 목록 (id, 이름, 지역 포함)
         List<Map<String, Object>> cinemaData = cinemas.stream()
                 .map(cinema -> {
                     Map<String, Object> map = new HashMap<>();
                     map.put("cinemaId", cinema.getCinemaId());
                     map.put("name", cinema.getName());
-                    map.put("selected", cinema.getCinemaId().equals(finalPreferredCinemaId));
+                    map.put("region", cinema.getRegion());
                     return map;
                 }).toList();
         model.addAttribute("cinemas", cinemaData);
+
 
         // 전체 장르 목록 (장르 테이블이 없기 때문에 하드코딩)
         List<String> allGenres = List.of("액션", "코미디", "드라마", "로맨스", "공포", "스릴러", "판타지", "SF", "애니메이션");
 
         // 기존 선호 장르 → 쉼표로 구분된 문자열을 리스트로 변환
-        List<String> selectedGenres = preferredGenresRaw != null ?
-                Arrays.asList(preferredGenresRaw.split(",")) :
-                new ArrayList<>(); // null인 경우 빈 리스트 처리 (NullPointerException 방지)
+        List<String> selectedGenres = preferredGenresRaw != null ? Arrays.asList(preferredGenresRaw.split(",")) : new ArrayList<>(); // null인 경우 빈 리스트 처리 (NullPointerException 방지)
 
         // 각 장르에 대해 'checked' 여부를 추가한 리스트 구성
-        List<Map<String, Object>> genreData = allGenres.stream()
-                .map(genre -> {
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("name", genre);
-                    map.put("checked", selectedGenres.contains(genre));
-                    return map;
-                }).toList();
+        List<Map<String, Object>> genreData = allGenres.stream().map(genre -> {
+            Map<String, Object> map = new HashMap<>();
+            map.put("name", genre);
+            map.put("checked", selectedGenres.contains(genre));
+            return map;
+        }).collect(Collectors.toList());
+
         model.addAttribute("genres", genreData);
 
         // 마이페이지 공통 레이아웃 렌더링
         return "mypage/mypageLayout";
     }
+
 
     //회원정보 > 회원탈퇴
     @GetMapping("/information/withdrawal")
@@ -180,6 +198,7 @@ public class MypageController {
         model.addAttribute("withdrawal", true);
         return "mypage/mypageLayout";
     }
+
     // 나의문의내역
     @GetMapping("/myinquiry")
     public String myInquiry(Model model) {
