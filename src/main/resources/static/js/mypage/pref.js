@@ -86,6 +86,56 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.querySelectorAll('input[name="preferredGenres[]"]').forEach(cb => {
       cb.checked = false;
+      const label = cb.closest(".genre-item");
+      label.classList.remove("checked");  // ✅ 이 줄이 빠져 있었음!
     });
   });
+
+
+  // 선호 장르 선택 스타일
+  document.querySelectorAll(".genre-item input[type='checkbox']").forEach(cb => {
+    const label = cb.closest(".genre-item");
+    if (cb.checked) label.classList.add("checked");
+
+    cb.addEventListener("change", function () {
+      label.classList.toggle("checked", this.checked);
+    });
+  });
+
+
+  // 페이지 로드시 기존 선호 영화관 표시
+  const savedCinemaId = hiddenInput.value;
+  if (savedCinemaId && savedCinemaId.trim() !== "") {
+    const matchedCinema = allCinemas.find(c => c.dataset.id === savedCinemaId);
+    if (matchedCinema) {
+      const region = matchedCinema.dataset.region;
+      const cinemaName = matchedCinema.textContent;
+
+      // 지역 세팅
+      regionSelectBox.textContent = region;
+      regionSelectBox.dataset.value = region;
+
+      // 영화관 목록 초기화 및 이벤트 재부여
+      cinemaOptions.innerHTML = "";
+      allCinemas.forEach(cinema => {
+        if (cinema.dataset.region === region) {
+          const cloned = cinema.cloneNode(true);
+          cloned.addEventListener("click", function () {
+            const name = this.textContent;
+            const id = this.dataset.id;
+            cinemaSelect.textContent = name;
+            hiddenInput.value = id;
+            closeAllSelects();
+          });
+          cinemaOptions.appendChild(cloned);
+        }
+      });
+
+      // 영화관 선택된 값 세팅
+      cinemaSelect.textContent = cinemaName;
+      cinemaSelectWrapper.style.display = "block";
+    }
+  }
+
+
 });
