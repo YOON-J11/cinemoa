@@ -6,3 +6,7 @@
     margin: 0 auto;
     color: #222;
 }
+
+movie-choice, theater-choice, .time-choice {
+width: calc(100% / 3);
+}

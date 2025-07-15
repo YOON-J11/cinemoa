@@ -1,4 +1,5 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/css/ticketing.css" />
 <style>
     /* 기존 스타일 유지 */
     .inactive { opacity: 0.6; pointer-events: none; }
@@ -43,61 +44,69 @@
 </style>
 {{>common/header}}
 
-<div class="container">
-    <!-- 영화 선택 -->
-    <div id="step1">
-        <h3>영화 선택</h3>
-        <div class="row" id="movieList">
-            {{#nowShowingMovies}}
-                <div class="col-md-4 mb-3">
-                    <div class="movie-item" data-movie-id="{{movieId}}">
-                        <div class="d-flex">
-                            <div class="flex-grow-1 ms-3">
-                                <h5>{{title}}</h5>
-                                <p><small>{{genre}} | {{runningTime}}분 | {{ageRating}}</small></p>
-                                <p><small>예매율: <span class="rating-value">{{reservationRate}}</span>%</small></p>
+<div class="container ticketing">
+
+    <div class="ticketing-wrap">
+        <!-- 영화 선택 -->
+        <div class="movie-choice">
+            <div id="step1">
+                <h3>영화 선택</h3>
+                <div class="row" id="movieList">
+                    {{#nowShowingMovies}}
+                        <div class="col-md-4 mb-3">
+                            <div class="movie-item" data-movie-id="{{movieId}}">
+                                <div class="d-flex">
+                                    <div class="flex-grow-1 ms-3">
+                                        <h5>{{title}}</h5>
+                                        <p><small>{{genre}} | {{runningTime}}분 | {{ageRating}}</small></p>
+                                        <p><small>예매율: <span class="rating-value">{{reservationRate}}</span>%</small></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    {{/nowShowingMovies}}
+                </div>
+                <input type="hidden" id="selectedMovieId" value="{{selectedMovieId}}" />
+            </div>
+        </div>
+
+        <!-- 지역 선택 -->
+        <div class="theater-choice">
+            <h3>극장 선택</h3>
+            <div id="step2" class="mt-4 inactive">
+                <div id="regionList" class="row mt-2">
+                    {{#regions}}
+                        <div class="col-md-3 mb-2">
+                            <button type="button" class="btn btn-outline-secondary w-100 region-button" data-region="{{.}}">
+                                {{.}}
+                            </button>
+                        </div>
+                    {{/regions}}
+                </div>
+            </div>
+            <div id="step3" class="mt-4 inactive">
+                <div id="cinemaList" class="row mt-2"></div>
+            </div>
+        </div>
+
+        <!-- 시간 선택 -->
+        <div class="time-choice">
+            <div id="step4" class="mt-4 inactive">
+                <div id="availableDates" class="row">
+                    <div class="col-12">
+                        <p id="selectCinemaMessage" class="alert alert-info text-center">영화관을 선택해주세요.</p>
                     </div>
                 </div>
-            {{/nowShowingMovies}}
-        </div>
-        <input type="hidden" id="selectedMovieId" value="{{selectedMovieId}}" />
-    </div>
-
-    <!-- 지역 선택 -->
-    <div class="movie-select-wrap">
-        <h3>극장 선택</h3>
-        <div id="step2" class="mt-4 inactive">
-            <div id="regionList" class="row mt-2">
-                {{#regions}}
-                    <div class="col-md-3 mb-2">
-                        <button type="button" class="btn btn-outline-secondary w-100 region-button" data-region="{{.}}">
-                            {{.}}
-                        </button>
-                    </div>
-                {{/regions}}
+                <input type="hidden" id="selectedDate">
+            </div>
+            <div id="step5" class="mt-4 inactive">
+                <div id="timeSlots" class="row"></div>
+                <input type="hidden" id="selectedShowtime" />
             </div>
         </div>
-        <div id="step3" class="mt-4 inactive">
-            <div id="cinemaList" class="row mt-2"></div>
-        </div>
-    </div>
 
-    <div id="step4" class="mt-4 inactive">
-        <div id="availableDates" class="row">
-            <div class="col-12">
-                <p id="selectCinemaMessage" class="alert alert-info text-center">영화관을 선택해주세요.</p>
-            </div>
-        </div>
-        <input type="hidden" id="selectedDate">
-    </div>
-
-    <!-- 시간 선택 -->
-    <div id="step5" class="mt-4 inactive">
-        <div id="timeSlots" class="row"></div>
-        <input type="hidden" id="selectedShowtime" />
         <button type="button" class="btn btn-success mt-3" id="goToSeatSelection" disabled>좌석선택하기</button>
+
     </div>
 </div>
 
