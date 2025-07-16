@@ -112,8 +112,10 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-    let currentStep = 1;
+
     let selectedMovieId = document.getElementById('selectedMovieId').value || null;
+    let currentStep = selectedMovieId ? 2 : 1;
+
     let selectedRegion = null;
     let selectedCinemaId = null;
     let selectedDate = null;
@@ -235,7 +237,7 @@
         // document.getElementById('availableDates').innerHTML = '';
         document.getElementById('timeSlots').innerHTML = '';
 
-        fetch(`/ticketing/api/cinemas?region=${selectedRegion}`)
+        fetch(`/api/ticketing/cinemas?region=${selectedRegion}`)
             .then(res => res.json())
             .then(data => {
                 const cinemas = Array.isArray(data) ? data : [];
@@ -312,7 +314,7 @@
 
     // 날짜 목록 업데이트
     function fetchShowtimes(movieId, cinemaId, date) {
-        fetch(`/ticketing/api/showtimes?movieId=${movieId}&cinemaId=${cinemaId}&date=${date}`)
+        fetch(`/api/ticketing/showtimes?movieId=${movieId}&cinemaId=${cinemaId}&date=${date}`)
             .then(res => res.json())
             .then(showtimes => {
                 const container = document.getElementById('timeSlots');
@@ -326,7 +328,7 @@
                         const end = new Date(show.endTime);
                         const timeDiv = document.createElement('div');
                         timeDiv.className = 'col-md-4 mb-3';
-                        timeDiv.innerHTML = `<div class="time-slot" data-showtime-id="${show.showtimeId}"><strong>${start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}-${end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</strong><p>${show.screenName}<br>${Number(show.price).toLocaleString()}원</p></div>`;
+                        timeDiv.innerHTML = `<div class="time-slot" data-showtime-id="${show.showtimeId}"><strong>${start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}-${end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</strong><p>${show.screenName}</p></div>`;
                         container.appendChild(timeDiv);
                     });
                     document.getElementById('goToSeatSelection').disabled = false;

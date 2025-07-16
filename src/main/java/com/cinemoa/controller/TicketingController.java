@@ -8,7 +8,6 @@ import com.cinemoa.service.CinemaService;
 import com.cinemoa.service.MovieService;
 import com.cinemoa.service.ShowtimeService;
 
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,16 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.HashMap;
 
 @Controller
 @RequestMapping("/ticketing")
@@ -36,29 +28,45 @@ public class TicketingController {
     private final CinemaService cinemaService;
     private final ShowtimeService showtimeService;
 
-    @Autowired
-    public TicketingController(MovieService movieService,
-                               CinemaService cinemaService,
-                               ShowtimeService showtimeService) {
+    @Autowired // 생성자 주입
+    public TicketingController(MovieService movieService, CinemaService cinemaService, ShowtimeService showtimeService) {
         this.movieService = movieService;
         this.cinemaService = cinemaService;
         this.showtimeService = showtimeService;
     }
 
-   // 영화 ID로 예매 페이지 진입 (영화 선택, 영화관, 날짜, 시간 선택 단계)
-   @GetMapping("/{movieId}")
+    @GetMapping("")
+    public String ticketingPage(Model model) {
+        // 모든 영화 가져오기
+        List<MovieDto> allMovies = movieService.getAllMovies();
+
+        Long firstMovieId = null;
+        if (!allMovies.isEmpty()) {
+            firstMovieId = allMovies.get(0).getMovieId();
+        }
+
+        return commonTicketingLogic(firstMovieId, model);
+    }
+
+    @GetMapping("/{movieId}")
     public String ticketingByMovie(@PathVariable("movieId") Long movieId, Model model) {
+        return commonTicketingLogic(movieId, model);
+    }
+
+    // 공통 로직을 처리하는 private 메서드
+    private String commonTicketingLogic(Long selectedMovieId, Model model) {
         // 상영 중인 모든 영화 목록 가져오기 (페이징 없이 모든 데이터)
-        Pageable pageable = PageRequest.of(0, Integer.MAX_VALUE, Sort.by("title").ascending()); // 모든 영화 가져오기
+        Pageable pageable = PageRequest.of(0, Integer.MAX_VALUE, Sort.by("title").ascending());
         List<MovieDto> nowShowingMovies = movieService.getMoviesByScreeningStatus(
                         Movie.ScreeningStatus.NOW_SHOWING, pageable)
                 .getContent();
 
-       List<MovieDto> allMovies = movieService.getAllMovies();
-       model.addAttribute("movies", allMovies);
+        // 모든 영화 목록
+        List<MovieDto> allMovies = movieService.getAllMovies();
 
+        model.addAttribute("movies", allMovies);
         model.addAttribute("nowShowingMovies", nowShowingMovies);
-        model.addAttribute("selectedMovieId", movieId); // URL에서 넘어온 movieId를 기본 선택으로 설정
+        model.addAttribute("selectedMovieId", selectedMovieId);
 
         // 모든 영화관 정보 가져오기
         List<Cinema> cinemas = cinemaService.getAllCinemas();
@@ -78,44 +86,6 @@ public class TicketingController {
         return "ticketing/ticketing"; // ticketing.mustache 템플릿 렌더링
     }
 
-    // AJAX API: 특정 영화, 영화관에 대한 상영 가능한 날짜 목록 조회
-    @GetMapping("/api/dates")
-    @ResponseBody
-    public List<String> getAvailableDates(
-            @RequestParam Long movieId,
-            @RequestParam Long cinemaId) {
-        return showtimeService.getAvailableDatesByMovieAndCinema(movieId, cinemaId);
-    }
-
-    // AJAX API: 특정 영화, 영화관, 날짜에 대한 상영 시간 목록 조회
-    @GetMapping("/api/showtimes")
-    @ResponseBody
-    public List<Map<String, Object>> getShowtimes(
-            @RequestParam Long movieId,
-            @RequestParam Long cinemaId,
-            @RequestParam String date) {
-
-        LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        List<Showtime> showtimes = showtimeService.getShowtimesByMovieCinemaAndDate(movieId, cinemaId, localDate);
-
-        return showtimes.stream().map(showtime -> {
-            Map<String, Object> showtimeMap = new HashMap<>();
-            showtimeMap.put("showtimeId", showtime.getShowtimeId());
-            showtimeMap.put("startTime", showtime.getStartTime());
-            showtimeMap.put("endTime", showtime.getEndTime());
-            showtimeMap.put("price", showtime.getPrice());
-            showtimeMap.put("screenName", showtime.getScreen().getScreenName()); // 상영관 이름
-            return showtimeMap;
-        }).collect(Collectors.toList());
-    }
-
-    // 지역별 영화관 목록 조회
-    @GetMapping("/api/cinemas")
-    @ResponseBody
-    public List<Cinema> getCinemasByRegion(@RequestParam String region) {
-        return cinemaService.getCinemasByRegion(region);
-    }
-
     // 좌석 선택 페이지로 이동하는 엔드포인트
     @GetMapping("/showtime/{showtimeId}/seats")
     public String showSeatSelectionPage(@PathVariable("showtimeId") Long showtimeId, Model model) {
@@ -133,4 +103,6 @@ public class TicketingController {
             return "redirect:/movies";
         }
     }
+
+
 }

@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/css/movie.css" />
+<link rel="stylesheet" href="/css/movies.css" />
 {{> common/header }}
 <div class="container movie">
     <div class="content-wrap">
@@ -31,6 +31,26 @@
                                 <p>배우: {{actors}}</p>
                                 <p>장르: {{genre}}</p>
                             </div>
+                            <div class="info3">
+                                <div class="like">
+                                    <h5>좋아요</h5>
+                                    <p>{{likesCount}}</p>
+                                </div>
+                            </div>
+                            <div class="info3 score">
+                                <div class="rate">
+                                    <h5><span class="text-warning">★</span> 평점</h5>
+                                    <p><span class="rating">{{rating}}</span>%</p>
+                                </div>
+                                <div class="reservation">
+                                    <h5>예매율</h5>
+                                    <p><span class="rating">{{reservationRate}}</span>%</p>
+                                </div>
+                                <div class="audience">
+                                    <h5>관객수</h5>
+                                    <p>{{audienceCount}}명</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="movie-cont-wrap">
@@ -41,32 +61,71 @@
                             <li>예고편/스틸컷</li>
                         </ul>
 
-                        <p class="movie-cont">{{{content}}}</p>
-                        <div class="score">
-                            <div class="rate">
-                                <h5><span class="text-warning">★</span> 평점</h5>
-                                <p><span class="rating">{{rating}}</span>%</p>
-                            </div>
-                            <div class="reservation">
-                                <h5>예매율</h5>
-                                <p><span class="rating">{{reservationRate}}</span>%</p>
-                            </div>
-                            <div class="audience">
-                                <h5>관객수</h5>
-                                <p>{{audienceCount}}명</p>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="">
-                            <div class="like">
-                                <h5>좋아요</h5>
-                                <p>{{likesCount}}</p>
-                            </div>
-                            <div class="review">
-                                <h5>리뷰</h5>
-                                <p>{{reviewCount}}</p>
-                            </div>
-                        </div>
+                        <ul class="tab_cont">
+                            <li class="movie-cont">
+                                <div class="inner">
+                                    <p class="movie-cont">{{{content}}}</p>
+                                    <h4>관람객 평점</h4>
+                                    <div class="row text-center">
+                                        <div class="col-md-6">
+                                            <div class="progress" style="height: 30px;">
+                                                <div class="progress-bar bg-success" role="progressbar" style="width: {{positivePercentage}}%;"
+                                                     aria-valuenow="{{positivePercentage}}" aria-valuemin="0" aria-valuemax="100">
+                                                    {{positivePercentage}}%
+                                                </div>
+                                            </div>
+                                            <p class="mt-2"><span class="rating">{{positivePercentage}}</span>%의 관람객이 이 영화를 좋아했습니다.</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <!-- 리뷰 작성 버튼 모달 트리거로 변경 -->
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal" data-movie-id="{{movieId}}">
+                                                리뷰 작성하기
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- 리뷰 목록 표시 부분 추가 -->
+                                    <hr>
+                                    <h4>관람객 리뷰 ({{reviews.size}})</h4>
+                                    {{#reviews}}
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between">
+                                                    <h5 class="card-title">
+                                                        {{#isPositive}}
+                                                            <span class="badge bg-success"><i class="bi bi-hand-thumbs-up"></i> 좋았어요</span>
+                                                        {{/isPositive}}
+                                                        {{^isPositive}}
+                                                            <span class="badge bg-danger"><i class="bi bi-hand-thumbs-down"></i> 별로였어요</span>
+                                                        {{/isPositive}}
+                                                    </h5>
+                                                    <small class="text-muted format-date">{{createdAt}}</small>
+                                                </div>
+                                                <p class="card-text">{{{content}}}</p>
+                                                <div class="d-flex justify-content-end">
+                                                    <a href="/reviews/delete/{{reviewId}}?movieId={{movieId}}" class="btn btn-sm btn-outline-danger"
+                                                    onclick="return confirm('정말로 이 리뷰를 삭제하시겠습니까?');">삭제</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {{/reviews}}
+                                    {{^reviews}}
+                                        <div class="alert alert-info">
+                                            아직 등록된 리뷰가 없습니다. 첫 번째 리뷰를 작성해보세요!
+                                        </div>
+                                    {{/reviews}}
+                                </div>
+                            </li>
+
+                            <li class="movie-review">
+                                리뷰만 띄울 곳
+                            </li>
+
+                            <li class="movie-video-img">
+                                예고편, 스틸컷
+                            </li>
+
+                        </ul>
 
                         {{#videoUrl}}
                             <hr>
@@ -113,57 +172,6 @@
             </div>
         </div>
     </div>
-    <!-- 평점 표시 부분 추가 -->
-    <hr>
-    <h4>관람객 평점</h4>
-    <div class="row text-center">
-        <div class="col-md-6">
-            <div class="progress" style="height: 30px;">
-                <div class="progress-bar bg-success" role="progressbar" style="width: {{positivePercentage}}%;"
-                     aria-valuenow="{{positivePercentage}}" aria-valuemin="0" aria-valuemax="100">
-                    {{positivePercentage}}%
-                </div>
-            </div>
-            <p class="mt-2"><span class="rating">{{positivePercentage}}</span>%의 관람객이 이 영화를 좋아했습니다.</p>
-        </div>
-        <div class="col-md-6">
-            <!-- 리뷰 작성 버튼 모달 트리거로 변경 -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal" data-movie-id="{{movieId}}">
-                리뷰 작성하기
-            </button>
-        </div>
-    </div>
-
-    <!-- 리뷰 목록 표시 부분 추가 -->
-    <hr>
-    <h4>관람객 리뷰 ({{reviews.size}})</h4>
-    {{#reviews}}
-        <div class="card mb-3">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <h5 class="card-title">
-                        {{#isPositive}}
-                            <span class="badge bg-success"><i class="bi bi-hand-thumbs-up"></i> 좋았어요</span>
-                        {{/isPositive}}
-                        {{^isPositive}}
-                            <span class="badge bg-danger"><i class="bi bi-hand-thumbs-down"></i> 별로였어요</span>
-                        {{/isPositive}}
-                    </h5>
-                    <small class="text-muted format-date">{{createdAt}}</small>
-                </div>
-                <p class="card-text">{{{content}}}</p>
-                <div class="d-flex justify-content-end">
-                    <a href="/reviews/delete/{{reviewId}}?movieId={{movieId}}" class="btn btn-sm btn-outline-danger"
-                    onclick="return confirm('정말로 이 리뷰를 삭제하시겠습니까?');">삭제</a>
-                </div>
-            </div>
-        </div>
-    {{/reviews}}
-    {{^reviews}}
-        <div class="alert alert-info">
-            아직 등록된 리뷰가 없습니다. 첫 번째 리뷰를 작성해보세요!
-        </div>
-    {{/reviews}}
 </div>
 
 <!-- 리뷰 작성 모달 -->

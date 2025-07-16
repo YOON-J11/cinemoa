@@ -5,9 +5,10 @@
     max-width: 1200px;
     margin: 0 auto;
     color: #222;
+    width: 1200px;
 }
 
-.ticketing {padding: 2.5rem 0;}
+.ticketing-wrap {padding: 20px 0 3rem;}
 
 movie-choice, theater-choice, .time-choice {
 width: calc(100% / 3);

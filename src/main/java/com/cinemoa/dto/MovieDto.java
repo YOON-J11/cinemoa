@@ -73,7 +73,10 @@ public class MovieDto {
         return "19".equals(this.ageRating);
     }
 
+
 }
+
+
 
 // 목록 조회용 간소화된 DTO
 @Data
