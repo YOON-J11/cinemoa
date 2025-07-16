@@ -2,7 +2,8 @@
 {{> common/header }}
 <div class="container reservation-wrapper">
     <!-- 왼쪽: 좌석 선택 영역 -->
-    <div class="seat-selection">
+    <div class="seat-selection" data-is-morning="{{isMorning}}" data-screen-type="{{screenType}}"
+        data-special="{{isImax}}">
         <div class="title">
             <h2>빠른예매</h2>
             <button class="reset-btn"><img src="/images/icons/reset-icon.png">초기화</button>
@@ -47,28 +48,23 @@
         <div class="seat-map">
             <div class="screen-label">SCREEN</div>
             {{#seatRowList}}
-                <div class="row" data-row="{{row}}">
-                    <span class="row-label">{{row}}</span>
-                    {{#seats}}
-                        {{#isGap}}
-                            <span class="seat-gap"></span>
-                        {{/isGap}}
-                        {{^isGap}}
-                            <span class="seat
-                     {{#isVip}}vip{{/isVip}}
-                                {{#isReserved}}reserved{{/isReserved}}
-                                {{#isDisabled}}disabled{{/isDisabled}}"
-                                  data-seat-id="{{seatId}}">
-                                {{seatNumber}}
-                            </span>
-                        {{/isGap}}
-                    {{/seats}}
-                </div>
+            <div class="row" data-row="{{row}}">
+                <span class="row-label">{{row}}</span>
+                {{#seats}}
+                {{#isGap}}
+                <span class="seat-gap"></span>
+                {{/isGap}}
+                {{^isGap}}
+                <span class="seat
+                    {{#isReserved}}disabled{{/isReserved}}
+                    {{#isVip}}vip{{/isVip}}
+                    {{#isAccessible}}accessible{{/isAccessible}}" data-seat-id="{{seatId}}" data-price="{{price}}">
+                    {{seatNumber}}
+                </span>
+                {{/isGap}}
+                {{/seats}}
+            </div>
             {{/seatRowList}}
-
-
-
-
         </div>
     </div>
 
@@ -76,16 +72,21 @@
     <div class="reservation-summary">
         <div class="movie-info">
             <div class="movie-title">
-                <h3>{{movie.title}}</h3>
-                <p>{{movie.genre}} / {{movie.ageRating}}</p>
+                <h3>{{movie.title}} <img src="{{ageImagePath}}" alt="관람등급" class="rating"></h3>
+                <p>{{movie.genre}}</p>
             </div>
             <div class="cinema-info">
                 <div class="cinema-info-left">
-                    <div>
-                        <p>{{screen.screenName}}</p>
-                    </div>
+                    <p style="margin-bottom: 25px;">
+                        {{screen.screenName}}
+                        {{#screenType}}
+                        {{^isStandard}} ({{screenType}}){{/isStandard}}
+                        {{/screenType}}
+                    </p>
                     <p>{{formattedDate}}</p>
-                    <p>{{formattedStartTime}} ~ {{formattedEndTime}}</p>
+                    <p>
+                        {{#isMorning}}☀️ {{/isMorning}}{{formattedStartTime}} ~ {{formattedEndTime}}
+                    </p>
                 </div>
                 <img src="/images/movie/{{movie.mainImageUrl}}" alt="포스터" class="poster">
             </div>
@@ -94,18 +95,19 @@
         <div class="legend">
             <ul>
                 <li><span class="box selected"></span>선택</li>
-                <li><span class="box reserved"></span>예매완료</li>
-                <li><span class="box disabled"></span>선택불가</li>
-                <li><span class="box normal"></span>일반</li>
-                <li><span class="box vip"></span>장애인석</li>
+                <li><span class="box disabled">✕</span>선택불가</li>
+            </ul>
+            <ul>
+                <li><span class="box normal"></span>일반석</li><!--seats테이블의 seat_typs STANDARD-->
+                <li><span class="box accessible"></span>장애인석</li><!--seats테이블의 seat_typs DISABLED-->
+                <li><span class="box vip"></span>VIP석</li><!--seats테이블의 seat_typs VIP-->
             </ul>
         </div>
 
         <div class="selected-seats">
             <h4>선택좌석</h4>
             <ul>
-                <li>A5</li>
-                <li>B6</li>
+
             </ul>
         </div>
 

@@ -54,12 +54,14 @@ public class SeatsController {
                                 map.put("seatId", seat.getSeatId());
                                 map.put("seatRow", seat.getSeatRow());
                                 map.put("seatNumber", seat.getSeatNumber());
-                                map.put("isVip", "VIP".equals(seat.getSeatType().name()));
-                                map.put("isReserved", false); // 예매 여부
-                                map.put("isDisabled", false); // 장애인석 여부
+                                map.put("isVip", "VIP".equals(seat.getSeatType()));
+                                map.put("isAccessible", "ACCESSIBLE".equals(seat.getSeatType()));
+                                map.put("price", seat.getPrice()); //좌석 가격
+                                map.put("isReserved", false); // 예매 여부 (현재는 임시로 false설정)
                                 map.put("isGap", false);      // 좌석 간격
                                 return map;
                             }, Collectors.toList())
+
                     ))
                     .entrySet().stream()
                     .map(entry -> {
@@ -69,6 +71,13 @@ public class SeatsController {
                         return rowMap;
                     })
                     .toList();
+
+            // ageRating에 따른 이미지 경로 설정
+            String ageRating = showtime.getMovie().getAgeRating(); // 예: "15"
+            String ageImagePath = "/images/movie/" + ageRating + "_46x46.png";
+
+            // 스크린 타입 가져오기 (IMAX, 4DX, 리클라이너 등등)
+            String screenType = showtime.getScreen().getScreenType();
 
             // 모델에 담기
             model.addAttribute("showtime", showtime);
@@ -80,6 +89,10 @@ public class SeatsController {
             model.addAttribute("isMorning", isMorning);
             model.addAttribute("seatRowList", seatRowList);
             model.addAttribute("title", "좌석 선택");
+            model.addAttribute("ageImagePath", ageImagePath);
+            model.addAttribute("screenType", showtime.getScreen().getScreenType());
+            model.addAttribute("isStandard", "STANDARD".equals(screenType));
+            model.addAttribute("isImax", "IMAX".equals(screenType));
 
 
 

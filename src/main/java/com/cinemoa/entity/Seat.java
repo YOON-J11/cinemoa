@@ -31,17 +31,11 @@ public class Seat {
     @Column(name = "seat_number", nullable = false)
     private int seatNumber; // 좌석 번호 (예: 1, 2, 3...)
 
-    @Enumerated(EnumType.STRING) // enum을 문자열로 저장
-    @Column(name = "seat_type", columnDefinition = "ENUM('STANDARD', 'VIP', 'DISABLED')", nullable = false)
-    private SeatType seatType = SeatType.STANDARD; // 좌석 타입 (일반, VIP, 장애인석)
+    @Column(name = "seat_type", nullable = false)
+    private String seatType; // 좌석 타입 (일반석, VIP석, 장애인석)
 
     @Column(name = "price", nullable = false)
     private int price; // 해당 좌석의 가격
-
-    // 좌석 타입 enum 정의
-    public enum SeatType {
-        STANDARD, VIP, DISABLED
-    }
 
 
 }
