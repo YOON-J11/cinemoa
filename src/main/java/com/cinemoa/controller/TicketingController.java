@@ -103,7 +103,6 @@ public class TicketingController {
             showtimeMap.put("showtimeId", showtime.getShowtimeId());
             showtimeMap.put("startTime", showtime.getStartTime());
             showtimeMap.put("endTime", showtime.getEndTime());
-            showtimeMap.put("price", showtime.getPrice());
             showtimeMap.put("screenName", showtime.getScreen().getScreenName()); // 상영관 이름
             return showtimeMap;
         }).collect(Collectors.toList());
