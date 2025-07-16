@@ -54,6 +54,9 @@ public class TicketingController {
                         Movie.ScreeningStatus.NOW_SHOWING, pageable)
                 .getContent();
 
+       List<MovieDto> allMovies = movieService.getAllMovies();
+       model.addAttribute("movies", allMovies);
+
         model.addAttribute("nowShowingMovies", nowShowingMovies);
         model.addAttribute("selectedMovieId", movieId); // URL에서 넘어온 movieId를 기본 선택으로 설정
 

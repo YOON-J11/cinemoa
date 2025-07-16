@@ -75,7 +75,7 @@
                                 </button>
                                 <span class="likesCount">{{likesCount}}</span>
                             </div>
-                            <button class="reservation-btn">예매하기</button>
+                            <a href="/ticketing/{{movieId}}" class="reservation-btn">예매하기</a>
                         </div>
                         <a href="/movies/{{movieId}}">상세보기</a>
                     </div>
@@ -87,9 +87,6 @@
     <div class="more-btn-wrap text-center">
         {{#movies.hasNext}}
             <button type="button" class="btn-more" id="btnLoadMore" data-next-page="{{nextPageNumber}}">더보기</button>
-        {{/movies.hasNext}}
-        {{^movies.hasNext}}
-            <p class="no-more-content">더 이상 표시할 영화가 없습니다.</p>
         {{/movies.hasNext}}
     </div>
 </div>
@@ -167,7 +164,7 @@
                 const currentStatus = urlParams.get('status');
 
                 // AJAX 요청 URL 구성
-                let url = `/api/movies?page=${nextPage}`;
+                let url = `/movies/loadMore?page=${nextPage}`;
                 if (currentStatus) {
                     url += `&status=${currentStatus}`;
                 }
@@ -189,8 +186,11 @@
                             movieListContainer.appendChild(movie);
                         });
 
+
                         // 다음 페이지가 있는지 확인
-                        const hasNextPage = tempDiv.querySelector('[data-has-next="true"]');
+                        const hasNextPageElement = tempDiv.querySelector('[data-has-next]'); // data-has-next 속성을 가진 요소를 찾음
+                        const hasNextPage = hasNextPageElement ? hasNextPageElement.getAttribute('data-has-next') === 'true' : false; // 그 요소의 속성값이 'true'인지 확인
+
                         if (hasNextPage) {
                             // 다음 페이지 번호 업데이트
                             this.setAttribute('data-next-page', parseInt(nextPage) + 1);
@@ -198,7 +198,7 @@
                             this.disabled = false;
                         } else {
                             // 더 이상 페이지가 없으면 버튼 제거
-                            this.parentNode.innerHTML = '<p class="no-more-content">더 이상 표시할 영화가 없습니다.</p>';
+                            this.parentNode.innerHTML = '';
                         }
                     })
                     .catch(error => {

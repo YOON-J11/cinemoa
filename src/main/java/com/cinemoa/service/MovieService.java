@@ -16,7 +16,6 @@ public interface MovieService {
     MovieDto updateMovie(Long id, MovieDto movieDto);
     void deleteMovie(Long id);
 
-
     // 상영 상태별 필터링
     Page<MovieDto> getMoviesByScreeningStatus(Movie.ScreeningStatus status, Pageable pageable);
 

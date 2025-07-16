@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -47,7 +48,7 @@ public class MovieController {
     @GetMapping("")
     public String listMovies(@RequestParam(required = false) String status,
                              Model model,
-                             @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+                             @PageableDefault(size = 12, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
 
         Page<MovieDto> movies;
 
@@ -84,9 +85,11 @@ public class MovieController {
         model.addAttribute("timestamp", System.currentTimeMillis());
         model.addAttribute("currentStatus", status); // 현재 선택된 상태를 모델에 추가
 
+        model.addAttribute("nextPageNumber", movies.getNumber() + 1);
+        model.addAttribute("hasNext", movies.hasNext());
+
         // 페이지네이션을 위한 값들 추가
         model.addAttribute("hasPrevious", movies.hasPrevious());
-        model.addAttribute("hasNext", movies.hasNext());
         model.addAttribute("prevPage", Math.max(0, movies.getNumber() - 1));
         model.addAttribute("nextPage", Math.min(movies.getTotalPages() - 1, movies.getNumber() + 1));
 
@@ -106,20 +109,40 @@ public class MovieController {
         return "movies/list";
     }
 
+    // "더보기" 버튼 클릭 시 호출될 AJAX 전용 엔드포인트 (HTML 조각 반환)
+    // MovieApiController의 /api/movies와 충돌하지 않도록 새로운 경로를 사용합니다.
+    @GetMapping("/loadMore") // <-- 새로운 경로 추가
+    public String loadMoreMovies(@RequestParam(required = false) String status,
+                                 @RequestParam(defaultValue = "0") int page,
+                                 Model model) {
+
+        Pageable pageable = PageRequest.of(page, 12, Sort.by("createdAt").descending());
+
+        Page<MovieDto> movies;
+
+        if (status != null && !status.isEmpty()) {
+            try {
+                Movie.ScreeningStatus screeningStatus = Movie.ScreeningStatus.valueOf(status);
+                movies = movieService.getMoviesByScreeningStatus(screeningStatus, pageable);
+            } catch (IllegalArgumentException e) {
+                movies = movieService.getMoviesPaginated(pageable);
+            }
+        } else {
+            movies = movieService.getMoviesPaginated(pageable);
+        }
+
+        model.addAttribute("movies", movies.getContent());
+        model.addAttribute("hasNext", movies.hasNext());
+
+        return "movies/movie-items-partial"; // 이 템플릿 파일을 확인해주세요.
+    }
+
     // 페이지 항목을 위한 내부 클래스
     @Data
     @AllArgsConstructor
     static class PageItem {
         private int number;
         private boolean active;
-    }
-
-    // 영화 목록 페이지 (추가 매핑 - /list로 접근할 경우)
-    @GetMapping("/list")
-    public String moviesList(@RequestParam(required = false) String status,
-                             Model model,
-                             @PageableDefault(size = 10) Pageable pageable) {
-        return listMovies(status, model, pageable);  // 파라미터 순서에 맞게 인자 전달
     }
 
 
