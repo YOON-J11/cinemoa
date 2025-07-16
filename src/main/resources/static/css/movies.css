@@ -8,6 +8,8 @@
     color: #222;
 }
 
+.movies {padding: 2.5rem 0;}
+
 .input-wrap {
     border: 1px solid #ccc;
     border-radius: 3px;
@@ -151,6 +153,7 @@ nav ul {
     font-size: 14px;
     justify-content: center;
     cursor:pointer;
+    align-items: center;
 }
 
 /* view */
