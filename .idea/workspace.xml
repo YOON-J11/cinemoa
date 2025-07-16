@@ -4,14 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f7ada35b-afbe-4ee7-b050-3cbb650c0ace" name="Changes" comment="db설정 바꿈">
+    <list default="true" id="5e69bfea-3231-44b6-87cd-dffb1dc2379d" name="Changes" comment="250709 리뷰 작성 모달로 변경">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/movies/movie-items-partial.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/common/header.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/common/header.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/controller/MovieController$PageItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/controller/MovieController$PageItem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/controller/MovieController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/controller/MovieController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/movies/list.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/movies/list.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MovieController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/TicketingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/TicketingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/MovieService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/MovieService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/movies.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/movies.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/ticketing.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/ticketing.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/movies/list.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/movies/list.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/ticketing/ticketing.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/ticketing/ticketing.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp_backup/.idea/modules/cinemoa.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp_merge_stash/.idea/modules/cinemoa.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp_merge_stash/.idea/modules/cinemoa.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp_merge_stash/.idea/modules/cinemoa.test.iml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,13 +59,7 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="cinemoa" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="cinemoa" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="application" type="c8890929:TasksNode$1" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
             </expand>
             <select />
@@ -55,11 +69,6 @@
     </system>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="dev" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -68,72 +77,33 @@
     &quot;assignee&quot;: &quot;YOON-J11&quot;
   }
 }</component>
-  <component name="GitToolBoxStore">
-    <option name="recentBranches">
-      <RecentBranches>
-        <option name="branchesForRepo">
-          <list>
-            <RecentBranchesForRepo>
-              <option name="branches">
-                <list>
-                  <RecentBranch>
-                    <option name="branchName" value="reservation_seats" />
-                    <option name="lastUsedInstant" value="1752590149" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="dev" />
-                    <option name="lastUsedInstant" value="1752590148" />
-                  </RecentBranch>
-                </list>
-              </option>
-              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
-            </RecentBranchesForRepo>
-          </list>
-        </option>
-      </RecentBranches>
-    </option>
-  </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/YOON-J11/cinemoa.git&quot;,
-    &quot;accountId&quot;: &quot;c727f623-82a7-4e36-846a-039dc355bb12&quot;
+    &quot;accountId&quot;: &quot;924e52b0-aa04-4ac1-afa4-5b847d085450&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 5
 }</component>
-  <component name="ProjectId" id="2zuiHIGglM1QsXJrke4bCr1d048" />
+  <component name="ProjectId" id="2zwZOlytNMOecYC0r8wncwqAn1L" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Gradle.cinemoa [:com.cinemoa.CineMoaApplication.main()].executor": "Run",
     "Gradle.cinemoa [bootRun].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "reservation__seats",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/cinemoa"
+    "settings.editor.selected.configurable": "File.Encoding"
   }
 }]]></component>
-  <component name="RunManager" selected="Gradle.cinemoa [bootRun]">
-    <configuration name="CineMoaApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.cinemoa.CineMoaApplication" />
-      <module name="cinemoa.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.cinemoa.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager">
     <configuration name="cinemoa [bootRun]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -168,23 +138,29 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.cinemoa [bootRun]" />
-        <item itemvalue="Application.CineMoaApplication" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f7ada35b-afbe-4ee7-b050-3cbb650c0ace" name="Changes" comment="" />
-      <created>1752587271428</created>
+      <changelist id="5e69bfea-3231-44b6-87cd-dffb1dc2379d" name="Changes" comment="" />
+      <created>1752644066840</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1752587271428</updated>
+      <updated>1752644066840</updated>
     </task>
     <servers />
   </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="db설정 바꿈" />
-    <option name="LAST_COMMIT_MESSAGE" value="db설정 바꿈" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

@@ -7,6 +7,8 @@
     color: #222;
 }
 
+.ticketing {padding: 2.5rem 0;}
+
 movie-choice, theater-choice, .time-choice {
 width: calc(100% / 3);
 }
