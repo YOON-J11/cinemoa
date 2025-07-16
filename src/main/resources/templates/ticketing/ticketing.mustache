@@ -52,7 +52,7 @@
             <div id="step1">
                 <h3>영화 선택</h3>
                 <div class="row" id="movieList">
-                    {{#nowShowingMovies}}
+                    {{#movies}}
                         <div class="col-md-4 mb-3">
                             <div class="movie-item" data-movie-id="{{movieId}}">
                                 <div class="d-flex">
@@ -64,7 +64,7 @@
                                 </div>
                             </div>
                         </div>
-                    {{/nowShowingMovies}}
+                    {{/movies}}
                 </div>
                 <input type="hidden" id="selectedMovieId" value="{{selectedMovieId}}" />
             </div>
