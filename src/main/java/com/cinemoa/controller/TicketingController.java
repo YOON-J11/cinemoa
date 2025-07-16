@@ -117,20 +117,20 @@ public class TicketingController {
     }
 
     // 좌석 선택 페이지로 이동하는 엔드포인트
-    @GetMapping("/showtime/{showtimeId}/seats")
-    public String showSeatSelectionPage(@PathVariable("showtimeId") Long showtimeId, Model model) {
-        Optional<Showtime> showtimeOptional = showtimeService.getShowtimeById(showtimeId);
-
-        if (showtimeOptional.isPresent()) {
-            Showtime showtime = showtimeOptional.get();
-            model.addAttribute("showtime", showtime);
-            model.addAttribute("movie", showtime.getMovie());
-            model.addAttribute("screen", showtime.getScreen());
-            model.addAttribute("title", "좌석 선택");
-
-            return "ticketing/seat-selection";
-        } else {
-            return "redirect:/movies";
-        }
-    }
+//    @GetMapping("/showtime/{showtimeId}/seats")
+//    public String showSeatSelectionPage(@PathVariable("showtimeId") Long showtimeId, Model model) {
+//        Optional<Showtime> showtimeOptional = showtimeService.getShowtimeById(showtimeId);
+//
+//        if (showtimeOptional.isPresent()) {
+//            Showtime showtime = showtimeOptional.get();
+//            model.addAttribute("showtime", showtime);
+//            model.addAttribute("movie", showtime.getMovie());
+//            model.addAttribute("screen", showtime.getScreen());
+//            model.addAttribute("title", "좌석 선택");
+//
+//            return "ticketing/seat-selection";
+//        } else {
+//            return "redirect:/movies";
+//        }
+//    }
 }

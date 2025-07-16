@@ -232,20 +232,18 @@
     <div class="reservation-summary">
         <div class="movie-info">
             <div class="movie-title">
-                <h3>F1 더 무비</h3>
-                <p>2D(자막)</p>
+                <h3>{{movie.title}}</h3>
+                <p>{{movie.genre}} / {{movie.ageRating}}</p>
             </div>
             <div class="cinema-info">
                 <div class="cinema-info-left">
                     <div>
-                        <p>서면대한<br>리클라이너 3관</p>
-                        <p>2025.07.14(월)</p>
+                        <p>{{screen.screenName}}</p>
                     </div>
-
-                    <p>20:35 ~ 23:20</p>
+                    <p>{{formattedDate}}</p>
+                    <p>{{formattedStartTime}} ~ {{formattedEndTime}}</p>
                 </div>
-
-                <img src="/images/movie.jpg" alt="포스터" class="poster">
+                <img src="/images/movie/{{movie.mainImageUrl}}" alt="포스터" class="poster">
             </div>
         </div>
 

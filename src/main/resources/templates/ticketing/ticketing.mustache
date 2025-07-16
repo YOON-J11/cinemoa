@@ -307,8 +307,9 @@
     // 좌석 선택 버튼 클릭
     document.getElementById('goToSeatSelection').addEventListener('click', () => {
         if (!selectedShowtimeId) return;
-        window.location.href = `/ticketing/showtime/${selectedShowtimeId}/seats`;
+        window.location.href = `/reservation/seats?showtimeId=${selectedShowtimeId}`;
     });
+
 
     // 날짜 목록 업데이트
     function fetchShowtimes(movieId, cinemaId, date) {
