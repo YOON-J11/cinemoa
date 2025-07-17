@@ -36,9 +36,6 @@ public class Showtime {
     @Column(name = "end_time", nullable = false)
     private LocalDateTime endTime;
 
-    @Column(name = "available_seats", nullable = false)
-    private Integer availableSeats;
-
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 

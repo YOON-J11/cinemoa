@@ -1,6 +1,92 @@
 *{outline:none; border: none;}
 *, :after, :before {box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;}
 
+/* ========== Font weight ========= */
+.bold100 {font-weight:100}
+.bold200 {font-weight:200}
+.bold300 {font-weight:300}
+.bold400 {font-weight:400}
+.bold500 {font-weight:500}
+.bold600 {font-weight:600}
+.bold700 {font-weight:700}
+.bold800 {font-weight:800}
+.bold900 {font-weight:900}
+
+/* =============== Display =============== */
+.flex-center {display: flex; align-items: center; justify-content: center;}
+
+/* ===== Padding ===== */
+.no-padding {padding:0!important}
+
+.pt-0   {padding-top: 0!important;}
+.pb-0   {padding-bottom: 0!important;}
+.pr-0   {padding-right:0!important}
+.pl-0   {padding-left:0!important}
+
+.pt-5   {padding-top: 0.3125rem;}
+.pt-10  {padding-top: 0.625rem; }
+.pt-15  {padding-top: 0.9375rem;}
+.pt-20  {padding-top: 1.250rem; }
+.pt-25  {padding-top: 1.5625rem;}
+.pt-30  {padding-top: 1.875rem; }
+.pt-35  {padding-top: 2.1875rem;}
+.pt-40  {padding-top: 2.500rem; }
+.pt-45  {padding-top: 2.8125rem;}
+.pt-50  {padding-top: 3.125rem; }
+.pt-60  {padding-top: 3.750rem; }
+.pt-70  {padding-top: 4.375rem; }
+.pt-80  {padding-top: 5.000rem; }
+.pt-90  {padding-top: 5.625rem; }
+.pt-100 {padding-top: 6.250rem; }
+
+.pb-5   {padding-bottom: 0.3125rem;}
+.pb-10  {padding-bottom: 0.625rem; }
+.pb-15  {padding-bottom: 0.9375rem;}
+.pb-20  {padding-bottom: 1.250rem; }
+.pb-25  {padding-bottom: 1.5625rem;}
+.pb-30  {padding-bottom: 1.875rem; }
+.pb-35  {padding-bottom: 2.1875rem;}
+.pb-40  {padding-bottom: 2.500rem; }
+.pb-45  {padding-bottom: 2.8125rem;}
+.pb-50  {padding-bottom: 3.125rem; }
+.pb-60  {padding-bottom: 3.750rem; }
+.pb-70  {padding-bottom: 4.375rem; }
+.pb-80  {padding-bottom: 5.000rem; }
+.pb-90  {padding-bottom: 5.625rem; }
+.pb-100 {padding-bottom: 6.250rem; }
+
+.pr-5   {padding-right: 0.3125rem;}
+.pr-10  {padding-right: 0.625rem; }
+.pr-15  {padding-right: 0.9375rem;}
+.pr-20  {padding-right: 1.250rem; }
+.pr-25  {padding-right: 1.5625rem;}
+.pr-30  {padding-right: 1.875rem; }
+.pr-35  {padding-right: 2.1875rem;}
+.pr-40  {padding-right: 2.500rem; }
+.pr-45  {padding-right: 2.8125rem;}
+.pr-50  {padding-right: 3.125rem; }
+.pr-60  {padding-right: 3.750rem; }
+.pr-70  {padding-right: 4.375rem; }
+.pr-80  {padding-right: 5.000rem; }
+.pr-90  {padding-right: 5.625rem; }
+.pr-100 {padding-right: 6.250rem; }
+
+.pl-5   {padding-left: 0.3125rem;}
+.pl-10  {padding-left: 0.625rem; }
+.pl-15  {padding-left: 0.9375rem;}
+.pl-20  {padding-left: 1.250rem; }
+.pl-25  {padding-left: 1.5625rem;}
+.pl-30  {padding-left: 1.875rem; }
+.pl-35  {padding-left: 2.1875rem;}
+.pl-40  {padding-left: 2.500rem; }
+.pl-45  {padding-left: 2.8125rem;}
+.pl-50  {padding-left: 3.125rem; }
+.pl-60  {padding-left: 3.750rem; }
+.pl-70  {padding-left: 4.375rem; }
+.pl-80  {padding-left: 5.000rem; }
+.pl-90  {padding-left: 5.625rem; }
+.pl-100 {padding-left: 6.250rem; }
+
 .container {
     width: 100%;
     max-width: 1200px;
@@ -226,6 +312,10 @@ nav ul {
 .movie-detail .movie-info {
     padding: 3rem;
     width: calc(100% - 316px);
+    display: flex    ;
+    flex-direction: column;
+    font-size: 18px;
+    gap: 1rem;
 }
 
 .movie-detail .movie-info .tit {
@@ -234,18 +324,46 @@ nav ul {
     padding-bottom: 1rem;
 }
 
-.movie-detail .movie-info  .info1 {
+.movie-detail .movie-info .info1 {
     display: flex;
     font-size: 22px;
-    font-weight: 600;
+    gap: 1rem;
+    align-items: center;
 }
-.movie-cont {
+
+.movie-detail .movie-info info4.score {
+    display: flex;
+    gap: 1rem;
+}
+
+.movie-detail .movie-cont {
     line-height: 1.4;
 }
 
-.movie-cont b {
+.movie-detail .movie-cont b {
     font: revert;
 }
+
+.movie-detail .movie-cont-wrap .tab {
+    display: flex;
+    padding: 1rem 0;
+    width: 100%;
+}
+.movie-detail .movie-cont-wrap .tab li {
+    width: calc(100% / 3);
+    text-align: center;
+    border-bottom: 1px solid #006f7c;
+    padding: 1rem 0;
+    cursor:pointer;
+}
+
+.movie-detail .tab_cont li {
+    display: none;
+}
+.movie-detail .tab_cont li.on {
+    display: block;
+}
+
 .movie-grade {
     display:inline-block;
     width: 23px;
