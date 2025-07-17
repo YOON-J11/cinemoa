@@ -38,4 +38,9 @@ public class Reservation {
     private String paymentMethod; // 결제 수단 (계좌이체 / 신용카드)
 
     private String status; // 예매 상태 (예약완료 / 취소됨)
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "showtime_id", nullable = false)
+    private Showtime showtime;
+
 }
