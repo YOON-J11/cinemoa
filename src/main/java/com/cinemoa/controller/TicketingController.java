@@ -4,6 +4,8 @@ import com.cinemoa.dto.MovieDto;
 import com.cinemoa.entity.Cinema;
 import com.cinemoa.entity.Movie;
 import com.cinemoa.entity.Showtime;
+import com.cinemoa.repository.ReservationSeatRepository;
+import com.cinemoa.repository.SeatRepository;
 import com.cinemoa.service.CinemaService;
 import com.cinemoa.service.MovieService;
 import com.cinemoa.service.ShowtimeService;
@@ -36,13 +38,22 @@ public class TicketingController {
     private final CinemaService cinemaService;
     private final ShowtimeService showtimeService;
 
+    // ✅추가
+    private final SeatRepository seatRepository;
+    private final ReservationSeatRepository reservationSeatRepository;
+
     @Autowired
     public TicketingController(MovieService movieService,
                                CinemaService cinemaService,
-                               ShowtimeService showtimeService) {
+                               ShowtimeService showtimeService,
+                               SeatRepository seatRepository,//✅추가
+                               ReservationSeatRepository reservationSeatRepository) {
         this.movieService = movieService;
         this.cinemaService = cinemaService;
         this.showtimeService = showtimeService;
+        //✅추가
+        this.seatRepository = seatRepository;
+        this.reservationSeatRepository = reservationSeatRepository;
     }
 
    // 영화 ID로 예매 페이지 진입 (영화 선택, 영화관, 날짜, 시간 선택 단계)
@@ -104,6 +115,13 @@ public class TicketingController {
             showtimeMap.put("startTime", showtime.getStartTime());
             showtimeMap.put("endTime", showtime.getEndTime());
             showtimeMap.put("screenName", showtime.getScreen().getScreenName()); // 상영관 이름
+
+            // ✅ 남은 좌석 수 계산 추가
+            int totalSeats = seatRepository.countByScreen_ScreenId(showtime.getScreen().getScreenId());
+            int reservedSeats = reservationSeatRepository.countByShowtime_ShowtimeId(showtime.getShowtimeId());
+            int availableSeats = totalSeats - reservedSeats;
+            showtimeMap.put("availableSeats", availableSeats); // ← 프론트로 전달
+
             return showtimeMap;
         }).collect(Collectors.toList());
     }

@@ -19,6 +19,12 @@ public class ReservationSeat {
     @JoinColumn(name = "seat_id", nullable = false)
     private Seat seat;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "showtime_id", nullable = false)
+    private Showtime showtime;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
+
+
 }

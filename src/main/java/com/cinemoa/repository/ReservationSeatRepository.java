@@ -13,4 +13,6 @@ public interface ReservationSeatRepository extends JpaRepository<ReservationSeat
         WHERE rs.reservation.showtime.showtimeId = :showtimeId
     """)
     int countReservedSeatsByShowtimeId(@Param("showtimeId") Long showtimeId);
+
+    int countByShowtime_ShowtimeId(Long showtimeId);
 }
