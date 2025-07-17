@@ -2,9 +2,11 @@ package com.cinemoa.controller;
 
 import com.cinemoa.dto.MovieDto;
 import com.cinemoa.dto.ReviewDto;
+import com.cinemoa.entity.Member;
 import com.cinemoa.entity.Movie;
 import com.cinemoa.service.MovieService;
 import com.cinemoa.service.ReviewService;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+
 
 @Controller
 @RequestMapping("/movies")
@@ -147,7 +150,7 @@ public class MovieController {
 
 
     @GetMapping("/{id}")
-    public String viewMovie(@PathVariable("id") Long id, Model model) {
+    public String viewMovie(@PathVariable("id") Long id, Model model, HttpSession session) {
         Optional<MovieDto> movieDtoOptional = movieService.getMovieById(id);
 
         if (movieDtoOptional.isPresent()) {
@@ -191,8 +194,14 @@ public class MovieController {
                 model.addAttribute("subImageUrlList", subImageUrlList);
             }
 
+            // 로그인된 사용자 정보 가져오기
+            Member loginMember = (Member) session.getAttribute("loginMember");
+            String currentUserId = loginMember != null ? loginMember.getMemberId() : null;
+            model.addAttribute("loginMember", loginMember); // 뷰용..
+
+
             // 리뷰 목록 조회
-            List<ReviewDto> reviews = reviewService.getReviewsByMovieId(id);
+            List<ReviewDto> reviews = reviewService.getReviewsByMovieId(id, currentUserId);
             model.addAttribute("reviews", reviews);
 
             // 긍정 평가 비율 계산

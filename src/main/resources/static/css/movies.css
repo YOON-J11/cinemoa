@@ -360,6 +360,13 @@ nav ul {
 .movie-detail .tab_cont li {
     display: none;
 }
+
+.movie-detail .tab li.on {
+   font-weight: 600;
+   border: 1px solid #006f7c;
+   border-bottom: 0;
+}
+
 .movie-detail .tab_cont li.on {
     display: block;
 }

@@ -33,8 +33,14 @@
                             </div>
                             <div class="info3">
                                 <div class="like">
-                                    <h5>좋아요</h5>
-                                    <span>{{likesCount}}</span>
+                                    <div class="like-btn">
+                                        <button class="heart-button">
+                                            <svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" id="heart" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M13.91,6.75c-1.17,2.25-4.3,5.31-6.07,6.94c-0.1903,0.1718-0.4797,0.1718-0.67,0C5.39,12.06,2.26,9,1.09,6.75&#xA;&#x9;C-1.48,1.8,5-1.5,7.5,3.45C10-1.5,16.48,1.8,13.91,6.75z" stroke="black"/>
+                                            </svg>
+                                        </button>
+                                        <span class="likesCount">{{likesCount}}</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="info4 score">
@@ -56,7 +62,7 @@
                     <div class="movie-cont-wrap">
 
                         <ul class="tab">
-                            <li>상세정보</li>
+                            <li class="on">상세정보</li>
                             <li>관람평</li>
                             <li>예고편/스틸컷</li>
                         </ul>
@@ -74,17 +80,17 @@
                                                     {{positivePercentage}}%
                                                 </div>
                                             </div>
-                                            <p class="mt-2"><span class="rating">{{positivePercentage}}</span>%의 관람객이 이 영화를 좋아했습니다.</p>
                                         </div>
                                     </div>
 
                                     <!-- 리뷰 목록 표시 부분 추가 -->
                                     <hr>
-                                    <!-- 리뷰 작성 버튼 모달 트리거로 변경 -->
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal" data-movie-id="{{movieId}}">
-                                        리뷰 작성하기
-                                    </button>
-                                    <h4>관람객 리뷰 ({{reviews.size}})</h4>
+                                    {{#loginMember}}
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal" data-movie-id="{{movieId}}">
+                                            리뷰 작성하기
+                                        </button>
+                                    {{/loginMember}}
+                                    <h4 class="">{{title}}에 대한 {{reviews.size}}개의 이야기가 있어요!</h4>
                                     {{#reviews}}
                                         <div class="card mb-3">
                                             <div class="card-body">
@@ -97,13 +103,16 @@
                                                             <span class="badge bg-danger"><i class="bi bi-hand-thumbs-down"></i> 별로였어요</span>
                                                         {{/isPositive}}
                                                     </h5>
-                                                    <small class="text-muted format-date">{{createdAt}}</small>
+                                                    <small class="text-muted">{{createdAt}}</small>
                                                 </div>
+                                                <strong>{{userName}}</strong>
                                                 <p class="card-text">{{{content}}}</p>
-                                                <div class="d-flex justify-content-end">
-                                                    <a href="/reviews/delete/{{reviewId}}?movieId={{movieId}}" class="btn btn-sm btn-outline-danger"
-                                                    onclick="return confirm('정말로 이 리뷰를 삭제하시겠습니까?');">삭제</a>
-                                                </div>
+                                                {{#deletable}}
+                                                    <div class="d-flex justify-content-end">
+                                                        <a href="/reviews/delete/{{reviewId}}?movieId={{movieId}}" class="btn btn-sm btn-outline-danger"
+                                                        onclick="return confirm('정말로 이 리뷰를 삭제하시겠습니까?');">삭제</a>
+                                                    </div>
+                                                {{/deletable}}
                                             </div>
                                         </div>
                                     {{/reviews}}
@@ -114,14 +123,16 @@
                                     {{/reviews}}
                                 </div>
                             </li>
+
                             <li class="">
                                 <!-- 리뷰 목록 표시 부분 추가 -->
                                 <hr>
-                                <!-- 리뷰 작성 버튼 모달 트리거로 변경 -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal" data-movie-id="{{movieId}}">
-                                    리뷰 작성하기
-                                </button>
-                                <h4>관람객 리뷰 ({{reviews.size}})</h4>
+                                {{#loginMember}}
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal" data-movie-id="{{movieId}}">
+                                        리뷰 작성하기
+                                    </button>
+                                {{/loginMember}}
+                                <h4 class="">{{title}}에 대한 {{reviews.size}}개의 이야기가 있어요!</h4>
                                 {{#reviews}}
                                     <div class="card mb-3">
                                         <div class="card-body">
@@ -134,13 +145,16 @@
                                                         <span class="badge bg-danger"><i class="bi bi-hand-thumbs-down"></i> 별로였어요</span>
                                                     {{/isPositive}}
                                                 </h5>
-                                                <small class="text-muted format-date">{{createdAt}}</small>
+                                                <small class="text-muted">{{createdAt}}</small>
                                             </div>
+                                            <strong>{{userName}}</strong>
                                             <p class="card-text">{{{content}}}</p>
-                                            <div class="d-flex justify-content-end">
-                                                <a href="/reviews/delete/{{reviewId}}?movieId={{movieId}}" class="btn btn-sm btn-outline-danger"
-                                                onclick="return confirm('정말로 이 리뷰를 삭제하시겠습니까?');">삭제</a>
-                                            </div>
+                                            {{#deletable}}
+                                                <div class="d-flex justify-content-end">
+                                                    <a href="/reviews/delete/{{reviewId}}?movieId={{movieId}}" class="btn btn-sm btn-outline-danger"
+                                                    onclick="return confirm('정말로 이 리뷰를 삭제하시겠습니까?');">삭제</a>
+                                                </div>
+                                            {{/deletable}}
                                         </div>
                                     </div>
                                 {{/reviews}}
@@ -150,6 +164,7 @@
                                     </div>
                                 {{/reviews}}
                             </li>
+
                             <li class="">
                                 {{#videoUrl}}
                                     <hr>
@@ -180,10 +195,13 @@
                                     </div>
                                 {{/detailImageUrls}}
                             </li>
+
                         </ul>
+
                         <hr>
                         등록일: <span class="format-date">{{createdAt}}</span><br>
                         수정일: <span class="format-date">{{updatedAt}}</span>
+
                     </div>
                     <div class="card-footer text-center">
                         <a href="/movies/{{movieId}}/edit" class="btn btn-primary me-2">수정하기</a>
@@ -241,6 +259,51 @@
         reviewModal.addEventListener('hidden.bs.modal', function () {
             document.getElementById('reviewFormContainer').innerHTML = '로딩 중...';
         });
+
+        // 탭
+        const tabHeaders = document.querySelectorAll('.tab li');
+        const tabContents = document.querySelectorAll('.tab_cont li');
+
+        // 각 탭 헤더(li)에 클릭 이벤트 리스너를 추가합니다.
+        tabHeaders.forEach((header, index) => {
+            header.addEventListener('click', function() {
+                // 모든 탭 헤더에서 'on' 클래스를 제거합니다.
+                tabHeaders.forEach(h => h.classList.remove('on'));
+                // 클릭된 탭 헤더에 'on' 클래스를 추가합니다.
+                this.classList.add('on');
+
+                // 모든 탭 내용에서 'on' 클래스를 제거합니다.
+                tabContents.forEach(content => content.classList.remove('on'));
+                // 클릭된 탭 헤더에 해당하는 탭 내용에 'on' 클래스를 추가합니다.
+                tabContents[index].classList.add('on');
+            });
+        });
+
+        const container = document.querySelector('.container');
+
+        if (!container) {
+            console.error('container 요소를 찾을 수 없습니다.');
+            return;
+        }
+
+        // 좋아요 버튼 클릭 이벤트 처리
+        container.querySelectorAll(".heart-button").forEach((button) => {
+            // 새로 추가되는 요소에만 이벤트 리스너를 추가하는 것이 일반적이지만,
+            // 여기서는 container 전체를 다시 스캔하여 적용합니다.
+            // (이미 리스너가 있는 경우 중복 추가될 수 있으나, 대부분의 경우 문제가 되지 않습니다.)
+            button.addEventListener("click", (event) => {
+                button.classList.toggle("active");
+            });
+        });
+
+        // 좋아요 개수를 표시하는 모든 span 요소
+        container.querySelectorAll('.likesCount').forEach(function(element) {
+            const count = parseInt(element.textContent);
+            if (!isNaN(count)) {
+                element.textContent = formatNumber(count);
+            }
+        });
+
     });
 </script>
 

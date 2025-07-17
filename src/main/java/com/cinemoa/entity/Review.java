@@ -23,13 +23,15 @@ public class Review {
     @Column(name = "review_id")
     private Long reviewId;
 
-    @Column(name = "movie_id")
-    private Long movieId;
+    @ManyToOne(fetch = FetchType.LAZY) // 지연 로딩
+    @JoinColumn(name = "movie_id", nullable = false) // reviews 테이블의 movie_id 컬럼에 매핑
+    private Movie movie; // Review가 특정 Movie에 속함을 나타냄
 
-    @Column(name = "user_id")
-    private Long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private Member user;
 
-    @Column(name = "content")
+    @Column(name = "content", columnDefinition = "TEXT")
     private String content;
 
     @Column(name = "is_positive")
@@ -42,4 +44,5 @@ public class Review {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
 }

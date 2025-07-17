@@ -12,16 +12,16 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     // 영화별 리뷰 목록 조회
-    List<Review> findByMovieIdOrderByCreatedAtDesc(Long movieId);
+    List<Review> findByMovie_MovieIdOrderByCreatedAtDesc(Long movieId);
 
     // 영화별 긍정 리뷰 수 조회
-    @Query("SELECT COUNT(r) FROM Review r WHERE r.movieId = :movieId AND r.isPositive = true")
+    @Query("SELECT COUNT(r) FROM Review r WHERE r.movie.movieId = :movieId AND r.isPositive = true")
     long countPositiveReviewsByMovieId(@Param("movieId") Long movieId);
 
     // 영화별 부정 리뷰 수 조회
-    @Query("SELECT COUNT(r) FROM Review r WHERE r.movieId = :movieId AND r.isPositive = false")
+    @Query("SELECT COUNT(r) FROM Review r WHERE r.movie.movieId = :movieId AND r.isPositive = false")
     long countNegativeReviewsByMovieId(@Param("movieId") Long movieId);
 
     // 영화별 전체 리뷰 수 조회
-    long countByMovieId(Long movieId);
+    long countByMovie_MovieId(Long movieId);
 }

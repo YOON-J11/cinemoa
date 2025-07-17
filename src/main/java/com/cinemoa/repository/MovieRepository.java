@@ -4,6 +4,7 @@ import com.cinemoa.entity.Movie;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -29,5 +30,14 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
             String directorKeyword, Movie.ScreeningStatus directorStatus,
             String actorsKeyword, Movie.ScreeningStatus actorsStatus,
             Pageable pageable);
+
+    // 좋아요 수 증가/감소용
+    @Modifying
+    @Query("UPDATE Movie m SET m.likesCount = m.likesCount + 1 WHERE m.id = :movieId")
+    void incrementLikes(@Param("movieId") Long movieId);
+
+    @Modifying
+    @Query("UPDATE Movie m SET m.likesCount = m.likesCount - 1 WHERE m.id = :movieId AND m.likesCount > 0")
+    void decrementLikes(@Param("movieId") Long movieId);
 
 }

@@ -1,8 +1,11 @@
 package com.cinemoa.api;
 
 import com.cinemoa.dto.MovieDto;
+import com.cinemoa.entity.Member;
 import com.cinemoa.entity.Movie;
+import com.cinemoa.service.LikeService;
 import com.cinemoa.service.MovieService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,16 +18,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/movies")
 public class MovieApiController {
 
     private final MovieService movieService;
+    private final LikeService likeService;
 
     @Autowired
-    public MovieApiController(MovieService movieService) {
+    public MovieApiController(MovieService movieService, LikeService likeService) {
         this.movieService = movieService;
+        this.likeService = likeService;
     }
 
     @GetMapping
@@ -66,4 +72,14 @@ public class MovieApiController {
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("/{movieId}")
+    public ResponseEntity<?> toggleLike(@PathVariable Long movieId, HttpSession session) {
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        if (loginMember == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+        }
+
+        boolean liked = likeService.toggleLike(movieId, loginMember.getMemberId());
+        return ResponseEntity.ok(Map.of("liked", liked));
+    }
 }
