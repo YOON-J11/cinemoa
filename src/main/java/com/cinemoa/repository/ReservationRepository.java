@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     List<Reservation> findTop5ByMember_MemberIdOrderByReservationTimeDesc(String memberId);
+    List<Reservation> findByShowtime_ShowtimeId(Long showtimeId);
+
 }
