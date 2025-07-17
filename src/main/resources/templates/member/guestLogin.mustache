@@ -1,0 +1,32 @@
+{{> common/header }}
+<link rel="stylesheet" href="/css/member/guestLogin.css?v={{ timestamp }}" />
+<div class="container guest-login-page">
+    <h3 class="page-title">비회원 예매 확인</h3>
+    <form method="post" action="/guest/login" class="guest-login-form">
+        <div class="form-group">
+            <input type="text" name="name" placeholder="이름" required>
+        </div>
+        <div class="form-group">
+            <input type="text" name="birthDate" placeholder="생년월일 (YYYY-MM-DD)" required>
+        </div>
+        <div class="form-group">
+            <input type="tel" name="phone" placeholder="휴대폰 번호 (- 제외)" required>
+        </div>
+        <div class="form-group">
+            <input type="password" name="reservationPassword" placeholder="예매 비밀번호" required>
+        </div>
+        <div class="form-group">
+            <input type="password" name="confirmPassword" placeholder="예매 비밀번호 확인" required>
+        </div>
+
+        {{#error}}
+            <div class="error-msg">{{error}}</div>
+        {{/error}}
+
+        <button type="submit" class="btn btn-primary">비회원 로그인</button>
+    </form>
+    <div class="login-links">
+        <a href="/member/login">회원 로그인</a>
+    </div>
+</div>
+{{> common/footer }}
