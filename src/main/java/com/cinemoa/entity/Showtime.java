@@ -36,12 +36,6 @@ public class Showtime {
     @Column(name = "end_time", nullable = false)
     private LocalDateTime endTime;
 
-    @Column(nullable = false, precision = 8, scale = 2)
-    private BigDecimal price;
-
-    @Column(name = "available_seats", nullable = false)
-    private Integer availableSeats;
-
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
@@ -53,6 +47,9 @@ public class Showtime {
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
     }
+
+    @Transient
+    private int availableSeats;
 
     @PreUpdate
     protected void onUpdate() {
