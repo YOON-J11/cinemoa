@@ -8,6 +8,35 @@ document.addEventListener("DOMContentLoaded", function () {
   const confirmBtn = document.getElementById("modalConfirm");
   const inputs = document.querySelectorAll(".guest-login-form input");
 
+  //생년월일입력받기
+  function formatWithZero(value, length = 2) {
+    return value.padStart(length, '0');
+  }
+
+  function updateBirthDate() {
+    const year = document.getElementById("birthYear").value.trim();
+    const month = document.getElementById("birthMonth").value.trim();
+    const day = document.getElementById("birthDay").value.trim();
+    const hidden = document.getElementById("birthDate");
+
+    if (year.length === 4 && month.length >= 1 && day.length >= 1) {
+      hidden.value = `${year}-${formatWithZero(month)}-${formatWithZero(day)}`;
+    } else {
+      hidden.value = "";
+    }
+  }
+
+  // 숫자만 허용하고 자리수 제한
+  ["birthYear", "birthMonth", "birthDay"].forEach(id => {
+    const input = document.getElementById(id);
+    input.addEventListener("input", function () {
+      this.value = this.value.replace(/\D/g, '');
+      updateBirthDate();
+      checkInputs(); // 기존 함수 재사용
+    });
+  });
+
+
   // 🔒 비밀번호, 비밀번호 확인 - 숫자만 4자리 입력
   [passwordField, confirmField].forEach(input => {
     input.addEventListener("input", function () {
@@ -31,12 +60,8 @@ document.addEventListener("DOMContentLoaded", function () {
   function checkInputs() {
     let allFilled = true;
     inputs.forEach(i => {
-    if (i.type === "hidden") return;
-      if (i.type === "date") {
-        if (!i.value) allFilled = false;
-      } else {
-        if (i.value.trim() === "") allFilled = false;
-      }
+      if (i.type === "hidden") return;
+      if (i.name === "birthDate" && !i.value) allFilled = false;
     });
 
     loginBtn.disabled = !allFilled;

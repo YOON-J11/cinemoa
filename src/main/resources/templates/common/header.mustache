@@ -28,7 +28,6 @@
         <nav class="member-info-wrap">
             <ul>
                 {{#loginMember}}
-                    <!-- 회원 로그인 시 -->
                     <li>
                         <a href="/member/logout">
                             <img src="/images/icons/logout-icon.png">
@@ -43,39 +42,35 @@
                     </li>
                 {{/loginMember}}
 
-                {{^loginMember}}
-                    {{#guestUser}}
-                        <!-- 비회원 로그인 시 -->
-                        <li>
-                            <a href="/guest/logout">
-                                <img src="/images/icons/logout-icon.png">
-                                <p>로그아웃</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/guest/mypage">
-                                <img src="/images/icons/user-icon.png">
-                                <p>마이페이지</p>
-                            </a>
-                        </li>
-                    {{/guestUser}}
+                {{#guestUser}}
+                    <li>
+                        <a href="/member/guest/logout">
+                            <img src="/images/icons/logout-icon.png">
+                            <p>로그아웃</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/reservation/lookup">
+                            <img src="/images/icons/ticket-icon.png">
+                            <p>예매조회</p>
+                        </a>
+                    </li>
+                {{/guestUser}}
 
-                    {{^guestUser}}
-                        <!-- 로그인 안 된 상태 -->
-                        <li>
-                            <a href="/member/login">
-                                <img src="/images/icons/login-icon.png">
-                                <p>로그인</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/member/join/step1">
-                                <img src="/images/icons/user-plus-icon.png">
-                                <p>회원가입</p>
-                            </a>
-                        </li>
-                    {{/guestUser}}
-                {{/loginMember}}
+                {{^loginMember}}{{^guestUser}}
+                    <li>
+                        <a href="/member/login">
+                            <img src="/images/icons/login-icon.png">
+                            <p>로그인</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/member/join/step1">
+                            <img src="/images/icons/user-plus-icon.png">
+                            <p>회원가입</p>
+                        </a>
+                    </li>
+                {{/guestUser}}{{/loginMember}}
 
                 <li>
                     <a href="/help">
@@ -85,6 +80,7 @@
                 </li>
             </ul>
         </nav>
+
 
     </div>
 

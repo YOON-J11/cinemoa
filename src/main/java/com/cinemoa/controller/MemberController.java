@@ -151,6 +151,12 @@ public class MemberController {
         session.invalidate(); // 세션 초기화
         return "redirect:/"; // 홈으로 이동
     }
+    //비회원로그아웃
+    @GetMapping("/guest/logout")
+    public String guestLogout(HttpSession session) {
+        session.invalidate(); // 비회원도 전체 세션 삭제
+        return "redirect:/";
+    }
 
     // 아이디, 비밀번호 찾기 페이지
     @GetMapping("/find")
