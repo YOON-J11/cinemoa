@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class SeatsController {
 
     private final ShowtimeRepository showtimeRepository;
-    private final SeatRepository seatRepository;  // 추가: 좌석 데이터 조회를 위한 repository
+    private final SeatRepository seatRepository;
 
     @GetMapping("/seats")
     public String showSeatPage(@RequestParam("showtimeId") Long showtimeId, Model model) {
