@@ -4,6 +4,7 @@ import com.cinemoa.dto.InquiryDto;
 import com.cinemoa.dto.ReservationDto;
 import com.cinemoa.entity.Cinema;
 import com.cinemoa.entity.Member;
+import com.cinemoa.repository.MemberRepository;
 import com.cinemoa.service.CinemaService;
 import com.cinemoa.service.MemberService;
 import jakarta.servlet.http.HttpSession;
@@ -14,8 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -24,6 +28,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor //생성자 자동 생성
 @RequestMapping("/mypage")
 public class MypageController {
+
+    private final MemberRepository memberRepository;
     private final MemberService memberService;
     private final CinemaService cinemaService;
 
@@ -86,6 +92,63 @@ public class MypageController {
         model.addAttribute("preferredCinemaName", preferredCinemaName);
 
         return "mypage/mypageLayout";
+    }
+
+    //프로필 수정 팝업 뷰
+    @GetMapping("/profileEditPopup")
+    public String showProfileEditPopup(Model model, HttpSession session) {
+        Member member = (Member) session.getAttribute("loginMember");
+        model.addAttribute("nickname", member.getNickname());
+        model.addAttribute("profileImg", member.getProfileImg());
+        return "mypage/profileEditPopup"; // /templates/mypage/profileEditPopup.mustache
+    }
+
+    //프로필 수정
+    @PostMapping("/information/profileEdit")
+    public String updateProfile(@RequestParam("nickname") String nickname, @RequestParam(value = "profileImg", required = false) MultipartFile profileImg, HttpSession session, Model model) {
+        Member member = (Member) session.getAttribute("loginMember");
+
+        // 닉네임 변경
+        member.setNickname(nickname);
+
+        // 프로필 이미지 처리
+        if (profileImg != null && !profileImg.isEmpty()) {
+
+            // 실제 서버에 이미지를 저장할 디렉토리 경로 설정
+            String saveDir = "C:/cinemoa-profile/";
+
+            // 업로드된 파일 이름 앞에 UUID를 붙여서 중복 방지
+            String fileName = UUID.randomUUID() + "_" + profileImg.getOriginalFilename();
+
+            try {
+                // 저장할 디렉토리가 존재하지 않으면 생성
+                File dir = new File(saveDir);
+                if (!dir.exists()) dir.mkdirs();
+                // 최종 저장 경로 (디렉토리 + 파일명)
+                File dest = new File(saveDir + fileName);
+                // 업로드된 파일을 해당 위치에 저장
+                profileImg.transferTo(dest);
+                // 저장된 파일명을 DB에 저장 (member 테이블의 profile_img 컬럼)
+                member.setProfileImg(fileName);
+            } catch (IOException e) {
+                // 파일 저장 중 에러 발생 시 로그 출력
+                e.printStackTrace();
+            }
+        } else {
+            // 사용자가 이미지 파일을 업로드하지 않았거나 기본 이미지 버튼을 눌렀을 경우
+            // 기존 이미지 대신 기본 이미지를 사용하기 위해 DB의 profile_img 컬럼을 null 처리
+            member.setProfileImg(null); // 또는 "" 처리도 가능
+        }
+        // 저장
+        memberRepository.save(member);
+        // 세션 정보 업데이트
+        session.setAttribute("loginMember", member);
+
+        // 모델에 nickname, profileImg 전달 (Mustache 에러 방지)
+        model.addAttribute("nickname", member.getNickname());
+        model.addAttribute("profileImg", member.getProfileImg());
+
+        return "mypage/profileEditPopup";
     }
 
     //예매내역
@@ -203,6 +266,7 @@ public class MypageController {
         model.addAttribute("withdrawal", true);
         return "mypage/mypageLayout";
     }
+
     //회원탈퇴
     @PostMapping("/information/withdraw")
     public String processWithdrawal(@RequestParam("reason") String reason,
@@ -236,8 +300,6 @@ public class MypageController {
         model.addAttribute("pagePath", "회원 탈퇴 완료");
         return "mypage/withdrawalSuccess";
     }
-
-
 
 
     // 나의문의내역

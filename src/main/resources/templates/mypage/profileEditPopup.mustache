@@ -19,9 +19,14 @@
         <!-- 프로필 이미지 영역 -->
         <div class="form-row profile-section">
             <div class="profile-label">프로필 사진</div>
+
             <div class="profile-content">
-                <img src="/upload/profile/{{profileImg}}" alt="프로필 이미지" class="profile-preview"
-                     onerror="this.src='/images/icons/default-profile.png'">
+                {{#profileImg}}
+                    <img src="/images/profile/{{profileImg}}" alt="프로필 이미지" class="profile-preview">
+                {{/profileImg}}
+                {{^profileImg}}
+                    <img src="/images/profile/default-profile.png" alt="기본 이미지" class="profile-preview">
+                {{/profileImg}}
                 <div class="profile-buttons">
                     <label for="profileImg" class="btn">사진변경</label>
                     <input type="file" id="profileImg" name="profileImg" accept="image/*" hidden>
