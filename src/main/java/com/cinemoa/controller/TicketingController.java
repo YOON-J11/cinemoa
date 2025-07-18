@@ -58,7 +58,7 @@ public class TicketingController {
         // 상영 중인 모든 영화 목록 가져오기 (페이징 없이 모든 데이터)
         Pageable pageable = PageRequest.of(0, Integer.MAX_VALUE, Sort.by("title").ascending());
         List<MovieDto> nowShowingMovies = movieService.getMoviesByScreeningStatus(
-                        Movie.ScreeningStatus.NOW_SHOWING, pageable)
+                        Movie.ScreeningStatus.NOW_SHOWING, pageable, null)
                 .getContent();
 
         // 모든 영화 목록
