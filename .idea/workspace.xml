@@ -4,33 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e69bfea-3231-44b6-87cd-dffb1dc2379d" name="Changes" comment="마이페이지 오류 수정">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/mypage/withdrawalSuccess.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/mypage/withdrawal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/withdrawalSuccess.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" afterDir="false" />
+    <list default="true" id="5e69bfea-3231-44b6-87cd-dffb1dc2379d" name="Changes" comment="회원 탈퇴 로직 완료">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/mypage/mypageHome.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/mypage/profileEditPopup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/profileEditPopup.mustache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/controller/MemberController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/controller/MemberController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/entity/Member$MemberBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/entity/Member$MemberBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/entity/Member.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/entity/Member.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/service/MemberService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/service/MemberService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MypageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MypageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/entity/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/entity/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/MemberService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/mypage/withdrawal.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/mypage/withdrawal.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/reset.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/reset.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/member/joinStep4.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/member/joinStep4.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/mypage/withdrawal.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/withdrawal.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/mypage/mypageHome.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/mypageHome.mustache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,7 +186,15 @@
       <option name="project" value="LOCAL" />
       <updated>1752742751125</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="회원 탈퇴 로직 완료">
+      <option name="closed" value="true" />
+      <created>1752817030383</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1752817030383</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -220,6 +212,7 @@
     <MESSAGE value="비회원 로그인 처리중" />
     <MESSAGE value="비회원 로그아웃, 로그인시 비밀번호확인란 추가" />
     <MESSAGE value="마이페이지 오류 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="마이페이지 오류 수정" />
+    <MESSAGE value="회원 탈퇴 로직 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="회원 탈퇴 로직 완료" />
   </component>
 </project>
