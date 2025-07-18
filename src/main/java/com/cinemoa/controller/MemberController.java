@@ -132,6 +132,12 @@ public class MemberController {
             return "member/login";
         }
 
+        // 탈퇴한 회원인 경우 로그인 거부
+        if (member.isDeleted()) {
+            model.addAttribute("error", "탈퇴한 회원입니다. 로그인할 수 없습니다.");
+            return "member/login";
+        }
+
         // 세션에 로그인 사용자 저장
         session.setAttribute("loginMember", member);
 

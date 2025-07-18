@@ -9,6 +9,7 @@ import com.cinemoa.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -133,5 +134,14 @@ public class MemberService {
     public void updatePreference(Member member) {
         memberRepository.save(member);
     }
+
+
+    // 회원 탈퇴 처리
+    @Transactional
+    public void withdraw(Member member) {
+        member.setDeleted(true);
+        memberRepository.save(member);
+    }
+
 
 }

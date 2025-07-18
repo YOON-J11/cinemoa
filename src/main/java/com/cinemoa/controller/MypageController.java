@@ -11,10 +11,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
 
 @Controller
 @RequiredArgsConstructor //생성자 자동 생성
@@ -22,6 +26,7 @@ import java.util.stream.Collectors;
 public class MypageController {
     private final MemberService memberService;
     private final CinemaService cinemaService;
+
 
     //마이페이지 홈
     @GetMapping
@@ -190,7 +195,7 @@ public class MypageController {
     }
 
 
-    //회원정보 > 회원탈퇴
+    //회원정보 > 회원탈퇴 페이지 뷰
     @GetMapping("/information/withdrawal")
     public String withdrawal(Model model) {
         //상단 경로 표시용
@@ -198,6 +203,42 @@ public class MypageController {
         model.addAttribute("withdrawal", true);
         return "mypage/mypageLayout";
     }
+    //회원탈퇴
+    @PostMapping("/information/withdraw")
+    public String processWithdrawal(@RequestParam("reason") String reason,
+                                    @RequestParam(value = "otherReason", required = false) String otherReason,
+                                    @RequestParam("password") String password,
+                                    HttpSession session,
+                                    RedirectAttributes redirectAttrs) {
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        if (loginMember == null) {
+            redirectAttrs.addFlashAttribute("error", "로그인이 필요합니다.");
+            return "redirect:/login";
+        }
+
+        // 비밀번호 평문 비교
+        if (!password.equals(loginMember.getPassword())) {
+            redirectAttrs.addFlashAttribute("error", "비밀번호가 일치하지 않습니다.");
+            return "redirect:/mypage/information/withdrawal";
+        }
+
+        // 탈퇴 처리 (is_deleted = true로 업데이트)
+        memberService.withdraw(loginMember);
+
+        // 세션 종료
+        session.invalidate();
+
+        return "redirect:/mypage/withdrawalSuccess";
+    }
+
+    @GetMapping("/withdrawalSuccess")
+    public String withdrawalSuccess(Model model) {
+        model.addAttribute("pagePath", "회원 탈퇴 완료");
+        return "mypage/withdrawalSuccess";
+    }
+
+
+
 
     // 나의문의내역
     @GetMapping("/myinquiry")

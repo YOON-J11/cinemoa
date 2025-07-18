@@ -18,16 +18,18 @@
   color: #333;
 }
 
-.group p {
-  font-size: 16px;
-  line-height: 1.5;
-}
-
 .btn-group {
   border: none;
 }
 
-.btn-group a {
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-group a,
+button {
   padding: 10px 18px;
   font-size: 15px;
   background-color: #006f7c;
@@ -40,10 +42,33 @@
 button {
   background-color: #f4f4f4;
   color: #333;
-  align-items: center;
   border: 1px solid #ddd;
-  padding: 10px 18px;
-  font-size: 15px;
-  cursor: pointer;
+}
+
+textarea,
+input[type="password"] {
+  width: 100%;
+  max-width: 450px;
+  padding: 12px 14px;
+  font-size: 14px;
+  border: 1px solid #ddd;
   border-radius: 6px;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+textarea {
+  height: 100px;
+  resize: none;
+}
+
+textarea:focus,
+input[type="password"]:focus {
+  outline: none;
+  border-color: #006f7c;
+}
+.error-msg {
+  color: red;
+  margin-top: 10px;
+  font-size: 14px;
 }

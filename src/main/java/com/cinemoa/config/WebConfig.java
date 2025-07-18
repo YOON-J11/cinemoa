@@ -13,6 +13,6 @@ public class WebConfig implements WebMvcConfigurer {
         // LoginCheckInterceptor를 등록
         registry.addInterceptor(new LoginCheckInterceptor())
                 .addPathPatterns("/mypage/**") // 이 경로 이하에 모두 적용
-                .excludePathPatterns("/member/**");   // 로그인 관련 경로는 제외 (로그인 페이지로의 무한 리다이렉트 방지)
+                .excludePathPatterns("/member/**", "/mypage/withdrawalSuccess");   // 로그인 관련 경로는 제외 (로그인 페이지로의 무한 리다이렉트 방지), 회원탈퇴 완료 페이지는 방지
     }
 }
