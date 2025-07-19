@@ -1,6 +1,6 @@
 function openProfileEditPopup() {
-    const popupWidth = 750;
-    const popupHeight = 500;
+    const popupWidth = 450;
+    const popupHeight = 600;
 
     const left = (window.screen.width / 2) - (popupWidth / 2);
     const top = (window.screen.height / 2) - (popupHeight / 2);

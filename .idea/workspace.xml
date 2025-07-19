@@ -5,23 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e69bfea-3231-44b6-87cd-dffb1dc2379d" name="Changes" comment="프로필수정 작성중">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/config/ProfileImageInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MypageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MypageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/icons/default-profile.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/profile/default-profile.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/mypage/mypageHome.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/mypage/mypageHome.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/mypage/profileEditPopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/mypage/profileEditPopup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/mypage/mypageHome.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/mypageHome.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/mypage/profileEditPopup.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/profileEditPopup.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/mypage/pref.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/mypage/pref.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/mypage/pref.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/mypage/pref.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
