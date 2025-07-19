@@ -1,6 +1,7 @@
 package com.cinemoa.controller;
 
 import com.cinemoa.dto.InquiryDto;
+import com.cinemoa.dto.ReservationDetailDto;
 import com.cinemoa.dto.ReservationDto;
 import com.cinemoa.entity.Cinema;
 import com.cinemoa.entity.Member;
@@ -153,11 +154,32 @@ public class MypageController {
 
     //예매내역
     @GetMapping("/bookinglist")
-    public String bookingList(Model model) {
-        //상단 경로 표시용
+    public String bookingList(HttpSession session, Model model) {
         model.addAttribute("pagePath", "마이페이지 > 예매/구매내역");
         model.addAttribute("bookinglist", true);
+
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        if (loginMember == null) {
+            return "redirect:/login";
+        }
+
+        String memberId = loginMember.getMemberId();
+
+        // 예매 전체 내역 가져오기
+        List<ReservationDto> reservationList = memberService.getAllReservations(memberId);
+
+        // 모델에 추가
+        model.addAttribute("reservations", reservationList);
+        model.addAttribute("totalReservations", reservationList.size());
+
         return "mypage/mypageLayout";
+    }
+
+    @GetMapping("/bookingdetail")
+    public String bookingDetail(@RequestParam("reservationId") Long reservationId, Model model) {
+        ReservationDetailDto detailDto = memberService.getReservationDetail(reservationId);
+        model.addAttribute("detail", detailDto);
+        return "mypage/bookingdetail";
     }
 
     //내가본영화

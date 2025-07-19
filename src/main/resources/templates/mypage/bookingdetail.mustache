@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="/css/mypage/bookingdetail.css?v={{ timestamp }}" />
+<div class="bookingdetail-container">
+    <h2 class="container-title">예매 상세 내역</h2>
+
+    <div class="detail-card">
+        <div class="detail-header">
+            <div class="poster">
+                <img src="/images/posters/{{detail.mainImageUrl}}" alt="{{detail.movieTitle}}" />
+            </div>
+            <div class="info">
+                <p class="movie-title">{{detail.movieTitle}}</p>
+                <p class="status {{detail.status}}">상태: {{detail.status}}</p>
+                <p>예매일시: {{detail.formattedReservationTime}}</p>
+                <p>영화관: {{detail.cinemaName}}</p>
+                <p>상영관: {{detail.screenName}}</p>
+                <p>상영시간: {{detail.showtimeStart}} ~ {{detail.showtimeEnd}}</p>
+                <p>판매번호: {{detail.salesNumber}}</p>
+            </div>
+        </div>
+
+        <div class="seats-section">
+            <h3>예매 좌석</h3>
+            <ul class="seat-list">
+                {{#detail.seats}}
+                    <li>{{seatRow}}{{seatNumber}} ({{seatType}}) - {{price}}원</li>
+                {{/detail.seats}}
+            </ul>
+        </div>
+
+        <div class="payment-section">
+            <h3>결제 정보</h3>
+            <p>총 금액: {{detail.totalPrice}}원</p>
+            <p>할인: {{detail.discount}}원</p>
+            <p><strong>최종 결제 금액: {{detail.finalPayment}}원</strong></p>
+            <p>결제수단: {{detail.paymentMethod}}</p>
+        </div>
+    </div>
+</div>

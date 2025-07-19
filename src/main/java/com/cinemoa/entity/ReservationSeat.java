@@ -1,11 +1,17 @@
 package com.cinemoa.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "reservation_seats")
+@Getter
+@Setter
+@NoArgsConstructor
 public class ReservationSeat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

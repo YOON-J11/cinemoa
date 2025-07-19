@@ -1,1 +1,36 @@
-<h1 style="color:red;">예매/구매내역 페이지</h1>
+<link rel="stylesheet" href="/css/mypage/bookinglist.css?v={{ timestamp }}" />
+<div class="bookinglist-container">
+    <h2 class="container-title">예매/구매내역</h2>
+
+    <div class="booking-list">
+        {{#reservations}}
+            <div class="booking-card">
+                <div class="booking-header">
+                    <span class="reservation-date">{{formattedReservationTime}}</span>
+                    <span class="cinema-name">{{cinemaName}}</span>
+                </div>
+
+                <div class="booking-body">
+                    <div class="poster">
+                        <img src="/images/posters/{{mainImageUrl}}" alt="{{movieTitle}}" />
+                    </div>
+                    <div class="booking-info">
+                        <p class="status {{paymentStatusClass}}">{{paymentStatusText}}</p>
+                        <p class="movie-title">{{movieTitle}}</p>
+                        <p class="screen-seat">좌석: {{seatInfo}}</p>
+                    </div>
+                </div>
+
+                <div class="booking-footer">
+                    <a class="detail-link" href="/mypage/bookingdetail?reservationId={{reservationId}}">상세보기</a>
+                </div>
+            </div>
+        {{/reservations}}
+
+        {{^reservations}}
+            <p class="empty-text">예매 내역이 없습니다.</p>
+        {{/reservations}}
+    </div>
+</div>
+
+<script src="/js/mypage/bookinglist.js"></script>

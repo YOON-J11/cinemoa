@@ -1,11 +1,11 @@
 package com.cinemoa.service;
 
-import com.cinemoa.dto.InquiryDto;
-import com.cinemoa.dto.MemberDto;
-import com.cinemoa.dto.ReservationDto;
+import com.cinemoa.dto.*;
 import com.cinemoa.entity.Member;
+import com.cinemoa.entity.Reservation;
 import com.cinemoa.repository.MemberRepository;
 import com.cinemoa.repository.ReservationRepository;
+import com.cinemoa.repository.ReservationSeatRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor // final 필드 생성자 자동 생성
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final ReservationSeatRepository reservationSeatRepository;
 
     //회원가입
     public Member join(MemberDto dto){
@@ -142,6 +144,86 @@ public class MemberService {
         member.setDeleted(true);
         memberRepository.save(member);
     }
+
+    public List<ReservationDto> getAllReservations(String memberId) {
+        List<Reservation> reservations = reservationRepository.findByMember_MemberId(memberId);
+
+        return reservations.stream()
+                .map(reservation -> ReservationDto.builder()
+                        .reservationId(reservation.getReservationId())
+                        .memberId(reservation.getMember().getMemberId())
+                        .movieId(reservation.getMovie().getMovieId())
+                        .cinemaId(reservation.getCinema().getCinemaId())
+                        .screenId(reservation.getScreenId())
+                        .seatInfo(reservation.getSeatInfo())
+                        .reservationTime(reservation.getReservationTime())
+                        .paymentMethod(reservation.getPaymentMethod())
+                        .status(reservation.getStatus())
+                        .movieTitle(reservation.getMovie().getTitle())
+                        .cinemaName(reservation.getCinema().getName())
+                        .mainImageUrl(reservation.getMovie().getMainImageUrl())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+
+
+
+
+    public ReservationDetailDto getReservationDetail(Long reservationId) {
+        Reservation reservation = reservationRepository.findById(reservationId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 예매가 존재하지 않습니다."));
+
+        // 좌석 정보 조회
+        List<SeatDto> seatDtos = reservationSeatRepository.findByReservation_ReservationId(reservationId)
+                .stream()
+                .map(resSeat -> {
+                    var seat = resSeat.getSeat();
+                    return SeatDto.builder()
+                            .seatId(seat.getSeatId())
+                            .seatRow(seat.getSeatRow())
+                            .seatNumber(seat.getSeatNumber())
+                            .seatType(seat.getSeatType())
+                            .price(seat.getPrice())
+                            .build();
+                })
+                .toList();
+
+        // 총 가격 계산
+        int totalPrice = seatDtos.stream().mapToInt(SeatDto::getPrice).sum();
+
+        // 할인은 일단 0원으로 고정 (추후 로직 추가 가능)
+        int discount = 0;
+        int finalPayment = totalPrice - discount;
+
+        // 상영 시작/종료 시간
+        String showtimeStart = reservation.getShowtime().getStartTime().toString(); // 예: "15:30"
+        String showtimeEnd = reservation.getShowtime().getEndTime().toString();     // 예: "17:30"
+
+        // 판매번호: 예) 2025-0720-0001 (임의 규칙: 예매날짜 + 예약ID 네자리)
+        String salesNumber = String.format("%s-%04d",
+                reservation.getReservationTime().toLocalDate().toString().replace("-", ""),
+                reservation.getReservationId());
+
+        return ReservationDetailDto.builder()
+                .reservationId(reservation.getReservationId())
+                .movieTitle(reservation.getMovie().getTitle())
+                .mainImageUrl(reservation.getMovie().getMainImageUrl())
+                .cinemaName(reservation.getCinema().getName())
+                .screenName(reservation.getScreen().getScreenName()) // 스트링으로 가져오고 있다면 그대로 사용
+                .paymentMethod(reservation.getPaymentMethod())
+                .status(reservation.getStatus())
+                .reservationTime(reservation.getReservationTime())
+                .showtimeStart(showtimeStart)
+                .showtimeEnd(showtimeEnd)
+                .seats(seatDtos)
+                .totalPrice(totalPrice)
+                .discount(discount)
+                .finalPayment(finalPayment)
+                .salesNumber(salesNumber)
+                .build();
+    }
+
 
 
 }
