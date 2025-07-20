@@ -73,4 +73,5 @@ public interface MemberRepository extends JpaRepository<Member, String> {
                 LIMIT 5
                 """, nativeQuery = true)
     List<InquiryDto> getRecentInquiries(@Param("memberId") String memberId);
+
 }

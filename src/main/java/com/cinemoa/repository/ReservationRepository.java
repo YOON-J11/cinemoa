@@ -18,4 +18,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     //특정 회원(memberId)의 모든 예매 내역을 가져옴.
     List<Reservation> findByMember_MemberId(String memberId);
 
+    List<Reservation> findByMember_MemberIdAndStatus(String memberId, String status);
+
+    boolean existsByMovie_MovieIdAndMember_MemberId(Long movieId, String memberId);
+
 }

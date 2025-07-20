@@ -3,6 +3,7 @@ package com.cinemoa.controller;
 import com.cinemoa.dto.InquiryDto;
 import com.cinemoa.dto.ReservationDetailDto;
 import com.cinemoa.dto.ReservationDto;
+import com.cinemoa.dto.WatchedMovieDto;
 import com.cinemoa.entity.Cinema;
 import com.cinemoa.entity.Member;
 import com.cinemoa.repository.MemberRepository;
@@ -188,10 +189,53 @@ public class MypageController {
 
     //내가본영화
     @GetMapping("/mymovie")
-    public String myMovie(Model model) {
-        //상단 경로 표시용
-        model.addAttribute("pagePath", "마이페이지 > 내가 본 영화");
+    public String myMovie(HttpSession session, Model model) {
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        if (loginMember == null) {
+            return "redirect:/login";
+        }
+
+        // 서비스에서 내가 본 영화 리스트 가져오기
+        List<WatchedMovieDto> movies = memberService.getWatchedMovies(loginMember.getMemberId());
+
+        model.addAttribute("pagePath", "마이페이지 > 나의 영화 > 내가 본 영화");
         model.addAttribute("mymovie", true);
+
+        model.addAttribute("watchedMovies", movies);
+
+        // (선택) 상단 날짜 필터용 — 현재는 고정값이지만, 나중에 동적으로 처리 가능
+        model.addAttribute("startDate", "2025.01.21");
+        model.addAttribute("endDate", "2025.07.20");
+
+        return "mypage/mypageLayout"; // 기존과 동일
+    }
+
+
+    //내가 쓴 관람평
+    @GetMapping("/myreview")
+    public String myReview(HttpSession session, Model model) {
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        if (loginMember == null) {
+            return "redirect:/login";
+        }
+
+        // 관람평 작성한 영화만 가져옴
+        List<WatchedMovieDto> reviewedMovies = memberService.getReviewedMovies(loginMember.getMemberId());
+
+        model.addAttribute("pagePath", "마이페이지 > 내가 쓴 관람평");
+        model.addAttribute("myreview", true);
+        model.addAttribute("watchedMovies", reviewedMovies); // 변수명 재사용
+
+        return "mypage/mypageLayout";
+    }
+
+
+    //좋아요 한 영화
+    @GetMapping("/mylike")
+    public String myLike(Model model) {
+        //상단 경로 표시용
+        model.addAttribute("pagePath", "마이페이지 > 나의 영화 > 좋아요 한 영화");
+        model.addAttribute("mylike", true);
         return "mypage/mypageLayout";
     }
 

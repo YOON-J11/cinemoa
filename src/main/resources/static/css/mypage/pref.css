@@ -116,8 +116,9 @@ form{
 }
 /* 체크된 경우 .checked 클래스 사용 */
 .genre-item.checked {
-  background-color: #b0e5eb;
-  border-color: #b0e5eb;
+    background-color: #e1f3f6;
+    color: #007880;
+    border: 1px solid #007880;
 }
 
 .genre-item input[type="checkbox"] {

@@ -5,15 +5,13 @@ import com.cinemoa.entity.Member;
 import com.cinemoa.entity.Payment;
 import com.cinemoa.entity.Reservation;
 import com.cinemoa.entity.Seat;
-import com.cinemoa.repository.MemberRepository;
-import com.cinemoa.repository.PaymentRepository;
-import com.cinemoa.repository.ReservationRepository;
-import com.cinemoa.repository.ReservationSeatRepository;
+import com.cinemoa.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.DayOfWeek;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
@@ -27,6 +25,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final ReservationSeatRepository reservationSeatRepository;
     private final PaymentRepository paymentRepository;
+    private final ReviewRepository reviewRepository;
 
     //회원가입
     public Member join(MemberDto dto) {
@@ -271,6 +270,79 @@ public class MemberService {
                 .formattedPaymentDate(formattedPaymentDate)
                 .build();
     }
+
+    //내가 본 영화
+    public List<WatchedMovieDto> getWatchedMovies(String memberId) {
+        List<Reservation> reservations = reservationRepository.findByMember_MemberIdAndStatus(memberId, "예약완료");
+
+        return reservations.stream().map(reservation -> {
+            var movie = reservation.getMovie();
+            var cinema = reservation.getCinema();
+            var screen = reservation.getScreen();
+            var showtime = reservation.getShowtime();
+
+            // 날짜 및 시간 포맷
+            var startTime = showtime.getStartTime();
+            var endTime = showtime.getEndTime();
+            String date = startTime.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
+            String day = getKoreanDayOfWeek(startTime.getDayOfWeek());
+            String time = startTime.format(DateTimeFormatter.ofPattern("HH:mm")) + "~" +
+                    endTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+
+            // 관람 인원 수
+            int personCount = reservation.getSeatInfo() != null
+                    ? reservation.getSeatInfo().split(",").length
+                    : 0;
+
+            // 관람평 조회
+            var reviewOpt = reviewRepository.findByMovieIdAndUserId(movie.getMovieId(), memberId);
+            boolean hasReview = reviewOpt.isPresent();
+            String reviewContent = hasReview ? reviewOpt.get().getContent() : null;
+
+            return WatchedMovieDto.builder()
+                    .movieId(movie.getMovieId()) // 리뷰 작성 링크에 필요
+                    .title(movie.getTitle())
+                    .poster(movie.getMainImageUrl())
+                    .grade(movie.getAgeRating())
+                    .date(date)
+                    .day("(" + day + ")")
+                    .time(time)
+                    .cinemaName(cinema.getName())
+                    .screenName(screen.getScreenName())
+                    .seatType(screen.getScreenType())
+                    .personCount(personCount)
+                    .hasReview(hasReview)
+                    .reviewContent(reviewContent)
+                    .build();
+
+        }).collect(Collectors.toList());
+    }
+
+
+
+    //요일 변환 메서드
+    private String getKoreanDayOfWeek(DayOfWeek dayOfWeek) {
+        return switch (dayOfWeek) {
+            case MONDAY -> "월";
+            case TUESDAY -> "화";
+            case WEDNESDAY -> "수";
+            case THURSDAY -> "목";
+            case FRIDAY -> "금";
+            case SATURDAY -> "토";
+            case SUNDAY -> "일";
+        };
+    }
+
+
+    public List<WatchedMovieDto> getReviewedMovies(String memberId) {
+        List<WatchedMovieDto> allWatchedMovies = getWatchedMovies(memberId);
+
+        // 관람평이 작성된 영화만 필터링
+        return allWatchedMovies.stream()
+                .filter(WatchedMovieDto::isHasReview) // hasReview == true 인 경우만
+                .collect(Collectors.toList());
+    }
+
 
 
 }
