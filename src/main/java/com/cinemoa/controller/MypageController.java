@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -240,13 +241,132 @@ public class MypageController {
     }
 
     //회원정보 > 개인정보설정
+//    @GetMapping("/information/myinfo")
+//    public String personalInfo(Model model, HttpSession session) {
+//        Member loginMember = (Member) session.getAttribute("loginMember");
+//
+//        model.addAttribute("pagePath", "마이페이지 > 회원정보 > 개인정보 설정");
+//        model.addAttribute("myinfo", true);
+//
+//        // 보여줄 개인정보 속성
+//        model.addAttribute("birthDate", loginMember.getBirthDate());
+//        model.addAttribute("phone", loginMember.getPhone());
+//        model.addAttribute("email", loginMember.getEmail());
+//        model.addAttribute("address", loginMember.getAddress());
+//        model.addAttribute("anniversary", loginMember.getAnniversary());
+//
+//        return "mypage/mypageLayout";
+//    }
+
+    // 1단계: 개인정보 접근을 위한 비밀번호 확인 페이지
     @GetMapping("/information/myinfo")
-    public String personalInfo(Model model) {
-        //상단 경로 표시용
+    public String showPasswordCheckPage(HttpSession session, Model model) {
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        if (loginMember == null) {
+            return "redirect:/login";
+        }
+
         model.addAttribute("pagePath", "마이페이지 > 회원정보 > 개인정보 설정");
-        model.addAttribute("myinfo", true);
+        model.addAttribute("myinfoPasswordCheck", true); // 머스태치에서 분기용
         return "mypage/mypageLayout";
     }
+
+    // 1단계: 비밀번호 확인 처리
+    @PostMapping("/information/myinfo")
+    public String checkPassword(@RequestParam("password") String password,
+                                HttpSession session,
+                                RedirectAttributes redirectAttrs) {
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        if (loginMember == null) {
+            return "redirect:/login";
+        }
+
+        if (!password.equals(loginMember.getPassword())) {
+            redirectAttrs.addFlashAttribute("error", "비밀번호가 일치하지 않습니다.");
+            return "redirect:/mypage/information/myinfo";
+        }
+
+        // 인증 성공 → 세션에 플래그 저장
+        session.setAttribute("infoAuth", true);
+        return "redirect:/mypage/information/edit";
+    }
+
+    // 2단계: 개인정보 수정 페이지 진입
+    @GetMapping("/information/edit")
+    public String showEditPage(HttpSession session, Model model) {
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        if (loginMember == null) {
+            return "redirect:/login";
+        }
+
+        Boolean isAuthed = (Boolean) session.getAttribute("infoAuth");
+        if (isAuthed == null || !isAuthed) {
+            return "redirect:/mypage/information/myinfo";
+        }
+
+        // ⭐ 최신 정보로 덮어씌우기
+        Member refreshed = memberRepository.findById(loginMember.getMemberId()).orElse(null);
+        if (refreshed == null) {
+            return "redirect:/login";
+        }
+        session.setAttribute("loginMember", refreshed);
+
+        model.addAttribute("pagePath", "마이페이지 > 회원정보 > 개인정보 수정");
+        model.addAttribute("myinfoEdit", true);
+
+        model.addAttribute("birthDate", refreshed.getBirthDate() != null ? refreshed.getBirthDate().toString() : "");
+        model.addAttribute("phone", refreshed.getPhone() != null ? refreshed.getPhone() : "");
+        model.addAttribute("email", refreshed.getEmail() != null ? refreshed.getEmail() : "");
+        model.addAttribute("address", refreshed.getAddress() != null ? refreshed.getAddress() : "");
+
+        return "mypage/mypageLayout";
+    }
+
+
+
+    // 2단계: 개인정보 저장 처리
+    @PostMapping("/information/edit")
+    public String updatePersonalInfo(@RequestParam("birthDate") String birthDate,
+                                     @RequestParam("phone") String phone,
+                                     @RequestParam("email") String email,
+                                     @RequestParam("address") String address,
+                                     HttpSession session,
+                                     RedirectAttributes redirectAttrs,
+                                     Model model) {
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        if (loginMember == null) {
+            return "redirect:/login";
+        }
+
+        try {
+            loginMember.setBirthDate(LocalDate.parse(birthDate));
+        } catch (Exception e) {
+            loginMember.setBirthDate(null);
+        }
+
+        loginMember.setPhone(phone);
+        loginMember.setEmail(email);
+        loginMember.setAddress(address);
+
+        memberRepository.save(loginMember);
+        session.setAttribute("loginMember", loginMember);
+
+        // 인증 플래그 삭제
+        session.removeAttribute("infoAuth");
+
+        // 다시 수정 페이지 보여주되, 성공 메시지 함께
+        model.addAttribute("pagePath", "마이페이지 > 회원정보 > 개인정보 수정");
+        model.addAttribute("myinfoEdit", true);
+        model.addAttribute("success", "개인정보가 성공적으로 수정되었습니다.");
+
+        model.addAttribute("birthDate", loginMember.getBirthDate() != null ? loginMember.getBirthDate().toString() : "");
+        model.addAttribute("phone", loginMember.getPhone() != null ? loginMember.getPhone() : "");
+        model.addAttribute("email", loginMember.getEmail() != null ? loginMember.getEmail() : "");
+        model.addAttribute("address", loginMember.getAddress() != null ? loginMember.getAddress() : "");
+
+        return "mypage/mypageLayout";
+    }
+
 
     // 회원정보 > 선호관람정보설정
     @GetMapping("/information/pref")
