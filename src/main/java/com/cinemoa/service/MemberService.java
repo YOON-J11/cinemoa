@@ -2,8 +2,11 @@ package com.cinemoa.service;
 
 import com.cinemoa.dto.*;
 import com.cinemoa.entity.Member;
+import com.cinemoa.entity.Payment;
 import com.cinemoa.entity.Reservation;
+import com.cinemoa.entity.Seat;
 import com.cinemoa.repository.MemberRepository;
+import com.cinemoa.repository.PaymentRepository;
 import com.cinemoa.repository.ReservationRepository;
 import com.cinemoa.repository.ReservationSeatRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -22,9 +26,10 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final ReservationSeatRepository reservationSeatRepository;
+    private final PaymentRepository paymentRepository;
 
     //회원가입
-    public Member join(MemberDto dto){
+    public Member join(MemberDto dto) {
         Member member = Member.builder()
                 .memberId(dto.getMemberId())
                 .password(dto.getPassword())
@@ -44,17 +49,17 @@ public class MemberService {
     }
 
     //아이디 중복 검사
-    public boolean isDuplicateId(String id){
+    public boolean isDuplicateId(String id) {
         return memberRepository.existsByMemberId(id);
     }
 
     //닉네임 중복 검사
-    public boolean isDuplicateNickname(String nickname){
+    public boolean isDuplicateNickname(String nickname) {
         return memberRepository.existsByNickname(nickname);
     }
 
     //로그인 처리
-    public Member login(String id, String password){
+    public Member login(String id, String password) {
         return memberRepository.findByMemberIdAndPassword(id, password);
     }
 
@@ -75,10 +80,12 @@ public class MemberService {
         }
         return null;
     }
+
     // 입력한 정보가 DB에 실제 존재하는지 검사하는 메서드
     public boolean validateMemberInfo(String memberId, String name, String email) {
         return memberRepository.findByMemberIdAndNameAndEmail(memberId, name, email).isPresent();
     }
+
     // 비밀번호 재설정 메서드
     public boolean updatePassword(String memberId, String newPassword) {
         Optional<Member> optionalMember = memberRepository.findByMemberId(memberId);
@@ -126,7 +133,6 @@ public class MemberService {
     }
 
 
-
     // 최근 문의 내역 (5건)
     public List<InquiryDto> getRecentInquiries(String memberId) {
         return memberRepository.getRecentInquiries(memberId);
@@ -149,25 +155,54 @@ public class MemberService {
         List<Reservation> reservations = reservationRepository.findByMember_MemberId(memberId);
 
         return reservations.stream()
-                .map(reservation -> ReservationDto.builder()
-                        .reservationId(reservation.getReservationId())
-                        .memberId(reservation.getMember().getMemberId())
-                        .movieId(reservation.getMovie().getMovieId())
-                        .cinemaId(reservation.getCinema().getCinemaId())
-                        .screenId(reservation.getScreenId())
-                        .seatInfo(reservation.getSeatInfo())
-                        .reservationTime(reservation.getReservationTime())
-                        .paymentMethod(reservation.getPaymentMethod())
-                        .status(reservation.getStatus())
-                        .movieTitle(reservation.getMovie().getTitle())
-                        .cinemaName(reservation.getCinema().getName())
-                        .mainImageUrl(reservation.getMovie().getMainImageUrl())
-                        .build())
+                .map(reservation -> {
+                    // 결제일 조회
+                    Optional<Payment> paymentOpt = paymentRepository.findByReservation_ReservationId(reservation.getReservationId());
+
+                    // 결제일 포맷
+                    String formattedPaymentDate = paymentOpt
+                            .map(payment -> payment.getPaidAt().format(DateTimeFormatter.ofPattern("yyyy.MM.dd (E) HH:mm", Locale.KOREAN)))
+                            .orElse("결제 정보 없음");
+                    // 상영 시작 시간 포맷 (한글 요일)
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd (E) HH:mm", Locale.KOREAN);
+                    String formattedShowtimeStart = reservation.getShowtime().getStartTime().format(formatter);
+
+                    String seatTypeSummary = reservationSeatRepository
+                            .findByReservation_ReservationId(reservation.getReservationId())
+                            .stream()
+                            .map(rs -> {
+                                Seat seat = rs.getSeat();
+                                String type = (seat != null && seat.getSeatType() != null)
+                                        ? seat.getSeatType()
+                                        : "알수없음";
+                                return type;
+                            })
+                            .collect(Collectors.groupingBy(s -> s, Collectors.counting()))
+                            .entrySet()
+                            .stream()
+                            .map(e -> e.getKey() + " " + e.getValue())
+                            .collect(Collectors.joining(", "));
+
+                    return ReservationDto.builder()
+                            .reservationId(reservation.getReservationId())
+                            .memberId(reservation.getMember().getMemberId())
+                            .movieId(reservation.getMovie().getMovieId())
+                            .cinemaId(reservation.getCinema().getCinemaId())
+                            .screenId(reservation.getScreenId())
+                            .seatInfo(reservation.getSeatInfo())
+                            .seatTypeSummary(seatTypeSummary)
+                            .reservationTime(reservation.getReservationTime())
+                            .paymentMethod(reservation.getPaymentMethod())
+                            .status(reservation.getStatus())
+                            .movieTitle(reservation.getMovie().getTitle())
+                            .cinemaName(reservation.getCinema().getName())
+                            .mainImageUrl(reservation.getMovie().getMainImageUrl())
+                            .formattedPaymentDate(formattedPaymentDate)
+                            .formattedShowtimeStart(formattedShowtimeStart)
+                            .build();
+                })
                 .collect(Collectors.toList());
     }
-
-
-
 
 
     public ReservationDetailDto getReservationDetail(Long reservationId) {
@@ -188,6 +223,17 @@ public class MemberService {
                             .build();
                 })
                 .toList();
+
+        // 결제일 조회
+        Optional<Payment> paymentOpt = paymentRepository.findByReservation_ReservationId(reservationId);
+        String formattedPaymentDate = paymentOpt
+                .map(payment -> payment.getPaidAt().format(DateTimeFormatter.ofPattern("yyyy.MM.dd (E) HH:mm", Locale.KOREAN)))
+                .orElse("결제 정보 없음");
+
+        // 예매일 포맷 ( 달 Mon->월  로 한글표기)
+        String formattedReservationTime = reservation.getReservationTime()
+                .format(DateTimeFormatter.ofPattern("yyyy.MM.dd (E) HH:mm", Locale.KOREAN));
+
 
         // 총 가격 계산
         int totalPrice = seatDtos.stream().mapToInt(SeatDto::getPrice).sum();
@@ -210,10 +256,11 @@ public class MemberService {
                 .movieTitle(reservation.getMovie().getTitle())
                 .mainImageUrl(reservation.getMovie().getMainImageUrl())
                 .cinemaName(reservation.getCinema().getName())
-                .screenName(reservation.getScreen().getScreenName()) // 스트링으로 가져오고 있다면 그대로 사용
+                .screenName(reservation.getScreen().getScreenName())
                 .paymentMethod(reservation.getPaymentMethod())
                 .status(reservation.getStatus())
                 .reservationTime(reservation.getReservationTime())
+                .formattedReservationTime(formattedReservationTime)
                 .showtimeStart(showtimeStart)
                 .showtimeEnd(showtimeEnd)
                 .seats(seatDtos)
@@ -221,9 +268,9 @@ public class MemberService {
                 .discount(discount)
                 .finalPayment(finalPayment)
                 .salesNumber(salesNumber)
+                .formattedPaymentDate(formattedPaymentDate)
                 .build();
     }
-
 
 
 }

@@ -179,7 +179,11 @@ public class MypageController {
     public String bookingDetail(@RequestParam("reservationId") Long reservationId, Model model) {
         ReservationDetailDto detailDto = memberService.getReservationDetail(reservationId);
         model.addAttribute("detail", detailDto);
-        return "mypage/bookingdetail";
+
+        //상단 경로 표시용
+        model.addAttribute("pagePath", "마이페이지 > 예매/구매내역 > 상세정보");
+        model.addAttribute("bookingdetail", true);
+        return "mypage/mypageLayout";
     }
 
     //내가본영화

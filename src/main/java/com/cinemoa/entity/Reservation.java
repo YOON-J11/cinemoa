@@ -40,6 +40,9 @@ public class Reservation {
 
     private LocalDateTime reservationTime; // 예매 시간
 
+    @OneToOne(mappedBy = "reservation", fetch = FetchType.LAZY)
+    private Payment payment;
+
     private String paymentMethod; // 결제 수단 (계좌이체 / 신용카드)
 
     private String status; // 예매 상태 (예약완료 / 취소됨)

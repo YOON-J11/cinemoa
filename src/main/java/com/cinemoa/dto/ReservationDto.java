@@ -33,7 +33,10 @@ public class ReservationDto {
     private String movieTitle; // 영화 이름 (조인)
     private String cinemaName; // 영화관 이름 (조인)
     private String mainImageUrl; // 영화 대표 이미지 파일명
-
+    private String formattedPaymentDate; // 결제일
+    private LocalDateTime showtimeStart; // 상영 시작시간
+    private String formattedShowtimeStart; // 상영 종료 시간
+    private String seatTypeSummary; // 좌석타입 예: STANDARD 2
 
 
     // 포맷된 예매일 반환용 getter

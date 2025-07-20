@@ -4,31 +4,41 @@
 
     <div class="booking-list">
         {{#reservations}}
-            <div class="booking-card">
-                <div class="booking-header">
+        <div class="booking-card">
+            <div class="booking-header">
+                <div class="booking-header-left">
                     <span class="reservation-date">{{formattedReservationTime}}</span>
+                    <span>|</span>
                     <span class="cinema-name">{{cinemaName}}</span>
                 </div>
+                <a class="detail-link" href="/mypage/bookingdetail?reservationId={{reservationId}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <g id="_01_align_center" data-name="01 align center">
+                            <path
+                                d="M7.412,24,6,22.588l9.881-9.881a1,1,0,0,0,0-1.414L6.017,1.431,7.431.017l9.862,9.862a3,3,0,0,1,0,4.242Z" />
+                        </g>
+                    </svg>
+                </a>
+            </div>
 
-                <div class="booking-body">
+            <div class="booking-body">
+                <p class="status {{paymentStatusClass}}">{{paymentStatusText}}</p>
+                <div class="booking-area">
                     <div class="poster">
                         <img src="/images/posters/{{mainImageUrl}}" alt="{{movieTitle}}" />
                     </div>
                     <div class="booking-info">
-                        <p class="status {{paymentStatusClass}}">{{paymentStatusText}}</p>
                         <p class="movie-title">{{movieTitle}}</p>
-                        <p class="screen-seat">좌석: {{seatInfo}}</p>
+                        <p class="showtime">{{formattedShowtimeStart}}</p>
+                        <p class="seat-type">{{seatTypeSummary}}</p>
                     </div>
                 </div>
-
-                <div class="booking-footer">
-                    <a class="detail-link" href="/mypage/bookingdetail?reservationId={{reservationId}}">상세보기</a>
-                </div>
             </div>
+        </div>
         {{/reservations}}
 
         {{^reservations}}
-            <p class="empty-text">예매 내역이 없습니다.</p>
+        <p class="empty-text">예매 내역이 없습니다.</p>
         {{/reservations}}
     </div>
 </div>

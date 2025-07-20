@@ -5,10 +5,6 @@
   margin-bottom: 20px;
 }
 
-.bookinglist-container {
-  padding: 20px 0;
-}
-
 .booking-list {
   display: flex;
   flex-direction: column;
@@ -16,7 +12,7 @@
 }
 
 .booking-card {
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 10px;
   padding: 16px;
   background-color: #fff;
@@ -27,40 +23,47 @@
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  color: #666;
   margin-bottom: 10px;
 }
-
-.reservation-date,
-.cinema-name {
-  font-weight: 500;
+.booking-header-left{
+  display: flex;
+  gap: 10px;
+  color: #777;
+  align-items: center;
 }
-
+.reservation-date{
+  color: #222;
+}
 .booking-body {
   display: flex;
-  gap: 16px;
-  align-items: center;
+  gap: 5px;
+  flex-direction: column;
 }
 
 .poster img {
   width: 80px;
-  height: 110px;
+  height: 120px;
   object-fit: cover;
-  border-radius: 6px;
-  border: 1px solid #ddd;
+  border-radius: 5px;
+  border: 0.5px solid #ddd;
 }
 
 .booking-info {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 /* 예매 상태 텍스트 색상 */
 .status {
   font-weight: bold;
-  font-size: 14px;
+  font-size: 18px;
+}
+
+.booking-area{
+  display: flex; 
+  gap : 16px;
+  align-items: center;
 }
 
 .status-confirmed {
@@ -72,19 +75,20 @@
 }
 
 .status-unknown {
-  color: #999;
+  color: #777;
 }
 
 /* 영화제목 + 좌석 */
 .movie-title {
+  margin-top: 10px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: bold;
   color: #222;
 }
 
-.screen-seat {
+.showtime, .seat-type{
+  color: #777;
   font-size: 14px;
-  color: #444;
 }
 
 .booking-footer {
@@ -94,13 +98,15 @@
 
 .detail-link {
   font-size: 14px;
-  color: #006f7c;
-  text-decoration: underline;
   cursor: pointer;
+}
+.detail-link svg{
+  width: 15px;
+  height: 15px;
 }
 
 .empty-text {
-  color: #999;
+  color: #777;
   text-align: center;
   font-size: 15px;
   margin-top: 40px;

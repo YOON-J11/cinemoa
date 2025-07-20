@@ -22,21 +22,14 @@ public class ReservationDetailDto {
     private String paymentMethod;
     private String status;
     private LocalDateTime reservationTime;
-
     private String showtimeStart;   // 예: "15:30"
     private String showtimeEnd;     // 예: "17:31"
-
     private List<SeatDto> seats;
-
+    private String formattedPaymentDate;
     private int totalPrice;      // 총 좌석가
     private int discount;        // 할인 금액
     private int finalPayment;    // 결제 금액
-
     private String salesNumber;  // 판매번호 예: 2024-0720-0001
+    private String formattedReservationTime;
 
-    public String getFormattedReservationTime() {
-        return reservationTime != null
-                ? reservationTime.format(java.time.format.DateTimeFormatter.ofPattern("yyyy.MM.dd (E) HH:mm:ss"))
-                : "";
-    }
 }
