@@ -13,9 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -112,6 +110,8 @@ public class MemberService {
     private ReservationRepository reservationRepository;
 
     public List<ReservationDto> getRecentReservations(String memberId) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
         return reservationRepository.findTop5ByMember_MemberIdOrderByReservationTimeDesc(memberId)
                 .stream()
                 .map(reservation -> ReservationDto.builder()
@@ -121,21 +121,34 @@ public class MemberService {
                         .cinemaId(reservation.getCinema().getCinemaId())
                         .screenId(reservation.getScreenId())
                         .seatInfo(reservation.getSeatInfo())
-                        .reservationTime(reservation.getReservationTime()) // LocalDateTime 유지
+                        .reservationTime(reservation.getReservationTime())
+                        .reservationTime(reservation.getReservationTime())
                         .paymentMethod(reservation.getPaymentMethod())
                         .status(reservation.getStatus())
                         .movieTitle(reservation.getMovie().getTitle())
                         .cinemaName(reservation.getCinema().getName())
+                        .formattedReservationDate(reservation.getReservationTime().format(formatter))
                         .build()
                 )
                 .toList();
     }
 
 
+
     // 최근 문의 내역 (5건)
     public List<InquiryDto> getRecentInquiries(String memberId) {
-        return memberRepository.getRecentInquiries(memberId);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return memberRepository.getRecentInquiries(memberId).stream()
+                .limit(5)
+                .map(inquiry -> InquiryDto.builder()
+                        .inquiryId(inquiry.getInquiryId())
+                        .title(inquiry.getTitle())
+                        .regDate(inquiry.getRegDate().format(formatter)) // String으로 변환
+                        .status(inquiry.getReplyContent() != null ? "답변 완료" : "미답변")
+                        .build())
+                .collect(Collectors.toList());
     }
+
 
     // 선호 영화관/장르 업데이트
     public void updatePreference(Member member) {
@@ -275,49 +288,60 @@ public class MemberService {
     public List<WatchedMovieDto> getWatchedMovies(String memberId) {
         List<Reservation> reservations = reservationRepository.findByMember_MemberIdAndStatus(memberId, "예약완료");
 
-        return reservations.stream().map(reservation -> {
-            var movie = reservation.getMovie();
-            var cinema = reservation.getCinema();
-            var screen = reservation.getScreen();
-            var showtime = reservation.getShowtime();
+        return reservations.stream()
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toCollection(() ->
+                                new TreeSet<Reservation>(
+                                        Comparator.comparing((Reservation r) ->
+                                                r.getMovie().getMovieId() + "_" + r.getShowtime().getShowtimeId()
+                                        )
+                                )
+                        ),
+                        ArrayList::new
+                ))
+                .stream()
+                .map(reservation -> {
+                    var movie = reservation.getMovie();
+                    var cinema = reservation.getCinema();
+                    var screen = reservation.getScreen();
+                    var showtime = reservation.getShowtime();
 
-            // 날짜 및 시간 포맷
-            var startTime = showtime.getStartTime();
-            var endTime = showtime.getEndTime();
-            String date = startTime.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
-            String day = getKoreanDayOfWeek(startTime.getDayOfWeek());
-            String time = startTime.format(DateTimeFormatter.ofPattern("HH:mm")) + "~" +
-                    endTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+                    // 날짜 및 시간 포맷
+                    var startTime = showtime.getStartTime();
+                    var endTime = showtime.getEndTime();
+                    String date = startTime.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
+                    String day = getKoreanDayOfWeek(startTime.getDayOfWeek());
+                    String time = startTime.format(DateTimeFormatter.ofPattern("HH:mm")) + "~" +
+                            endTime.format(DateTimeFormatter.ofPattern("HH:mm"));
 
-            // 관람 인원 수
-            int personCount = reservation.getSeatInfo() != null
-                    ? reservation.getSeatInfo().split(",").length
-                    : 0;
+                    // 관람 인원 수
+                    int personCount = reservation.getSeatInfo() != null
+                            ? reservation.getSeatInfo().split(",").length
+                            : 0;
 
-            // 관람평 조회
-            var reviewOpt = reviewRepository.findByMovieIdAndUserId(movie.getMovieId(), memberId);
-            boolean hasReview = reviewOpt.isPresent();
-            String reviewContent = hasReview ? reviewOpt.get().getContent() : null;
+                    // 관람평 조회
+                    var reviewOpt = reviewRepository.findByMovieIdAndUserId(movie.getMovieId(), memberId);
+                    boolean hasReview = reviewOpt.isPresent();
+                    String reviewContent = hasReview ? reviewOpt.get().getContent() : null;
 
-            return WatchedMovieDto.builder()
-                    .movieId(movie.getMovieId()) // 리뷰 작성 링크에 필요
-                    .title(movie.getTitle())
-                    .poster(movie.getMainImageUrl())
-                    .grade(movie.getAgeRating())
-                    .date(date)
-                    .day("(" + day + ")")
-                    .time(time)
-                    .cinemaName(cinema.getName())
-                    .screenName(screen.getScreenName())
-                    .seatType(screen.getScreenType())
-                    .personCount(personCount)
-                    .hasReview(hasReview)
-                    .reviewContent(reviewContent)
-                    .build();
+                    return WatchedMovieDto.builder()
+                            .movieId(movie.getMovieId()) // 리뷰 작성 링크에 필요
+                            .title(movie.getTitle())
+                            .poster(movie.getMainImageUrl())
+                            .grade(movie.getAgeRating())
+                            .date(date)
+                            .day("(" + day + ")")
+                            .time(time)
+                            .cinemaName(cinema.getName())
+                            .screenName(screen.getScreenName())
+                            .seatType(screen.getScreenType())
+                            .personCount(personCount)
+                            .hasReview(hasReview)
+                            .reviewContent(reviewContent)
+                            .build();
 
-        }).collect(Collectors.toList());
+                }).collect(Collectors.toList());
     }
-
 
 
     //요일 변환 메서드
@@ -342,7 +366,6 @@ public class MemberService {
                 .filter(WatchedMovieDto::isHasReview) // hasReview == true 인 경우만
                 .collect(Collectors.toList());
     }
-
 
 
 }

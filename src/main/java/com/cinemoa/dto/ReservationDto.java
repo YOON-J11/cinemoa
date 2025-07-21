@@ -37,6 +37,8 @@ public class ReservationDto {
     private LocalDateTime showtimeStart; // 상영 시작시간
     private String formattedShowtimeStart; // 상영 종료 시간
     private String seatTypeSummary; // 좌석타입 예: STANDARD 2
+    private String formattedReservationDate; // yyyy-MM-dd 형식만 표시
+
 
 
     // 포맷된 예매일 반환용 getter

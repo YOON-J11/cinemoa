@@ -5,18 +5,17 @@ import com.cinemoa.dto.ReservationDetailDto;
 import com.cinemoa.dto.ReservationDto;
 import com.cinemoa.dto.WatchedMovieDto;
 import com.cinemoa.entity.Cinema;
+import com.cinemoa.entity.GuestUser;
 import com.cinemoa.entity.Member;
 import com.cinemoa.repository.MemberRepository;
 import com.cinemoa.service.CinemaService;
+import com.cinemoa.service.InquiryService;
 import com.cinemoa.service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -35,7 +34,7 @@ public class MypageController {
     private final MemberRepository memberRepository;
     private final MemberService memberService;
     private final CinemaService cinemaService;
-
+    private final InquiryService inquiryService;
 
     //마이페이지 홈
     @GetMapping
@@ -492,13 +491,48 @@ public class MypageController {
     }
 
 
-    // 나의문의내역
+
+
     @GetMapping("/myinquiry")
-    public String myInquiry(Model model) {
-        //상단 경로 표시용
-        model.addAttribute("pagePath", "마이페이지 > 나의 문의내역");
+    public String myinquiry(Model model, HttpSession session) {
+
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        GuestUser guestUser = (GuestUser) session.getAttribute("guestUser");
+
+        // 로그인 사용자 또는 비회원이 아니면 접근 불가
+        if (loginMember == null && guestUser == null) {
+            return "redirect:/member/login";
+        }
+
+        if (loginMember != null) {
+            List<InquiryDto> myInquiries = inquiryService.getMyInquiries(loginMember.getMemberId());
+            model.addAttribute("myInquiries", myInquiries);
+        } else if (guestUser != null) {
+            List<InquiryDto> myInquiries = inquiryService.getMyInquiriesForGuest(guestUser.getGuestUserId());
+            model.addAttribute("myInquiries", myInquiries);
+        }
+
         model.addAttribute("myinquiry", true);
+        model.addAttribute("pagePath", "고객센터 > 나의 문의 내역");
         return "mypage/mypageLayout";
     }
+
+    @GetMapping("/inquiry/{id}")
+    public String inquiryDetail(@PathVariable Long id, Model model, HttpSession session) {
+
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        GuestUser guestUser = (GuestUser) session.getAttribute("guestUser");
+
+        // 로그인 사용자 또는 비회원이 아니면 접근 불가
+        if (loginMember == null && guestUser == null) {
+            return "redirect:/member/login";
+        }
+
+        model.addAttribute("inquiryDetail", true);
+        model.addAttribute("pagePath", "고객센터 > 나의 문의 내역");
+        return "mypage/mypageLayout";
+    }
+
+
 
 }
