@@ -97,9 +97,6 @@ public class MovieController {
             // handleNullValues(movieDto);
         }
 
-        model.addAttribute("title", "영화 목록");
-        model.addAttribute("timestamp", System.currentTimeMillis());
-
         model.addAttribute("currentStatus", status); // 현재 선택된 상태를 모델에 추가
 
         model.addAttribute("nextPageNumber", movies.getNumber() + 1);
@@ -229,10 +226,6 @@ public class MovieController {
 
             // movieId 값을 모델에 추가
             model.addAttribute("movieId", id);
-
-            // 페이지 제목
-            model.addAttribute("title", id);
-            model.addAttribute("timestamp", System.currentTimeMillis());
 
             model.addAttribute("movie", movieDto);
             return "movies/view";

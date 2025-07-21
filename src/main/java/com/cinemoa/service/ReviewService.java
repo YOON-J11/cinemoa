@@ -2,6 +2,7 @@ package com.cinemoa.service;
 
 import com.cinemoa.dto.ReviewDto;
 import com.cinemoa.entity.Review;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +20,13 @@ public interface ReviewService {
     // 리뷰 삭제
     void deleteReview(Long reviewId);
 
+    // 리뷰 수정
+    public void updateReview(ReviewDto dto, String currentUserId);
+
     // 영화별 긍정 리뷰 비율 조회
     int getPositivePercentage(Long movieId);
+
+    Optional<ReviewDto> getReviewByUserAndMovie(String memberId, Long movieId);
+
+
 }

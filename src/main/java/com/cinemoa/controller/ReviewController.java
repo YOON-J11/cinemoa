@@ -9,6 +9,7 @@ import com.cinemoa.repository.MovieRepository;
 import com.cinemoa.service.ReviewService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,26 @@ public class ReviewController {
         model.addAttribute("movieId", movieId);
         model.addAttribute("review", new ReviewDto());
         return "reviews/new";
+    }
+
+    @GetMapping("/edit-fragment")
+    public String showEditReviewForm(@RequestParam Long reviewId, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        if (loginMember == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "로그인이 필요합니다.");
+            return "redirect:/member/login";
+        }
+
+        ReviewDto reviewDto = reviewService.getReviewById(reviewId)
+                .orElseThrow(() -> new NoSuchElementException("리뷰를 찾을 수 없습니다."));
+
+        if (!reviewDto.getUserId().equals(loginMember.getMemberId())) {
+            redirectAttributes.addFlashAttribute("errorMessage", "본인만 수정할 수 있습니다.");
+            return "redirect:/movies/" + reviewDto.getMovieId();
+        }
+
+        model.addAttribute("review", reviewDto);
+        return "reviews/edit"; // 수정 폼 템플릿 (모달 내용)
     }
 
     // 리뷰 저장
@@ -78,7 +99,6 @@ public class ReviewController {
         return "redirect:/movies/" + reviewDto.getMovieId();
     }
 
-
     // 리뷰 삭제
     @GetMapping("/delete/{reviewId}")
     public String deleteReview(@PathVariable Long reviewId, @RequestParam Long movieId, HttpSession session, RedirectAttributes redirectAttributes) {
@@ -108,4 +128,38 @@ public class ReviewController {
 
         return "redirect:/movies/" + movieId;
     }
+
+    // 리뷰 수정
+    @PostMapping("/edit")
+    public String updateReview(@ModelAttribute ReviewDto reviewDto, HttpSession session, RedirectAttributes redirectAttributes) {
+        Member loginMember = (Member) session.getAttribute("loginMember");
+
+        if (loginMember == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "로그인이 필요합니다.");
+            return "redirect:/member/login";
+        }
+
+        try {
+            reviewService.updateReview(reviewDto, loginMember.getMemberId());
+            redirectAttributes.addFlashAttribute("message", "리뷰가 수정되었습니다.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "리뷰 수정 실패: " + e.getMessage());
+        }
+
+        return "redirect:/movies/" + reviewDto.getMovieId();
+    }
+
+    // 리뷰 유무 확인
+    @GetMapping("/check-review")
+    @ResponseBody
+    public ResponseEntity<ReviewDto> checkUserReview(@RequestParam Long movieId, HttpSession session) {
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        if (loginMember == null) return ResponseEntity.ok().body(null);
+
+        return reviewService.getReviewByUserAndMovie(loginMember.getMemberId(), movieId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.ok().body(null));
+    }
+
+
 }

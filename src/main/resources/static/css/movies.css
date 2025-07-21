@@ -1,5 +1,9 @@
-*{outline:none; border: none;}
+* {outline:none; border: none; background: transparent; font: inherit; color: inherit; padding:0;}
 *, :after, :before {box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;}
+
+body {
+padding: 0 !important;
+}
 
 /* ========== Font weight ========= */
 .bold100 {font-weight:100}
@@ -94,7 +98,9 @@
     color: #222;
     width: 1200px;
 }
-.point-color {#006f7c}
+.point-color {color: #006f7c}
+.color-red {color:red;}
+.color-gray {color:#ccc;}
 
 .movie-chart {padding: 20px 0 3rem;}
 
@@ -261,6 +267,7 @@ nav ul {
     height: 100%;
     align-items: center;
     flex: 1;
+    line-height: 0;
 }
 
 .movie-chart .movie-list .item .item-btn .reservation-btn {
@@ -311,7 +318,7 @@ nav ul {
     object-fit: cover;
 }
 .movie-detail .movie-info {
-    padding: 2rem 1rem 2rem 3rem;
+    padding: 2rem 0 2rem 3rem;
     width: calc(100% - 316px);
     display: flex    ;
     flex-direction: column;
@@ -343,24 +350,40 @@ nav ul {
     flex-wrap: wrap;
     gap: 5px;
 }
+.movie-detail .movie-info .info3 {display: flex;  gap: .5rem; height: 50px;}
 .movie-detail .movie-info .info3 .like-btn {
     border: 1px solid #ccc;
-    width: 140px;
+    width: 120px;
+    height: 100%;
     border-radius: 5px;
-    padding: .5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
+    line-height: 0;
+}
+.movie-detail .movie-info .info3 .ticketing-btn {
+    border: 1px solid #006f7c;
+    display: flex;
+    border-radius: 5px;
+    height: 100%;
+    background-color: #006f7c;
+    color: #fff;
+    font-weight: 500;
+    justify-content: center;
+    cursor: pointer;
+    align-items: center;
+    width: 180px;
+    font-size: 18px;
 }
 
 .movie-detail .movie-info .info4{
     display: flex;
     gap: 2rem;
 }
-.movie-detail .movie-info .info4 {font-size: 14px;}
-.movie-detail .movie-info .info4 h5 {padding-bottom: .5rem;}
-.movie-detail .movie-info .info4 span {font-size: 30px;}
+.movie-detail .movie-info .info4 {font-size: 1rem;}
+.movie-detail .movie-info .info4 h5 {padding-bottom: .5rem; }
+.movie-detail .movie-info .info4 span {font-size: 26px;}
 
 .movie-detail .movie-cont {
     line-height: 1.4;
@@ -398,7 +421,7 @@ nav ul {
     display: block;
 }
 .movie-detail .review-top {
-    padding: 2rem 0 1rem;
+    padding: 3rem 0 1rem;
     border-bottom: 1px solid #ccc;
  }
  .movie-detail .review-top .alert-info {
@@ -408,10 +431,11 @@ nav ul {
     font-size: 18px;
  }
 
- .movie-detail .btn-review {
+ .movie-detail .review-top .btn-review,
+ .movie-detail .review-top a {
      width: 100%;
      padding: 15px;
-     font-size: 14px;
+     font-size: 1rem;
      display: flex;
      border-radius: 5px;
      justify-content: center;
@@ -431,15 +455,100 @@ nav ul {
     border-bottom: 1px solid #ccc;
     width: 100%;
   }
+
   .movie-detail .review-list .date {
     font-size: 14px;
     padding: .5rem 0 .75rem;
   }
-.movie-detail .review-list .cart-delete {
+
+.movie-detail .review-list .btn-wrap {
     font-size: 14px;
     padding-top: 10px;
+    opacity: .75;
+}
+.movie-detail .review-list .btn-wrap button {
+  cursor: pointer;
+}
+
+.movie-detail .review-list .btn-wrap a {
     color: red;
-  }
+    cursor: pointer;
+}
+.movie-detail .media h4 {font-size: 1.5rem; font-weight: 500;}
+.movie-detail .media .embed-responsive {
+   max-width: 850px;
+   height: 480px;
+   margin: 0 auto;
+   width: 100%;
+}
+.movie-detail .media .detail-images-gallery {
+    column-count: 3;
+    --webkit-column-count: 2;
+    --moz-column-count: 3;
+    column-gap: .75rem;
+}
+.movie-detail .media .detail-images-gallery .detail-image-item {
+    width: auto;
+    height: fit-content;
+    margin-bottom: .75rem;
+}
+.movie-detail .media .detail-images-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+.modal-open {
+    overflow: auto !important;
+    padding: 0 !important;
+}
+
+#reviewModal.show {
+   position: fixed;
+   z-index: 999;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   border: 1px solid #ccc;
+   background: #fff;
+   width: 90%;
+   padding: 1.5rem !important;
+   max-width: 450px;
+   border-radius: 5px;
+}
+#reviewModal button {
+    border: 1px solid #006f7c;
+    display: flex;
+    border-radius: 5px;
+    height: 100%;
+    background-color: #006f7c;
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+    justify-content: center;
+    cursor: pointer;
+    align-items: center;
+    width: 150px;
+    font-size: 1rem;
+    padding: .5rem;
+    flex: 1;
+}
+#reviewModal p {
+    font-weight: 700;
+    font-size: 18px;
+}
+#reviewModal textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    resize: none;
+    height: 150px;
+    padding: .5rem;
+}
+#reviewModal .button-group {
+    display: flex;
+    gap: .5rem;
+    justify-content: space-between;
+}
 
 .movie-grade {
     display:inline-block;
@@ -564,3 +673,121 @@ nav ul {
 	100% { scale: 1.1; rotate: 0deg; }
 } */
 
+
+/* admin */
+.admin-btn {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    font-weight: 500;
+}
+.admin-btn a, .admin-btn button {
+    border: 1px solid #006f7c;
+    padding: .5rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #006f7c;
+    color: #fff;
+}
+
+/* edit */
+.movie-edit {padding: 3rem 0;}
+.movie-edit .movie-info-wrap {display: flex;}
+
+.movie-edit .movie-info {
+    padding: 1rem 0 1rem 3rem;
+    width: calc(100% - 316px);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 1rem;
+    justify-content: center;
+}
+.movie-edit .movie-info .form-group {
+    display: flex;
+    align-items: center;
+}
+.movie-edit .movie-info label {
+    font-weight: 600;
+    width: 100px;
+}
+.movie-edit .movie-info input,
+.movie-edit .movie-info select {
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+.movie-edit .movie-info .date-wrap {
+    padding: 7px 0;
+}
+.movie-edit .movie-info .date-wrap span:nth-child(1) {
+    width: 100px;
+    display: inline-block;
+}
+.movie-edit .poster {
+    width: 316px;
+    height: 468px;
+    overflow: hidden;
+    border-radius: 20px;
+    position: relative;
+}
+.movie-edit .poster .image-preview-container ,
+.movie-edit .poster .image-preview {
+    width: 100%;
+    height: 100%;
+}
+.movie-edit .poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.movie-edit .poster .poster-input {
+    position: absolute;
+    z-index: 10;
+    bottom: 10px;
+    left: 10px;
+    font-size: 14px;
+}
+.movie-edit .poster .poster-input label {
+    background: #fff;
+    line-height: 1.4;
+    font-weight: 500;
+}
+.movie-edit .poster .poster-input input {
+    background: #fff;
+}
+
+.movie-edit .image-preview-input .text-muted {
+    padding-top: 5px;
+    font-size: 14px;
+}
+.movie-edit .image-preview-input input {
+  font-size: 14px;
+}
+
+.movie-edit .image-preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem
+}
+.movie-edit .image-preview-container .image-preview {
+    position: relative;
+}
+.movie-edit .image-preview-container .image-preview button {
+    position: absolute;
+    background: #fff;
+    top: 10px;
+    left: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    cursor:pointer;
+    border: 1px solid #ccc;
+}
+
+#no-main-image-text {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -47,6 +48,20 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    @Transactional
+    public void updateReview(ReviewDto dto, String currentUserId) {
+        Review review = reviewRepository.findById(dto.getReviewId())
+                .orElseThrow(() -> new NoSuchElementException("리뷰 없음"));
+
+        if (!review.getUser().getMemberId().equals(currentUserId)) {
+            throw new IllegalStateException("본인만 수정 가능");
+        }
+
+        review.setContent(dto.getContent());
+        review.setIsPositive(dto.getIsPositive());
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public int getPositivePercentage(Long movieId) {
         long totalReviews = reviewRepository.countByMovie_MovieId(movieId);
@@ -56,6 +71,16 @@ public class ReviewServiceImpl implements ReviewService {
         long positiveReviews = reviewRepository.countPositiveReviewsByMovieId(movieId);
         return (int) ((positiveReviews * 100) / totalReviews);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<ReviewDto> getReviewByUserAndMovie(String memberId, Long movieId) {
+        return reviewRepository.findByUser_MemberIdAndMovie_MovieId(memberId, movieId)
+                .map(review -> convertToDto(review, memberId));
+    }
+
+
+
 
     // Entity -> DTO 변환 (currentUserId를 전달하여 삭제 가능 여부 판단)
     private ReviewDto convertToDto(Review review, String currentUserId) {
