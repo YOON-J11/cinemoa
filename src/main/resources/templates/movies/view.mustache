@@ -15,42 +15,48 @@
                             {{/mainImageUrl}}
                         </div>
                         <div class="movie-info">
-                           <h2 class="tit">{{title}}</h2>
-                            <ul class="info1">
-                                <li>
-                                    <p class="date">
-                                        {{#releaseDate}}<span class="bold600 format-date">{{releaseDate}}</span> 개봉{{/releaseDate}}
-                                        {{^releaseDate}}미정{{/releaseDate}}
-                                    </p>
-                                </li>
-                                <li class="flex-center "><img src="https://www.lottecinema.co.kr/NLCHS/Content/images/icon/icon_clock_black.svg"><span class="time bold600 pl-5">{{runningTime}}</span>분</li>
-                                <li class="age">{{ageRating}}</li>
-                            </ul>
-                            <div class="info2">
-                                <p>감독: {{director}}</p>
-                                <p>배우: {{actors}}</p>
-                                <p>장르: {{genre}}</p>
-                            </div>
-                            <div class="info3">
-                                <div class="like">
-                                    <div class="like-btn">
-                                        <button class="heart-button">
-                                            <svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" id="heart" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M13.91,6.75c-1.17,2.25-4.3,5.31-6.07,6.94c-0.1903,0.1718-0.4797,0.1718-0.67,0C5.39,12.06,2.26,9,1.09,6.75&#xA;&#x9;C-1.48,1.8,5-1.5,7.5,3.45C10-1.5,16.48,1.8,13.91,6.75z" stroke="black"/>
-                                            </svg>
-                                        </button>
-                                        <span class="likesCount">{{likesCount}}</span>
+                           <div class="movie-info-top">
+                               <h2 class="tit">{{title}}</h2>
+                                <ul class="info1">
+                                    <li>
+                                        <p class="date">
+                                            {{#releaseDate}}<span class="bold600 format-date">{{releaseDate}}</span> 개봉{{/releaseDate}}
+                                            {{^releaseDate}}미정{{/releaseDate}}
+                                        </p>
+                                    </li>
+                                    <li class="flex-center "><img src="https://www.lottecinema.co.kr/NLCHS/Content/images/icon/icon_clock_black.svg"><span class="time bold600 pl-5">{{runningTime}}</span>분</li>
+                                    <li class="age">{{ageRating}}</li>
+                                </ul>
+                                <div class="info2">
+                                    <p>감독 : {{director}}</p>
+                                    <p>배우 : {{actors}}</p>
+                                    <p>장르 : {{genre}}</p>
+                                </div>
+                                <div class="info3">
+                                    <div class="like">
+                                        <div class="like-btn">
+                                            <button class="heart-button">
+                                                <svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" id="heart" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M13.91,6.75c-1.17,2.25-4.3,5.31-6.07,6.94c-0.1903,0.1718-0.4797,0.1718-0.67,0C5.39,12.06,2.26,9,1.09,6.75&#xA;&#x9;C-1.48,1.8,5-1.5,7.5,3.45C10-1.5,16.48,1.8,13.91,6.75z" stroke="black"/>
+                                                </svg>
+                                            </button>
+                                            <span class="likesCount">{{likesCount}}</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                           </div>
                             <div class="info4 score">
                                 <div class="rate">
                                     <h5>실관람 평점</h5>
-                                    <p><span class="rating">{{rating}}</span>%</p>
+                                    <p class="progress">
+                                        <span aria-valuenow="{{positivePercentage}}" aria-valuemin="0" aria-valuemax="100">
+                                            {{positivePercentage}}
+                                        </span>%
+                                    </p>
                                 </div>
                                 <div class="reservation">
                                     <h5>예매율</h5>
-                                    <p>n위(<span class="rating">{{reservationRate}}</span>%)</p>
+                                    <p><span>1</span>위({{reservationRate}}%)</p>
                                 </div>
                                 <div class="audience">
                                     <h5>누적관객수</h5>
@@ -71,101 +77,109 @@
                             <li class="on">
                                 <div class="inner">
                                     <p class="movie-cont">{{{content}}}</p>
-                                    <h4>관람객 평점</h4>
-                                    <div class="row text-center">
-                                        <div class="col-md-6">
-                                            <div class="progress" style="height: 30px;">
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: {{positivePercentage}}%;"
-                                                     aria-valuenow="{{positivePercentage}}" aria-valuemin="0" aria-valuemax="100">
-                                                    {{positivePercentage}}%
-                                                </div>
-                                            </div>
+                                    <!-- 리뷰 목록 -->
+                                    <div class="review-top">
+                                        <div class="alert-info">
+                                            <p class="pb-25">영화의 어떤 점이 좋았는지 이야기해주세요!</p>
+                                            {{#loginMember}}
+                                                <button type="button" class="btn-review" data-bs-toggle="modal" data-bs-target="#reviewModal" data-movie-id="{{movieId}}">
+                                                    실관람평 작성하기
+                                                </button>
+                                            {{/loginMember}}
+                                            {{^loginMember}}
+                                                <a href="/member/login" class="btn-review">실관람평 작성하기</a>
+                                            {{/loginMember}}
                                         </div>
+                                        <h4 class="bold600">실관람평 {{reviews.size}}</h4>
                                     </div>
-
-                                    <!-- 리뷰 목록 표시 부분 추가 -->
-                                    <hr>
-                                    {{#loginMember}}
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal" data-movie-id="{{movieId}}">
-                                            리뷰 작성하기
-                                        </button>
-                                    {{/loginMember}}
-                                    <h4 class="">{{title}}에 대한 {{reviews.size}}개의 이야기가 있어요!</h4>
+                                    <div class="review-list">
                                     {{#reviews}}
-                                        <div class="card mb-3">
-                                            <div class="card-body">
-                                                <div class="d-flex justify-content-between">
-                                                    <h5 class="card-title">
-                                                        {{#isPositive}}
-                                                            <span class="badge bg-success"><i class="bi bi-hand-thumbs-up"></i> 좋았어요</span>
-                                                        {{/isPositive}}
-                                                        {{^isPositive}}
-                                                            <span class="badge bg-danger"><i class="bi bi-hand-thumbs-down"></i> 별로였어요</span>
-                                                        {{/isPositive}}
-                                                    </h5>
-                                                    <small class="text-muted">{{createdAt}}</small>
+                                        <div class="card">
+                                            <div class="card-inner">
+                                                <div class="cart-cont">
+                                                    <p class="user bold600">{{userName}}</p>
+                                                    <p class="date">{{createdAt}}</p>
+                                                    <p class="card-text">{{{content}}}</p>
+                                                    {{#deletable}}
+                                                        <div class="cart-delete">
+                                                            <a href="/reviews/delete/{{reviewId}}?movieId={{movieId}}" class="btn btn-sm btn-outline-danger"
+                                                            onclick="return confirm('정말로 이 리뷰를 삭제하시겠습니까?');">삭제</a>
+                                                        </div>
+                                                    {{/deletable}}
                                                 </div>
-                                                <strong>{{userName}}</strong>
-                                                <p class="card-text">{{{content}}}</p>
-                                                {{#deletable}}
-                                                    <div class="d-flex justify-content-end">
-                                                        <a href="/reviews/delete/{{reviewId}}?movieId={{movieId}}" class="btn btn-sm btn-outline-danger"
-                                                        onclick="return confirm('정말로 이 리뷰를 삭제하시겠습니까?');">삭제</a>
-                                                    </div>
-                                                {{/deletable}}
+                                                <h5 class="card-title">
+                                                    {{#isPositive}}
+                                                        <span class="badge bg-success">좋았어요</span>
+                                                    {{/isPositive}}
+                                                    {{^isPositive}}
+                                                        <span class="badge bg-danger">별로였어요</span>
+                                                    {{/isPositive}}
+                                                </h5>
                                             </div>
                                         </div>
                                     {{/reviews}}
                                     {{^reviews}}
-                                        <div class="alert alert-info">
+                                        <div class="alert-info">
                                             아직 등록된 리뷰가 없습니다. 첫 번째 리뷰를 작성해보세요!
                                         </div>
                                     {{/reviews}}
+                                    </div>
                                 </div>
                             </li>
 
-                            <li class="">
-                                <!-- 리뷰 목록 표시 부분 추가 -->
-                                <hr>
-                                {{#loginMember}}
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal" data-movie-id="{{movieId}}">
-                                        리뷰 작성하기
-                                    </button>
-                                {{/loginMember}}
-                                <h4 class="">{{title}}에 대한 {{reviews.size}}개의 이야기가 있어요!</h4>
-                                {{#reviews}}
-                                    <div class="card mb-3">
-                                        <div class="card-body">
-                                            <div class="d-flex justify-content-between">
-                                                <h5 class="card-title">
-                                                    {{#isPositive}}
-                                                        <span class="badge bg-success"><i class="bi bi-hand-thumbs-up"></i> 좋았어요</span>
-                                                    {{/isPositive}}
-                                                    {{^isPositive}}
-                                                        <span class="badge bg-danger"><i class="bi bi-hand-thumbs-down"></i> 별로였어요</span>
-                                                    {{/isPositive}}
-                                                </h5>
-                                                <small class="text-muted">{{createdAt}}</small>
-                                            </div>
-                                            <strong>{{userName}}</strong>
-                                            <p class="card-text">{{{content}}}</p>
-                                            {{#deletable}}
-                                                <div class="d-flex justify-content-end">
-                                                    <a href="/reviews/delete/{{reviewId}}?movieId={{movieId}}" class="btn btn-sm btn-outline-danger"
-                                                    onclick="return confirm('정말로 이 리뷰를 삭제하시겠습니까?');">삭제</a>
-                                                </div>
-                                            {{/deletable}}
+                            <li>
+                                <div class="inner">
+                                    <!-- 리뷰 목록 -->
+                                    <div class="review-top">
+                                        <div class="alert-info">
+                                            <p class="pb-25">영화의 어떤 점이 좋았는지 이야기해주세요!</p>
+                                            {{#loginMember}}
+                                                <button type="button" class="btn-review" data-bs-toggle="modal" data-bs-target="#reviewModal" data-movie-id="{{movieId}}">
+                                                    실관람평 작성하기
+                                                </button>
+                                            {{/loginMember}}
+                                            {{^loginMember}}
+                                                <a href="/member/login" class="btn-review">실관람평 작성하기</a>
+                                            {{/loginMember}}
                                         </div>
+                                        <h4 class="bold600">실관람평 {{reviews.size}}</h4>
                                     </div>
-                                {{/reviews}}
-                                {{^reviews}}
-                                    <div class="alert alert-info">
-                                        아직 등록된 리뷰가 없습니다. 첫 번째 리뷰를 작성해보세요!
+                                    <div class="review-list">
+                                        {{#reviews}}
+                                            <div class="card">
+                                                <div class="card-inner">
+                                                    <div class="cart-cont">
+                                                        <p class="user bold600">{{userName}}</p>
+                                                        <p class="date">{{createdAt}}</p>
+                                                        <p class="card-text">{{{content}}}</p>
+                                                        {{#deletable}}
+                                                            <div class="cart-delete">
+                                                                <a href="/reviews/delete/{{reviewId}}?movieId={{movieId}}" class="btn btn-sm btn-outline-danger"
+                                                                onclick="return confirm('정말로 이 리뷰를 삭제하시겠습니까?');">삭제</a>
+                                                            </div>
+                                                        {{/deletable}}
+                                                    </div>
+                                                    <h5 class="card-title">
+                                                        {{#isPositive}}
+                                                            <span class="badge bg-success">좋았어요</span>
+                                                        {{/isPositive}}
+                                                        {{^isPositive}}
+                                                            <span class="badge bg-danger">별로였어요</span>
+                                                        {{/isPositive}}
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                        {{/reviews}}
+                                        {{^reviews}}
+                                            <div class="alert-info">
+                                                아직 등록된 리뷰가 없습니다. 첫 번째 리뷰를 작성해보세요!
+                                            </div>
+                                        {{/reviews}}
                                     </div>
-                                {{/reviews}}
+                                </div>
                             </li>
 
-                            <li class="">
+                            <li>
                                 {{#videoUrl}}
                                     <hr>
                                     <h4>예고편</h4>
