@@ -31,7 +31,7 @@ public class MovieDto {
     private String subImageUrls; // 서브 이미지 URL 필드 추가
     private String detailImageUrls;
     private String videoUrl;
-    private BigInteger audienceCount;
+    private Long audienceCount;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private Movie.ScreeningStatus screeningStatus; // 상영 상태 추가

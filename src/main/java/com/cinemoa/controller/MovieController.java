@@ -229,6 +229,10 @@ public class MovieController {
             // movieId 값을 모델에 추가
             model.addAttribute("movieId", id);
 
+            // 누적 관객수 조회 (서비스 호출)
+            long audienceCount = movieService.getConfirmedAudienceCount(id);
+            model.addAttribute("audienceCount", audienceCount);
+
             // 영화 전체 리스트로 rank 포함 DTO 리스트 조회
             List<MovieDto> rankedMovies = movieService.getMoviesWithStats(currentMemberId);
 
@@ -519,7 +523,7 @@ public class MovieController {
             movieDto.setReservationRate(BigDecimal.ZERO);
         }
         if (movieDto.getAudienceCount() == null) {
-            movieDto.setAudienceCount(BigInteger.ZERO);
+            movieDto.setAudienceCount(0L);
         }
         if (movieDto.getLikesCount() == null) {
             movieDto.setLikesCount(0);
