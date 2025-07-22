@@ -96,9 +96,9 @@ public class TicketingController {
 
         // 지역별 영화관 목록 가져오기
         List<String> regions = cinemas.stream()
+                .sorted((c1, c2) -> Long.compare(c1.getCinemaId(), c2.getCinemaId())) // Cinema ID 오름차순 정렬
                 .map(Cinema::getRegion)
                 .distinct()
-                .sorted()
                 .toList();
         model.addAttribute("regions", regions);
 

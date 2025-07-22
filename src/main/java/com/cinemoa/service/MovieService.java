@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -37,4 +38,20 @@ public interface MovieService {
     // 좋아요 상태를 확인하는 보조 메서드
     boolean isMovieLikedByMember(Long movieId, String memberId);
 
+    // 특정 영화 예매 수 조회
+    long countReservationsByMovie(Movie movie);
+
+    // 전체 예매 수 조회
+    long countAllReservations();
+
+    // 특정 영화 예매율 조회 (예: 0.15 = 15%)
+    BigDecimal getReservationRate(Movie movie);
+
+    // 특정 영화 누적 관객 수 (payment 완료된 예매 수)
+    long countAudienceByMovie(Long movieId);
+
+    List<MovieDto> getMoviesWithStats(String memberId);
+
+    public Page<MovieDto> getMoviesByRank(Pageable pageable, String memberId);
+    Page<MovieDto> getMoviesByRank(Pageable pageable, String memberId, Movie.ScreeningStatus screeningStatus);
 }

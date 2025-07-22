@@ -54,7 +54,7 @@ public class MovieController {
                              Model model,
                              @PageableDefault(size = 12, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable, HttpSession session) {
 
-        Page<MovieDto> movies;
+        //Page<MovieDto> movies;
 
         // 세션에서 로그인된 사용자 정보 가져오기 (다른 메서드와 일치시킴)
         Object sessionAttribute = session.getAttribute("loginMember");
@@ -69,22 +69,19 @@ public class MovieController {
             System.out.println("초기 로드 - 임시 ID 사용: " + currentMemberId);
         }
 
-        // 상영 상태별 필터링
+        Movie.ScreeningStatus screeningStatus = null;
         if (status != null && !status.isEmpty()) {
             try {
-                // 문자열을 Enum으로 변환
-                com.cinemoa.entity.Movie.ScreeningStatus screeningStatus =
-                        com.cinemoa.entity.Movie.ScreeningStatus.valueOf(status);
-
-                // 상영 상태별 영화 조회 (페이징 처리 필요)
-                movies = movieService.getMoviesByScreeningStatus(screeningStatus, pageable, currentMemberId);
+                screeningStatus = Movie.ScreeningStatus.valueOf(status);
             } catch (IllegalArgumentException e) {
-                // 잘못된 상태 값이 전달된 경우 모든 영화 표시
-                movies = movieService.getMoviesPaginated(pageable, currentMemberId);
+                screeningStatus = null;  // 잘못된 status 무시
             }
-        } else {
-            // 상태 파라미터가 없으면 모든 영화 표시
-            movies = movieService.getMoviesPaginated(pageable, currentMemberId);
+        }
+
+        Page<MovieDto> movies = movieService.getMoviesByRank(pageable, currentMemberId, screeningStatus);
+
+        for (MovieDto movieDto : movies.getContent()) {
+            handleNullValues(movieDto);
         }
 
         model.addAttribute("movies", movies);
@@ -130,19 +127,26 @@ public class MovieController {
         Member loginMember = (Member) session.getAttribute("loginMember");
         String currentMemberId = loginMember != null ? loginMember.getMemberId() : null;
 
-        Pageable pageable = PageRequest.of(page, 12, Sort.by("createdAt").descending());
+        Pageable pageable = PageRequest.of(page, 12, Sort.by("rank").descending());
 
-        Page<MovieDto> movies;
+        Movie.ScreeningStatus screeningStatus = null;
 
         if (status != null && !status.isEmpty()) {
             try {
-                Movie.ScreeningStatus screeningStatus = Movie.ScreeningStatus.valueOf(status);
-                movies = movieService.getMoviesByScreeningStatus(screeningStatus, pageable, currentMemberId);
+                screeningStatus = Movie.ScreeningStatus.valueOf(status);
             } catch (IllegalArgumentException e) {
-                movies = movieService.getMoviesPaginated(pageable, currentMemberId);
+                screeningStatus = null; // 유효하지 않은 값일 경우 null로 처리
             }
+        }
+
+        Page<MovieDto> movies;
+
+        if (screeningStatus != null) {
+            // 상영 상태 필터가 있으면, 필터 포함된 rank 순 조회
+            movies = movieService.getMoviesByRank(pageable, currentMemberId, screeningStatus);
         } else {
-            movies = movieService.getMoviesPaginated(pageable, currentMemberId);
+            // 필터 없으면 그냥 rank 순 조회
+            movies = movieService.getMoviesByRank(pageable, currentMemberId, null);
         }
 
         model.addAttribute("movies", movies.getContent());
@@ -158,7 +162,6 @@ public class MovieController {
         private int number;
         private boolean active;
     }
-
 
     @GetMapping("/{id}")
     public String viewMovie(@PathVariable("id") Long id, Model model, HttpSession session) {
@@ -226,7 +229,20 @@ public class MovieController {
             // movieId 값을 모델에 추가
             model.addAttribute("movieId", id);
 
+            // 영화 전체 리스트로 rank 포함 DTO 리스트 조회
+            List<MovieDto> rankedMovies = movieService.getMoviesWithStats(currentMemberId);
+
+            // 현재 영화의 rank 찾기
+            int rank = rankedMovies.stream()
+                    .filter(m -> m.getMovieId().equals(id))
+                    .map(MovieDto::getRank)
+                    .findFirst()
+                    .orElse(0);
+
+            movieDto.setRank(rank);
+
             model.addAttribute("movie", movieDto);
+
             return "movies/view";
         } else {
             return "redirect:/movies";

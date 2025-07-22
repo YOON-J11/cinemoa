@@ -4,17 +4,23 @@ import com.cinemoa.dto.MovieDto;
 import com.cinemoa.entity.Like;
 import com.cinemoa.entity.Member;
 import com.cinemoa.entity.Movie;
+import com.cinemoa.entity.Payment;
 import com.cinemoa.repository.LikeRepository;
 import com.cinemoa.repository.MemberRepository;
 import com.cinemoa.repository.MovieRepository;
+import com.cinemoa.repository.ReservationRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -24,12 +30,14 @@ public class MovieServiceImpl implements MovieService {
     private final MovieRepository movieRepository;
     private final LikeRepository likeRepository;
     private final MemberRepository memberRepository;
+    private final ReservationRepository reservationRepository;
 
     @Autowired
-    public MovieServiceImpl(MovieRepository movieRepository, LikeRepository likeRepository, MemberRepository memberRepository) {
+    public MovieServiceImpl(MovieRepository movieRepository, LikeRepository likeRepository, MemberRepository memberRepository, ReservationRepository reservationRepository) {
         this.movieRepository = movieRepository;
         this.likeRepository = likeRepository;
         this.memberRepository = memberRepository;
+        this.reservationRepository = reservationRepository;
     }
 
     @Override
@@ -47,8 +55,19 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Optional<MovieDto> getMovieById(Long id, String memberId) {
-        return movieRepository.findById(id)
-                .map(movie -> convertToDtoWithLikeStatus(movie, memberId));
+        Optional<Movie> movieOpt = movieRepository.findById(id);
+        return movieOpt.map(movie -> {
+            MovieDto dto = convertToDtoWithLikeStatus(movie, memberId);
+
+            // 예매율, 누적 관객 수 직접 MovieDto 필드에 넣거나 컨트롤러에서 따로 조회할 수도 있음
+            BigDecimal reservationRate = getReservationRate(movie);
+            long audienceCount = countAudienceByMovie(id);
+
+            dto.setReservationRate(reservationRate);
+            dto.setAudienceCount(BigInteger.valueOf(audienceCount));
+
+            return dto;
+        });
     }
 
     @Override
@@ -209,6 +228,92 @@ public class MovieServiceImpl implements MovieService {
         return false;
     }
 
+    @Override
+    public BigDecimal getReservationRate(Movie movie) {
+        // 예: 특정 영화 예매율 = (영화 예매 수) / (전체 예매 수)
+        long movieReservations = countReservationsByMovie(movie);
+        long allReservations = countAllReservations();
+
+        if (allReservations == 0) {
+            return BigDecimal.ZERO;
+        }
+        return BigDecimal.valueOf(movieReservations)
+                .divide(BigDecimal.valueOf(allReservations), 4, RoundingMode.HALF_UP);
+    }
+
+    @Override
+    public long countReservationsByMovie(Movie movie) {
+        // 예매 DB에서 영화별 예약 수를 가져오는 로직 작성
+        return reservationRepository.countByMovie(movie);
+    }
+
+    @Override
+    public long countAllReservations() {
+        // 전체 예매 수 조회
+        return reservationRepository.countAll();
+    }
+
+    @Override
+    public long countAudienceByMovie(Long movieId) {
+        return reservationRepository.countConfirmedAudience(movieId, Payment.PaymentStatus.PAID);
+
+    }
+
+    @Override
+    public List<MovieDto> getMoviesWithStats(String memberId) {
+        List<Movie> movies = movieRepository.findAll();
+
+        // 1. DTO로 변환 및 예매율/누적관객수 포함
+        List<MovieDto> movieDtos = movies.stream().map(movie -> {
+            MovieDto dto = convertToDtoWithLikeStatus(movie, memberId);
+            dto.setReservationRate(getReservationRate(movie)); // 예매율 계산
+            dto.setAudienceCount(BigInteger.valueOf(countAudienceByMovie(movie.getMovieId()))); // 누적관객수 계산
+            return dto;
+        }).collect(Collectors.toList());
+
+        // 2. 예매율 기준으로 정렬하여 순위 부여
+        movieDtos.sort(Comparator.comparing(MovieDto::getReservationRate).reversed());
+
+        int rank = 1;
+        for (MovieDto dto : movieDtos) {
+            dto.setRank(rank++);
+            System.out.println("Movie: " + dto.getTitle() + ", Rank: " + dto.getRank());
+        }
+
+        return movieDtos;
+    }
+
+    // 순위로 출력
+    public Page<MovieDto> getMoviesByRank(Pageable pageable, String memberId, Movie.ScreeningStatus status) {
+        // 1. 전체 영화 조회 + DTO 변환 + 예매율, 관객수 계산 + rank 부여 (상태 필터 포함)
+        List<MovieDto> allMoviesWithStats = getMoviesWithStats(memberId).stream()
+                .filter(movieDto -> status == null || movieDto.getScreeningStatus() == status)
+                .collect(Collectors.toList());
+
+        // 2. 페이징 처리용 start, end index 계산
+        int offset = (int) pageable.getOffset();
+        int pageSize = pageable.getPageSize();
+
+        int total = allMoviesWithStats.size();
+
+        if (offset > total) {
+            return new PageImpl<>(Collections.emptyList(), pageable, total);
+        }
+
+        int toIndex = Math.min(offset + pageSize, total);
+
+        // 3. 해당 페이지에 맞는 sublist 반환
+        List<MovieDto> pageContent = allMoviesWithStats.subList(offset, toIndex);
+
+        return new PageImpl<>(pageContent, pageable, total);
+    }
+
+    @Override
+    public Page<MovieDto> getMoviesByRank(Pageable pageable, String memberId) {
+        return getMoviesByRank(pageable, memberId, null);
+    }
+
+
     // Entity -> DTO 변환, 좋아요 상태를 포함시키는 헬퍼 메서드
     private MovieDto convertToDtoWithLikeStatus(Movie movie, String memberId) {
         MovieDto movieDto = new MovieDto();
@@ -221,6 +326,11 @@ public class MovieServiceImpl implements MovieService {
     private MovieDto convertToDto(Movie movie) {
         MovieDto movieDto = new MovieDto();
         BeanUtils.copyProperties(movie, movieDto);
+
+        // 예매율 계산 추가
+        BigDecimal reservationRate = getReservationRate(movie);
+        movieDto.setReservationRate(reservationRate);
+
         return movieDto;
     }
 

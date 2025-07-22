@@ -198,6 +198,7 @@
             .then(res => res.json())
             .then(data => {
                 const cinemas = Array.isArray(data) ? data : [];
+
                 if (cinemas.length === 0) {
                     document.getElementById('cinemaList').innerHTML = '<p>해당 지역에 영화관이 없습니다.</p>';
                     return;
@@ -229,13 +230,13 @@
         selectedCinemaId = btn.dataset.cinemaId;
         const cinemaName = btn.textContent.trim();
 
+          window.selectedCinemaName = cinemaName;
+
         selectedDate = null;
         selectedShowtimeId = null;
        // document.getElementById('availableDates').innerHTML = '';
         document.getElementById('timeSlots').innerHTML = '';
         fetchAvailableDates(selectedMovieId, selectedCinemaId);
-
-        window.selectedCinemaName = cinemaName;
 
         currentStep = 4;
         updateStepVisibility();
@@ -277,7 +278,8 @@
     });
 
     // 날짜 목록 업데이트
-    function fetchShowtimes(movieId, cinemaId, date, cinemaName) {
+    function fetchShowtimes(movieId, cinemaId, date) {
+        const cinemaName = window.selectedCinemaName || "";
         fetch(`/api/ticketing/showtimes?movieId=${movieId}&cinemaId=${cinemaId}&date=${date}`)
             .then(res => res.json())
             .then(showtimes => {
@@ -291,13 +293,14 @@
                         const start = new Date(show.startTime);
                         const end = new Date(show.endTime);
                         const timeDiv = document.createElement('div');
-                        timeDiv.innerHTML = `<div class="time-slot" data-showtime-id="${show.showtimeId}"><strong><span class="start-time">${start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit',hour12: false })}</span><br> ~ ${end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit',hour12: false })}</strong><p><span>${cinemaName}</span><span>${show.screenName}</span></p></div>`;
+                         timeDiv.innerHTML = `<div class="time-slot" data-showtime-id="${show.showtimeId}"><strong><span class="start-time">${start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit',hour12: false })}</span><br> ~ ${end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit',hour12: false })}</strong><p class="info"><span>${cinemaName}</span><span>${show.screenName}</span></p></div>`;
                         container.appendChild(timeDiv);
                     });
                     document.getElementById('goToSeatSelection').disabled = false;
                 }
             });
     }
+
 
     updateStepVisibility();
 });
