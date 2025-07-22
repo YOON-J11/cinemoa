@@ -18,4 +18,5 @@ public class ShowtimeDto {
     private LocalDateTime startTime;
     private LocalDateTime endTime; // 계산된 종료 시간을 담을 필드
     private String screenName; // 상영관 이름
+    private Long screenId;
 }

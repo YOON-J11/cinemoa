@@ -1,6 +1,7 @@
 package com.cinemoa.controller;
 
 import com.cinemoa.dto.MovieDto;
+import com.cinemoa.dto.ShowtimeDto;
 import com.cinemoa.entity.Cinema;
 import com.cinemoa.entity.Movie;
 import com.cinemoa.entity.Showtime;
@@ -125,17 +126,18 @@ public class TicketingController {
             @RequestParam String date) {
 
         LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        List<Showtime> showtimes = showtimeService.getShowtimesByMovieCinemaAndDate(movieId, cinemaId, localDate);
+        List<ShowtimeDto> showtimes = showtimeService.getShowtimesByMovieCinemaAndDate(movieId, cinemaId, localDate);
+
 
         return showtimes.stream().map(showtime -> {
             Map<String, Object> showtimeMap = new HashMap<>();
             showtimeMap.put("showtimeId", showtime.getShowtimeId());
             showtimeMap.put("startTime", showtime.getStartTime());
             showtimeMap.put("endTime", showtime.getEndTime());
-            showtimeMap.put("screenName", showtime.getScreen().getScreenName()); // 상영관 이름
+            showtimeMap.put("screenName", showtime.getScreenName());
 
             // ✅ 남은 좌석 수 계산 추가
-            int totalSeats = seatRepository.countByScreen_ScreenId(showtime.getScreen().getScreenId());
+            int totalSeats = seatRepository.countByScreen_ScreenId(showtime.getScreenId());
             int reservedSeats = reservationSeatRepository.countByShowtime_ShowtimeId(showtime.getShowtimeId());
             int availableSeats = totalSeats - reservedSeats;
             showtimeMap.put("availableSeats", availableSeats); // ← 프론트로 전달

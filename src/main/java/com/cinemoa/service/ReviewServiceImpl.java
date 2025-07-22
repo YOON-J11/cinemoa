@@ -75,11 +75,9 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     @Transactional(readOnly = true)
     public Optional<ReviewDto> getReviewByUserAndMovie(String memberId, Long movieId) {
-        return reviewRepository.findByUser_MemberIdAndMovie_MovieId(memberId, movieId)
+        return reviewRepository.findByMovie_MovieIdAndUser_MemberId(movieId, memberId)
                 .map(review -> convertToDto(review, memberId));
     }
-
-
 
 
     // Entity -> DTO 변환 (currentUserId를 전달하여 삭제 가능 여부 판단)
