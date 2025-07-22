@@ -4,6 +4,7 @@ import com.cinemoa.entity.*;
 import com.cinemoa.repository.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
@@ -44,6 +45,7 @@ public class PaymentComtroller {
 
     @PostMapping("/payment/complete")
     @ResponseBody
+    @Transactional
     public ResponseEntity<String> completePayment(@RequestBody Map<String, Object> payload, HttpSession session) {
         try {
             // 1. 전달받은 값 꺼내기
