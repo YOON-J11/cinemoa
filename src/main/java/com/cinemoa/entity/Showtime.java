@@ -26,9 +26,12 @@ public class Showtime {
     @JoinColumn(name = "movie_id", nullable = false)
     private Movie movie;
 
+    @Column(name = "screen_id", insertable = false, updatable = false)
+    private Long screenId; // ID 값만 직접 조회하고 싶을 때 사용
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "screen_id", nullable = false)
-    private Screen screen;
+    private Screen screen; // 연관관계 객체로 접근할 때 사용
 
     @Column(name = "start_time", nullable = false)
     private LocalDateTime startTime;
