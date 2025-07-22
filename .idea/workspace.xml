@@ -5,78 +5,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e69bfea-3231-44b6-87cd-dffb1dc2379d" name="Changes" comment="db수정">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/api/TicketingApiController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/dto/ShowtimeDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/entity/Like.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/LikeRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/reviews/edit.mustache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/api/MovieApiController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/api/MovieApiController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/api/ReviewApiController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/api/ReviewApiController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/controller/MovieController$PageItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/controller/MovieController$PageItem.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/controller/MovieController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/controller/MovieController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/controller/ReviewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/controller/ReviewController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/dto/MovieDto$MovieDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/dto/MovieDto$MovieDtoBuilder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/dto/MovieDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/dto/MovieDto.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/dto/MovieListDto$MovieListDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/dto/MovieListDto$MovieListDtoBuilder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/dto/MovieListDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/dto/MovieListDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/dto/ReviewDto$ReviewDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/dto/ReviewDto$ReviewDtoBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/dto/ReviewDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/dto/ReviewDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/entity/Movie.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/entity/Movie.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/entity/Review$ReviewBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/entity/Review$ReviewBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/entity/Review.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/entity/Review.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/repository/MovieRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/repository/MovieRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/repository/ReviewRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/repository/ReviewRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/service/MemberService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/service/MemberService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/service/MovieService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/service/MovieService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/service/MovieServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/service/MovieServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/service/ReviewService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/service/ReviewService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/templates/movies/edit.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/movies/edit.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/movies/list.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/movies/list.mustache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/templates/movies/new.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/movies/new.mustache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/templates/movies/view.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/movies/view.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/reviews/new.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/reviews/new.mustache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/api/MovieApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/api/MovieApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/api/ReviewApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/api/ReviewApiController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/MovieController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/ReviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/ReviewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/TicketingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/TicketingController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/dto/MovieDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/dto/MovieDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/dto/ReviewDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/dto/ReviewDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/entity/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/entity/Movie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/entity/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/entity/Review.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/MovieRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/MovieRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/ReviewRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/ReviewRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/ShowtimeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/ShowtimeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/MemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/CinemaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/CinemaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/ReservationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/ReservationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/CinemaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/CinemaService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/MovieService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/MovieService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/MovieServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/MovieServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/ReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/ReviewService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/ReviewServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/ReviewServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/ShowtimeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/ShowtimeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/ShowtimeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/ShowtimeServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/movies.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/movies.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/ticketing.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/ticketing.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/movies/edit.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/movies/edit.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/movies/list.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/movies/list.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/movies/movie-items-partial.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/movies/movie-items-partial.mustache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/movies/new.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/movies/new.mustache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/movies/view.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/movies/view.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/reviews/new.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/reviews/new.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/ticketing/seat-selection.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/ticketing/seat-selection.mustache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/ticketing/ticketing.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/ticketing/ticketing.mustache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -112,11 +74,6 @@
                 <item name="cinemoa" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="application" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="cinemoa" type="f1a62948:ProjectNode" />
-                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
             </expand>
             <select />
@@ -156,12 +113,12 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="member" />
-                    <option name="lastUsedInstant" value="1752925502" />
+                    <option name="branchName" value="dev" />
+                    <option name="lastUsedInstant" value="1753185832" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="board" />
-                    <option name="lastUsedInstant" value="1752925501" />
+                    <option name="lastUsedInstant" value="1753185810" />
                   </RecentBranch>
                 </list>
               </option>
@@ -391,7 +348,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753163316116</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="dev -&gt; main 반영">
+      <option name="closed" value="true" />
+      <created>1753186157032</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1753186157032</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -419,7 +384,8 @@
     <MESSAGE value="board merge완료" />
     <MESSAGE value="영화 페이지 오류 -&gt; MovieController수정" />
     <MESSAGE value="db수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="db수정" />
+    <MESSAGE value="dev -&gt; main 반영" />
+    <option name="LAST_COMMIT_MESSAGE" value="dev -&gt; main 반영" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

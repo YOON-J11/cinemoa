@@ -70,6 +70,7 @@ public class MovieDto {
     }
 
     private boolean likedByCurrentUser;
+    private Integer rank; // 예매율 기반 순위
 
 }
 
