@@ -28,6 +28,7 @@ public class MemberController {
     public String showJoinStep1(Model model) {
         return "member/joinStep1";
     }
+
     // 이메일 중복 확인
     @PostMapping("/check-email")
     public ResponseEntity<Boolean> checkEmail(@RequestParam String email) {
@@ -66,6 +67,7 @@ public class MemberController {
         }
         return "member/joinStep3";
     }
+
     @PostMapping("/join/step3/process")
     public String processStep3(@ModelAttribute MemberDto dto, HttpSession session, Model model) {
         // 이메일은 세션에서 가져오기 (step1에서 저장된 verifiedEmail)
@@ -119,13 +121,14 @@ public class MemberController {
 
     //로그인 페이지 (GET)
     @GetMapping("/login")
-    public String showLoginForm() {
-    return "member/login";
+    public String showLoginForm(@RequestParam(value = "redirect", required = false) String redirect, Model model) {
+        model.addAttribute("redirect", redirect != null ? redirect : "");
+        return "member/login";
     }
 
     //로그인 처리 (POST)
     @PostMapping("/login")
-    public String processLogin(@RequestParam String memberId, @RequestParam String password, Model model, HttpSession session) {
+    public String processLogin(@RequestParam String memberId, @RequestParam String password, @RequestParam(required = false) String redirect, Model model, HttpSession session) {
         Member member = memberService.login(memberId, password);
         if (member == null) {
             model.addAttribute("error", "아이디 또는 비밀번호가 일치하지 않습니다.");
@@ -141,14 +144,20 @@ public class MemberController {
         // 세션에 로그인 사용자 저장
         session.setAttribute("loginMember", member);
 
-        // 이전에 저장된 리디렉션 경로가 있다면
+        // URL 파라미터로 전달된 redirect 값이 있으면 해당 경로로 이동 (모달 로그인 등)
+        if (redirect != null && !redirect.isBlank()) {
+            return "redirect:" + redirect;
+        }
+
+        // 세션에 저장된 redirectAfterLogin 값이 있으면 해당 경로로 이동 (기존 리디렉션 처리)
         String redirectPath = (String) session.getAttribute("redirectAfterLogin");
         if (redirectPath != null) {
             session.removeAttribute("redirectAfterLogin");
             return "redirect:" + redirectPath;
         }
 
-        return "redirect:/"; //로그인 성공 후 메인페이지로 이동
+        // 위 조건이 모두 없으면 기본적으로 메인 페이지로 이동
+        return "redirect:/";
     }
 
     //로그아웃
@@ -157,6 +166,7 @@ public class MemberController {
         session.invalidate(); // 세션 초기화
         return "redirect:/"; // 홈으로 이동
     }
+
     //비회원로그아웃
     @GetMapping("/guest/logout")
     public String guestLogout(HttpSession session) {
@@ -214,7 +224,6 @@ public class MemberController {
         // 리다이렉트
         return "redirect:/mypage/information/pref";
     }
-
 
 
 }

@@ -11,10 +11,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        // LoginCheckInterceptor를 등록
         registry.addInterceptor(new LoginCheckInterceptor())
-                .addPathPatterns("/mypage/**") // 이 경로 이하에 모두 적용
-                .excludePathPatterns("/member/**", "/mypage/withdrawalSuccess");   // 로그인 관련 경로는 제외 (로그인 페이지로의 무한 리다이렉트 방지), 회원탈퇴 완료 페이지는 방지
+                .addPathPatterns("/mypage/**", "/reservation/payment") // 마이페이지, 결제 페이지는 로그인 필요
+                .excludePathPatterns(
+                        "/member/**", // 회원가입/로그인 등은 예외
+                        "/mypage/withdrawalSuccess",  // 탈퇴 성공 페이지는 예외
+                        "/ticketing/**" // 비로그인 유저도 좌석선택까지는 가능
+                        );
     }    @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/profile/**")
