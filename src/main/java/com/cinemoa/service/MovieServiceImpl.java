@@ -64,7 +64,7 @@ public class MovieServiceImpl implements MovieService {
             long audienceCount = countAudienceByMovie(id);
 
             dto.setReservationRate(reservationRate);
-            dto.setAudienceCount(BigInteger.valueOf(audienceCount));
+            dto.setAudienceCount(audienceCount);
 
             return dto;
         });
@@ -255,8 +255,8 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public long countAudienceByMovie(Long movieId) {
-        return reservationRepository.countConfirmedAudience(movieId, Payment.PaymentStatus.PAID);
-
+        // 결제 상태 조건 없이 movie_id만으로 카운트하도록 변경
+        return reservationRepository.countByMovieId(movieId);
     }
 
     @Override
@@ -267,7 +267,7 @@ public class MovieServiceImpl implements MovieService {
         List<MovieDto> movieDtos = movies.stream().map(movie -> {
             MovieDto dto = convertToDtoWithLikeStatus(movie, memberId);
             dto.setReservationRate(getReservationRate(movie)); // 예매율 계산
-            dto.setAudienceCount(BigInteger.valueOf(countAudienceByMovie(movie.getMovieId()))); // 누적관객수 계산
+            dto.setAudienceCount(countAudienceByMovie(movie.getMovieId()));
             return dto;
         }).collect(Collectors.toList());
 
@@ -313,6 +313,10 @@ public class MovieServiceImpl implements MovieService {
         return getMoviesByRank(pageable, memberId, null);
     }
 
+    @Override
+    public long getConfirmedAudienceCount(Long movieId) {
+        return reservationRepository.countByMovieId(movieId);
+    }
 
     // Entity -> DTO 변환, 좋아요 상태를 포함시키는 헬퍼 메서드
     private MovieDto convertToDtoWithLikeStatus(Movie movie, String memberId) {
@@ -340,6 +344,5 @@ public class MovieServiceImpl implements MovieService {
         BeanUtils.copyProperties(movieDto, movie);
         return movie;
     }
-
 
 }
