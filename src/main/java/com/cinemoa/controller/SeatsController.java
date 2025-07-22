@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/reservation")
+@RequestMapping("/ticketing")
 public class SeatsController {
 
     private final ShowtimeRepository showtimeRepository;
@@ -110,7 +110,7 @@ public class SeatsController {
             model.addAttribute("isStandard", "STANDARD".equals(screenType));
             model.addAttribute("isImax", "IMAX".equals(screenType));
 
-            return "seats/seatReservation"; // 좌석 예약 페이지
+            return "ticketing/seatReservation"; // 좌석 예약 페이지
         } else {
             return "redirect:/movies";  // 예매 정보가 없으면 영화 목록 페이지로 리디렉션
         }

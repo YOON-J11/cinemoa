@@ -274,7 +274,7 @@
     // 좌석 선택 버튼 클릭
     document.getElementById('goToSeatSelection').addEventListener('click', () => {
         if (!selectedShowtimeId) return;
-        window.location.href = `/reservation/seats?showtimeId=${selectedShowtimeId}`;
+        window.location.href = `/ticketing/seats?showtimeId=${selectedShowtimeId}`;
     });
 
     // 날짜 목록 업데이트

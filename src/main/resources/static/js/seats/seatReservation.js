@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const showtimeId = new URLSearchParams(window.location.search).get("showtimeId");
             const redirectUrl = `/reservation/payment`;
 
-            sessionStorage.setItem("redirectAfterLogin", `/reservation/seats?showtimeId=${showtimeId}`);
+            sessionStorage.setItem("redirectAfterLogin", `/ticketing/seats?showtimeId=${showtimeId}`);
 
             // confirm 없이 바로 로그인 페이지로 이동
             window.location.href = `/member/login?redirect=${encodeURIComponent(redirectUrl)}`;
