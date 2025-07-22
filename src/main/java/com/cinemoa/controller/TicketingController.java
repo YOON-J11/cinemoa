@@ -80,9 +80,6 @@ public class TicketingController {
                 .toList();
         model.addAttribute("regions", regions);
 
-        model.addAttribute("title", "영화 예매");
-        model.addAttribute("timestamp", System.currentTimeMillis());
-
         return "ticketing/ticketing"; // ticketing.mustache 템플릿 렌더링
     }
 

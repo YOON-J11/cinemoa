@@ -26,7 +26,7 @@
                                 </div>
                             {{/mainImageUrl}}
                             {{^mainImageUrl}}
-                                <p id="no-main-image-text">등록된 포스터가 없습니다.</p>
+                                <p id="noImageText">등록된 포스터가 없습니다.</p>
                             {{/mainImageUrl}}
                         </div>
                         <input type="hidden" id="mainImageUrlInput" name="mainImageUrl"
@@ -74,13 +74,11 @@
                                 </option>
                             </select>
                         </div>
-
                         <div class="form-group">
                             <label for="rating">평점</label>
                             <input type="number" id="rating" name="rating" step="0.1" min="0" max="10"
                                    value="{{#rating}}{{rating}}{{/rating}}">
                         </div>
-
                         <div class="form-group">
                             <label for="reservationRate">예매율</label>
                             <input type="number" id="reservationRate" name="reservationRate" step="0.1" min="0" max="100"
@@ -117,7 +115,7 @@
                 <!-- 스틸컷 섹션 -->
                 <div class="form-group pt-30">
                     <div class="image-preview-input pb-20">
-                        <label for="detailImageFiles">새 스틸컷 업로드</label>
+                        <label for="detailImageFiles">추가 스틸컷 업로드</label>
                         <input type="file" id="detailImageFiles" name="detailImageFiles" multiple accept="image/*" class="form-control">
                         <p class="form-text text-muted">*여러 이미지를 선택할 수 있습니다.</p>
                     </div>
@@ -129,7 +127,7 @@
                             </div>
                         {{/detailImageUrlList}}
                         {{^detailImageUrlList}}
-                            <p id="no-detail-image-text">등록된 포스터 이미지가 없습니다.</p>
+                            <p id="#noImageText">등록된 이미지가 없습니다.</p>
                         {{/detailImageUrlList}}
                     </div>
                     <input type="hidden" id="detailImageUrlsInput" name="detailImageUrls" value="{{detailImageUrls}}">
@@ -182,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // "등록된 이미지가 없습니다" 메시지 표시
                 const noImageText = document.createElement('p');
-                noImageText.id = `no-${type}-image-text`;
+                noImageText.id = `noImageText`;
                 noImageText.textContent = `등록된 ${type === 'main' ? '포스터' : '서브'} 이미지가 없습니다.`;
                 container.appendChild(noImageText);
             }
@@ -197,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const container = document.getElementById('detail-images-container');
             const detailImageUrlsInput = document.getElementById('detailImageUrlsInput');
 
-            if (confirm('이 상세 이미지를 삭제하시겠습니까?')) {
+            if (confirm('이 이미지를 삭제하시겠습니까?')) {
                 // DOM에서 이미지 제거
                 item.remove();
 
@@ -210,11 +208,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.log('삭제된 이미지:', filename);
                     console.log('남은 이미지 URL들:', detailImageUrlsInput.value);
 
-                    // 모든 상세 이미지가 삭제되면 "등록된 상세 이미지가 없습니다" 메시지 표시
                     if (updatedUrls.length === 0) {
                         const noDetailImageText = document.createElement('p');
                         noDetailImageText.id = 'no-detail-image-text';
-                        noDetailImageText.textContent = '등록된 상세 이미지가 없습니다.';
+                        noDetailImageText.textContent = '등록된 이미지가 없습니다.';
                         container.appendChild(noDetailImageText);
                     }
                 }
@@ -279,14 +276,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         // input의 files를 새로운 FileList로 교체
                         input.files = dt.files;
 
-                        // 모든 미리보기가 제거되었고 기존 이미지도 없으면 "등록된 상세 이미지가 없습니다" 메시지 표시
+                        // 모든 미리보기가 제거되었고 기존 이미지도 없으면 "등록된 이미지가 없습니다" 메시지 표시
                         const existingImages = container.querySelectorAll('.detail-image-item:not(.new-upload)');
                         const newImages = container.querySelectorAll('.new-upload');
 
                         if (existingImages.length === 0 && newImages.length === 0) {
                             const noDetailImageText = document.createElement('p');
                             noDetailImageText.id = 'no-detail-image-text';
-                            noDetailImageText.textContent = '등록된 상세 이미지가 없습니다.';
+                            noDetailImageText.textContent = '등록된 이미지가 없습니다.';
                             container.appendChild(noDetailImageText);
                         }
                     });
@@ -299,11 +296,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
      // 새 파일 선택 시 미리보기 업데이트 (선택 사항)
      document.getElementById('mainImageFile').addEventListener('change', function(event) {
-         updateImagePreview(event.target, 'main-image-preview-wrapper', 'mainImageUrlInput', 'no-main-image-text');
+         updateImagePreview(event.target, 'main-image-preview-wrapper', 'mainImageUrlInput', 'noImageText');
      });
-     document.getElementById('subImageFile').addEventListener('change', function(event) {
-         updateImagePreview(event.target, 'sub-image-preview-wrapper', 'subImageUrlsInput', 'no-sub-image-text');
-     });
+
      // 상세 이미지는 multiple이라 미리보기 로직이 더 복잡해져서 여기서는 생략. 필요시 구현
      // document.getElementById('detailImageFiles').addEventListener('change', function(event) { /* ... */ });
 
@@ -352,7 +347,7 @@ document.addEventListener('DOMContentLoaded', function() {
                          if (!noImageText) {
                              noImageText = document.createElement('p');
                              noImageText.id = noImageTextId;
-                             noImageText.textContent = `등록된 ${type === 'main' ? '메인' : '서브'} 이미지가 없습니다.`;
+                             noImageText.textContent = `등록된 ${type === 'main' ? '포스터' : ''} 이미지가 없습니다.`;
                              this.closest('.image-preview-container').appendChild(noImageText);
                          }
                      });
@@ -369,7 +364,7 @@ document.addEventListener('DOMContentLoaded', function() {
              if (!noImageText) {
                  const newNoImageText = document.createElement('p');
                  newNoImageText.id = noImageTextId;
-                 newNoImageText.textContent = `등록된 ${input.id.includes('main') ? '메인' : '서브'} 이미지가 없습니다.`;
+                 newNoImageText.textContent = `등록된 ${input.id.includes('main') ? '포스터' : ''} 이미지가 없습니다.`;
                  input.closest('.form-group').querySelector('.image-preview-container').appendChild(newNoImageText);
              }
          }
