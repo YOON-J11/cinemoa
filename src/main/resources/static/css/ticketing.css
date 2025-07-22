@@ -55,6 +55,7 @@
     gap: 10px;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
 }
 
 .time-slot.selected {
@@ -67,6 +68,17 @@
 .time-slot .start-time {
     font-weight: 600;
     font-size: 20px;
+}
+.time-slot .info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 14px;
+    gap: 5px;
+}
+
+.time-slot .info span:nth-child(2) {
+    font-weight: 600;
 }
 
 h3 {
@@ -107,8 +119,6 @@ h3 {
 }
 #regionList { border-right: 1px solid #ccc; height: 100%; padding: 1rem}
 #cinemaList {height: 100%; padding: 1rem;}
-
-
 
 .running-time {opacity:0;}
 .btn-primary { background: #006f7c; color: #fff;}
