@@ -58,8 +58,8 @@ public class PaymentComtroller {
             List<Integer> seatIds = (List<Integer>) payload.get("seatIdList");
 
             // 2. 아임포트 결제 검증
-            String impKey = "YOUR_REST_API_KEY";
-            String impSecret = "YOUR_REST_API_SECRET";
+            String impKey = "7713737840810560";
+            String impSecret = "dMiYlmpKva4VtalV4HkOLqNK3P8KHshJ3ughJ9avTl8dS4qyn8KDTsRMxERIDrd4QaowezrtzsYHOfmw";
 
             RestTemplate restTemplate = new RestTemplate();
             HttpHeaders headers = new HttpHeaders();

@@ -109,6 +109,11 @@ public class SeatsController {
             model.addAttribute("screenType", showtime.getScreen().getScreenType());
             model.addAttribute("isStandard", "STANDARD".equals(screenType));
             model.addAttribute("isImax", "IMAX".equals(screenType));
+            model.addAttribute("cinemaId", showtime.getCinema().getCinemaId());
+            model.addAttribute("movieId", showtime.getMovie().getMovieId());
+            model.addAttribute("showtimeId", showtime.getShowtimeId());
+            model.addAttribute("screenId", showtime.getScreen().getScreenId());
+
 
             return "ticketing/seatReservation"; // 좌석 예약 페이지
         } else {

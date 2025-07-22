@@ -128,37 +128,46 @@ public class MemberController {
 
     //로그인 처리 (POST)
     @PostMapping("/login")
-    public String processLogin(@RequestParam String memberId, @RequestParam String password, @RequestParam(required = false) String redirect, Model model, HttpSession session) {
+    public String processLogin(
+            @RequestParam String memberId,
+            @RequestParam String password,
+            @RequestParam(required = false) String redirect,
+            Model model,
+            HttpSession session) {
+
         Member member = memberService.login(memberId, password);
         if (member == null) {
             model.addAttribute("error", "아이디 또는 비밀번호가 일치하지 않습니다.");
             return "member/login";
         }
 
-        // 탈퇴한 회원인 경우 로그인 거부
         if (member.isDeleted()) {
             model.addAttribute("error", "탈퇴한 회원입니다. 로그인할 수 없습니다.");
             return "member/login";
         }
 
-        // 세션에 로그인 사용자 저장
         session.setAttribute("loginMember", member);
 
-        // URL 파라미터로 전달된 redirect 값이 있으면 해당 경로로 이동 (모달 로그인 등)
         if (redirect != null && !redirect.isBlank()) {
-            return "redirect:" + redirect;
+            // redirect 값에 포함된 쿼리스트링이 URL 인코딩 되어 있는 경우가 많으므로 디코딩 후 리다이렉트
+            try {
+                String decodedRedirect = java.net.URLDecoder.decode(redirect, "UTF-8");
+                return "redirect:" + decodedRedirect;
+            } catch (Exception e) {
+                // 디코딩 실패 시 원래 redirect로 이동
+                return "redirect:" + redirect;
+            }
         }
 
-        // 세션에 저장된 redirectAfterLogin 값이 있으면 해당 경로로 이동 (기존 리디렉션 처리)
         String redirectPath = (String) session.getAttribute("redirectAfterLogin");
         if (redirectPath != null) {
             session.removeAttribute("redirectAfterLogin");
             return "redirect:" + redirectPath;
         }
 
-        // 위 조건이 모두 없으면 기본적으로 메인 페이지로 이동
         return "redirect:/";
     }
+
 
     //로그아웃
     @GetMapping("/logout")
