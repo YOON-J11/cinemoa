@@ -93,8 +93,7 @@ public class MovieController {
         int nextPageNumber = movies.getNumber() + 1;
         model.addAttribute("nextPageNumber", nextPageNumber);
         for (MovieDto movieDto : movies.getContent()) {
-            // null 값 처리
-            // handleNullValues(movieDto);
+            handleNullValues(movieDto);
         }
 
         model.addAttribute("currentStatus", status); // 현재 선택된 상태를 모델에 추가
