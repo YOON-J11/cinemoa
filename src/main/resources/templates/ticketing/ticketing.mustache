@@ -198,6 +198,7 @@
             .then(res => res.json())
             .then(data => {
                 const cinemas = Array.isArray(data) ? data : [];
+
                 if (cinemas.length === 0) {
                     document.getElementById('cinemaList').innerHTML = '<p>해당 지역에 영화관이 없습니다.</p>';
                     return;
@@ -236,8 +237,6 @@
        // document.getElementById('availableDates').innerHTML = '';
         document.getElementById('timeSlots').innerHTML = '';
         fetchAvailableDates(selectedMovieId, selectedCinemaId);
-
-
 
         currentStep = 4;
         updateStepVisibility();
