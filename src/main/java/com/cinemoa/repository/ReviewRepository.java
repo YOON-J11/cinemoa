@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     // 영화별 리뷰 목록 조회
-    List<Review> findByMovieIdOrderByCreatedAtDesc(Long movieId);
+    List<Review> findByMovie_MovieIdOrderByCreatedAtDesc(Long movieId);
 
     // 영화별 긍정 리뷰 수 조회
     @Query("SELECT COUNT(r) FROM Review r WHERE r.movieId = :movieId AND r.isPositive = true")
@@ -29,4 +29,10 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     boolean existsByMovieIdAndUserId(Long movieId, String userId);
 
     Optional<Review> findByMovieIdAndUserId(Long movieId, String userId);
+    long countByMovie_MovieId(Long movieId);
+
+    // 영화ID + 유저ID 로 리뷰 단건 조회 (Optional)
+    Optional<Review> findByUser_MemberIdAndMovie_MovieId(String memberId, Long movieId);
+
+
 }

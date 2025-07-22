@@ -56,20 +56,38 @@ public class TicketingController {
         this.reservationSeatRepository = reservationSeatRepository;
     }
 
-   // 영화 ID로 예매 페이지 진입 (영화 선택, 영화관, 날짜, 시간 선택 단계)
-   @GetMapping("/{movieId}")
+    @GetMapping("")
+    public String ticketingPage(Model model) {
+        // 모든 영화 가져오기
+        List<MovieDto> allMovies = movieService.getAllMovies();
+
+        Long firstMovieId = null;
+        if (!allMovies.isEmpty()) {
+            firstMovieId = allMovies.get(0).getMovieId();
+        }
+
+        return commonTicketingLogic(firstMovieId, model);
+    }
+
+    @GetMapping("/{movieId}")
     public String ticketingByMovie(@PathVariable("movieId") Long movieId, Model model) {
+        return commonTicketingLogic(movieId, model);
+    }
+
+    // 공통 로직을 처리하는 private 메서드
+    private String commonTicketingLogic(Long selectedMovieId, Model model) {
         // 상영 중인 모든 영화 목록 가져오기 (페이징 없이 모든 데이터)
-        Pageable pageable = PageRequest.of(0, Integer.MAX_VALUE, Sort.by("title").ascending()); // 모든 영화 가져오기
+        Pageable pageable = PageRequest.of(0, Integer.MAX_VALUE, Sort.by("title").ascending());
         List<MovieDto> nowShowingMovies = movieService.getMoviesByScreeningStatus(
-                        Movie.ScreeningStatus.NOW_SHOWING, pageable)
+                        Movie.ScreeningStatus.NOW_SHOWING, pageable, null)
                 .getContent();
 
-       List<MovieDto> allMovies = movieService.getAllMovies();
-       model.addAttribute("movies", allMovies);
+        // 모든 영화 목록
+        List<MovieDto> allMovies = movieService.getAllMovies();
 
+        model.addAttribute("movies", allMovies);
         model.addAttribute("nowShowingMovies", nowShowingMovies);
-        model.addAttribute("selectedMovieId", movieId); // URL에서 넘어온 movieId를 기본 선택으로 설정
+        model.addAttribute("selectedMovieId", selectedMovieId);
 
         // 모든 영화관 정보 가져오기
         List<Cinema> cinemas = cinemaService.getAllCinemas();
@@ -133,21 +151,4 @@ public class TicketingController {
         return cinemaService.getCinemasByRegion(region);
     }
 
-    // 좌석 선택 페이지로 이동하는 엔드포인트
-//    @GetMapping("/showtime/{showtimeId}/seats")
-//    public String showSeatSelectionPage(@PathVariable("showtimeId") Long showtimeId, Model model) {
-//        Optional<Showtime> showtimeOptional = showtimeService.getShowtimeById(showtimeId);
-//
-//        if (showtimeOptional.isPresent()) {
-//            Showtime showtime = showtimeOptional.get();
-//            model.addAttribute("showtime", showtime);
-//            model.addAttribute("movie", showtime.getMovie());
-//            model.addAttribute("screen", showtime.getScreen());
-//            model.addAttribute("title", "좌석 선택");
-//
-//            return "ticketing/seat-selection";
-//        } else {
-//            return "redirect:/movies";
-//        }
-//    }
 }
