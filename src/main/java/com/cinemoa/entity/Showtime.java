@@ -51,10 +51,6 @@ public class Showtime {
         updatedAt = LocalDateTime.now();
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cinema_id", nullable = false)
-    private Cinema cinema;
-
     @PreUpdate
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();

@@ -95,6 +95,7 @@ public class SeatsController {
             // 스크린 타입 가져오기 (IMAX, 4DX, 리클라이너 등등)
             String screenType = showtime.getScreen().getScreenType();
 
+
             // 모델에 담기
             model.addAttribute("showtime", showtime);
             model.addAttribute("movie", showtime.getMovie());
@@ -109,7 +110,6 @@ public class SeatsController {
             model.addAttribute("screenType", showtime.getScreen().getScreenType());
             model.addAttribute("isStandard", "STANDARD".equals(screenType));
             model.addAttribute("isImax", "IMAX".equals(screenType));
-            model.addAttribute("cinemaId", showtime.getCinema().getCinemaId());
             model.addAttribute("movieId", showtime.getMovie().getMovieId());
             model.addAttribute("showtimeId", showtime.getShowtimeId());
             model.addAttribute("screenId", showtime.getScreen().getScreenId());

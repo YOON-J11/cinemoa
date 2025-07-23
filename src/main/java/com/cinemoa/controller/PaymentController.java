@@ -20,7 +20,7 @@ import java.util.Map;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/reservation")
-public class PaymentComtroller {
+public class PaymentController {
 
     private final ReservationRepository reservationRepository;
     private final ReservationSeatRepository reservationSeatRepository;
@@ -33,15 +33,31 @@ public class PaymentComtroller {
 
 
     @GetMapping("/payment")
-    public String showPaymentPage(@RequestParam int amount, Model model, HttpSession session) {
+    public String showPaymentPage(
+            @RequestParam int amount,
+            @RequestParam Long movieId,
+            @RequestParam Long showtimeId,
+            @RequestParam Long screenId,
+            @RequestParam String seatInfo,
+            @RequestParam List<Long> seatIdList,
+            Model model,
+            HttpSession session
+    ) {
         // 로그인 여부 또는 세션 값 확인 (필요시 활용)
         Object loginMember = session.getAttribute("loginMember");
         Object guestUser = session.getAttribute("guestUser");
 
-        // 모델에 결제 금액 전달
+        // 모델에 결제 관련 정보 전달
         model.addAttribute("amount", amount);
+        model.addAttribute("movieId", movieId);
+        model.addAttribute("showtimeId", showtimeId);
+        model.addAttribute("screenId", screenId);
+        model.addAttribute("seatInfo", seatInfo);
+        model.addAttribute("seatIdList", seatIdList);
+
         return "payment/payment";
     }
+
 
     @PostMapping("/payment/complete")
     @ResponseBody
@@ -52,12 +68,12 @@ public class PaymentComtroller {
             String impUid = (String) payload.get("impUid");
             int paidAmount = ((Number) payload.get("paidAmount")).intValue();
             String method = (String) payload.get("method");
-            Long cinemaId = Long.valueOf(payload.get("cinemaId").toString());
             Long movieId = Long.valueOf(payload.get("movieId").toString());
             Long showtimeId = Long.valueOf(payload.get("showtimeId").toString());
             Integer screenId = Integer.valueOf(payload.get("screenId").toString());
             String seatInfo = (String) payload.get("seatInfo");
             List<Integer> seatIds = (List<Integer>) payload.get("seatIdList");
+
 
             // 2. 아임포트 결제 검증
             String impKey = "7713737840810560";
@@ -91,13 +107,17 @@ public class PaymentComtroller {
                 return ResponseEntity.badRequest().body("결제 금액 불일치");
             }
 
+            Showtime showtime = showtimeRepository.findById(showtimeId)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid showtimeId: " + showtimeId));
+            Cinema cinema = showtime.getScreen().getCinema();
+
             // 3. 예약 정보 저장
             Reservation reservation = new Reservation();
             reservation.setReservationTime(LocalDateTime.now());
             reservation.setSeatInfo(seatInfo);
             reservation.setStatus("예약완료");
             reservation.setPaymentMethod(method);
-            reservation.setCinema(cinemaRepository.findById(cinemaId).orElse(null));
+            reservation.setCinema(cinema);
             reservation.setMovie(movieRepository.findById(movieId).orElse(null));
             reservation.setShowtime(showtimeRepository.findById(showtimeId).orElse(null));
             reservation.setScreenId(screenId);
@@ -109,10 +129,6 @@ public class PaymentComtroller {
 
             reservationRepository.save(reservation);
 
-
-            // showtime 조회
-            Showtime showtime = showtimeRepository.findById(showtimeId)
-                    .orElseThrow(() -> new IllegalArgumentException("Invalid showtimeId: " + showtimeId));
             // 4. 좌석 정보 저장
             for (Integer seatId : seatIds) {
                 ReservationSeat reservationSeat = new ReservationSeat();

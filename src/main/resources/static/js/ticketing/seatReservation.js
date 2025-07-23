@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const isMorning = seatSection.dataset.morning === 'true';
     const isSpecialTheater = seatSection.dataset.special === 'true';
 
-
     // 1. 인원 수 증감
     personButtons.forEach((btn) => {
         btn.addEventListener("click", function () {
@@ -82,15 +81,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     renderSelectedSeats();
 
-    const selectedSeatIdList = selectedSeats.map(seatObj => {
-        const seatEl = Array.from(seatElements).find(el => {
-            const row = el.closest('.row').dataset.row;
-            const number = el.textContent.trim();
-            return `${row}${number}` === seatObj.label;
-        });
-        return seatEl ? Number(seatEl.dataset.seatId) : null;
-    }).filter(id => id !== null);
-
     function getSeatLabel(seat) {
         const row = seat.closest(".row").dataset.row;
         const number = seat.textContent.trim();
@@ -137,8 +127,6 @@ document.addEventListener("DOMContentLoaded", function () {
         sessionStorage.setItem("totalPrice", total);
     }
 
-
-
     function updateSeatLimit() {
         if (selectedSeats.length > getTotalPeopleCount()) {
             alert("인원 수가 줄어들어 좌석 일부가 선택 해제됩니다.");
@@ -171,20 +159,33 @@ document.addEventListener("DOMContentLoaded", function () {
         updatePrice();
     });
 
-    const goLoginBtn = document.getElementById("goLogin");
-    if (goLoginBtn) {
-        goLoginBtn.addEventListener("click", function () {
-            const showtimeId = new URLSearchParams(window.location.search).get("showtimeId");
-            const redirectUrl = `/reservation/payment`;
-
-            sessionStorage.setItem("redirectAfterLogin", `/ticketing/seats?showtimeId=${showtimeId}`);
-
-            // confirm 없이 바로 로그인 페이지로 이동
-            window.location.href = `/member/login?redirect=${encodeURIComponent(redirectUrl)}`;
-        });
+    function getSelectedSeatIdList() {
+        return selectedSeats.map(seatObj => {
+            const seatEl = Array.from(seatElements).find(el => {
+                const row = el.closest('.row').dataset.row;
+                const number = el.textContent.trim();
+                return `${row}${number}` === seatObj.label;
+            });
+            return seatEl ? Number(seatEl.dataset.seatId) : null;
+        }).filter(id => id !== null);
     }
 
-    // 다음 버튼 눌렀을 때 모달
+    function redirectToPayment() {
+        const totalPrice = sessionStorage.getItem("totalPrice");
+        const seatInfo = selectedSeats.map(s => s.label).join(',');
+        const seatIds = getSelectedSeatIdList();
+
+        const params = new URLSearchParams();
+        params.append("amount", totalPrice);
+        params.append("movieId", movieId);
+        params.append("showtimeId", showtimeId);
+        params.append("screenId", screenId);
+        params.append("seatInfo", seatInfo);
+        seatIds.forEach(id => params.append("seatIdList", id));
+
+        window.location.href = `/reservation/payment?${params.toString()}`;
+    }
+
     document.querySelector(".navigation .next").addEventListener("click", function () {
         fetch("/checkLogin", {
             method: "GET",
@@ -193,41 +194,56 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(response => response.json())
             .then(data => {
                 if (data.loggedIn) {
-                    const totalPrice = sessionStorage.getItem("totalPrice");
-                      window.location.href = `/reservation/payment?amount=${totalPrice}&cinemaId=${cinemaId}&movieId=${movieId}&showtimeId=${showtimeId}&screenId=${screenId}&seatInfo=${encodeURIComponent(selectedSeats.map(s => s.label).join(','))}&seatIdList=${encodeURIComponent(JSON.stringify(selectedSeatIdList))}`;
+                    redirectToPayment();
                 } else {
-                    // 로그인 모달 표시
                     document.getElementById("loginRequiredModal").style.display = "flex";
                 }
             });
     });
 
-    // 모달 내 버튼 클릭 이벤트
-   document.getElementById("loginMemberBtn").addEventListener("click", function () {
-       const totalPrice = sessionStorage.getItem("totalPrice");
-       const seatInfo = encodeURIComponent(selectedSeats.map(s => s.label).join(','));
-       const seatIdList = encodeURIComponent(JSON.stringify(selectedSeatIdList));  // 여기 인코딩 중요
+    document.getElementById("loginMemberBtn").addEventListener("click", function () {
+        const totalPrice = sessionStorage.getItem("totalPrice");
+        const seatInfo = selectedSeats.map(s => s.label).join(',');
+        const seatIds = getSelectedSeatIdList();
 
-       const redirectUrl = `/reservation/payment?amount=${totalPrice}&cinemaId=${cinemaId}&movieId=${movieId}` +
-                           `&showtimeId=${showtimeId}&screenId=${screenId}&seatInfo=${seatInfo}&seatIdList=${seatIdList}`;
+        const params = new URLSearchParams();
+        params.append("amount", totalPrice);
+        params.append("movieId", movieId);
+        params.append("showtimeId", showtimeId);
+        params.append("screenId", screenId);
+        params.append("seatInfo", seatInfo);
+        seatIds.forEach(id => params.append("seatIdList", id));
 
-       window.location.href = `/member/login?redirect=${encodeURIComponent(redirectUrl)}`;
-   });
+        const redirectUrl = `/reservation/payment?${params.toString()}`;
+        window.location.href = `/member/login?redirect=${encodeURIComponent(redirectUrl)}`;
+    });
 
+    document.getElementById("loginGuestBtn").addEventListener("click", function () {
+        const totalPrice = sessionStorage.getItem("totalPrice");
+        const seatInfo = selectedSeats.map(s => s.label).join(',');
+        const seatIds = getSelectedSeatIdList();
 
-   document.getElementById("loginGuestBtn").addEventListener("click", function () {
-       const totalPrice = sessionStorage.getItem("totalPrice");
-       const seatInfo = encodeURIComponent(selectedSeats.map(s => s.label).join(','));
-       const seatIdList = encodeURIComponent(JSON.stringify(selectedSeatIdList)); // 인코딩 필수!
+        const params = new URLSearchParams();
+        params.append("amount", totalPrice);
+        params.append("movieId", movieId);
+        params.append("showtimeId", showtimeId);
+        params.append("screenId", screenId);
+        params.append("seatInfo", seatInfo);
+        seatIds.forEach(id => params.append("seatIdList", id));
 
-       const redirectUrl = `/reservation/payment?amount=${totalPrice}&cinemaId=${cinemaId}&movieId=${movieId}` +
-                           `&showtimeId=${showtimeId}&screenId=${screenId}&seatInfo=${seatInfo}&seatIdList=${seatIdList}`;
+        const redirectUrl = `/reservation/payment?${params.toString()}`;
+        window.location.href = `/guest/login?redirect=${encodeURIComponent(redirectUrl)}`;
+    });
 
-       window.location.href = `/guest/login?redirect=${encodeURIComponent(redirectUrl)}`;
-   });
+    const goLoginBtn = document.getElementById("goLogin");
+    if (goLoginBtn) {
+        goLoginBtn.addEventListener("click", function () {
+            const showtimeId = new URLSearchParams(window.location.search).get("showtimeId");
+            const redirectUrl = `/reservation/payment`;
 
-
-
-
+            sessionStorage.setItem("redirectAfterLogin", `/ticketing/seats?showtimeId=${showtimeId}`);
+            window.location.href = `/member/login?redirect=${encodeURIComponent(redirectUrl)}`;
+        });
+    }
 
 });
