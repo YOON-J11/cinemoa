@@ -105,19 +105,20 @@
         container.innerHTML = ''; // 기존 내용은 지우지 않음
 
         const today = new Date();
-        const todayStr = today.toISOString().split('T')[0]; // 오늘 날짜
-
-
+       // const todayStr = today.toISOString().split('T')[0];
+       const todayStr = today.toLocaleDateString('sv-SE'); // '2025-07-23' 형태, 한국 시간 기준
 
         // 21일씩 날짜 목록을 렌더링
         for (let i = 0; i < 21; i++) {
             const date = new Date(today);
             date.setDate(today.getDate() + i);
-            const dateStr = date.toISOString().split('T')[0];
-            const day = date.getDate();
+
+            //const dateStr = date.toISOString().split('T')[0];
+            const dateStr = date.toLocaleDateString('sv-SE');
+            const displayDay = date.getDate();
 
             const div = document.createElement('div');
-            div.innerHTML = `<button type="button" class="btn date-optionbutton" data-date="${dateStr}">${day}</button>`;
+            div.innerHTML = `<button type="button" class="btn date-optionbutton" data-date="${dateStr}">${displayDay}</button>`;
             container.appendChild(div);
 
             // 오늘 날짜 자동 선택 및 showtimes 조회
@@ -270,6 +271,8 @@
         btn.classList.add('btn-primary');
         selectedDate = btn.dataset.date;
 
+        document.getElementById('selectedDate').value = selectedDate;
+
         fetchShowtimes(selectedMovieId, selectedCinemaId, selectedDate, window.selectedCinemaName);
         currentStep = 5;
         updateStepVisibility();
@@ -305,11 +308,11 @@
         // 날짜 포맷 변환
         const selectedDateInput = document.getElementById('selectedDate');
         let selectedDateRaw = selectedDateInput?.value || '';
-        let formattedDate = selectedDateRaw.replace(/-/g, '.');
+        let formattedDate = selectedDate.split('-').join('.');
 
         infoDiv.innerHTML = `
             <p class="tit"><span class="movie-grade age-${ageRating}">${ageRating}</span>${selectedMovieTitle}</p>
-            <p>${selectedDate}</p>
+            <p>${formattedDate}</p>
             <p>${cinemaName}${screenName}</p>
             <p>${startTime} ~ ${endTime}</p>
          `;
