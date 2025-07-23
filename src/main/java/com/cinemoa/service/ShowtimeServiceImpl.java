@@ -60,6 +60,7 @@ public class ShowtimeServiceImpl implements ShowtimeService {
                     .startTime(showtime.getStartTime())
                     .endTime(calculatedEndTime)
                     .screenName(showtime.getScreen().getScreenName())
+                    .screenType(showtime.getScreen().getScreenType())
                     .build();
         }).collect(Collectors.toList());
     }

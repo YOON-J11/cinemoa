@@ -556,9 +556,10 @@ nav ul {
     height: 23px;
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    color: transparent;
 }
 
-.movie-grade.age-all {
+.movie-grade.age-all, .movie-grade.age-ALL {
     background-image: url(https://img.megabox.co.kr/static/pc/images/common/txt/ALL_46x46.png);
 }
 
@@ -666,6 +667,7 @@ nav ul {
 	fill: hsl(0,100%,60%);
 	stroke: hsl(0,100%,60%);
 }
+.heart-button.disable {pointer-events: none;}
 
 /* @keyframes liked {
 	0% { scale: 1; rotate: -15deg; }
