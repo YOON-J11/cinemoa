@@ -57,5 +57,6 @@ public interface MovieService {
 
     long getConfirmedAudienceCount(Long movieId);
 
+    List<MovieDto> getTop4MoviesByReservationRate(String memberId);
 
 }

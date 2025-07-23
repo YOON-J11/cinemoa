@@ -11,9 +11,7 @@ import com.cinemoa.repository.MovieRepository;
 import com.cinemoa.repository.ReservationRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -114,11 +112,28 @@ public class MovieServiceImpl implements MovieService {
     @Override
     @Transactional(readOnly = true)
     public Page<MovieDto> searchMoviesByKeyword(String keyword, Pageable pageable, String memberId) {
-        // 제목, 감독, 배우만으로 키워드 검색
+        // 검색된 영화 목록
         Page<Movie> moviePage = movieRepository.findByTitleContainingOrDirectorContainingOrActorsContaining(
-                keyword, keyword, keyword, pageable);
-        return moviePage.map(movie -> convertToDtoWithLikeStatus(movie, memberId));
+                keyword, keyword, keyword, Pageable.unpaged()); // 전체 가져오기
+
+        // DTO로 변환 + 예매율 정렬
+        List<MovieDto> sortedList = moviePage.stream()
+                .map(movie -> {
+                    MovieDto dto = convertToDtoWithLikeStatus(movie, memberId);
+                    dto.setReservationRate(getReservationRate(movie));
+                    return dto;
+                })
+                .sorted(Comparator.comparing(MovieDto::getReservationRate, Comparator.nullsLast(BigDecimal::compareTo)).reversed())
+                .collect(Collectors.toList());
+
+        // 다시 Page 형태로 변환
+        int start = (int) pageable.getOffset();
+        int end = Math.min(start + pageable.getPageSize(), sortedList.size());
+        List<MovieDto> pagedList = sortedList.subList(start, end);
+
+        return new PageImpl<>(pagedList, pageable, sortedList.size());
     }
+
 
     @Override
     @Transactional(readOnly = true)
@@ -316,6 +331,21 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public long getConfirmedAudienceCount(Long movieId) {
         return reservationRepository.countByMovieId(movieId);
+    }
+
+    @Override
+    public List<MovieDto> getTop4MoviesByReservationRate(String memberId) {
+        List<Movie> movies = movieRepository.findAll();
+
+        return movies.stream()
+                .map(movie -> {
+                    MovieDto dto = convertToDtoWithLikeStatus(movie, memberId);
+                    dto.setReservationRate(getReservationRate(movie));
+                    return dto;
+                })
+                .sorted(Comparator.comparing(MovieDto::getReservationRate, Comparator.nullsLast(BigDecimal::compareTo)).reversed())
+                .limit(4)
+                .collect(Collectors.toList());
     }
 
     // Entity -> DTO 변환, 좋아요 상태를 포함시키는 헬퍼 메서드

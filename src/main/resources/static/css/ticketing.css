@@ -52,6 +52,8 @@
     gap: .5rem;
 }
 
+#timeSlots div:last-child .time-slot {border-bottom:0;}
+
 .time-slot {
     border-bottom: 1px solid #ccc;
     padding: 1rem;
