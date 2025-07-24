@@ -44,3 +44,13 @@ window.addEventListener("scroll", function () {
     mainNav.classList.remove("fixed");
   }
 });
+
+// 구현예정 알러트창
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('a[href="#"]').forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault(); // 기본 동작 막기 (페이지 상단 이동 방지)
+        alert('추후 구현 예정입니다.');
+      });
+    });
+  });
