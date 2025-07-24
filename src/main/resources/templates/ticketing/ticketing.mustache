@@ -72,10 +72,12 @@
             <p>선택한 상영 정보를 확인해주세요</p>
             <button id="closeConfirmPopup" class="close-btn"><img src="https://www.lottecinema.co.kr/NLCHS/Content/images/icon/close_19_wht.png"></button>
         </div>
-        <div id="confirmShowtimeInfo"></div>
-        <div class="btn-wrap">
-            <button id="closeConfirmPopup2">취소</button>
-            <button id="confirmGoToSeats" class="btn btn-primary">인원/좌석 선택</button>
+        <div class="inner">
+            <div id="confirmShowtimeInfo"></div>
+            <div class="btn-wrap">
+                <button id="closeConfirmPopup2">취소</button>
+                <button id="confirmGoToSeats" class="btn btn-primary">인원/좌석 선택</button>
+            </div>
         </div>
     </div>
 </div>
@@ -312,9 +314,9 @@
 
         infoDiv.innerHTML = `
             <p class="tit"><span class="movie-grade age-${ageRating}">${ageRating}</span>${selectedMovieTitle}</p>
-            <p>${formattedDate}</p>
-            <p>${cinemaName}${screenName}</p>
-            <p>${startTime} ~ ${endTime}</p>
+            <p class="date">${formattedDate}</p>
+            <p class="time">${startTime} ~ ${endTime}</p>
+            <p>${cinemaName} / ${screenName}</p>
          `;
 
         popup.style.display = 'flex';
@@ -325,7 +327,7 @@
         if (!selectedShowtimeId) return;
 
         document.getElementById('confirmShowtimePopup').style.display = 'none';
-        window.location.href = `/ticketing/seats?showtimeId=${selectedShowtimeId}`;
+        window.location.href = `/ticketing/showtime/${selectedShowtimeId}/seats`;
     });
 
     document.getElementById('closeConfirmPopup').addEventListener('click', () => {
@@ -352,7 +354,7 @@
                 const container = document.getElementById('timeSlots');
                 container.innerHTML = '';
                 if (showtimes.length === 0) {
-                    container.innerHTML = `<div class=""><div class="alert alert-warning text-center">조회 가능한 상영시간이 없습니다.<br>조건을 변경해주세요.</div></div>`;
+                    container.innerHTML = `<div class="alert"><img src="https://www.lottecinema.co.kr/NLCHS/Content/images/icon/film.png"><div class="text-wrap">조회 가능한 상영시간이 없습니다.<br>조건을 변경해주세요.</div></div>`;
                     document.getElementById('goToSeatSelection').disabled = true;
                 } else {
                     showtimes.forEach(show => {

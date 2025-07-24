@@ -1,15 +1,17 @@
 {{> common/header }}
 <link rel="stylesheet" href="/css/movies.css" />
-<a href="/movies/new">등록하기</a>
-<a href="/movies?status=NOT_SHOWING">상영안함</a>
-
 <div class="container movies">
+    <div class="admin-btn">
+        <a href="/movies/new">새 영화 등록</a>
+    </div>
     <div class="movie-chart">
         <div class="tit">
             <h1>무비차트</h1>
             <div class="status-tab">
                 <a href="/movies" class="tab-item">무비차트</a>
                 <a href="/movies?status=COMING_SOON" class="tab-item">상영예정작</a>
+                <!-- amdin -->
+                <a href="/movies?status=NOT_SHOWING" class="tab-item">상영중지</a>
             </div>
         </div>
         <div class="sort">
