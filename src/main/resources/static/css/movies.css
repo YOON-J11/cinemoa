@@ -145,7 +145,7 @@ nav ul {
 }
 .movie-chart .tit .status-tab a.active {
     color: #006f7c;
-        display: flex;
+    display: flex;
 }
 
 .movie-chart .tit .status-tab a.active:before {
@@ -350,7 +350,7 @@ nav ul {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 7px;
 }
 .movie-detail .movie-info .info3 {display: flex;  gap: .5rem; height: 50px;}
 .movie-detail .movie-info .info3 .like-btn {
@@ -386,6 +386,7 @@ nav ul {
 .movie-detail .movie-info .info4 {font-size: 1rem;}
 .movie-detail .movie-info .info4 h5 {padding-bottom: .5rem; }
 .movie-detail .movie-info .info4 span {font-size: 26px;}
+.movie-detail .movie-info .info4 span.rating {font-size: 1rem;}
 
 .movie-detail .movie-cont {
     line-height: 1.4;

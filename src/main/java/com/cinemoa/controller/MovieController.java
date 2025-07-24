@@ -50,7 +50,7 @@ public class MovieController {
     @GetMapping("")
     public String listMovies(@RequestParam(required = false) String status,
                              Model model,
-                             @PageableDefault(size = 12, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable, HttpSession session) {
+                             @PageableDefault(size = 8, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable, HttpSession session) {
 
         //Page<MovieDto> movies;
 
@@ -125,7 +125,7 @@ public class MovieController {
         Member loginMember = (Member) session.getAttribute("loginMember");
         String currentMemberId = loginMember != null ? loginMember.getMemberId() : null;
 
-        Pageable pageable = PageRequest.of(page, 12, Sort.by("rank").descending());
+        Pageable pageable = PageRequest.of(page, 8, Sort.by("rank").descending());
 
         Movie.ScreeningStatus screeningStatus = null;
 
