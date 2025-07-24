@@ -13,8 +13,8 @@
                             <div class="movie-item" data-movie-id="{{movieId}}">
                                 <div class="tit-wrap">
                                     <div class="tit">
-                                        <span>{{ageRating}}</span>
-                                        <h5>{{title}}</h5>
+                                        <span class="age movie-grade age-{{ageRating}}">{{ageRating}}</span>
+                                        <h5 class="movie-tit">{{title}}</h5>
                                         <p class="running-time"> {{runningTime}}분</p>
                                     </div>
                                 </div>
@@ -59,9 +59,23 @@
                         <div id="timeSlots"></div>
                         <input type="hidden" id="selectedShowtime" />
                     </div>
-                    <button type="button" class="btn btn-success" id="goToSeatSelection" disabled>좌석선택하기</button>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- 상영시간 확인 팝업 -->
+<div id="confirmShowtimePopup" class="custom-modal" style="display:none;">
+    <div class="custom-modal-content">
+        <div class="modal-top">
+            <p>선택한 상영 정보를 확인해주세요</p>
+            <button id="closeConfirmPopup" class="close-btn"><img src="https://www.lottecinema.co.kr/NLCHS/Content/images/icon/close_19_wht.png"></button>
+        </div>
+        <div id="confirmShowtimeInfo"></div>
+        <div class="btn-wrap">
+            <button id="closeConfirmPopup2">취소</button>
+            <button id="confirmGoToSeats" class="btn btn-primary">인원/좌석 선택</button>
         </div>
     </div>
 </div>
@@ -91,19 +105,20 @@
         container.innerHTML = ''; // 기존 내용은 지우지 않음
 
         const today = new Date();
-        const todayStr = today.toISOString().split('T')[0]; // 오늘 날짜
-
-
+       // const todayStr = today.toISOString().split('T')[0];
+       const todayStr = today.toLocaleDateString('sv-SE'); // '2025-07-23' 형태, 한국 시간 기준
 
         // 21일씩 날짜 목록을 렌더링
         for (let i = 0; i < 21; i++) {
             const date = new Date(today);
             date.setDate(today.getDate() + i);
-            const dateStr = date.toISOString().split('T')[0];
-            const day = date.getDate();
+
+            //const dateStr = date.toISOString().split('T')[0];
+            const dateStr = date.toLocaleDateString('sv-SE');
+            const displayDay = date.getDate();
 
             const div = document.createElement('div');
-            div.innerHTML = `<button type="button" class="btn date-optionbutton" data-date="${dateStr}">${day}</button>`;
+            div.innerHTML = `<button type="button" class="btn date-optionbutton" data-date="${dateStr}">${displayDay}</button>`;
             container.appendChild(div);
 
             // 오늘 날짜 자동 선택 및 showtimes 조회
@@ -256,6 +271,8 @@
         btn.classList.add('btn-primary');
         selectedDate = btn.dataset.date;
 
+        document.getElementById('selectedDate').value = selectedDate;
+
         fetchShowtimes(selectedMovieId, selectedCinemaId, selectedDate, window.selectedCinemaName);
         currentStep = 5;
         updateStepVisibility();
@@ -265,11 +282,60 @@
     document.getElementById('timeSlots').addEventListener('click', e => {
         const slot = e.target.closest('.time-slot');
         if (!slot) return;
+
         document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
         slot.classList.add('selected');
+
         selectedShowtimeId = slot.dataset.showtimeId;
-        document.getElementById('goToSeatSelection').disabled = false;
+
+        //document.getElementById('goToSeatSelection').disabled = false;
+
+        // 팝업 열기
+        const popup = document.getElementById('confirmShowtimePopup');
+        const infoDiv = document.getElementById('confirmShowtimeInfo');
+
+        const startTime = slot.querySelector('.start-time')?.innerText || '';
+        const endTime = slot.querySelector('.end-time')?.innerText || '';
+        const screenName = slot.querySelector('.screen-name')?.innerText || '';
+        const cinemaName = window.selectedCinemaName || '';
+
+        // 영화 제목 가져오기
+        const selectedMovieElement = document.querySelector('.movie-item.selected');
+        const selectedMovieTitle = selectedMovieElement ? selectedMovieElement.querySelector('.movie-tit')?.innerText || ''
+        : '';
+        const ageRating = selectedMovieElement?.querySelector('.movie-grade')?.innerText || '';
+
+        // 날짜 포맷 변환
+        const selectedDateInput = document.getElementById('selectedDate');
+        let selectedDateRaw = selectedDateInput?.value || '';
+        let formattedDate = selectedDate.split('-').join('.');
+
+        infoDiv.innerHTML = `
+            <p class="tit"><span class="movie-grade age-${ageRating}">${ageRating}</span>${selectedMovieTitle}</p>
+            <p>${formattedDate}</p>
+            <p>${cinemaName}${screenName}</p>
+            <p>${startTime} ~ ${endTime}</p>
+         `;
+
+        popup.style.display = 'flex';
+
     });
+
+    document.getElementById('confirmGoToSeats').addEventListener('click', () => {
+        if (!selectedShowtimeId) return;
+
+        document.getElementById('confirmShowtimePopup').style.display = 'none';
+        window.location.href = `/ticketing/showtime/${selectedShowtimeId}/seats`;
+    });
+
+    document.getElementById('closeConfirmPopup').addEventListener('click', () => {
+        document.getElementById('confirmShowtimePopup').style.display = 'none';
+    });
+    document.getElementById('closeConfirmPopup2').addEventListener('click', () => {
+        document.getElementById('confirmShowtimePopup').style.display = 'none';
+    });
+
+
 
     // 좌석 선택 버튼 클릭
     document.getElementById('goToSeatSelection').addEventListener('click', () => {
@@ -293,7 +359,19 @@
                         const start = new Date(show.startTime);
                         const end = new Date(show.endTime);
                         const timeDiv = document.createElement('div');
-                         timeDiv.innerHTML = `<div class="time-slot" data-showtime-id="${show.showtimeId}"><strong><span class="start-time">${start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit',hour12: false })}</span><br> ~ ${end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit',hour12: false })}</strong><p class="info"><span>${cinemaName}</span><span>${show.screenName}</span></p></div>`;
+                         timeDiv.innerHTML = `
+                         <div class="time-slot" data-showtime-id="${show.showtimeId}">
+                            <strong>
+                                <span class="start-time">${start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit',hour12: false })}</span>
+                                <br> ~ <span class="end-time">${end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit',hour12: false })}</span>
+                            </strong>
+                            <div class="info">
+                                ${cinemaName}
+                                <p class="screen-name">${show.screenName}
+                                    <span class="screen-type">(${show.screenType})</span>
+                                </p>
+                            </div>
+                        </div>`;
                         container.appendChild(timeDiv);
                     });
                     document.getElementById('goToSeatSelection').disabled = false;
@@ -301,8 +379,8 @@
             });
     }
 
-
     updateStepVisibility();
+
 });
 </script>
 {{> common/footer }}

@@ -29,10 +29,16 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     // 특정 영화의 예매 수
     long countByMovie(Movie movie);
 
+    // 특정 영화를 예매한 관객 수
+    // 결제 상태 조건 없이 특정 movie_id의 예약 건수 카운트
+    @Query("SELECT COUNT(r) FROM Reservation r WHERE r.movie.movieId = :movieId")
+    long countByMovieId(@Param("movieId") Long movieId);
+
+    // 기존에 PaymentStatus 조건이 있던 메서드
     @Query("SELECT COUNT(r) FROM Reservation r WHERE r.movie.movieId = :movieId AND r.payment.status = :status")
-    long countConfirmedAudience(@Param("movieId") Long movieId, @Param("status") Payment.PaymentStatus status);
+    long countReservationsByMovieId(@Param("movieId") Long movieId, @Param("status") Payment.PaymentStatus status);
+
 
     @Query("SELECT COUNT(r) FROM Reservation r")
     long countAll();
-
 }

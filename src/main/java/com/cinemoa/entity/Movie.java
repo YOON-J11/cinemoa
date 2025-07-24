@@ -69,7 +69,7 @@ public class Movie {
     private String videoUrl;
 
     @Column(name = "audience_count")
-    private BigInteger audienceCount;
+    private Long audienceCount;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)

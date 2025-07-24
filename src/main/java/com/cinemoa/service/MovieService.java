@@ -54,4 +54,9 @@ public interface MovieService {
 
     public Page<MovieDto> getMoviesByRank(Pageable pageable, String memberId);
     Page<MovieDto> getMoviesByRank(Pageable pageable, String memberId, Movie.ScreeningStatus screeningStatus);
+
+    long getConfirmedAudienceCount(Long movieId);
+
+    List<MovieDto> getTop4MoviesByReservationRate(String memberId);
+
 }

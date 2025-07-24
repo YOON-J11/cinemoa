@@ -117,4 +117,14 @@ public class MovieApiController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
+
+    @GetMapping("/rank")
+    public ResponseEntity<List<MovieDto>> getTop4Movies(HttpSession session) {
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        String memberId = loginMember != null ? loginMember.getMemberId() : null;
+
+        List<MovieDto> top4Movies = movieService.getTop4MoviesByReservationRate(memberId);
+        return ResponseEntity.ok(top4Movies);
+    }
+
 }

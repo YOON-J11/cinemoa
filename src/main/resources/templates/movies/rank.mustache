@@ -1,46 +1,24 @@
-{{> common/header }}
 <link rel="stylesheet" href="/css/movies.css" />
-<a href="/movies/new">등록하기</a>
-<a href="/movies?status=NOT_SHOWING">상영안함</a>
-
-<div class="container movies">
-    <div class="movie-chart">
-        <div class="tit">
-            <h1>무비차트</h1>
-            <div class="status-tab">
-                <a href="/movies" class="tab-item">무비차트</a>
-                <a href="/movies?status=COMING_SOON" class="tab-item">상영예정작</a>
-            </div>
+<div class="box-office movies">
+    <div class="container movie-chart">
+        <div class="top">
+            <p>박스오피스</p>
+            <a href="/movies">더 많은 영화 보기<img src="https://img.megabox.co.kr/static/pc/images/common/ico/ico-more-cross-gray.png"></a>
         </div>
-        <div class="sort">
-            <div class="onair-condition">
-                <div class="toggle-switch-wrapper">
-                    <input type="checkbox" name="onairToggle" class="mobileToggle" id="onairToggle">
-                    <label for="onairToggle"></label>
-                </div>
-                <p class="toggle-text">개봉작만</p>
-            </div>
-            <div class="input-wrap movie-search">
-                <input type="text" id="searchKeyword" title="영화 검색" placeholder="영화명, 감독명, 배우명 검색">
-                <button type="button" class="btn-search-input" id="btnSearch"><img width="20" height="20" src="https://img.icons8.com/ios-glyphs/20/search--v1.png" alt="search--v1"/></button>
-            </div>
-        </div>
-
         <div class="movie-list">
             {{#movies.content}}
                 <div class="item">
                     <div class="item-wrap">
-
                         {{#mainImageUrl}}
-                        <div class="main-image">
-                            <div class="over_box">
-                                <div class="inner">
-                                    <a href="/ticketing/{{movieId}}">예매하기</a>
-                                    <a href="/movies/{{movieId}}">상세정보</a>
+                            <div class="main-image">
+                                <div class="over_box">
+                                    <div class="inner">
+                                        <a href="/ticketing/{{movieId}}">예매하기</a>
+                                        <a href="/movies/{{movieId}}">상세정보</a>
+                                    </div>
                                 </div>
+                                <img src="/images/movie/{{mainImageUrl}}" alt="{{title}}">
                             </div>
-                            <img src="/images/movie/{{mainImageUrl}}" alt="{{title}}">
-                        </div>
                         {{/mainImageUrl}}
                         {{^mainImageUrl}}
                             <div class="main-image empty">>이미지 없음</div>
@@ -76,19 +54,19 @@
                         <div class="item-btn">
                             <div class="like-btn" data-movie-id="{{movieId}}">
                                 {{#loginMember}}
-                                <button class="heart-button {{#likedByCurrentUser}}active{{/likedByCurrentUser}}">
-                                <svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" id="heart" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M13.91,6.75c-1.17,2.25-4.3,5.31-6.07,6.94c-0.1903,0.1718-0.4797,0.1718-0.67,0C5.39,12.06,2.26,9,1.09,6.75&#xA;&#x9;C-1.48,1.8,5-1.5,7.5,3.45C10-1.5,16.48,1.8,13.91,6.75z" stroke="black"/>
-                                </svg>
-                                </button>
-                                {{/loginMember}}
-                                {{^loginMember}}
-                                    <a href="/member/login">
-                                    <button class="heart-button disable">
+                                    <button class="heart-button {{#likedByCurrentUser}}active{{/likedByCurrentUser}}">
                                         <svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" id="heart" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M13.91,6.75c-1.17,2.25-4.3,5.31-6.07,6.94c-0.1903,0.1718-0.4797,0.1718-0.67,0C5.39,12.06,2.26,9,1.09,6.75&#xA;&#x9;C-1.48,1.8,5-1.5,7.5,3.45C10-1.5,16.48,1.8,13.91,6.75z" stroke="black"/>
                                         </svg>
                                     </button>
+                                {{/loginMember}}
+                                {{^loginMember}}
+                                    <a href="/member/login">
+                                        <button class="heart-button disable">
+                                            <svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" id="heart" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M13.91,6.75c-1.17,2.25-4.3,5.31-6.07,6.94c-0.1903,0.1718-0.4797,0.1718-0.67,0C5.39,12.06,2.26,9,1.09,6.75&#xA;&#x9;C-1.48,1.8,5-1.5,7.5,3.45C10-1.5,16.48,1.8,13.91,6.75z" stroke="black"/>
+                                            </svg>
+                                        </button>
                                     </a>
                                 {{/loginMember}}
                                 <span class="likesCount">{{likesCount}}</span>
@@ -98,11 +76,6 @@
                     </div>
                 </div>
             {{/movies.content}}
-        </div>
-        <div class="more-btn-wrap">
-            {{#movies.hasNext}}
-                <button type="button" class="btn-more" id="btnLoadMore" data-next-page="{{nextPageNumber}}"><span>더보기</span><img src="https://img.megabox.co.kr/static/pc/images/common/ico/ico-btn-more-arr.png"></button>
-            {{/movies.hasNext}}
         </div>
     </div>
 </div>
@@ -271,51 +244,6 @@
             }
         });
 
-        // 온에어 토글 체크박스 코드
-        const onairToggle = document.getElementById('onairToggle');
-        if (onairToggle) {
-            if (status === 'NOW_SHOWING') {
-                onairToggle.checked = true;
-            } else {
-                onairToggle.checked = false;
-            }
-            onairToggle.addEventListener('change', function() {
-                if (this.checked) {
-                    window.location.href = '/movies?status=NOW_SHOWING';
-                } else {
-                    window.location.href = '/movies';
-                }
-            });
-        }
-
-        // 검색 버튼 클릭 이벤트 처리
-        const btnSearch = document.getElementById('btnSearch');
-        const searchKeyword = document.getElementById('searchKeyword');
-        if (btnSearch && searchKeyword) {
-            btnSearch.addEventListener('click', function() {
-                performSearch();
-            });
-            searchKeyword.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    performSearch();
-                }
-            });
-
-            function performSearch() {
-                const keyword = searchKeyword.value.trim();
-                if (keyword) {
-                    const currentStatus = urlParams.get('status');
-                    let searchUrl = '/movies/search?keyword=' + encodeURIComponent(keyword);
-                    if (currentStatus) {
-                        searchUrl += '&status=' + currentStatus;
-                    }
-                    window.location.href = searchUrl;
-                } else {
-                    alert('검색할 영화명을 입력하세요.');
-                }
-            }
-        }
-
         // 초기 로드된 영화 목록에 동작 적용
         const movieListContainer = document.querySelector('.movie-list');
         if (!movieListContainer) {
@@ -326,65 +254,5 @@
         // 날짜, 좋아요 수 포맷 등 초기 적용
         applyBehaviorsToMovieItems(movieListContainer);
 
-         // 좋아요 버튼 클릭 이벤트 위임
-        movieListContainer.addEventListener('click', function(event) {
-            const heartBtn = event.target.closest('.heart-button');
-            if (heartBtn && movieListContainer.contains(heartBtn)) {
-                heartBtn.classList.toggle('active');
-            }
-        });
-
-        // 더보기 버튼 이벤트 처리
-        const btnLoadMore = document.getElementById('btnLoadMore');
-        if (btnLoadMore) {
-            btnLoadMore.addEventListener('click', function() {
-                const nextPage = this.getAttribute('data-next-page');
-                const currentStatus = urlParams.get('status');
-
-                let url = `/movies/loadMore?page=${nextPage}`;
-                if (currentStatus) {
-                    url += `&status=${currentStatus}`;
-                }
-
-                this.innerHTML = '로딩 중...';
-                this.disabled = true;
-
-                fetch(url)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-                        return response.text();
-                    })
-                    .then(html => {
-                        const tempDiv = document.createElement('div');
-                        tempDiv.innerHTML = html;
-                        const newMovies = tempDiv.querySelectorAll('.item');
-
-                        newMovies.forEach(movie => {
-                            movieListContainer.appendChild(movie);
-                        });
-
-                        applyBehaviorsToMovieItems(movieListContainer);
-
-                        const hasNextPageElement = tempDiv.querySelector('[data-has-next]');
-                        const hasNextPage = hasNextPageElement ? hasNextPageElement.getAttribute('data-has-next') === 'true' : false;
-
-                        if (hasNextPage) {
-                            this.setAttribute('data-next-page', parseInt(nextPage) + 1);
-                            this.innerHTML = '더보기';
-                            this.disabled = false;
-                        } else {
-                            this.parentNode.innerHTML = '';
-                        }
-                    })
-                    .catch(error => {
-                        console.error('영화를 불러오는 중 오류가 발생했습니다:', error);
-                        this.innerHTML = '다시 시도';
-                        this.disabled = false;
-                    });
-            });
-        }
     });
 </script>
-{{> common/footer }}
