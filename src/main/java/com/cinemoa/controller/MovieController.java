@@ -34,7 +34,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-
 @Controller
 @RequestMapping("/movies")
 public class MovieController {
@@ -47,7 +46,6 @@ public class MovieController {
         this.movieService = movieService;
         this.reviewService = reviewService;
     }
-
 
     @GetMapping("")
     public String listMovies(@RequestParam(required = false) String status,
@@ -228,6 +226,10 @@ public class MovieController {
 
             // movieId 값을 모델에 추가
             model.addAttribute("movieId", id);
+
+            // 누적 관객수 조회 (서비스 호출)
+            long audienceCount = movieService.getConfirmedAudienceCount(id);
+            model.addAttribute("audienceCount", audienceCount);
 
             // 영화 전체 리스트로 rank 포함 DTO 리스트 조회
             List<MovieDto> rankedMovies = movieService.getMoviesWithStats(currentMemberId);
@@ -510,6 +512,27 @@ public class MovieController {
         return "movies/list"; // 검색 결과도 동일한 목록 템플릿 사용
     }
 
+    @GetMapping("/rank")
+    public String getTop4Movies(Model model, HttpSession session) {
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        String memberId = loginMember != null ? loginMember.getMemberId() : null;
+
+        List<MovieDto> top4Movies = movieService.getTop4MoviesByReservationRate(memberId);
+
+        top4Movies.forEach(dto -> {
+            boolean liked = memberId != null && movieService.isMovieLikedByMember(dto.getMovieId(), memberId);
+            dto.setLikedByCurrentUser(liked);
+        });
+
+        Map<String, Object> moviesWrapper = new HashMap<>();
+        moviesWrapper.put("content", top4Movies);
+
+        model.addAttribute("movies", moviesWrapper);
+        model.addAttribute("loginMember", loginMember != null); // boolean 값으로 변경
+
+        return "movies/rank";
+    }
+
     private void handleNullValues(MovieDto movieDto) {
         // 숫자형 필드 null 처리
         if (movieDto.getRating() == null) {
@@ -519,7 +542,7 @@ public class MovieController {
             movieDto.setReservationRate(BigDecimal.ZERO);
         }
         if (movieDto.getAudienceCount() == null) {
-            movieDto.setAudienceCount(BigInteger.ZERO);
+            movieDto.setAudienceCount(0L);
         }
         if (movieDto.getLikesCount() == null) {
             movieDto.setLikesCount(0);
