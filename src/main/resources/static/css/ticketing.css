@@ -130,6 +130,7 @@ h3 {
     padding: 1rem;
     overflow-y: scroll;
     height: calc(100% - 50px);
+    overflow-x: hidden;
 }
 #movieList::-webkit-scrollbar {display: none; }
 
