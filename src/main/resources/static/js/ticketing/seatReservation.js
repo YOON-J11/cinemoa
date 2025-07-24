@@ -108,8 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (isMorning) {
                     price -= 5000; // 조조 할인 (중복불가)
                 } else {
-                    if (type === "청소년") price -= 3000;
-                    if (type === "경로" || type === "우대") price -= 5000;
+                    if (type === "청소년" || type === "경로" || type === "우대") price -= 3000;
                 }
 
                 if (screenType === "IMAX") {

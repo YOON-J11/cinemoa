@@ -3,7 +3,7 @@
 <div class="container reservation-wrapper">
     <!-- 왼쪽: 좌석 선택 영역 -->
     <div class="seat-selection" data-is-morning="{{isMorning}}" data-screen-type="{{screenType}}"
-         data-special="{{isImax}}">
+        data-special="{{isImax}}">
         <div class="title">
             <h2>빠른예매</h2>
             <button class="reset-btn"><img src="/images/icons/reset-icon.png">초기화</button>
@@ -48,25 +48,28 @@
         <div class="seat-map">
             <div class="screen-label">SCREEN</div>
             {{#seatRowList}}
-                <div class="row" data-row="{{row}}">
-                    <span class="row-label">{{row}}</span>
+            <div class="row" data-row="{{row}}">
+                <span class="row-label">{{row}}</span>
+                <div class="seat-line">
                     {{#seats}}
-                        {{#isGap}}
-                            <span class="seat-gap"></span>
-                        {{/isGap}}
-                        {{^isGap}}
-                            <span class="seat
-                    {{#isReserved}}disabled{{/isReserved}}
-                                {{#isVip}}vip{{/isVip}}
-                                {{#isAccessible}}accessible{{/isAccessible}}" data-seat-id="{{seatId}}"
-                                  data-price="{{price}}">
-                                {{seatNumber}}
-                            </span>
-                        {{/isGap}}
+                    {{#isGap}}
+                    <span class="seat-gap"></span>
+                    {{/isGap}}
+                    {{^isGap}}
+                    <span class="seat
+                            {{#isReserved}}disabled{{/isReserved}}
+                            {{#isVip}}vip{{/isVip}}
+                            {{#isAccessible}}accessible{{/isAccessible}}" data-seat-id="{{seatId}}"
+                        data-price="{{price}}">
+                        {{seatNumber}}
+                    </span>
+                    {{/isGap}}
                     {{/seats}}
                 </div>
+            </div>
             {{/seatRowList}}
         </div>
+
     </div>
 
     <!-- 오른쪽: 예매 정보 영역 -->
@@ -81,7 +84,7 @@
                     <p style="margin-bottom: 25px;">
                         {{screen.screenName}}
                         {{#screenType}}
-                            {{^isStandard}} ({{screenType}}){{/isStandard}}
+                        {{^isStandard}} ({{screenType}}){{/isStandard}}
                         {{/screenType}}
                     </p>
                     <p>{{formattedDate}}</p>
