@@ -325,7 +325,7 @@
         if (!selectedShowtimeId) return;
 
         document.getElementById('confirmShowtimePopup').style.display = 'none';
-        window.location.href = `/ticketing/showtime/${selectedShowtimeId}/seats`;
+        window.location.href = `/ticketing/seats?showtimeId=${selectedShowtimeId}`;
     });
 
     document.getElementById('closeConfirmPopup').addEventListener('click', () => {
