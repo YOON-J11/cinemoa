@@ -36,33 +36,7 @@
     border-right: 1px solid #ccc;
 }
 
-.time-choice #step4 {
-    padding: .5rem;
-    border-bottom: 1px solid #ccc;
-    height: 80px;
-}
-
-.time-choice #step5 { height: calc(100% - 130px);}
-.time-choice #step5 .input-wrap {height: 100%;}
-.time-choice #step5 #timeSlots {
-    height: 100%;
-    overflow-y: scroll;
-    padding-bottom: 1rem;
-}
-.time-choice #step5 #timeSlots::-webkit-scrollbar {display: none; }
-
-.time-choice #step5 .alert {
-    padding: 2rem 1rem 4rem;
-    text-align: center;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: .5rem;
-}
-.time-choice #step5 .alert .text-wrap {line-height: 1.2;}
-
+.time-choice #step4 {padding: 1rem;     border-bottom: 1px solid #ccc;}
 .time-choice button.date-optionbutton {
     width: 30px;
     height: 30px;
@@ -76,8 +50,9 @@
     overflow-x: scroll;
     width: 100%;
     gap: .5rem;
-    padding: .5rem;
 }
+
+#timeSlots div:last-child .time-slot {border-bottom:0;}
 
 .time-slot {
     border-bottom: 1px solid #ccc;
@@ -131,7 +106,6 @@ h3 {
     overflow-y: scroll;
     height: calc(100% - 50px);
 }
-#movieList::-webkit-scrollbar {display: none; }
 
 .movie-item {
     padding: 10px 5px ;
@@ -161,20 +135,8 @@ h3 {
     text-align: left;
 }
 
-#regionList {
-    border-right: 1px solid #ccc;
-    height: 100%;
-    padding: 1rem;
-    overflow-y: scroll;
-}
-#regionList::-webkit-scrollbar {display: none; }
-
-#cinemaList {
-    height: 100%;
-    padding: 1rem;
-    overflow-y: scroll;
-}
-#cinemaList::-webkit-scrollbar {display: none; }
+#regionList { border-right: 1px solid #ccc; height: 100%; padding: 1rem}
+#cinemaList {height: 100%; padding: 1rem;}
 
 .running-time {opacity:0;}
 .btn-primary { background: #006f7c; color: #fff;}
@@ -239,49 +201,14 @@ h3 {
     align-items: center;
     gap: 5px;
 }
-.custom-modal-content .date {
-    font-weight: 600;
-    font-size: 18px;
-}
-
-.custom-modal-content .time {
-    font-size: 24px;
-    font-weight: 600;
-}
-.custom-modal-content .inner {
-    height: calc(100% - 50px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding-bottom: 2rem;
-    gap: 2rem;
-}
 
 #confirmShowtimeInfo {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
-}
-.custom-modal-content .btn-wrap {
-    display: flex;
-    gap: .5rem;
-    align-items: center;
-    justify-content: center;
-}
-.custom-modal-content .btn-wrap button {
-    border: 1px solid #006f7c;
-    padding: .75rem 1rem;
-    border-radius: 10px;
-    cursor: pointer;
-    background: #006f7c;
-    color: #fff;
-    min-width: 130px;
-}
-.custom-modal-content .btn-wrap button:nth-child(1) {
-    background: #999;
-    border: 1px solid #999;
+    padding: 2rem 1rem;
+
 }
 
 .movie-grade {

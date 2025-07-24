@@ -23,13 +23,14 @@
     max-width: 450px;
     margin: 0 auto;
 }
-
-.profile-section img {
+.profile-preview {
     width: 210px;
     height: 210px;
     border-radius: 50%;
     border: 1px solid #ddd;
     object-fit: cover;
+    display: block;
+    margin: 0 auto;
 }
 
 .profile-buttons{
