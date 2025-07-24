@@ -176,6 +176,7 @@
   border-radius: 10px;
   border: 1px solid #ddd;
   box-sizing: border-box;
+  align-self: flex-start;
 }
 
 .movie-info {
@@ -222,9 +223,11 @@
 
 .movie-info .poster {
   width: 100px;
-  max-width: 100%;
-  height: auto;
+  height: 140px;
+  object-fit: cover;
   display: block;
+  border: 1px solid #eee;
+  border-radius: 6px;
 }
 
 /* 전설표 */
@@ -319,6 +322,7 @@
 
 /* 네비게이션 버튼 */
 .navigation {
+  margin-top: 20px;
   display: flex;
   justify-content: space-between;
 }

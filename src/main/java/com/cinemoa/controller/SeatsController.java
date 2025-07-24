@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/reservation")
+@RequestMapping("/ticketing")
 public class SeatsController {
 
     private final ShowtimeRepository showtimeRepository;
@@ -95,6 +95,7 @@ public class SeatsController {
             // 스크린 타입 가져오기 (IMAX, 4DX, 리클라이너 등등)
             String screenType = showtime.getScreen().getScreenType();
 
+
             // 모델에 담기
             model.addAttribute("showtime", showtime);
             model.addAttribute("movie", showtime.getMovie());
@@ -109,8 +110,12 @@ public class SeatsController {
             model.addAttribute("screenType", showtime.getScreen().getScreenType());
             model.addAttribute("isStandard", "STANDARD".equals(screenType));
             model.addAttribute("isImax", "IMAX".equals(screenType));
+            model.addAttribute("movieId", showtime.getMovie().getMovieId());
+            model.addAttribute("showtimeId", showtime.getShowtimeId());
+            model.addAttribute("screenId", showtime.getScreen().getScreenId());
 
-            return "seats/seatReservation"; // 좌석 예약 페이지
+
+            return "ticketing/seatReservation"; // 좌석 예약 페이지
         } else {
             return "redirect:/movies";  // 예매 정보가 없으면 영화 목록 페이지로 리디렉션
         }

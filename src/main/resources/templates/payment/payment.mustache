@@ -1,9 +1,24 @@
 {{> common/header }}
-<link rel="stylesheet" href="/css/payment.css?v={{ timestamp }}" />
+<link rel="stylesheet" href="/css/payment/payment.css?v={{ timestamp }}" />
 
 <div class="container">
     <h2>결제 페이지</h2>
-    <p>여기에 결제 내역 및 카드 정보 입력 등 UI 구성 예정</p>
+
+    <div class="payment-box">
+        <p>결제 금액: <strong id="amount">{{amount}}</strong>원</p>
+        <button id="pay-button">결제하기</button>
+    </div>
 </div>
+
+<!-- 아임포트 SDK -->
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+
+<!-- 모델에서 받은 값 JS 변수로 전달 -->
+<script>
+    const amount = parseInt("{{amount}}");
+</script>
+
+<!-- 결제 처리용 JS -->
+<script src="/js/payment/payment.js?v={{ timestamp }}"></script>
 
 {{> common/footer }}

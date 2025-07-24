@@ -1,9 +1,9 @@
-<link rel="stylesheet" href="/css/seats/seatReservation.css?v={{ timestamp }}" />
+<link rel="stylesheet" href="/css/ticketing/seatReservation.css?v={{ timestamp }}" />
 {{> common/header }}
 <div class="container reservation-wrapper">
     <!-- 왼쪽: 좌석 선택 영역 -->
     <div class="seat-selection" data-is-morning="{{isMorning}}" data-screen-type="{{screenType}}"
-        data-special="{{isImax}}">
+         data-special="{{isImax}}">
         <div class="title">
             <h2>빠른예매</h2>
             <button class="reset-btn"><img src="/images/icons/reset-icon.png">초기화</button>
@@ -48,22 +48,23 @@
         <div class="seat-map">
             <div class="screen-label">SCREEN</div>
             {{#seatRowList}}
-            <div class="row" data-row="{{row}}">
-                <span class="row-label">{{row}}</span>
-                {{#seats}}
-                {{#isGap}}
-                <span class="seat-gap"></span>
-                {{/isGap}}
-                {{^isGap}}
-                <span class="seat
+                <div class="row" data-row="{{row}}">
+                    <span class="row-label">{{row}}</span>
+                    {{#seats}}
+                        {{#isGap}}
+                            <span class="seat-gap"></span>
+                        {{/isGap}}
+                        {{^isGap}}
+                            <span class="seat
                     {{#isReserved}}disabled{{/isReserved}}
-                    {{#isVip}}vip{{/isVip}}
-                    {{#isAccessible}}accessible{{/isAccessible}}" data-seat-id="{{seatId}}" data-price="{{price}}">
-                    {{seatNumber}}
-                </span>
-                {{/isGap}}
-                {{/seats}}
-            </div>
+                                {{#isVip}}vip{{/isVip}}
+                                {{#isAccessible}}accessible{{/isAccessible}}" data-seat-id="{{seatId}}"
+                                  data-price="{{price}}">
+                                {{seatNumber}}
+                            </span>
+                        {{/isGap}}
+                    {{/seats}}
+                </div>
             {{/seatRowList}}
         </div>
     </div>
@@ -80,7 +81,7 @@
                     <p style="margin-bottom: 25px;">
                         {{screen.screenName}}
                         {{#screenType}}
-                        {{^isStandard}} ({{screenType}}){{/isStandard}}
+                            {{^isStandard}} ({{screenType}}){{/isStandard}}
                         {{/screenType}}
                     </p>
                     <p>{{formattedDate}}</p>
@@ -125,15 +126,20 @@
 
 <!-- 로그인 유도 모달 -->
 <div id="loginRequiredModal" class="modal" style="display: none;">
-  <div class="modal-content">
-    <p>로그인이 필요한 서비스입니다.</p>
-    <div class="modal-actions">
-      <button id="loginMemberBtn">회원 로그인</button>
-      <button id="loginGuestBtn">비회원 로그인</button>
+    <div class="modal-content">
+        <p>로그인이 필요한 서비스입니다.</p>
+        <div class="modal-actions">
+            <button id="loginMemberBtn">회원 로그인</button>
+            <button id="loginGuestBtn">비회원 로그인</button>
+        </div>
     </div>
-  </div>
 </div>
 
+<script>
+    const movieId = "{{movieId}}";
+    const showtimeId = "{{showtimeId}}";
+    const screenId = "{{screenId}}";
+</script>
 
-<script src="/js/seats/seatReservation.js"></script>
+<script src="/js/ticketing/seatReservation.js"></script>
 {{> common/footer }}

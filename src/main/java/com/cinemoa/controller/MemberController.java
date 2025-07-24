@@ -28,6 +28,7 @@ public class MemberController {
     public String showJoinStep1(Model model) {
         return "member/joinStep1";
     }
+
     // 이메일 중복 확인
     @PostMapping("/check-email")
     public ResponseEntity<Boolean> checkEmail(@RequestParam String email) {
@@ -66,6 +67,7 @@ public class MemberController {
         }
         return "member/joinStep3";
     }
+
     @PostMapping("/join/step3/process")
     public String processStep3(@ModelAttribute MemberDto dto, HttpSession session, Model model) {
         // 이메일은 세션에서 가져오기 (step1에서 저장된 verifiedEmail)
@@ -119,37 +121,53 @@ public class MemberController {
 
     //로그인 페이지 (GET)
     @GetMapping("/login")
-    public String showLoginForm() {
-    return "member/login";
+    public String showLoginForm(@RequestParam(value = "redirect", required = false) String redirect, Model model) {
+        model.addAttribute("redirect", redirect != null ? redirect : "");
+        return "member/login";
     }
 
     //로그인 처리 (POST)
     @PostMapping("/login")
-    public String processLogin(@RequestParam String memberId, @RequestParam String password, Model model, HttpSession session) {
+    public String processLogin(
+            @RequestParam String memberId,
+            @RequestParam String password,
+            @RequestParam(required = false) String redirect,
+            Model model,
+            HttpSession session) {
+
         Member member = memberService.login(memberId, password);
         if (member == null) {
             model.addAttribute("error", "아이디 또는 비밀번호가 일치하지 않습니다.");
             return "member/login";
         }
 
-        // 탈퇴한 회원인 경우 로그인 거부
         if (member.isDeleted()) {
             model.addAttribute("error", "탈퇴한 회원입니다. 로그인할 수 없습니다.");
             return "member/login";
         }
 
-        // 세션에 로그인 사용자 저장
         session.setAttribute("loginMember", member);
 
-        // 이전에 저장된 리디렉션 경로가 있다면
+        if (redirect != null && !redirect.isBlank()) {
+            // redirect 값에 포함된 쿼리스트링이 URL 인코딩 되어 있는 경우가 많으므로 디코딩 후 리다이렉트
+            try {
+                String decodedRedirect = java.net.URLDecoder.decode(redirect, "UTF-8");
+                return "redirect:" + decodedRedirect;
+            } catch (Exception e) {
+                // 디코딩 실패 시 원래 redirect로 이동
+                return "redirect:" + redirect;
+            }
+        }
+
         String redirectPath = (String) session.getAttribute("redirectAfterLogin");
         if (redirectPath != null) {
             session.removeAttribute("redirectAfterLogin");
             return "redirect:" + redirectPath;
         }
 
-        return "redirect:/"; //로그인 성공 후 메인페이지로 이동
+        return "redirect:/";
     }
+
 
     //로그아웃
     @GetMapping("/logout")
@@ -157,6 +175,7 @@ public class MemberController {
         session.invalidate(); // 세션 초기화
         return "redirect:/"; // 홈으로 이동
     }
+
     //비회원로그아웃
     @GetMapping("/guest/logout")
     public String guestLogout(HttpSession session) {
@@ -214,7 +233,6 @@ public class MemberController {
         // 리다이렉트
         return "redirect:/mypage/information/pref";
     }
-
 
 
 }
