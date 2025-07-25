@@ -121,6 +121,7 @@
   font-size: 14px;
   margin-top: 8px;
   line-height: 1.5;
+  white-space: normal;
 }
 
 /* 실관람평 유도 문구 */
