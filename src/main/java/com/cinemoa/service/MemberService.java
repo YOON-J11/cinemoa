@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -247,6 +248,15 @@ public class MemberService {
                 .format(DateTimeFormatter.ofPattern("yyyy.MM.dd (E) HH:mm", Locale.KOREAN));
 
 
+        // 상영시간 포맷
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd (E)", Locale.KOREAN);
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalDateTime showStart = reservation.getShowtime().getStartTime();
+        LocalDateTime showEnd = reservation.getShowtime().getEndTime();
+        String formattedShowDate = showStart.format(dateFormatter); // ex) 2025.07.28 (월)
+        String formattedShowtime = showStart.format(timeFormatter) + " ~ " + showEnd.format(timeFormatter); // ex) 16:00 ~ 18:00
+
+
         // 총 가격 계산
         int totalPrice = seatDtos.stream().mapToInt(SeatDto::getPrice).sum();
 
@@ -265,6 +275,7 @@ public class MemberService {
 
         return ReservationDetailDto.builder()
                 .reservationId(reservation.getReservationId())
+                .movieId(reservation.getMovie().getMovieId())
                 .movieTitle(reservation.getMovie().getTitle())
                 .mainImageUrl(reservation.getMovie().getMainImageUrl())
                 .cinemaName(reservation.getCinema().getName())
@@ -275,6 +286,8 @@ public class MemberService {
                 .formattedReservationTime(formattedReservationTime)
                 .showtimeStart(showtimeStart)
                 .showtimeEnd(showtimeEnd)
+                .formattedShowDate(formattedShowDate)
+                .formattedShowtime(formattedShowtime)
                 .seats(seatDtos)
                 .totalPrice(totalPrice)
                 .discount(discount)

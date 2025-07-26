@@ -1,0 +1,51 @@
+<link rel="stylesheet" href="/css/support/supportList.css?v={{ timestamp }}" />
+
+<div class="support-list-container">
+    <div class="title-area">
+        <h2 class="section-title">공지사항</h2>
+    </div>
+    <div class="search-wrap ">
+        <input id="srchKwrd" class="txt-input  " placeholder="검색어를 입력해주세요." type="search" value="">
+        <button type="button" class="btn-sch" title="검색하기">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g aria-hidden="true">
+                    <circle cx="8.90039" cy="8.90039" r="7" stroke="#161616" stroke-width="1.8"></circle>
+                    <path d="M13.8496 13.8496L17.7387 17.7387" stroke="#161616" stroke-width="1.8"
+                        stroke-linecap="round"></path>
+                </g>
+                <defs aria-hidden="true">
+                    <clipPath>
+                        <rect width="20" height="20" fill="white"></rect>
+                    </clipPath>
+                </defs>
+            </svg>
+        </button>
+    </div>
+    <table class="list-table">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>등록일</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--<tr><td class="no-list" colspan="4">등록된 공지사항 없습니다.</td></tr>--><!-- 공지사항이 없을 경우에만 노출 -->
+            <tr class="tr-style">
+                <td>1</td>
+                <td>
+                    <a href="#" class="list-link">공지사항제목</a>
+                </td>
+                <td>2025-07-21</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination">
+        <a href="#" class="page prev">«</a>
+        <a href="#" class="page active">1</a>
+        <a href="#" class="page">2</a>
+        <a href="#" class="page">3</a>
+        <a href="#" class="page next">»</a>
+    </div>
+
+</div>

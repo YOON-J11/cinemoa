@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efa756a2-6927-4f8f-b316-fccc6793d09e" name="Changes" comment="ticketing-css 변경">
+    <list default="true" id="efa756a2-6927-4f8f-b316-fccc6793d09e" name="Changes" comment="마이페이지 수정중">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/icons/search-icon.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" afterDir="false" />
@@ -12,12 +13,25 @@
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/service/MemberService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/cinemoa/service/MemberService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/mypage/mymovieAndmyreview.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/mypage/mymovieAndmyreview.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/dto/ReservationDetailDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/dto/ReservationDetailDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/dto/ReservationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/dto/ReservationDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/MemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/mypage/bookingdetail.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/mypage/bookingdetail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/mypage/bookinglist.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/mypage/bookinglist.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/support/myinquiry.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/support/supportList.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/support/support.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/support/supportLayout.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/mypage/bookingdetail.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/bookingdetail.mustache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/mypage/bookinglist.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/bookinglist.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/mypage/myinquiry.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/myinquiry.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/support/faqList.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/support/faqList.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/support/myinquiry.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/support/myinquiry.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/support/noticeList.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/support/noticeList.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/support/supportLayout.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/support/supportLayout.mustache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,12 +83,12 @@
     &quot;assignee&quot;: &quot;YOON-J11&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/YOON-J11/cinemoa.git&quot;,
-    &quot;accountId&quot;: &quot;924e52b0-aa04-4ac1-afa4-5b847d085450&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/YOON-J11/cinemoa.git",
+    "accountId": "c727f623-82a7-4e36-846a-039dc355bb12"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 5
@@ -92,9 +106,15 @@
     "git-widget-placeholder": "member",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/cinemoa/src/main/resources/static/images/icons",
     "settings.editor.selected.configurable": "File.Encoding"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\cinemoa\src\main\resources\static\images\icons" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="cinemoa [bootRun]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -150,11 +170,20 @@
       <option name="project" value="LOCAL" />
       <updated>1753343891749</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="마이페이지 수정중">
+      <option name="closed" value="true" />
+      <created>1753463388531</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1753463388531</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ticketing-css 변경" />
-    <option name="LAST_COMMIT_MESSAGE" value="ticketing-css 변경" />
+    <MESSAGE value="마이페이지 수정중" />
+    <option name="LAST_COMMIT_MESSAGE" value="마이페이지 수정중" />
   </component>
 </project>

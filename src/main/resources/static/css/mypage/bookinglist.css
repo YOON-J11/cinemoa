@@ -67,15 +67,15 @@
 .booking-area {
 }
 
-.status-confirmed {
+.status.confirmed {
   color: #006f7c;
 }
 
-.status-cancelled {
+.status.cancelled {
   color: #e60000;
 }
 
-.status-unknown {
+.status.unknown {
   color: #777;
 }
 

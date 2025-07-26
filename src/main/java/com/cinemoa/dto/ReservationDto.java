@@ -48,18 +48,15 @@ public class ReservationDto {
         return reservationTime.format(formatter);
     }
 
-    public String getPaymentStatusClass() {
-        if ("예약완료".equals(status)) return "status-confirmed";
-        else if ("취소됨".equals(status)) return "status-cancelled";
-        else return "status-unknown";
-    }
 
-    public String getPaymentStatusText() {
-        if ("예약완료".equals(status)) return "예매 완료";
-        else if ("취소됨".equals(status)) return "예매 취소";
-        else return "상태 알 수 없음";
+    public String getStatusClass() {
+        if (status == null) return "unknown";
+        return switch (status) {
+            case "예약완료" -> "confirmed";
+            case "취소됨" -> "cancelled";
+            default -> "unknown";
+        };
     }
-
 
 
 

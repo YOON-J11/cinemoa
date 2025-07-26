@@ -25,13 +25,16 @@
 
     <!-- 영화 및 상영 정보 -->
     <div class="detail-contents detail-card">
-        <h3 class="status {{detail.status}}">{{detail.status}}</h3>
+        <h3 class="status {{detail.statusClass}}">{{detail.status}}</h3>
         <div class="detail-contents-info">
-            <img src="/images/movie/{{detail.mainImageUrl}}" alt="{{detail.movieTitle}}" />
+            <a href="/movies/{{detail.movieId}}" class="poster">
+                <img src="/images/movie/{{detail.mainImageUrl}}" alt="{{detail.movieTitle}}" />
+            </a>
             <div class="detail-contents-info-right">
                 <p class="movie-title">{{detail.movieTitle}}</p>
-                <p>상영시간: {{detail.showtimeStart}} ~ {{detail.showtimeEnd}}</p>
-                <p>상영관: {{detail.screenName}} | {{#detail.seats}}{{seatRow}}{{seatNumber}} {{/detail.seats}}</p>
+                <p>상영시간 : {{detail.formattedShowDate}} {{detail.formattedShowtime}}</p>
+                <p>상영관 : {{detail.screenName}}</p>
+                <p>좌석 : {{#detail.seats}}{{seatRow}}{{seatNumber}} {{/detail.seats}}</p>
             </div>
         </div>
     </div>
@@ -42,14 +45,9 @@
             <span class="total-price">{{detail.totalPrice}}원</span>
         </div>
 
-        <div class="payment-item">
-            <div class="item-left">{{detail.movieTitle}}</div>
-            <div class="item-right"></div>
-        </div>
-
         {{#detail.seats}}
         <div class="payment-subitem">
-            <div class="item-left">ㄴ {{seatType}}</div>
+            <div class="item-left">{{seatType}}</div>
             <div class="item-right">{{price}}원</div>
         </div>
         {{/detail.seats}}

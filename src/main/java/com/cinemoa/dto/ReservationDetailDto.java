@@ -31,5 +31,18 @@ public class ReservationDetailDto {
     private int finalPayment;    // 결제 금액
     private String salesNumber;  // 판매번호 예: 2024-0720-0001
     private String formattedReservationTime;
+    private Long movieId; // 영화 ID
+    private String formattedShowDate;
+    private String formattedShowtime;
+
+
+    public String getStatusClass() {
+        if (status == null) return "unknown";
+        return switch (status) {
+            case "예약완료" -> "confirmed";
+            case "취소됨" -> "cancelled";
+            default -> "unknown";
+        };
+    }
 
 }
