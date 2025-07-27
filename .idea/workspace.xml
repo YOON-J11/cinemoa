@@ -4,33 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efa756a2-6927-4f8f-b316-fccc6793d09e" name="Changes" comment="마이페이지 수정">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/dto/FaqDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/dto/NoticeDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/entity/Faq.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/entity/Notice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/FaqRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/repository/NoticeRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/FaqService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/service/NoticeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.bin" afterDir="false" />
+    <list default="true" id="efa756a2-6927-4f8f-b316-fccc6793d09e" name="Changes" comment="공지사항,FAQ List 구현 완료">
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/SupportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cinemoa/controller/SupportController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/mypage/bookingdetail.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/mypage/bookingdetail.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/support/supportList.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/support/supportList.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/mypage/bookingdetail.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/bookingdetail.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/mypage/myinquiry.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/mypage/myinquiry.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/support/faqList.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/support/faqList.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/support/myinquiry.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/support/myinquiry.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/support/noticeList.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/support/noticeList.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,13 +178,22 @@
       <option name="project" value="LOCAL" />
       <updated>1753558748925</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="공지사항,FAQ List 구현 완료">
+      <option name="closed" value="true" />
+      <created>1753630754984</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1753630754984</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ticketing-css 변경" />
     <MESSAGE value="마이페이지 수정중" />
     <MESSAGE value="마이페이지 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="마이페이지 수정" />
+    <MESSAGE value="공지사항,FAQ List 구현 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="공지사항,FAQ List 구현 완료" />
   </component>
 </project>
