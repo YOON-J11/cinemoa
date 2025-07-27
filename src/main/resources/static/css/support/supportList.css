@@ -34,6 +34,10 @@
   border-radius: 8px;
   font-size: 14px;
 }
+.txt-input:focus {
+  outline: none;
+  border: 1px solid #006f7c;
+}
 
 .btn-sch {
   background-color: #006f7c;
@@ -165,4 +169,23 @@
 .page.prev,
 .page.next {
   font-weight: bold;
+}
+
+
+.faq-answer {
+  display: none; /* JS로 토글 */
+  background-color: #f9f9f9;
+  color: #444;
+  font-size: 14px;
+  line-height: 1.6;
+  transition: background-color 0.3s ease;
+}
+
+.faq-answer td {
+  text-align: left;
+  padding: 16px 20px;
+  white-space: normal;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 14px;
+  color: #555;
 }

@@ -100,7 +100,7 @@
 }
 
 /* 결제 금액 섹션 */
-.seats-section .section-header {
+.section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -109,7 +109,7 @@
   padding-bottom: 20px;
 }
 
-.section-header h3 {
+h3 {
   font-size: 18px;
   font-weight: bold;
 }
@@ -144,6 +144,10 @@
 .payment-section {
   font-size: 14px;
   line-height: 1.6;
+}
+.payment-section div {
+  display: flex;
+  justify-content: space-between;
 }
 
 .payment-section p {

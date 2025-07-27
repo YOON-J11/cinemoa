@@ -62,11 +62,13 @@
 
     <!-- 결제 -->
     <div class="payment-section detail-card">
-        <h3>결제 정보</h3>
-        <p>총 금액: {{detail.totalPrice}}원</p>
-        <p>할인: {{detail.discount}}원</p>
-        <p><strong>최종 결제 금액: {{detail.finalPayment}}원</strong></p>
-        <p>결제수단: {{detail.paymentMethod}}</p>
+        <div class="section-header">
+            <h3>결제 정보</h3>
+        </div>
+        <div><p>총 금액</p><p>{{detail.totalPrice}}원</p></div>
+        <div><p>할인</p><p>{{detail.discount}}원</p></div>
+        <div><p><strong>최종 결제 금액</strong></p><p><strong>{{detail.finalPayment}}원</strong></p></div>
+        <div><p>결제수단</p><p>{{detail.paymentMethod}}</p></div>
     </div>
 
 </div>
