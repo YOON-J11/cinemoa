@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efa756a2-6927-4f8f-b316-fccc6793d09e" name="Changes" comment="ticketing-css 변경">
+    <list default="true" id="efa756a2-6927-4f8f-b316-fccc6793d09e" name="Changes" comment="공지사항,FAQ List 구현 완료">
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.14.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/ticketing/seatReservation.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/ticketing/seatReservation.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/ticketing/seatReservation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/ticketing/seatReservation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/ticketing/seatReservation.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/ticketing/seatReservation.mustache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/ticketing/ticketing.mustache" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/ticketing/ticketing.mustache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,41 +51,62 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "YOON-J11"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;YOON-J11&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/YOON-J11/cinemoa.git",
-    "accountId": "924e52b0-aa04-4ac1-afa4-5b847d085450"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/YOON-J11/cinemoa.git&quot;,
+    &quot;accountId&quot;: &quot;c727f623-82a7-4e36-846a-039dc355bb12&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 5
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="30JRHa5ZjTMIhDCS02gt9GcSKwE" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.cinemoa [bootRun].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "dev",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "settings.editor.selected.configurable": "File.Encoding"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.cinemoa [bootRun].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;member&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/cinemoa/src/main/resources/static/images/icons&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\cinemoa\src\main\resources\static\images\icons" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\cinemoa\src\main\java\com\cinemoa\service" />
+      <recent name="C:\cinemoa\src\main\java\com\cinemoa\repository" />
+      <recent name="C:\cinemoa\src\main\java\com\cinemoa\entity" />
+      <recent name="C:\cinemoa\src\main\java\com\cinemoa\dto" />
+      <recent name="C:\cinemoa\src\main\java\com\cinemoa\controller" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="cinemoa [bootRun]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -145,11 +162,38 @@
       <option name="project" value="LOCAL" />
       <updated>1753343891749</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="마이페이지 수정중">
+      <option name="closed" value="true" />
+      <created>1753463388531</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1753463388531</updated>
+    </task>
+    <task id="LOCAL-00003" summary="마이페이지 수정">
+      <option name="closed" value="true" />
+      <created>1753558748925</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1753558748925</updated>
+    </task>
+    <task id="LOCAL-00004" summary="공지사항,FAQ List 구현 완료">
+      <option name="closed" value="true" />
+      <created>1753630754984</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1753630754984</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ticketing-css 변경" />
-    <option name="LAST_COMMIT_MESSAGE" value="ticketing-css 변경" />
+    <MESSAGE value="마이페이지 수정중" />
+    <MESSAGE value="마이페이지 수정" />
+    <MESSAGE value="공지사항,FAQ List 구현 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="공지사항,FAQ List 구현 완료" />
   </component>
 </project>

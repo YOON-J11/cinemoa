@@ -25,13 +25,16 @@
 
     <!-- 영화 및 상영 정보 -->
     <div class="detail-contents detail-card">
-        <h3 class="status {{detail.status}}">{{detail.status}}</h3>
+        <h3 class="status {{detail.statusClass}}">{{detail.status}}</h3>
         <div class="detail-contents-info">
-            <img src="/images/posters/{{detail.mainImageUrl}}" alt="{{detail.movieTitle}}" />
+            <a href="/movies/{{detail.movieId}}" class="poster">
+                <img src="/images/movie/{{detail.mainImageUrl}}" alt="{{detail.movieTitle}}" />
+            </a>
             <div class="detail-contents-info-right">
                 <p class="movie-title">{{detail.movieTitle}}</p>
-                <p>상영시간: {{detail.showtimeStart}} ~ {{detail.showtimeEnd}}</p>
-                <p>상영관: {{detail.screenName}} | {{#detail.seats}}{{seatRow}}{{seatNumber}} {{/detail.seats}}</p>
+                <p>상영시간 : {{detail.formattedShowDate}} {{detail.formattedShowtime}}</p>
+                <p>상영관 : {{detail.screenName}}</p>
+                <p>좌석 : {{#detail.seats}}{{seatRow}}{{seatNumber}} {{/detail.seats}}</p>
             </div>
         </div>
     </div>
@@ -42,14 +45,9 @@
             <span class="total-price">{{detail.totalPrice}}원</span>
         </div>
 
-        <div class="payment-item">
-            <div class="item-left">{{detail.movieTitle}}</div>
-            <div class="item-right"></div>
-        </div>
-
         {{#detail.seats}}
         <div class="payment-subitem">
-            <div class="item-left">ㄴ {{seatType}}</div>
+            <div class="item-left">{{seatType}}</div>
             <div class="item-right">{{price}}원</div>
         </div>
         {{/detail.seats}}
@@ -64,11 +62,13 @@
 
     <!-- 결제 -->
     <div class="payment-section detail-card">
-        <h3>결제 정보</h3>
-        <p>총 금액: {{detail.totalPrice}}원</p>
-        <p>할인: {{detail.discount}}원</p>
-        <p><strong>최종 결제 금액: {{detail.finalPayment}}원</strong></p>
-        <p>결제수단: {{detail.paymentMethod}}</p>
+        <div class="section-header">
+            <h3>결제 정보</h3>
+        </div>
+        <div><p>총 금액</p><p>{{detail.totalPrice}}원</p></div>
+        <div><p>할인</p><p>{{detail.discount}}원</p></div>
+        <div><p><strong>최종 결제 금액</strong></p><p><strong>{{detail.finalPayment}}원</strong></p></div>
+        <div><p>결제수단</p><p>{{detail.paymentMethod}}</p></div>
     </div>
 
 </div>

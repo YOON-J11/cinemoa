@@ -1,18 +1,26 @@
 package com.cinemoa.controller;
 
+import com.cinemoa.dto.FaqDto;
 import com.cinemoa.dto.InquiryDto;
+import com.cinemoa.dto.NoticeDto;
 import com.cinemoa.entity.GuestUser;
 import com.cinemoa.entity.Inquiry;
 import com.cinemoa.entity.Member;
+import com.cinemoa.service.FaqService;
 import com.cinemoa.service.InquiryService;
+import com.cinemoa.service.NoticeService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.IntStream;
 
 @Controller
 @RequiredArgsConstructor
@@ -20,6 +28,9 @@ import java.util.List;
 public class SupportController {
 
     private final InquiryService inquiryService;
+    private final NoticeService noticeService;
+    private final FaqService faqService;
+
 
     // 로그인 유저 세션 정보 추가 (공통 처리)
     private void addLoginMember(Model model, HttpSession session) {
@@ -38,12 +49,36 @@ public class SupportController {
     }
 
     @GetMapping("/notice")
-    public String noticeList(Model model, HttpSession session) {
+    public String noticeList(Model model, HttpSession session,
+                             @RequestParam(value = "keyword", required = false) String keyword,
+                             @RequestParam(value = "page", defaultValue = "1") int page) {
+
+        Page<NoticeDto> notices = noticeService.getNoticeList(keyword, page);
+        int currentPage = notices.getNumber() + 1;
+        int totalPages = notices.getTotalPages();
+
+        int start = Math.max(currentPage - 2, 1);
+        int end = Math.min(start + 4, totalPages);
+
+        List<Map<String, Object>> pages = IntStream.rangeClosed(start, end)
+                .mapToObj(i -> {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("pageNumber", i);
+                    map.put("isActive", i == currentPage);
+                    return map;
+                }).toList();
+
+        model.addAttribute("notices", notices);
+        model.addAttribute("pages", pages);
+        model.addAttribute("keyword", keyword != null ? keyword : "");
+        model.addAttribute("nextPage", notices.getNumber() + 2);
         model.addAttribute("noticeList", true);
         model.addAttribute("pagePath", "고객센터 > 공지사항");
         addLoginMember(model, session);
         return "support/supportLayout";
     }
+
+
 
     @GetMapping("/notice/{id}")
     public String noticeDetail(@PathVariable Long id, Model model, HttpSession session) {
@@ -55,12 +90,36 @@ public class SupportController {
     }
 
     @GetMapping("/faq")
-    public String faqList(Model model, HttpSession session) {
+    public String faqList(Model model, HttpSession session,
+                          @RequestParam(value = "keyword", required = false) String keyword,
+                          @RequestParam(value = "page", defaultValue = "1") int page) {
+
+        Page<FaqDto> faqs = faqService.searchFaqs(keyword, page);
+        int currentPage = faqs.getNumber() + 1;
+        int totalPages = faqs.getTotalPages();
+
+        int start = Math.max(currentPage - 2, 1);
+        int end = Math.min(start + 4, totalPages);
+
+        List<Map<String, Object>> pages = IntStream.rangeClosed(start, end)
+                .mapToObj(i -> {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("pageNumber", i);
+                    map.put("isActive", i == currentPage);
+                    return map;
+                }).toList();
+
+        model.addAttribute("faqs", faqs);
+        model.addAttribute("pages", pages);
+        model.addAttribute("keyword", keyword != null ? keyword : "");
+        model.addAttribute("nextPage", faqs.getNumber() + 2);
         model.addAttribute("faqList", true);
         model.addAttribute("pagePath", "고객센터 > 자주 묻는 질문");
         addLoginMember(model, session);
         return "support/supportLayout";
     }
+
+
 
     // 1:1 문의하기
     @GetMapping("/inquiryForm")
@@ -116,7 +175,7 @@ public class SupportController {
 
 
     @GetMapping("/myinquiry")
-    public String myinquiry(Model model, HttpSession session) {
+    public String myinquiry(Model model, HttpSession session, @RequestParam(defaultValue = "1") int page) {
 
         Member loginMember = (Member) session.getAttribute("loginMember");
         GuestUser guestUser = (GuestUser) session.getAttribute("guestUser");
