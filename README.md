@@ -80,7 +80,8 @@ Spring Boot 기반으로 개발 중인 영화 예매 플랫폼입니다.
 - 예매 시 좌석 선택 페이지 개발  
   <img width="1186" height="920" alt="좌석선택페이지" src="https://github.com/user-attachments/assets/98f751e2-028d-436c-91d5-3d551510c830" />
 
-- 결제 시스템 개발 (진행 중)
+- 결제 시스템 개발
+  <img width="1282" height="981" alt="image" src="https://github.com/user-attachments/assets/8f1c95f3-fd9f-4e83-bab7-133283d71b89" />
 
 ---
 
